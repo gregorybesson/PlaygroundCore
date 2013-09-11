@@ -42,16 +42,12 @@ class Slugify extends \Zend\Filter\AbstractUnicode
      */
     public function filter($value)
     {
-        // TODO : Traiter UTF8 et le remplissage depuis un autre champ si vide
+        $value = iconv("UTF-8","ASCII//IGNORE//TRANSLIT",$value);
         $value = strtolower($value);
         $value = str_replace("'", '', $value);
         $value = preg_replace('([^a-zA-Z0-9_-]+)', '-', $value);
         $value = preg_replace('(-{2,})', '-', $value);
         $value = trim($value, '-');
-
-        /*if ($this->options['encoding'] !== null) {
-            return mb_strtolower((string) $value,  $this->options['encoding']);
-        }*/
 
         return $value;
     }

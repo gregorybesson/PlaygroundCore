@@ -558,7 +558,7 @@ return array(
 
 	'core_layout' => array(
         'PlaygroundCore' => array(
-            'default_layout' => 'layout/homepage-2columns-right',
+            'default_layout' => 'layout/admin',
             'controllers' => array(
             	'PlaygroundCore\Controller\Dashboard'   => array(
             		'default_layout' => 'layout/admin',

@@ -637,7 +637,8 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
     	'template_map' => array(
-    		'zend-developer-tools/toolbar/template-hint' => __DIR__ . '/../view/zend-developer-tools/toolbar/template-hint.phtml',
+    		'zend-developer-tools/toolbar/request'=> __DIR__ . '/../view/zend-developer-tools/toolbar/request.phtml',
+    		//'zend-developer-tools/toolbar/template-hint' => __DIR__ . '/../view/zend-developer-tools/toolbar/template-hint.phtml',
     	),
         'template_path_stack' => array(
             __DIR__ . '/../view/admin',
@@ -651,11 +652,11 @@ return array(
 				'template_hint' => 'playgroundcore_templatehint_collector',
 			),
 		),
-		'toolbar' => array(
+		/*'toolbar' => array(
 			'entries' => array(
 				'template_hint' => 'zend-developer-tools/toolbar/template-hint',
 			),
-		),
+		),*/
 	),
 		
 	/*'design' => array(

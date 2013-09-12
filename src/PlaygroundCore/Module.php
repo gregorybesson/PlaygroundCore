@@ -119,6 +119,21 @@ class Module
         },200);
 
         /**
+         * HintStrategy activated only when developer toolbar is on and tempateHint is on
+         */
+        	if (isset($config['zenddevelopertools']['toolbar']['enabled'])
+        		&& $config['zenddevelopertools']['toolbar']['enabled'] === true
+        		&& isset($config['zenddevelopertools']['toolbar']['templateHint'])
+        		&& $config['zenddevelopertools']['toolbar']['templateHint'] === true
+        	){
+        		$e->getApplication()->getEventManager()->attach(\Zend\Mvc\MvcEvent::EVENT_DISPATCH, function($e) use ($serviceManager) {
+        			$strategy = $serviceManager->get('PhpRendererHintStrategy');
+        			$view     = $serviceManager->get('ViewManager')->getView();
+        			$strategy->attach($view->getEventManager());
+        		}, 100);
+        	}
+        	
+        /**
          * This listener gives the possibility to select the layout on module / controller / action level !
          * Just configure it in any module config or autoloaded config.
          */
@@ -280,6 +295,7 @@ class Module
                     'playgroundcore_message'       => 'PlaygroundCore\Mail\Service\Message',
                     'playgroundcore_cron_service'  => 'PlaygroundCore\Service\Cron',
                     'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\ShortenUrl',
+                	'playgroundcore_templatehint_collector'	=> 'PlaygroundCore\ZendDevTools\Collector\TemplateHintCollector',
 
                 ),
                 'factories' => array(

@@ -464,7 +464,7 @@ class PhpRendererHint implements \Zend\View\Renderer\RendererInterface, \Zend\Vi
             try {
                 ob_start();
                 echo "<div style='background-color:#" . $color[$i]  . ";border: 1px solid black;' >";
-                //echo   "<a href='#' title = '". $this->__file ."'>vue cucu</a><br/>";
+                //echo   "<a href='#' title = '". $this->__file ."'>></a><br/>";
                 echo "<!--Greg-100-->";
                 include $this->__file;
                 //echo "</div>";

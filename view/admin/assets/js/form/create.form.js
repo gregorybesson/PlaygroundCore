@@ -70,7 +70,7 @@ $(document).ready(function() {
      */
     $('#add_form_properties').click(function(e){
         e.preventDefault();
-        alert($('[name="form_title"]').val());
+        
         var formTitle = $('.form_title_head');
         formTitle.find('.form_title_placeholder').html(
             $('[name="form_title"]').val()

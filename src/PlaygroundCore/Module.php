@@ -57,11 +57,18 @@ class Module
         		// Resolver des templates phtml
         		$viewResolverPathStack->addPaths($pathStack);
         		
-        		$filename = $adminPath . '/assets.php';
-        		if(is_file($filename) && is_readable($filename)){
-        			$configAssets = new \Zend\Config\Config(include $filename);
+        		$assets = $adminPath . '/assets.php';
+        		if(is_file($assets) && is_readable($assets)){
+        			$configAssets = new \Zend\Config\Config(include $assets);
         			$config = array_replace_recursive($config, $configAssets->toArray());
         			$configHasChanged = true;
+        		}
+        		
+        		$layout = $adminPath . '/layout.php';
+        		if(is_file($layout) && is_readable($layout)){
+        		    $configLayout = new \Zend\Config\Config(include $layout);
+        		    $config = array_replace_recursive($config, $configLayout->toArray());
+        		    $configHasChanged = true;
         		}
         	}
         	if(isset($config['design']['frontend']) && isset($config['design']['frontend']['package']) && isset($config['design']['frontend']['theme'])){
@@ -71,17 +78,30 @@ class Module
         		$config['assetic_configuration']['modules']['frontend']['root_path'][] = $frontendPath . '/assets';
         		$viewResolverPathStack->addPaths($pathStack);
         		
-        		$filename = $frontendPath . '/assets.php';
-        		if(is_file($filename) && is_readable($filename)){
-        			$configAssets = new \Zend\Config\Config(include $filename);
-        			$config = array_replace_recursive($configAssets->toArray(), $config);
+        		$assets = $frontendPath . '/assets.php';
+        		if(is_file($assets) && is_readable($assets)){
+        			$configAssets = new \Zend\Config\Config(include $assets);
+        			$config = array_replace_recursive($config, $configAssets->toArray() );
         			$configHasChanged = true;
+        		}
+        		
+        		$layout = $frontendPath . '/layout.php';
+        		if(is_file($layout) && is_readable($layout)){
+        		    $configLayout = new \Zend\Config\Config(include $layout);
+        		    $config = array_replace_recursive($config, $configLayout->toArray() );
+        		    $configHasChanged = true;
         		}
         	}
         	if($configHasChanged){
         		$e->getApplication()->getServiceManager()->setAllowOverride(true);
         		$e->getApplication()->getServiceManager()->setService('config', $config);
         	}
+        	
+        	/*foreach($config['core_layout'] as $i=>$t){
+        	    echo "<br>". $i . "<br>";
+        	    print_r($t);
+        	    
+        	}*/
         }
 
         /**
@@ -142,14 +162,17 @@ class Module
             if (isset($config['core_layout'])) {
                 $controller      = $e->getTarget();
                 $controllerClass = get_class($controller);
-                $moduleName		 = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+                $moduleName		 = strtolower(substr($controllerClass, 0, strpos($controllerClass, '\\')));
                 $match			 = $e->getRouteMatch();
+                $routeName       = $match->getMatchedRouteName();
+                $areaName        = (strpos($routeName, '/'))?substr($routeName, 0, strpos($routeName, '/')):$routeName;
                 $controllerName  = $match->getParam('controller', 'not-found');
                 $actionName 	 = $match->getParam('action', 'not-found');
                 $channel		 = $match->getParam('channel', 'not-found');
                 $viewModel 		 = $e->getViewModel();     
 
                 //print_r($match);
+                //echo $areaName;
 
                 //die('module : '.$moduleName . "- controller : " . $controllerName . "- action :" . $actionName);
 
@@ -157,42 +180,45 @@ class Module
                  * Assign the correct layout
                  */
                 
-                if (isset($config['core_layout'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['default_layout'])) {
-                    //print_r($config['core_layout'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['default_layout']);
-                    $controller->layout($config['core_layout'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['default_layout']);
-                } elseif (isset($config['core_layout'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['default_layout'])) {
-                    //print_r($config['core_layout'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['default_layout']);
-                    $controller->layout($config['core_layout'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['default_layout']);
-                } elseif (isset($config['core_layout'][$moduleName]['controllers'][$controllerName]['channel'][$channel]['default_layout'])) {
-                    //print_r($config['core_layout'][$moduleName]['controllers'][$controllerName]['channel'][$channel]['default_layout']);
-                    $controller->layout($config['core_layout'][$moduleName]['controllers'][$controllerName]['channel'][$channel]['default_layout']);
-                } elseif (isset($config['core_layout'][$moduleName]['controllers'][$controllerName]['default_layout'])) {
-                    //print_r($config['core_layout'][$moduleName]['controllers'][$controllerName]['default_layout']);
-                    $controller->layout($config['core_layout'][$moduleName]['controllers'][$controllerName]['default_layout']);
-                } elseif (isset($config['core_layout'][$moduleName]['channel'][$channel]['default_layout'])) {
-                    //print_r($config['core_layout'][$moduleName]['channel'][$channel]['default_layout']);
-                    $controller->layout($config['core_layout'][$moduleName]['channel'][$channel]['default_layout']);
-                } elseif (isset($config['core_layout'][$moduleName]['default_layout'])) {
-                    //print_r($config['core_layout'][$moduleName]['default_layout']);
-                    $controller->layout($config['core_layout'][$moduleName]['default_layout']);
+                if (isset($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['layout'])) {
+                    //print_r($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['layout']);
+                    $controller->layout($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['layout']);
+                } elseif (isset($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['layout'])) {
+                    //print_r($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['layout']);
+                    $controller->layout($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['layout']);
+                } elseif (isset($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['channel'][$channel]['layout'])) {
+                    //print_r($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['channel'][$channel]['layout']);
+                    $controller->layout($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['channel'][$channel]['layout']);
+                } elseif (isset($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['layout'])) {
+                    //print_r($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['layout']);
+                    $controller->layout($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['layout']);
+                } elseif (isset($config['core_layout'][$areaName]['modules'][$moduleName]['channel'][$channel]['layout'])) {
+                    //print_r($config['core_layout'][$areaName]['modules'][$moduleName]['channel'][$channel]['layout']);
+                    $controller->layout($config['core_layout'][$areaName]['modules'][$moduleName]['channel'][$channel]['layout']);
+                } elseif (isset($config['core_layout'][$areaName]['modules'][$moduleName]['layout'])) {
+                    //print_r($config['core_layout'][$areaName]['modules'][$moduleName]['layout']);
+                    $controller->layout($config['core_layout'][$areaName]['modules'][$moduleName]['layout']);
+                } else {
+                    $controller->layout($config['core_layout'][$areaName]['layout']);
                 }
 
+                //echo $controller->layout()->getTemplate();
                 /**
                  * Create variables attached to layout containing path views
                  * cascading assignment is managed
                  */
-                if (isset($config['core_layout'][$moduleName]['children_views'])) {
-                    foreach ($config['core_layout'][$moduleName]['children_views'] as $k => $v) {
+                if (isset($config['core_layout'][$areaName]['modules'][$moduleName]['children_views'])) {
+                    foreach ($config['core_layout'][$areaName]['modules'][$moduleName]['children_views'] as $k => $v) {
                         $viewModel->$k  = $v;
                     }
                 }
-                if (isset($config['core_layout'][$moduleName]['controllers'][$controllerName]['children_views'])) {
-                    foreach ($config['core_layout'][$moduleName]['controllers'][$controllerName]['children_views'] as $k => $v) {
+                if (isset($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['children_views'])) {
+                    foreach ($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['children_views'] as $k => $v) {
                         $viewModel->$k  = $v;
                     }
                 }
-                if (isset($config['core_layout'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['children_views'])) {
-                    foreach ($config['core_layout'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['children_views'] as $k => $v) {
+                if (isset($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['children_views'])) {
+                    foreach ($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['children_views'] as $k => $v) {
                         $viewModel->$k  = $v;
                     }
                 }

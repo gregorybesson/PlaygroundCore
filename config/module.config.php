@@ -567,15 +567,17 @@ return array(
         )
     ),
 
-	'core_layout' => array(
-        'PlaygroundCore' => array(
-            'default_layout' => 'layout/admin',
-            'controllers' => array(
-            	'PlaygroundCore\Controller\Dashboard'   => array(
-            		'default_layout' => 'layout/admin',
-            	),	
-            ),
-        ),
+    'core_layout' => array(
+	    'admin' => array(
+	        'layout' => 'layout/admin',
+	    ),
+	    'frontend' => array(
+	        'layout' => 'layout/2columns-right',
+	        /*'children_views' => array(
+	            'col_right'  => 'application/common/column_right.phtml',
+	            'col_left'  => 'playground-user/layout/col-user.phtml',
+	        ),*/
+	    ),
 	),
 		
 		

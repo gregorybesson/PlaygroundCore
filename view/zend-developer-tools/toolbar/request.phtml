@@ -42,12 +42,16 @@ $templates = $this->report->getCollector('template_hint')->getTemplates();
             <span class="zdt-detail-label">Route</span>
             <span class="zdt-detail-value"><?php echo $this->collector->getRouteName(); ?></span>
         </span>
-        <?php foreach($templates as $template):?>
-    	<span class="zdt-toolbar-info">
-    		<span class="zdt-detail-label"><?php echo $template['template']?></span>
-    		<span class="zdt-detail-value"><?php echo $template['path']?></span>
-    	</span>
-    	<?php endforeach;?>
+        <?php if($templates && count($templates>0)):?>
+            <?php foreach($templates as $template):?>
+        	<span class="zdt-toolbar-info">
+        		<span class="zdt-detail-label"><?php echo $template['template']?></span>
+        		<span class="zdt-detail-value"><?php echo $template['path']?></span>
+        	</span>
+        	<?php endforeach;?>
+        <?php else:?>
+            <?php echo $this->ZendDeveloperToolsDetailArray('Templates', $this->collector->getTemplateNames()); ?>
+        <?php endif;?>
         <?php //echo $this->ZendDeveloperToolsDetailArray('Templates', $this->collector->getTemplateNames()); ?>
     </div>
 </div>

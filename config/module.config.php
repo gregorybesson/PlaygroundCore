@@ -567,16 +567,9 @@ return array(
         )
     ),
 
-    'core_layout' => array(
+	'core_layout' => array(
 	    'admin' => array(
 	        'layout' => 'layout/admin',
-	    ),
-	    'frontend' => array(
-	        'layout' => 'layout/2columns-right',
-	        /*'children_views' => array(
-	            'col_right'  => 'application/common/column_right.phtml',
-	            'col_left'  => 'playground-user/layout/col-user.phtml',
-	        ),*/
 	    ),
 	),
 		

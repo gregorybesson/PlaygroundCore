@@ -6,8 +6,6 @@ return array(
 			'AsseticBundle\Service' => 'PlaygroundCore\Assetic\ServiceFactory',
 			'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
 			'nav' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-			'PhpRendererHintStrategy' => 'PlaygroundCore\View\Strategy\PhpRendererHintStrategyFactory',
-			'PhpRendererHint' =>  'PlaygroundCore\View\Renderer\PhpRendererHintFactory',
 		),
 	),
 
@@ -640,28 +638,11 @@ return array(
         'doctype'                  => 'XHTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-    	'template_map' => array(
-    		'zend-developer-tools/toolbar/request'=> __DIR__ . '/../view/zend-developer-tools/toolbar/request.phtml',
-    		//'zend-developer-tools/toolbar/template-hint' => __DIR__ . '/../view/zend-developer-tools/toolbar/template-hint.phtml',
-    	),
         'template_path_stack' => array(
             __DIR__ . '/../view/admin',
             __DIR__ . '/../view/frontend',
         ),
     ),
-	
-	'zenddevelopertools' => array(
-		'profiler' => array(
-			'collectors' => array(
-				'template_hint' => 'playgroundcore_templatehint_collector',
-			),
-		),
-		/*'toolbar' => array(
-			'entries' => array(
-				'template_hint' => 'zend-developer-tools/toolbar/template-hint',
-			),
-		),*/
-	),
 		
 	/*'design' => array(
 		'admin' => array(

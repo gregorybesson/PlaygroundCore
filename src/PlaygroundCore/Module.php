@@ -22,7 +22,7 @@ class Module implements
     ServiceProviderInterface,
     ViewHelperProviderInterface
 {
-    
+
     public function init(ModuleManager $manager)
     {
         $eventManager = $manager->getEventManager();
@@ -30,25 +30,25 @@ class Module implements
          * This event will exist in ZF 2.3.0. I'll then use it to change the config before it's cached
          * The change will apply to 'template_path_stack' and 'assetic_configuration'
          * These 2 config take part in the Playground Theme Management
-         */  
+         */
         //$eventManager->attach(\Zend\ModuleManager\ModuleEvent::EVENT_MERGE_CONFIG, array($this, 'onMergeConfig'));
     }
-    
+
     /*
      * This function will be used once 'EVENT_MERGE_CONFIG' will exist in ZF 2.3
      */
     public function onMergeConfig($e)
     {
-        
+
         $config = $e->getConfigListener()->getMergedConfig(false);
-        
+
         if(isset($config['design'])){
         	$configHasChanged = false;
         	$viewResolverPathStack = $config['template_path_stack'];
         	if(isset($config['design']['admin']) && isset($config['design']['admin']['package']) && isset($config['design']['admin']['theme'])){
-        	            	    
+
         		$adminPath = __DIR__ . '/../../../../../design/admin/'. $config['design']['admin']['package'] .'/'. $config['design']['admin']['theme'];
-        		
+
         		// I get the Theme definition file and apply a check on the parent theme.
         		// TODO : Apply recursion to this stuff.
         		$adminThemePath = $adminPath . '/theme.php';
@@ -81,24 +81,24 @@ class Module implements
         		        $viewResolverPathStack->addPaths($stack);
         		    }
         		}
-        		
+
         		$pathStack = array($adminPath);
-        		
+
         		// Assetic pour les CSS
         		$config['assetic_configuration']['modules']['admin']['root_path'][] = $adminPath . '/assets';
-        		
+
         		// Resolver des templates phtml
         		$viewResolverPathStack->addPaths($pathStack);
-        		
+
         		//print_r($viewResolverPathStack->getPaths());
-        		
+
         		$assets = $adminPath . '/assets.php';
         		if(is_file($assets) && is_readable($assets)){
         			$configAssets = new \Zend\Config\Config(include $assets);
         			$config = array_replace_recursive($config, $configAssets->toArray());
         			$configHasChanged = true;
         		}
-        		
+
         		$layout = $adminPath . '/layout.php';
         		if(is_file($layout) && is_readable($layout)){
         		    $configLayout = new \Zend\Config\Config(include $layout);
@@ -108,11 +108,11 @@ class Module implements
         	}
         	if(isset($config['design']['frontend']) && isset($config['design']['frontend']['package']) && isset($config['design']['frontend']['theme'])){
         		$frontendPath = __DIR__ . '/../../../../../design/frontend/'. $config['design']['frontend']['package'] .'/'. $config['design']['frontend']['theme'];
-        		
+
         		$frontendThemePath = $frontendPath . '/theme.php';
         		if(is_file($frontendThemePath) && is_readable($frontendThemePath)){
         		    $configTheme = new \Zend\Config\Config(include $frontendThemePath);
-        		
+
         		    if (isset($configTheme['design']['package']['theme']['parent'])){
         		        $stack = array();
         		        $parentTheme = explode('_', $configTheme['design']['package']['theme']['parent']);
@@ -139,20 +139,20 @@ class Module implements
         		        $viewResolverPathStack->addPaths($stack);
         		    }
         		}
-        		
+
         		$pathStack = array($frontendPath);
         		// Assetic pour les CSS
         		$config['assetic_configuration']['modules']['frontend']['root_path'][] = $frontendPath . '/assets';
-        		
+
         		$viewResolverPathStack->addPaths($pathStack);
-        		
+
         		$assets = $frontendPath . '/assets.php';
         		if(is_file($assets) && is_readable($assets)){
         			$configAssets = new \Zend\Config\Config(include $assets);
         			$config = array_replace_recursive($config, $configAssets->toArray() );
         			$configHasChanged = true;
         		}
-        		
+
         		$layout = $frontendPath . '/layout.php';
         		if(is_file($layout) && is_readable($layout)){
         		    $configLayout = new \Zend\Config\Config(include $layout);
@@ -168,16 +168,16 @@ class Module implements
         	/*foreach($config['core_layout'] as $i=>$t){
         	    echo "<br>". $i . "<br>";
         	    print_r($t);
-        	    
+
         	}*/
         }
-        
+
         $e->getConfigListener()->setMergedConfig($config);
-        
-    
+
+
         // do something with the above!
     }
-    
+
     public function onBootstrap(EventInterface $e)
     {
         $serviceManager = $e->getApplication()->getServiceManager();
@@ -212,15 +212,15 @@ class Module implements
         $sessionConfig->setOptions($config['session']);
         $sessionManager = new SessionManager($sessionConfig);
         $sessionManager->start();
-        
+
             // Design management : template and assets management
         if(isset($config['design'])){
         	$configHasChanged = false;
         	$viewResolverPathStack = $e->getApplication()->getServiceManager()->get('ViewTemplatePathStack');
         	if(isset($config['design']['admin']) && isset($config['design']['admin']['package']) && isset($config['design']['admin']['theme'])){
-        	            	    
+
         		$adminPath = __DIR__ . '/../../../../../design/admin/'. $config['design']['admin']['package'] .'/'. $config['design']['admin']['theme'];
-        		
+
         		// I get the Theme definition file and apply a check on the parent theme.
         		// TODO : Apply recursion to this stuff.
         		$adminThemePath = $adminPath . '/theme.php';
@@ -253,24 +253,24 @@ class Module implements
         		        $viewResolverPathStack->addPaths($stack);
         		    }
         		}
-        		
+
         		$pathStack = array($adminPath);
-        		
+
         		// Assetic pour les CSS
         		$config['assetic_configuration']['modules']['admin']['root_path'][] = $adminPath . '/assets';
-        		
+
         		// Resolver des templates phtml
         		$viewResolverPathStack->addPaths($pathStack);
-        		
+
         		//print_r($viewResolverPathStack->getPaths());
-        		
+
         		$assets = $adminPath . '/assets.php';
         		if(is_file($assets) && is_readable($assets)){
         			$configAssets = new \Zend\Config\Config(include $assets);
         			$config = array_replace_recursive($config, $configAssets->toArray());
         			$configHasChanged = true;
         		}
-        		
+
         		$layout = $adminPath . '/layout.php';
         		if(is_file($layout) && is_readable($layout)){
         		    $configLayout = new \Zend\Config\Config(include $layout);
@@ -280,11 +280,11 @@ class Module implements
         	}
         	if(isset($config['design']['frontend']) && isset($config['design']['frontend']['package']) && isset($config['design']['frontend']['theme'])){
         		$frontendPath = __DIR__ . '/../../../../../design/frontend/'. $config['design']['frontend']['package'] .'/'. $config['design']['frontend']['theme'];
-        		
+
         		$frontendThemePath = $frontendPath . '/theme.php';
         		if(is_file($frontendThemePath) && is_readable($frontendThemePath)){
         		    $configTheme = new \Zend\Config\Config(include $frontendThemePath);
-        		
+
         		    if (isset($configTheme['design']['package']['theme']['parent'])){
         		        $stack = array();
         		        $parentTheme = explode('_', $configTheme['design']['package']['theme']['parent']);
@@ -311,20 +311,20 @@ class Module implements
         		        $viewResolverPathStack->addPaths($stack);
         		    }
         		}
-        		
+
         		$pathStack = array($frontendPath);
         		// Assetic pour les CSS
         		$config['assetic_configuration']['modules']['frontend']['root_path'][] = $frontendPath . '/assets';
-        		
+
         		$viewResolverPathStack->addPaths($pathStack);
-        		
+
         		$assets = $frontendPath . '/assets.php';
         		if(is_file($assets) && is_readable($assets)){
         			$configAssets = new \Zend\Config\Config(include $assets);
         			$config = array_replace_recursive($config, $configAssets->toArray() );
         			$configHasChanged = true;
         		}
-        		
+
         		$layout = $frontendPath . '/layout.php';
         		if(is_file($layout) && is_readable($layout)){
         		    $configLayout = new \Zend\Config\Config(include $layout);
@@ -340,7 +340,7 @@ class Module implements
         	/*foreach($config['core_layout'] as $i=>$t){
         	    echo "<br>". $i . "<br>";
         	    print_r($t);
-        	    
+
         	}*/
         }
 
@@ -356,7 +356,7 @@ class Module implements
             $view   = $serviceManager->get('ViewHelperManager');
             $plugin = $view->get('googleAnalytics');
             $plugin();
-            
+
             $viewModel 		 = $e->getViewModel();
             $match			 = $e->getRouteMatch();
             $channel		 = isset($match)? $match->getParam('channel', ''):'';
@@ -377,7 +377,7 @@ class Module implements
         		$session->offsetSet('signed_request',  $data);
         	}
         },200);
-        	
+
         /**
          * This listener gives the possibility to select the layout on module / controller / action level !
          * Just configure it in any module config or autoloaded config.
@@ -394,7 +394,7 @@ class Module implements
                 $controllerName  = $match->getParam('controller', 'not-found');
                 $actionName 	 = $match->getParam('action', 'not-found');
                 $channel		 = $match->getParam('channel', 'not-found');
-                $viewModel 		 = $e->getViewModel();     
+                $viewModel 		 = $e->getViewModel();
 
                 //print_r($match);
                 //echo $areaName;
@@ -404,7 +404,7 @@ class Module implements
                 /**
                  * Assign the correct layout
                  */
-                
+
                 if (isset($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['layout'])) {
                     //print_r($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['layout']);
                     $controller->layout($config['core_layout'][$areaName]['modules'][$moduleName]['controllers'][$controllerName]['actions'][$actionName]['channel'][$channel]['layout']);
@@ -426,7 +426,7 @@ class Module implements
                 } elseif (isset($config['core_layout'][$areaName]['channel'][$channel]['layout'])) {
                     //print_r($config['core_layout'][$areaName]['channel'][$channel]['layout']);
                     $controller->layout($config['core_layout'][$areaName]['channel'][$channel]['layout']);
-                } else {
+                } elseif (isset($config['core_layout'][$areaName]['layout'])) {
                     $controller->layout($config['core_layout'][$areaName]['layout']);
                 }
 
@@ -502,7 +502,7 @@ class Module implements
 
                 return $helper;
                 },
-                
+
                 'adminAssetPath' => function($sm) {
                 	$config = $sm->getServiceLocator()->has('Config') ? $sm->getServiceLocator()->get('Config') : array();
                 	$helper  = new View\Helper\AdminAssetPath;
@@ -514,7 +514,7 @@ class Module implements
                 	$helper->setBasePath($basePath);
                 	return $helper;
                 },
-                
+
                 'frontendAssetPath' => function($sm) {
                 	$config = $sm->getServiceLocator()->has('Config') ? $sm->getServiceLocator()->get('Config') : array();
                 	$helper  = new View\Helper\FrontendAssetPath;

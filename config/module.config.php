@@ -83,7 +83,7 @@ return array(
 				        ),
 				        'options' => array(
 				            'move_raw' => true,
-				            'output' => 'zfcadmin/css',
+				            'output' => 'zfcadmin',
 				        )
 				    ),
 					'admin_fonts' => array(

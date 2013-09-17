@@ -68,13 +68,24 @@ return array(
 						'assets' => array(
 							'images/**/*.jpg',
 							'images/**/*.png',
-
+						    'images/**/*.gif',
 						),
 						'options' => array(
 							'move_raw' => true,
 							'output' => 'zfcadmin',
 						)
 					),
+				    'admin_jquery_ui_images' => array(
+				        'assets' => array(
+				            'css/images/*.jpg',
+				            'css/images/*.png',
+				            'css/images/*.gif',
+				        ),
+				        'options' => array(
+				            'move_raw' => true,
+				            'output' => 'zfcadmin/css',
+				        )
+				    ),
 					'admin_fonts' => array(
 		 				'assets' => array(
 							'fonts/**/*.eot',

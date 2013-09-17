@@ -232,11 +232,11 @@ return array(
         'use_cookies' => true,
         'cookie_httponly' => true,
     ),
-		
+
     'router' => array(
         'routes' => array(
             'frontend' => array(
-            	'type' => 'PlaygroundCore\Mvc\Router\Http\RegexSlash', 
+            	'type' => 'PlaygroundCore\Mvc\Router\Http\RegexSlash',
             	'options' => array(
             		'regex'    => '\/(?<channel>(embed|facebook|platform|mobile)+)?\/?',
             		'defaults' => array(
@@ -569,9 +569,12 @@ return array(
 	    'admin' => array(
 	        'layout' => 'layout/admin',
 	    ),
+	    'frontend' => array(
+	        'layout' => 'layout/layout',
+	    ),
 	),
-		
-		
+
+
     'controllers' => array(
         'invokables' => array(
             'PlaygroundCore\Controller\Dashboard' => 'PlaygroundCore\Controller\DashboardController',
@@ -643,7 +646,7 @@ return array(
             __DIR__ . '/../view/frontend',
         ),
     ),
-		
+
 	/*'design' => array(
 		'admin' => array(
 			'package' => 'default',

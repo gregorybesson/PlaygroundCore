@@ -2,14 +2,6 @@
 $settings = array(
 
     /**
-     * On peut déterminer un layout pour un module (la config doit se trouver dans global.php ou local.php)
-     * TODO : Descendre jusqu'à l'action
-     */
-    /*'core_layout' => array(
-            'PlaygroundUser' => 'layout/1column',
-    ),*/
-
-    /**
      * Bitly Account : A service for shortening url :)
      */
     'bitlyUsername' => 'o_7t2s2bjmun',
@@ -98,7 +90,7 @@ $settings = array(
         'allow_linker' => false,
     ),
 );
-
+ 
 $zenddevelopertools = array(
     'profiler' => array(
         'enabled' => true,

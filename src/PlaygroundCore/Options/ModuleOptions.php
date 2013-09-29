@@ -16,6 +16,7 @@ class ModuleOptions extends AbstractOptions
     protected $googleAnalytics = array('id' => '');
     protected $adServing = array();
     protected $defaultShareMessage = 'Venez jouer';
+    protected $facebookOpengraph = array('appId' => '');
     
 
     protected $ckeditor = array();
@@ -53,6 +54,18 @@ class ModuleOptions extends AbstractOptions
     {
         $this->googleAnalytics = $googleAnalytics;
 
+        return $this;
+    }
+    
+    public function getFacebookOpengraph()
+    {
+        return $this->facebookOpengraph;
+    }
+    
+    public function setFacebookOpengraph($facebookOpengraph)
+    {
+        $this->facebookOpengraph = $facebookOpengraph;
+    
         return $this;
     }
 

@@ -71,6 +71,9 @@ class Module implements
             $plugin = $view->get('googleAnalytics');
             $plugin();
 
+            $pluginOG = $view->get('facebookOpengraph');
+            $pluginOG();
+            
             $viewModel 		 = $e->getViewModel();
             $match			 = $e->getRouteMatch();
             $channel		 = isset($match)? $match->getParam('channel', ''):'';
@@ -130,6 +133,14 @@ class Module implements
 
                 return $helper;
                 },
+                
+                'facebookOpengraph' => function($sm) {
+                    $tracker = $sm->getServiceLocator()->get('facebook-opengraph');
+                
+                    $helper  = new View\Helper\FacebookOpengraph($tracker, $sm->getServiceLocator()->get('Request'));
+                
+                    return $helper;
+                },
             ),
         );
 
@@ -141,7 +152,8 @@ class Module implements
 
                 'aliases' => array(
                     'playgroundcore_doctrine_em' => 'doctrine.entitymanager.orm_default',
-                    'google-analytics'      => 'PlaygroundCore\Analytics\Tracker',
+                    'google-analytics'           => 'PlaygroundCore\Analytics\Tracker',
+                    'facebook-opengraph'         => 'PlaygroundCore\Opengraph\Tracker',
                 ),
 
                 'shared' => array(
@@ -190,6 +202,25 @@ class Module implements
                             $tracker->setAllowHash($config['allow_hash']);
                         }
 
+                        return $tracker;
+                    },
+                    'PlaygroundCore\Opengraph\Tracker' => function($sm) {
+                        $config = $sm->get('config');
+                        $config = isset($config['playgroundcore']['facebookOpengraph']) ? $config['playgroundcore']['facebookOpengraph'] : array('appId' => '');
+                    
+                        $tracker = new Opengraph\Tracker($config['appId']);
+                    
+                        if (isset($config['enable'])) {
+                            $tracker->setEnableOpengraph($config['enable']);
+                        }
+                        
+                        if (isset($config['tags'])) {
+                            foreach($config['tags'] as $type => $value) {
+                                $tag = new Opengraph\Tag ($type, $value);
+                                $tracker->addTag($tag);
+                            }
+                        }
+                    
                         return $tracker;
                     },
                 ),

@@ -302,7 +302,6 @@ return array(
             'PlaygroundCore\Controller\Formgen'   => 'PlaygroundCore\Controller\FormgenController',
             'playgroundcore_console'              => 'PlaygroundCore\Controller\ConsoleController',
             'elfinder'                       => 'PlaygroundCore\Controller\ElfinderController',
-            'facebook'                       => 'PlaygroundCore\Controller\FacebookController',
         ),
     ),
     'controller_plugins' => array(

@@ -17,6 +17,7 @@ class ModuleOptions extends AbstractOptions
     protected $adServing = array();
     protected $defaultShareMessage = 'Venez jouer';
     protected $facebookOpengraph = array('appId' => '');
+    protected $locale = null;
     
 
     protected $ckeditor = array();
@@ -161,6 +162,18 @@ class ModuleOptions extends AbstractOptions
     public function setBitlyUrl($bitlyUrl)
     {
         $this->bitlyUrl = $bitlyUrl;
+
+        return $this;
+    }
+
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
 
         return $this;
     }

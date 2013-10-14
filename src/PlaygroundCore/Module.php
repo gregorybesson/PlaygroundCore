@@ -26,18 +26,25 @@ class Module implements
     public function onBootstrap(EventInterface $e)
     {
         $serviceManager = $e->getApplication()->getServiceManager();
+        $config = $e->getApplication()->getServiceManager()->get('config');
 
-        /* Set the translator for default validation messages
-         * I've copy/paste the Validator messages from ZF2 and placed them in a correct path : PlaygroundCore
-        * TODO : Centraliser la trad pour les Helper et les Plugins
-        */
+        //translator
+        $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
         $translator = $serviceManager->get('translator');
+        $translator->setLocale($locale);
 
-        //Translation based on Browser's locale
-        //$translator->setLocale(\Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+        // plugins
+        $translate = $serviceManager->get('viewhelpermanager')->get('translate');
+        $translate->getTranslator()->setLocale($locale);
+
+        $options = $serviceManager->get('playgroundcore_module_options');
+        $options->setLocale($locale);
 
         // positionnement de la langue pour les traductions de date avec strftime
         setlocale(LC_TIME, "fr_FR", 'fr_FR.utf8', 'fra');
+
+        
+
 
         AbstractValidator::setDefaultTranslator($translator,'playgroundcore');
 
@@ -51,8 +58,6 @@ class Module implements
         $filterChain->attach(new Filter\Slugify());
 
         // Start the session container
-        $config = $e->getApplication()->getServiceManager()->get('config');
-
         $sessionConfig = new SessionConfig();
         $sessionConfig->setOptions($config['session']);
         $sessionManager = new SessionManager($sessionConfig);

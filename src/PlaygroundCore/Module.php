@@ -27,24 +27,24 @@ class Module implements
     {
         $serviceManager = $e->getApplication()->getServiceManager();
         $config = $e->getApplication()->getServiceManager()->get('config');
-
-        //translator
-        $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+       
         $translator = $serviceManager->get('translator');
-        $translator->setLocale($locale);
 
-        // plugins
-        $translate = $serviceManager->get('viewhelpermanager')->get('translate');
-        $translate->getTranslator()->setLocale($locale);
+        // Gestion de la locale
+        if (PHP_SAPI !== 'cli') {
+            //translator
+            $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);    
+            $translator->setLocale($locale);
+        
+            // plugins
+            $translate = $serviceManager->get('viewhelpermanager')->get('translate');
+            $translate->getTranslator()->setLocale($locale);
 
-        $options = $serviceManager->get('playgroundcore_module_options');
-        $options->setLocale($locale);
-
+            $options = $serviceManager->get('playgroundcore_module_options');
+            $options->setLocale($locale);
+        }
         // positionnement de la langue pour les traductions de date avec strftime
         setlocale(LC_TIME, "fr_FR", 'fr_FR.utf8', 'fra');
-
-        
-
 
         AbstractValidator::setDefaultTranslator($translator,'playgroundcore');
 

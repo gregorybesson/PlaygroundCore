@@ -88,6 +88,12 @@ class Module implements
             }
         });
 
+        
+        // I don't attache listeners if the request is a console request
+        if ((get_class($e->getRequest()) == 'Zend\Console\Request')) {
+            return;
+        }
+            
         // Detect if the app is called from FB and store unencrypted signed_request
         $e->getApplication()->getEventManager()->attach("dispatch", function($e) {
        		$session = new Container('facebook');

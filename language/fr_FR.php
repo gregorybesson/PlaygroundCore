@@ -297,6 +297,5 @@ return array(
 	
 	// Formgen Input
 	'Input Name'			=> 'Nom du champ',
-	
-	
+
 );

@@ -276,4 +276,56 @@ return array(
     // Zend_Validator_Uri
     "Invalid type given. String expected" => "Invalid type given. String expected",
     "The input does not appear to be a valid Uri" => "The input does not appear to be a valid Uri",
+
+    // Doctrine
+    "This email already exists !" => "This email already exists !",
+    
+    // Formgen upload
+    'File Upload Name'		=> 'File Upload Name',
+    'Replace Label Text'	=> 'Replace Label Text',
+    'Required'				=> 'Required',
+    'No'					=> 'No',
+    'Yes'					=> 'Yes',
+    'Save'					=> 'Save',
+    
+    // Formgen paragraph
+    'Paragraph Name'		=> 'Paragraph Name',
+    'Placeholder Text'		=> 'Placeholder Text',
+    'Type something...'		=> 'Type something...',
+    'Validate between'		=> 'Validate between',
+    'number of characters' 	=> 'number of characters',
+    
+    // Formgen Input
+    'Input Name'			=> 'Input Name',
+    
+    // CORPS DE L'EMAIL ENVOYE QUANT L'UTILISATEUR POSE UNE QUESTION
+    'Mail send from contact page' => 'Mail send from contact page',
+    'Last name' => 'Last name',
+    'First name' => 'First name',
+    'Email' => 'Email',
+    'Object' => 'Object',
+    'Message' => 'Message',
+    
+    // CONTACT FORM
+    'Contact us' => 'Contact us',
+	'A question to ask ?' => 'A question to ask ?',
+	'Your last name' => 'Your name',
+	'Your first name' => 'Your first name',
+	'Your email' => 'Your email',
+	'I have a technical problem' => 'I have a technical problem',
+	'I have a question about games' => 'I have a question about games',
+	'I have not received my lot or my invitation' => 'I have not received my lot or my invitation',
+	'I have a comment or suggestion' => 'I have a comment or suggestion',
+	'Other' => 'Other',
+	'Select' => 'Select',
+	'Your question' => 'Your question',
+	'Send' => 'Send',
+	'required fields' => 'required fields',
+	'Your request has been sent, we will process it as soon as possible' => 'Your request has been sent, we will process it as soon as possible',
+	'Thanks' => 'Thanks',
+	'Playground team' => 'Playground team',
+	'continue' => 'continue',
+	
+    
+    
 );

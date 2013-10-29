@@ -298,5 +298,39 @@ return array(
 	// Formgen Input
 	'Input Name'			=> 'Nom du champ',
 	
+	// CORPS DE L'EMAIL ENVOYE QUANT L'UTILISATEUR POSE UNE QUESTION
+	'Mail send from contact page' => 'Email envoyé depuis la page contact',
+	'Last name' => 'Nom',
+	'First name' => 'Prénom',
+	'Email' => 'Email',
+	'Object' => 'Objet',
+	'Message' => 'Message',
+	
+	// CONTACT FORM
+	'Contact us' => 'Contactez-nous',
+	'A question to ask ?' => 'Une question à nous poser ?',
+	'Your name' => 'Votre Nom',
+	'Your first name' => 'Votre Prénom',
+	'Your email' => 'Votre Email',
+	'I have a technical problem' => 'Je rencontre un problème technique',
+	'I have a question about games' => 'J\'ai une question sur les jeux',
+	'I have not received my lot or my invitation' => 'Je n\'ai pas reçu mon lot ou mon invitation',
+	'I have a comment or suggestion' => 'J\'ai une remarque ou suggestion à formuler',
+	'Other' => 'Autre',
+	'Select' => 'Sélectionner',
+	'Your question' => 'Votre question',
+	'Send' => 'Envoyer',
+	'required fields' => 'champs obligatoires',
+	'Your request has been sent, we will process it as soon as possible' => 'Votre demande a bien été envoyée, nous la traiterons dans les plus brefs délais',
+	'Thanks' => 'Merci',
+	'Playground team' => 'L\'équipe Playground',
+	'continue' => 'continuer',
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
 	
 );

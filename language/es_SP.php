@@ -326,6 +326,20 @@ return array(
 	'Playground team' => 'Playground team',
 	'continue' => 'continue',
 	
-    
+	// PAGE 404
+    'The page you requested was not found' => 'The page you requested was not found',
+    'The requested controller was unable to dispatch the request.' => 'The requested controller was unable to dispatch the request.',
+    'The requested controller could not be mapped to an existing controller class.' => 'The requested controller could not be mapped to an existing controller class.',
+    'The requested controller was not dispatchable.' => 'The requested controller was not dispatchable.',
+    'The requested URL could not be matched by routing.' => 'The requested URL could not be matched by routing.',
+    'We cannot determine at this time why a 404 was generated.' => 'We cannot determine at this time why a 404 was generated.',
+    'An error occurred' => 'An error occurred',
+    'Additional information' => 'Additional information',
+    'File' => 'File',
+    'Message' => 'Message',
+    'Stack trace' => 'Stack trace',
+    'Previous exceptions' => 'Previous exceptions',
+    'No Exception available' => 'No Exception available',
+    'Other games in' => 'Other games in',
     
 );

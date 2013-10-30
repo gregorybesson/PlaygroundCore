@@ -340,7 +340,7 @@ return array(
 	'Stack trace' => 'Trace',
 	'Previous exceptions' => 'Exception précédente',
 	'No Exception available' => 'Aucune exception disponible',
-	'' => '',
+	'Other games in' => 'Voir tous les jeux en cours',
 	'' => '',
 	'' => '',
 	'' => '',

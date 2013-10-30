@@ -340,5 +340,6 @@ return array(
     'Stack trace' => 'Stack trace',
     'Previous exceptions' => 'Previous exceptions',
     'No Exception available' => 'No Exception available',
+    'Other games in' => 'Other games in',
     
 );

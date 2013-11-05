@@ -524,8 +524,17 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
                         $expr
                 ));
             }
-            $from = self::exprToNumeric($arg[0]);
-            $to = self::exprToNumeric($arg[1]);
+            if(!is_numeric($arg[0])) {
+                $from = self::exprToNumeric($arg[0]);
+            } else {
+                $from = $arg[0];
+            }
+            if(!is_numeric($arg[1])) {
+                $to = self::exprToNumeric($arg[1]);
+            } else {
+                $to = $arg[1];
+            }
+            
         }
         //handle regular token
         else {

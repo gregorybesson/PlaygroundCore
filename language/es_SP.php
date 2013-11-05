@@ -276,4 +276,70 @@ return array(
     // Zend_Validator_Uri
     "Invalid type given. String expected" => "Invalid type given. String expected",
     "The input does not appear to be a valid Uri" => "The input does not appear to be a valid Uri",
+
+    // Doctrine
+    "This email already exists !" => "This email already exists !",
+    
+    // Formgen upload
+    'File Upload Name'		=> 'File Upload Name',
+    'Replace Label Text'	=> 'Replace Label Text',
+    'Required'				=> 'Required',
+    'No'					=> 'No',
+    'Yes'					=> 'Yes',
+    'Save'					=> 'Save',
+    
+    // Formgen paragraph
+    'Paragraph Name'		=> 'Paragraph Name',
+    'Placeholder Text'		=> 'Placeholder Text',
+    'Type something...'		=> 'Type something...',
+    'Validate between'		=> 'Validate between',
+    'number of characters' 	=> 'number of characters',
+    
+    // Formgen Input
+    'Input Name'			=> 'Input Name',
+    
+    // CORPS DE L'EMAIL ENVOYE QUANT L'UTILISATEUR POSE UNE QUESTION
+    'Mail send from contact page' => 'Mail send from contact page',
+    'Last name' => 'Last name',
+    'First name' => 'First name',
+    'Email' => 'Email',
+    'Object' => 'Object',
+    'Message' => 'Message',
+    
+    // CONTACT FORM
+    'Contact us' => 'Contact us',
+	'A question to ask ?' => 'A question to ask ?',
+	'Your last name' => 'Your name',
+	'Your first name' => 'Your first name',
+	'Your email' => 'Your email',
+	'I have a technical problem' => 'I have a technical problem',
+	'I have a question about games' => 'I have a question about games',
+	'I have not received my lot or my invitation' => 'I have not received my lot or my invitation',
+	'I have a comment or suggestion' => 'I have a comment or suggestion',
+	'Other' => 'Other',
+	'Select' => 'Select',
+	'Your question' => 'Your question',
+	'Send' => 'Send',
+	'required fields' => 'required fields',
+	'Your request has been sent, we will process it as soon as possible' => 'Your request has been sent, we will process it as soon as possible',
+	'Thanks' => 'Thanks',
+	'Playground team' => 'Playground team',
+	'continue' => 'continue',
+	
+	// PAGE 404
+    'The page you requested was not found' => 'The page you requested was not found',
+    'The requested controller was unable to dispatch the request.' => 'The requested controller was unable to dispatch the request.',
+    'The requested controller could not be mapped to an existing controller class.' => 'The requested controller could not be mapped to an existing controller class.',
+    'The requested controller was not dispatchable.' => 'The requested controller was not dispatchable.',
+    'The requested URL could not be matched by routing.' => 'The requested URL could not be matched by routing.',
+    'We cannot determine at this time why a 404 was generated.' => 'We cannot determine at this time why a 404 was generated.',
+    'An error occurred' => 'An error occurred',
+    'Additional information' => 'Additional information',
+    'File' => 'File',
+    'Message' => 'Message',
+    'Stack trace' => 'Stack trace',
+    'Previous exceptions' => 'Previous exceptions',
+    'No Exception available' => 'No Exception available',
+    'Other games in' => 'Other games in',
+    
 );

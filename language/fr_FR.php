@@ -297,5 +297,54 @@ return array(
 	
 	// Formgen Input
 	'Input Name'			=> 'Nom du champ',
-
+	
+	// CORPS DE L'EMAIL ENVOYE QUANT L'UTILISATEUR POSE UNE QUESTION
+	'Mail send from contact page' => 'Email envoyé depuis la page contact',
+	'Last name' => 'Nom',
+	'First name' => 'Prénom',
+	'Email' => 'Email',
+	'Object' => 'Objet',
+	'Message' => 'Message',
+	
+	// CONTACT FORM
+	'Contact us' => 'Contactez-nous',
+	'A question to ask ?' => 'Une question à nous poser ?',
+	'Your name' => 'Votre Nom',
+	'Your first name' => 'Votre Prénom',
+	'Your email' => 'Votre Email',
+	'I have a technical problem' => 'Je rencontre un problème technique',
+	'I have a question about games' => 'J\'ai une question sur les jeux',
+	'I have not received my lot or my invitation' => 'Je n\'ai pas reçu mon lot ou mon invitation',
+	'I have a comment or suggestion' => 'J\'ai une remarque ou suggestion à formuler',
+	'Other' => 'Autre',
+	'Select' => 'Sélectionner',
+	'Your question' => 'Votre question',
+	'Send' => 'Envoyer',
+	'required fields' => 'champs obligatoires',
+	'Your request has been sent, we will process it as soon as possible' => 'Votre demande a bien été envoyée, nous la traiterons dans les plus brefs délais',
+	'Thanks' => 'Merci',
+	'Playground team' => 'L\'équipe Playground',
+	'continue' => 'continuer',
+	
+	// PAGE 404
+	'The page you requested was not found' => 'La page que vous recherchez est introuvable',
+	'The requested controller was unable to dispatch the request.' => 'Le contrôleur demande a été incapable d\'envoyer la requête.',
+	'The requested controller could not be mapped to an existing controller class.' => 'Le contrôleur demandée n\'a pas pu être mappé à une classe de contrôleur existant.',
+	'The requested controller was not dispatchable.' => 'Le contrôleur a demandé n\'était pas dispatchable.',
+	'The requested URL could not be matched by routing.' => 'L\'URL demandée n\'a pas pu être compensée par le routage.',
+	'We cannot determine at this time why a 404 was generated.' => 'Nous ne pouvons pas déterminer à ce moment pourquoi un 404 a été généré.',
+	'An error occurred' => 'Une erreur s\'est produite',
+	'Additional information' => 'Informations complémentaires',
+	'File' => 'Fichier',
+	'Message' => 'Message',
+	'Stack trace' => 'Trace',
+	'Previous exceptions' => 'Exception précédente',
+	'No Exception available' => 'Aucune exception disponible',
+	'Other games in' => 'Voir tous les jeux en cours',
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
+	
 );

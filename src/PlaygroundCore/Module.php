@@ -48,6 +48,44 @@ class Module implements
 
         AbstractValidator::setDefaultTranslator($translator,'playgroundcore');
 
+        if (PHP_SAPI !== 'cli') {
+            // This fix exists only for safari
+            if (!count($_COOKIE) > 0 && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari')) {
+                $fb = $e->getRequest()->getPost()->get('signed_request');
+                if ($fb) {
+                    list($encoded_sig, $payload) = explode('.', $fb, 2);
+                    $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+                    $data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
+                    echo "<script type=\"text/javascript\">
+                    window.top.location.href = window.location.href+'?page_id='+".$data["page"]["id"]."
+                    </script>";
+                }
+            }
+
+            if (strpos($_SERVER['HTTP_USER_AGENT'], 'Safari')) {
+                $pageId = $e->getRequest()->getQuery('page_id');
+                if (!empty($pageId)) {
+                    $requestUri = $e->getRequest()->getRequestUri();
+                    $requestUri = explode("/", $requestUri);
+                    $requestUri = array_slice($requestUri, -1, 1);
+                    $requestUri = explode("?", $requestUri[0]);
+                    $gameName = $requestUri[0];
+                    $gameMapper = $serviceManager->get('playgroundgame_game_mapper');
+                    $game = $gameMapper->findByIdentifier($gameName);
+                    $appId = 'app_'.$game->getFbAppId();
+
+                    $url = 'https://www.facebook.com/pages/playground/'.$pageId.'?sk='.$appId;
+                    header("Location: $url");
+                    exit;
+                }
+            }
+            // This fix exists only for IE + IE11 when this app is embedded into an iFrame : The P3P policy has to be set.
+            $response = $e->getResponse();
+            if ($response instanceof \Zend\Http\Response && ( strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') || strpos($_SERVER['HTTP_USER_AGENT'], 'rv:11.'))) {
+                    $response->getHeaders()->addHeaderLine('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+            }
+        }
+
         /**
          * Adding a Filter to slugify a string (make it URL compliiant)
          */

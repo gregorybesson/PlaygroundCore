@@ -115,6 +115,15 @@ class Module implements
                     $response->getHeaders()->addHeaderLine('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
                 }
             }
+            
+            // We set an anonymous cookie. No usage yet else but persisting it in a game entry.
+            if ($e->getRequest()->getCookie()->offsetExists('pg_anonymous')){
+                $anonymousId = $e->getRequest()->getCookie()->offsetGet('pg_anonymous');
+            }else{
+                $anonymousId = uniqid('pg_', true);
+            }
+            $cookie = new \Zend\Http\Header\SetCookie('pg_anonymous', $anonymousId, time() + 60*60*24*30*365,'/');
+            $e->getResponse()->getHeaders()->addHeader($cookie);
         }
     }
 

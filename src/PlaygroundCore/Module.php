@@ -117,14 +117,10 @@ class Module implements
             }
             
             // We set an anonymous cookie. No usage yet else but persisting it in a game entry.
-            if ($e->getRequest()->getCookie()) {
-                if ($e->getRequest()->getCookie()->offsetExists('pg_anonymous')) {
-                    $anonymousId = $e->getRequest()->getCookie()->offsetGet('pg_anonymous');
-                } else {
-                    $anonymousId = uniqid('pg_', true);
-                }
+            if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_anonymous')) {
+                $anonymousId = $e->getRequest()->getCookie()->offsetGet('pg_anonymous');
             } else {
-               $anonymousId = uniqid('pg_', true); 
+                $anonymousId = uniqid('pg_', true); 
             }
             $cookie = new \Zend\Http\Header\SetCookie('pg_anonymous', $anonymousId, time() + 60*60*24*365,'/');
             $e->getResponse()->getHeaders()->addHeader($cookie);

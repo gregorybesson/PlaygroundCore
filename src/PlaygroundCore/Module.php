@@ -122,7 +122,7 @@ class Module implements
             }else{
                 $anonymousId = uniqid('pg_', true);
             }
-            $cookie = new \Zend\Http\Header\SetCookie('pg_anonymous', $anonymousId, time() + 60*60*24*30*365,'/');
+            $cookie = new \Zend\Http\Header\SetCookie('pg_anonymous', $anonymousId, time() + 60*60*24*365,'/');
             $e->getResponse()->getHeaders()->addHeader($cookie);
         }
     }

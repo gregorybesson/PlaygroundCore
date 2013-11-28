@@ -55,8 +55,8 @@ class Module implements
         $evm = $doctrine->getEventManager();
         
         $translatableListener = new \Gedmo\Translatable\TranslatableListener();
-        // Set the Default locale
-        //$translatableListener->setDefaultLocale('en_us');
+        // TODO : Set the Default locale to be taken from config
+        $translatableListener->setDefaultLocale('fr_FR');
         // If no translation is found, fallback to entity data
         $translatableListener->setTranslationFallback(true);
         // set Locale

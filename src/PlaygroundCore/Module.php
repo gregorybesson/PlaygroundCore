@@ -60,7 +60,9 @@ class Module implements
         // If no translation is found, fallback to entity data
         $translatableListener->setTranslationFallback(true);
         // set Locale
-        $translatableListener->setTranslatableLocale($locale);
+        if(isset($locale)){
+            $translatableListener->setTranslatableLocale($locale);
+        }
         
         $evm->addEventSubscriber($translatableListener);
 

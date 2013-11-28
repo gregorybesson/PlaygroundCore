@@ -47,6 +47,22 @@ class Module implements
         setlocale(LC_TIME, "fr_FR", 'fr_FR.utf8', 'fra');
 
         AbstractValidator::setDefaultTranslator($translator,'playgroundcore');
+        
+        /*
+         * Entity translation based on Doctrine Gedmo library
+         */
+        $doctrine = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $evm = $doctrine->getEventManager();
+        
+        $translatableListener = new \Gedmo\Translatable\TranslatableListener();
+        // Set the Default locale
+        //$translatableListener->setDefaultLocale('en_us');
+        // If no translation is found, fallback to entity data
+        $translatableListener->setTranslationFallback(true);
+        // set Locale
+        $translatableListener->setTranslatableLocale($locale);
+        
+        $evm->addEventSubscriber($translatableListener);
 
         /**
          * Adding a Filter to slugify a string (make it URL compliiant)

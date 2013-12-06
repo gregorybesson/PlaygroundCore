@@ -69,7 +69,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $websiteEntity = new WebsiteEntity;
         $websiteEntity->populate($this->website);
         
-        $this->assertEquals('/lib/flag/frff', $websiteEntity->getFlag());
+        $this->assertEquals('/lib/images/flag/frff', $websiteEntity->getFlag());
 
         unset($websiteEntity);
     }

@@ -33,7 +33,7 @@ return array(
             'core_lib' => array(
                 # module root path for your css and js files
                 'root_path' => array(
-                    __DIR__ . '/../view/lib',
+                    __DIR__ . '/../view/images',
                 ),
                 # collection of assets
                 'collections' => array(    
@@ -43,7 +43,7 @@ return array(
                         ),
                         'options' => array(
                             'move_raw' => true,
-                            'output' => 'lib',
+                            'output' => 'lib/images',
                         )
                     ),
                 ),
@@ -54,7 +54,6 @@ return array(
     'router' => array(
         'routes' => array(
             'frontend' => array(
-                
                 'child_routes' => array(
                     'locale' => array(
                         'type' => 'Segment',

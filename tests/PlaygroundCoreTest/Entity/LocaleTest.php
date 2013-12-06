@@ -55,7 +55,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $localeEntity = new LocaleEntity;
         $localeEntity->populate($this->locale);
 
-        $this->assertEquals("/lib/flag/fr", $localeEntity->getFlag());
+        $this->assertEquals("/lib/images/flag/fr", $localeEntity->getFlag());
     }
 
 }

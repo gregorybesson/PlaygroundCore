@@ -213,7 +213,7 @@ class Locale implements InputFilterAwareInterface
             return '';
         }
 
-        return "/lib/flag/".strtolower($flags[1]);
+        return "/lib/images/flag/".strtolower($flags[1]);
     }
 
     /**

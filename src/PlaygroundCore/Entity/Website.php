@@ -56,7 +56,7 @@ class Website implements InputFilterAwareInterface
      * default
      * @ORM\Column(type="boolean", nullable=false)
      */
-    protected $by_default = 0;
+    protected $byDefault = 0;
 
 
     /**
@@ -194,7 +194,7 @@ class Website implements InputFilterAwareInterface
      */
     public function getDefault()
     {
-        return $this->by_default;
+        return $this->byDefault;
     }
     
     /**
@@ -203,7 +203,7 @@ class Website implements InputFilterAwareInterface
      */
     public function setDefault($default)
     {
-        $this->by_default = (int) $default;
+        $this->byDefault = (int) $default;
     
         return $this;
     }
@@ -281,7 +281,7 @@ class Website implements InputFilterAwareInterface
     */
     public function getFlag()
     {
-        return "/lib/flag/".strtolower($this->getCode());
+        return "/lib/images/flag/".strtolower($this->getCode());
     }
 
 

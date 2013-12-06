@@ -321,16 +321,6 @@ return array(
                                     ),
                                 ),
                             ),
-                            'edit-locales' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                     'route' => '/edit-active',
-                                    'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
-                                        'action'     => 'editlocales',
-                                    ),
-                                ),
-                            ),
                         ),
                     ),
                 ),

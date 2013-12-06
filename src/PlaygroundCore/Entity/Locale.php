@@ -227,7 +227,7 @@ class Locale implements InputFilterAwareInterface
             $this->name = $data['name'];
         }
         if (isset($data['locale']) && $data['locale'] != null) {
-        	$this->code = $data['code'];
+        	$this->locale = $data['locale'];
         }
     }
 

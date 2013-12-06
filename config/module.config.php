@@ -28,6 +28,29 @@ return array(
         'cookie_httponly' => true,
     ),
 
+    'assetic_configuration' => array(
+        'modules' => array(
+            'core_lib' => array(
+                # module root path for your css and js files
+                'root_path' => array(
+                    __DIR__ . '/../view/lib',
+                ),
+                # collection of assets
+                'collections' => array(    
+                    'flags' => array(
+                        'assets' => array(
+                            'flag/*.png',
+                        ),
+                        'options' => array(
+                            'move_raw' => true,
+                            'output' => 'lib',
+                        )
+                    ),
+                ),
+            ),
+        ),
+    ),
+
     'router' => array(
         'routes' => array(
             'frontend' => array(

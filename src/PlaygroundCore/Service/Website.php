@@ -31,63 +31,6 @@ class Website extends EventProvider implements ServiceManagerAwareInterface
      */
     protected $options;
 
-    /**
-     *
-     * This service is ready for create a Website
-     *
-     * @param  array  $data
-     * @param  string $formClass
-     *
-     * @return \PlaygroundCore\Entity\Website
-     */
-    public function create(array $data)
-    {
-        $website = new WebsiteEntity();
-        $website->populate($data);
-        $entityManager = $this->getServiceManager()->get('playgroundcore_doctrine_em');
-
-        $form = $this->getServiceManager()->get('playgroundcore_website_form');
-
-        $form->bind($website);
-        $form->setData($data);
-
-        if (!$form->isValid()) {
-            return false;
-        }
-
-        $websiteyMapper = $this->getWebsiteMapper();
-        $website = $websiteyMapper->insert($website);
-
-        return $website;
-    }
-
-    /**
-     *
-     * This service is ready for edit a Website
-     *
-     * @param  array  $data
-     * @param  string $website
-     * @param  string $formClass
-     *
-     * @return \PlaygroundCore\Entity\Website
-     */
-    public function edit(array $data, $website)
-    {
-        $entityManager = $this->getServiceManager()->get('playgroundcore_doctrine_em');
-
-        $form  = $this->getServiceManager()->get('playgroundcore_website_form');
-
-        $form->bind($website);
-
-        $form->setData($data);
-
-        if (!$form->isValid()) {
-            return false;
-        }
-        $website = $this->getWebsiteMapper()->update($website);
-
-        return $website;
-    }
 
     /**
      * getWebsiteMapper

@@ -33,7 +33,21 @@ class Module implements
         // Gestion de la locale
         if (PHP_SAPI !== 'cli') {
             //translator
-            $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);    
+
+            // Gestion locale pour le back
+            if($serviceManager->get('router')->match($serviceManager->get('request')) && strpos($serviceManager->get('router')->match($serviceManager->get('request'))->getMatchedRouteName(), 'admin') !==false){
+                if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_back')) {
+                    $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_back');
+                }
+            }else{
+                // Gestion locale pour le front
+                if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_front')) {
+                    $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_front');
+                }  
+            }
+            if(empty($locale)){
+                $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);   
+            }
             $translator->setLocale($locale);
         
             // plugins

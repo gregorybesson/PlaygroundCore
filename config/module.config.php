@@ -31,7 +31,18 @@ return array(
     'router' => array(
         'routes' => array(
             'frontend' => array(
-        		'child_routes' => array(
+                
+                'child_routes' => array(
+                    'locale' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'switch/[:locale]/[:context]/[:referer]',
+                            'defaults' => array(
+                                'controller' => 'PlaygroundCore\Controller\Frontend\SwitchLocale',
+                                'action'     => 'switch',
+                            ),
+                        ),
+                    ),
 		            'elfinder' => array(
 		                'type' => 'Literal',
 		                'options' => array(
@@ -276,6 +287,52 @@ return array(
                             ),
                         ),
                     ),
+                    'website' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/sitecountry',
+                            'defaults' => array(
+                                'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
+                                'action'     => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'list' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                     'route' => '/list',
+                                    'defaults' => array(
+                                        'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
+                                        'action'     => 'list',
+                                    ),
+                                ),
+                            ),
+                            'edit-active' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                     'route' => '/edit-active/[:websiteId]',
+                                    'defaults' => array(
+                                        'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
+                                        'action'     => 'editactive',
+                                    ),
+                                    'constraints' => array(
+                                        'websiteId' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
+                            'edit-locales' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                     'route' => '/edit-active',
+                                    'defaults' => array(
+                                        'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
+                                        'action'     => 'editlocales',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
@@ -302,6 +359,8 @@ return array(
             'PlaygroundCore\Controller\Formgen'   => 'PlaygroundCore\Controller\FormgenController',
             'playgroundcore_console'              => 'PlaygroundCore\Controller\ConsoleController',
             'elfinder'                       => 'PlaygroundCore\Controller\ElfinderController',
+            'PlaygroundCore\Controller\Frontend\SwitchLocale' => 'PlaygroundCore\Controller\Frontend\SwitchLocaleController',
+            'PlaygroundCore\Controller\Admin\WebsiteAdmin'    => 'PlaygroundCore\Controller\Admin\WebsiteAdminController',
         ),
     ),
     'controller_plugins' => array(

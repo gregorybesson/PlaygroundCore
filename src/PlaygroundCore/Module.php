@@ -33,7 +33,21 @@ class Module implements
         // Gestion de la locale
         if (PHP_SAPI !== 'cli') {
             //translator
-            $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);    
+
+            // Gestion locale pour le back
+            if($serviceManager->get('router')->match($serviceManager->get('request')) && strpos($serviceManager->get('router')->match($serviceManager->get('request'))->getMatchedRouteName(), 'admin') !==false){
+                if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_back')) {
+                    $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_back');
+                }
+            }else{
+                // Gestion locale pour le front
+                if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_front')) {
+                    $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_front');
+                }  
+            }
+            if(empty($locale)){
+                $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);   
+            }
             $translator->setLocale($locale);
         
             // plugins
@@ -190,6 +204,14 @@ class Module implements
                 
                     return $helper;
                 },
+
+                 'switchLocaleWidget' => function ($sm) {
+                    $viewHelper = new View\Helper\SwitchLocaleWidget();
+                    $viewHelper->setLocaleService($sm->getServiceLocator()->get('playgroundcore_locale_service'));
+                    $viewHelper->setWebsiteService($sm->getServiceLocator()->get('playgroundcore_website_service'));
+                    $viewHelper->setRouteMatch($sm->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch());
+                    return $viewHelper;
+                },
             ),
         );
 
@@ -210,10 +232,12 @@ class Module implements
                 ),
 
                 'invokables' => array(
-                    'Zend\Session\SessionManager' => 'Zend\Session\SessionManager',
-                    'playgroundcore_message'       => 'PlaygroundCore\Mail\Service\Message',
-                    'playgroundcore_cron_service'  => 'PlaygroundCore\Service\Cron',
+                    'Zend\Session\SessionManager'        => 'Zend\Session\SessionManager',
+                    'playgroundcore_message'             => 'PlaygroundCore\Mail\Service\Message',
+                    'playgroundcore_cron_service'        => 'PlaygroundCore\Service\Cron',
                     'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\ShortenUrl',
+                    'playgroundcore_website_service'     => 'PlaygroundCore\Service\Website',
+                    'playgroundcore_locale_service'      => 'PlaygroundCore\Service\Locale',
                 ),
                 'factories' => array(
                     'playgroundcore_module_options' => function ($sm) {
@@ -221,6 +245,16 @@ class Module implements
 
                         return new Options\ModuleOptions(isset($config['playgroundcore']) ? $config['playgroundcore'] : array());
                     },
+
+                    'playgroundcore_website_mapper' => function  ($sm) {
+                    
+                        return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                    },
+
+                    'playgroundcore_locale_mapper' => function  ($sm) {
+                        return new Mapper\Locale($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                    },
+
                     'playgroundcore_transport' => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
                     'PlaygroundCore\Analytics\Tracker' => function($sm) {
                         $config = $sm->get('config');

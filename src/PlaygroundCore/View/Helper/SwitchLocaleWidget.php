@@ -18,6 +18,10 @@ class SwitchLocaleWidget extends AbstractHelper
     public function __invoke($options = array())
     {
         $locales = array();
+        if (!$this->getRouteMatch()) {
+            return;
+        }
+
         if(empty($options['context'])){
             $locales['locales'] = $this->getLocaleService()->getLocaleMapper()->findAll();
             $locales['context'] = null;

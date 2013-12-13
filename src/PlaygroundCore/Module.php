@@ -27,7 +27,7 @@ class Module implements
     {
         $serviceManager = $e->getApplication()->getServiceManager();
         $config = $e->getApplication()->getServiceManager()->get('config');
-       
+
         $translator = $serviceManager->get('translator');
 
         // Gestion de la locale
@@ -43,13 +43,17 @@ class Module implements
                 // Gestion locale pour le front
                 if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_front')) {
                     $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_front');
-                }  
+                }
             }
             if(empty($locale)){
-                $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);   
+                if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
+                    $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                }else{
+                    $locale = 'fr_FR';
+                }
             }
             $translator->setLocale($locale);
-        
+
             // plugins
             $translate = $serviceManager->get('viewhelpermanager')->get('translate');
             $translate->getTranslator()->setLocale($locale);
@@ -61,13 +65,13 @@ class Module implements
         setlocale(LC_TIME, "fr_FR", 'fr_FR.utf8', 'fra');
 
         AbstractValidator::setDefaultTranslator($translator,'playgroundcore');
-        
+
         /*
          * Entity translation based on Doctrine Gedmo library
          */
         $doctrine = $serviceManager->get('doctrine.entitymanager.orm_default');
         $evm = $doctrine->getEventManager();
-        
+
         $translatableListener = new \Gedmo\Translatable\TranslatableListener();
         // TODO : Set the Default locale to be taken from config
         $translatableListener->setDefaultLocale('fr_FR');
@@ -77,7 +81,7 @@ class Module implements
         if(isset($locale)){
             $translatableListener->setTranslatableLocale($locale);
         }
-        
+
         $evm->addEventSubscriber($translatableListener);
 
         /**
@@ -110,7 +114,7 @@ class Module implements
 
             $pluginOG = $view->get('facebookOpengraph');
             $pluginOG();
-            
+
             $viewModel 		 = $e->getViewModel();
             $match			 = $e->getRouteMatch();
             $channel		 = isset($match)? $match->getParam('channel', ''):'';
@@ -120,8 +124,8 @@ class Module implements
             }
         });
 
-        
-        if (PHP_SAPI !== 'cli') {   
+
+        if (PHP_SAPI !== 'cli') {
             $session = new Container('facebook');
             $fb = $e->getRequest()->getPost()->get('signed_request');
             if ($fb) {
@@ -129,7 +133,7 @@ class Module implements
                 $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
                 $data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
                 $session->offsetSet('signed_request',  $data);
-                
+
                 // This fix exists only for safari on Windows : we need to redirect the user to the page outside of iframe
                 // for the cookie to be accepted. Core just adds a 'redir_fb_page_id' var to alert controllers
                 // that they need to send the user back to FB...
@@ -140,19 +144,19 @@ class Module implements
                     'window.top.location.href = window.location.href+"?redir_fb_page_id='. $data["page"]["id"]. '";' .
                     '</script>';
                 }
-                
+
                 // This fix exists only for IE6+, when this app is embedded into an iFrame : The P3P policy has to be set.
                 $response = $e->getResponse();
                 if ($response instanceof \Zend\Http\Response && ( strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') || strpos($_SERVER['HTTP_USER_AGENT'], 'rv:11.'))) {
                     $response->getHeaders()->addHeaderLine('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
                 }
             }
-            
+
             // We set an anonymous cookie. No usage yet else but persisting it in a game entry.
             if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_anonymous')) {
                 $anonymousId = $e->getRequest()->getCookie()->offsetGet('pg_anonymous');
             } else {
-                $anonymousId = uniqid('pg_', true); 
+                $anonymousId = uniqid('pg_', true);
             }
             $cookie = new \Zend\Http\Header\SetCookie('pg_anonymous', $anonymousId, time() + 60*60*24*365,'/');
             $e->getResponse()->getHeaders()->addHeader($cookie);
@@ -196,12 +200,12 @@ class Module implements
 
                 return $helper;
                 },
-                
+
                 'facebookOpengraph' => function($sm) {
                     $tracker = $sm->getServiceLocator()->get('facebook-opengraph');
-                
+
                     $helper  = new View\Helper\FacebookOpengraph($tracker, $sm->getServiceLocator()->get('Request'));
-                
+
                     return $helper;
                 },
 
@@ -247,7 +251,7 @@ class Module implements
                     },
 
                     'playgroundcore_website_mapper' => function  ($sm) {
-                    
+
                         return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
@@ -290,20 +294,20 @@ class Module implements
                     'PlaygroundCore\Opengraph\Tracker' => function($sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']['facebookOpengraph']) ? $config['playgroundcore']['facebookOpengraph'] : array('appId' => '');
-                    
+
                         $tracker = new Opengraph\Tracker($config['appId']);
-                    
+
                         if (isset($config['enable'])) {
                             $tracker->setEnableOpengraph($config['enable']);
                         }
-                        
+
                         if (isset($config['tags'])) {
                             foreach($config['tags'] as $type => $value) {
                                 $tag = new Opengraph\Tag ($type, $value);
                                 $tracker->addTag($tag);
                             }
                         }
-                    
+
                         return $tracker;
                     },
                 ),

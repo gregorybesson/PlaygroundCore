@@ -43,6 +43,11 @@ class Slugify extends \Zend\Filter\AbstractUnicode
     public function filter($value)
     {
         setlocale(LC_CTYPE, 'en_US.UTF-8');
+
+        //@HotFix : en attendant Bacon/BaconStringUtils
+        $value = str_replace("é","e",$value); 
+        $value = str_replace("è","e",$value); 
+
         $value = iconv("UTF-8","ASCII//TRANSLIT",$value);
         $value = strtolower($value);
         $value = str_replace("'", '', $value);

@@ -24,7 +24,12 @@ class CronTest extends \PHPUnit_Framework_TestCase
 
         $string = "vue arrière";
         $return = $this->slugify->filter($string);
-        $this->assertEquals("vue-arri-re", $return);
+        $this->assertEquals("vue-arriere", $return);
+
+
+        $string = "groß"; // grand
+        $return = $this->slugify->filter($string);
+        $this->assertEquals("gross", $return);
 
     }
 

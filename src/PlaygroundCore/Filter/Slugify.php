@@ -42,7 +42,7 @@ class Slugify extends \Zend\Filter\AbstractUnicode
      */
     public function filter($value)
     {
-        $value = iconv("UTF-8","ASCII//IGNORE//TRANSLIT",$value);
+        $value = iconv("UTF-8","UTF-8//IGNORE//TRANSLIT",$value);
         $value = strtolower($value);
         $value = str_replace("'", '', $value);
         $value = preg_replace('([^a-zA-Z0-9_-]+)', '-', $value);

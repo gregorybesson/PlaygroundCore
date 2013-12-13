@@ -54,7 +54,7 @@ class Website implements InputFilterAwareInterface
 
     /**
      * default
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(name="by_default", type="boolean", nullable=false)
      */
     protected $byDefault = 0;
 
@@ -69,7 +69,11 @@ class Website implements InputFilterAwareInterface
      */
     protected $locales;
 
- 
+    /**
+     * gtmId
+     * @ORM\Column(name="gtm_id", type="string", length=15, nullable=true)
+     */
+    protected $gtmId = 0;
 
     /**
      * @ORM\Column(type="datetime")
@@ -214,6 +218,25 @@ class Website implements InputFilterAwareInterface
     public function getLocales()
     {
         return $this->locales;
+    }
+
+    /**
+     * @param string $gtmId
+     * @return Website
+     */
+    public function setGtmId($gtmId)
+    {
+        $this->gtmId = (string) $gtmId;
+    
+        return $this;
+    }
+
+    /**
+     * @return string $gtmId
+     */
+    public function getGtmId()
+    {
+        return $this->gtmId;
     }
     
     /**

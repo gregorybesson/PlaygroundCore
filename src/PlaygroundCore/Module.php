@@ -251,6 +251,11 @@ class Module implements
                         return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
+                    'playgroundcore_formgen_mapper' => function  ($sm) {
+
+                        return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                    },
+
                     'playgroundcore_locale_mapper' => function  ($sm) {
                         return new Mapper\Locale($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },

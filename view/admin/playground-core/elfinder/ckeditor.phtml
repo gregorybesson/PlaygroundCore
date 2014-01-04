@@ -46,7 +46,7 @@
             lang : 'fr',
             height:'570',
             getFileCallback : function(file) {
-                window.opener.CKEDITOR.tools.callFunction(funcNum, file);
+                window.opener.CKEDITOR.tools.callFunction(funcNum, file.url);
                 //console.log(file.url);
                 window.close();
             },

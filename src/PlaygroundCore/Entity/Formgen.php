@@ -143,11 +143,7 @@ class Formgen implements InputFilterAwareInterface
      */
     public function getFormjsonified()
     {
-<<<<<<< HEAD
         return $this->formjsonified;
-=======
-        return $this->phase;
->>>>>>> CCC-203, add form gestion
     }
     
     /**

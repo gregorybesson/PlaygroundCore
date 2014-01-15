@@ -40,12 +40,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         $title = '';
         $description = '';
         if ($data['form_jsonified']) {
-<<<<<<< HEAD
             $jsonTmp = str_replace('\\', '_', $data['form_jsonified']);
             $jsonPV = json_decode($jsonTmp);
-=======
-            $jsonPV = json_decode($data['form_jsonified']);
->>>>>>> CCC-203, add form gestion
             foreach ($jsonPV as $element) {
                 if ($element->form_properties) {
                     $attributes = $element->form_properties[0];
@@ -86,12 +82,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
      */
     public function setFormgenMapper($formgenMapper)
     {
-<<<<<<< HEAD
         $this->formgenMapper = $formgenMapper;
-=======
-        $this->formgenMapper = $localeMappers;
->>>>>>> CCC-203, add form gestion
-
+        
         return $this;
     }
 

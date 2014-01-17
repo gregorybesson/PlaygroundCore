@@ -233,6 +233,7 @@ class Module implements
                     'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\ShortenUrl',
                     'playgroundcore_website_service'     => 'PlaygroundCore\Service\Website',
                     'playgroundcore_locale_service'      => 'PlaygroundCore\Service\Locale',
+                    'playgroundcore_formgen_service'     => 'PlaygroundCore\Service\Formgen',
                 ),
                 'factories' => array(
                     'playgroundcore_module_options' => function ($sm) {
@@ -241,9 +242,18 @@ class Module implements
                         return new Options\ModuleOptions(isset($config['playgroundcore']) ? $config['playgroundcore'] : array());
                     },
 
+                    'playgroundcore_formgen_mapper' => function  ($sm) {
+                        return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                    },
+
                     'playgroundcore_website_mapper' => function  ($sm) {
 
                         return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                    },
+
+                    'playgroundcore_formgen_mapper' => function  ($sm) {
+
+                        return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
                     'playgroundcore_locale_mapper' => function  ($sm) {

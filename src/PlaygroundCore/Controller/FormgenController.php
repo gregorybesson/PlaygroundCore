@@ -7,9 +7,43 @@ use Zend\View\Renderer\PhpRenderer;
 
 class FormgenController extends AbstractActionController
 {
+
+    protected $formgenService;
+
+
     public function indexAction()
     {
         return array ();
+    }
+
+    public function listAction()
+    {
+        $mapper = $this->getFormgenService()->getformgenMapper();
+        $forms = $mapper->findAll();
+        return new ViewModel(array(
+            'forms' => $forms,
+        ));
+    }
+
+    public function generateAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $data = $this->getRequest()->getPost()->toArray();
+            $formGenService = $this->getFormgenService();
+            $formGenService->insert($data);
+        }
+        return new ViewModel(array(
+            //'form' => $form,
+        ));
+    }
+
+    public function activateAction()
+    {
+        $formId = $this->getEvent()->getRouteMatch()->getParam('formId');
+        $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->findById($formId);
+        $formgen->setActive(!$formgen->getActive());
+        $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->update($formgen);
+        return $this->redirect()->toRoute('admin/formgen/list');
     }
 
     public function viewAction()
@@ -175,5 +209,21 @@ class FormgenController extends AbstractActionController
         $result->setTerminal ( true );
 
         return $result;
+    }
+
+    public function getFormgenService()
+    {
+        if (!$this->formgenService) {
+            $this->formgenService = $this->getServiceLocator()->get('playgroundcore_formgen_service');
+        }
+
+        return $this->formgenService;
+    }
+
+    public function setFormgenService($formgenService)
+    {
+        $this->formgenService = $formgenService;
+
+        return $this;
     }
 }

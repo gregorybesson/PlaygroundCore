@@ -134,6 +134,52 @@ return array(
                                     ),
                                 ),
                             ),
+                            'generate' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/generate',
+                                    'defaults' => array(
+                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'action'     => 'generate',
+                                    ),
+                                ),
+                            ),
+                            'list' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/list',
+                                    'defaults' => array(
+                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'action'     => 'list',
+                                    ),
+                                ),
+                            ),
+                            'edit' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/edit[/:formId]',
+                                    'defaults' => array(
+                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'action'     => 'edit',
+                                    ),
+                                    'constraints' => array(
+                                        'formId' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
+                            'activate' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/activate[/:formId]',
+                                    'defaults' => array(
+                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'action'     => 'activate',
+                                    ),
+                                    'constraints' => array(
+                                        'formId' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
                             'view' => array(
                                 'type' => 'segment',
                                 'options' => array(

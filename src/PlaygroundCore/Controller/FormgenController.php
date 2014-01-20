@@ -72,7 +72,6 @@ class FormgenController extends AbstractActionController
             if ($form->isValid()) {
                 $user->exchangeArray($form->getData());
             }
-            echo '<pre>'; var_dump($form->getData()); echo '</pre>';
         }
 
         return array('form' => $form);

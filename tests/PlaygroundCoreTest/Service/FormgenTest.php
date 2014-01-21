@@ -83,10 +83,68 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $element = new stdClass();
         $element->line_email = array( (object) array('name' => 'email',
                                      'type' => 'Zend\\Form\\Element\\Mail"',
-                                     'order' => '1',
+                                     'order' => '2',
                                      'data' => (object) array(
                                         'placeholder' => 'Your mail...',
                                          'label' => 'email',
+                                         'required' => '0',
+                                         'class' => '',
+                                         'id' => '',
+                                         'length' => (object) array(
+                                            'min' => '',
+                                            'max' =>''
+                                        )
+                                    )
+                                )
+                            );
+        $formGem[] = $element;
+
+
+        $element = new stdClass();
+        $element->line_checkbox = array( (object) array('name' => 'optin',
+                                     'type' => 'Zend\\Form\\Element\\Checkbox"',
+                                     'order' => '3',
+                                     'data' => (object) array(
+                                        'placeholder' => '',
+                                         'label' => 'optin',
+                                         'required' => '0',
+                                         'class' => '',
+                                         'id' => '',
+                                         'length' => (object) array(
+                                            'min' => '',
+                                            'max' =>''
+                                        )
+                                    )
+                                )
+                            );
+        $formGem[] = $element;
+
+        $element = new stdClass();
+        $element->line_paragraph = array( (object) array('name' => 'comment',
+                                     'type' => 'Zend\\Form\\Element\\TextArea"',
+                                     'order' => '4',
+                                     'data' => (object) array(
+                                        'placeholder' => 'Your comment',
+                                         'label' => 'comment',
+                                         'required' => '0',
+                                         'class' => '',
+                                         'id' => '',
+                                         'length' => (object) array(
+                                            'min' => '',
+                                            'max' =>''
+                                        )
+                                    )
+                                )
+                            );
+        $formGem[] = $element;
+
+        $element = new stdClass();
+        $element->line_upload = array( (object) array('name' => 'file',
+                                     'type' => 'Zend\\Form\\Element\\File"',
+                                     'order' => '4',
+                                     'data' => (object) array(
+                                        'placeholder' => '',
+                                         'label' => 'file',
                                          'required' => '0',
                                          'class' => '',
                                          'id' => '',
@@ -107,6 +165,13 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_class($form->get('firstname')), "Zend\Form\Element\Text");
         $this->assertEquals($form->get('email')->getLabel(), "email");
         $this->assertEquals(get_class($form->get('email')), "Zend\Form\Element\Email");
+        $this->assertEquals($form->get('optin')->getLabel(), "optin");
+        $this->assertEquals(get_class($form->get('optin')), "Zend\Form\Element\MultiCheckbox");
+        $this->assertEquals($form->get('comment')->getLabel(), "comment");
+        $this->assertEquals(get_class($form->get('comment')), "Zend\Form\Element\Textarea");
+        $this->assertEquals($form->get('file')->getLabel(), "file");
+        $this->assertEquals(get_class($form->get('file')), "Zend\Form\Element\File");
+ 
  
     }
     

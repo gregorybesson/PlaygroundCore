@@ -3,6 +3,7 @@ namespace PlaygroundCoreTest\Service;
 
 use PlaygroundCoreTest\Bootstrap;
 use \PlaygroundCore\Entity\Formgen as FormgenEntity;
+use stdClass;
 
 class FormgenTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,6 +53,61 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $formgen = $service->insert($formgenDataFromForm);
 
         $this->assertEquals($this->formgenData['title'], $formgen->getTitle());
+    }
+
+
+    public function testRender(){
+        $service = new \PlaygroundCore\Service\Formgen();
+        $service->setServiceManager(Bootstrap::getServiceManager());
+
+        $formGem = array(); 
+        $element = new stdClass();
+        $element->line_text = array( (object) array('name' => 'firstname',
+                                     'type' => 'Zend\\Form\\Element\\Text"',
+                                     'order' => '1',
+                                     'data' => (object) array(
+                                        'placeholder' => 'Your firstname...',
+                                         'label' => 'firstname',
+                                         'required' => '0',
+                                         'class' => '',
+                                         'id' => '',
+                                         'length' => (object) array(
+                                            'min' => '',
+                                            'max' =>''
+                                        )
+                                    )
+                                )
+                            );
+        $formGem[] = $element;
+
+        $element = new stdClass();
+        $element->line_email = array( (object) array('name' => 'email',
+                                     'type' => 'Zend\\Form\\Element\\Mail"',
+                                     'order' => '1',
+                                     'data' => (object) array(
+                                        'placeholder' => 'Your mail...',
+                                         'label' => 'email',
+                                         'required' => '0',
+                                         'class' => '',
+                                         'id' => '',
+                                         'length' => (object) array(
+                                            'min' => '',
+                                            'max' =>''
+                                        )
+                                    )
+                                )
+                            );
+        $formGem[] = $element;
+        
+
+        $form = $service->render($formGem, "formtest");
+
+        $this->assertEquals(get_class($form), "Zend\Form\Form");
+        $this->assertEquals($form->get('firstname')->getLabel(), "firstname");
+        $this->assertEquals(get_class($form->get('firstname')), "Zend\Form\Element\Text");
+        $this->assertEquals($form->get('email')->getLabel(), "email");
+        $this->assertEquals(get_class($form->get('email')), "Zend\Form\Element\Email");
+ 
     }
     
 }

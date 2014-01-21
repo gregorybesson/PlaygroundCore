@@ -78,7 +78,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 $position    = isset($attributes->order)? $attributes->order : '';
                 $placeholder = isset($attributes->data->placeholder)? $attributes->data->placeholder : '';
                 $label       = isset($attributes->data->label)? $attributes->data->label : '';
-                $required    = ($attributes->data->required == 'true') ? true : false ;
+                //$required    = ($attributes->data->required == 'true') ? true : false ;
+                $required = false;
                 $class       = isset($attributes->data->class)? $attributes->data->class : '';
                 $id          = isset($attributes->data->id)? $attributes->data->id : '';
                 $lengthMin   = isset($attributes->data->length)? $attributes->data->length->min : '';
@@ -95,6 +96,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                         'id'            => $id
                     )
                 );
+
+      
                 $form->add($element);
 
                 $options = array();
@@ -131,6 +134,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 $placeholder = isset($attributes->data->placeholder)? $attributes->data->placeholder : '';
                 $label       = isset($attributes->data->label)? $attributes->data->label : '';
                 //$required    = ($attributes->data->required == 'true') ? true : false ;
+                $required = false;
                 $class       = isset($attributes->data->class)? $attributes->data->class : '';
                 $id          = isset($attributes->data->id)? $attributes->data->id : '';
                 $lengthMin   = isset($attributes->data->length)? $attributes->data->length->min : '';

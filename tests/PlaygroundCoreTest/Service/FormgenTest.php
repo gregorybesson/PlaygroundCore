@@ -72,8 +72,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'class' => '',
                                          'id' => '',
                                          'length' => (object) array(
-                                            'min' => '',
-                                            'max' =>''
+                                            'min' => '10',
+                                            'max' => '20'
                                         )
                                     )
                                 )
@@ -91,8 +91,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'class' => '',
                                          'id' => '',
                                          'length' => (object) array(
-                                            'min' => '',
-                                            'max' =>''
+                                            'min' => '10',
+                                            'max' => '20'
                                         )
                                     )
                                 )
@@ -106,10 +106,13 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                      'order' => '3',
                                      'data' => (object) array(
                                         'placeholder' => '',
-                                         'label' => 'optin',
-                                         'required' => '0',
-                                         'class' => '',
-                                         'id' => '',
+                                        'label' => 'optin',
+                                        'required' => '0',
+                                        'class' => '',
+                                        'id' => '',
+                                        'innerData'=> array(  (object) array(
+                                            'label' => 'optin'
+                                        )),
                                          'length' => (object) array(
                                             'min' => '',
                                             'max' =>''
@@ -129,9 +132,9 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'required' => '0',
                                          'class' => '',
                                          'id' => '',
-                                         'length' => (object) array(
-                                            'min' => '',
-                                            'max' =>''
+                                         'length' =>   (object) array(
+                                            'min' => '10',
+                                            'max' => '20'
                                         )
                                     )
                                 )
@@ -163,6 +166,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_class($form), "Zend\Form\Form");
         $this->assertEquals($form->get('firstname')->getLabel(), "firstname");
         $this->assertEquals(get_class($form->get('firstname')), "Zend\Form\Element\Text");
+
         $this->assertEquals($form->get('email')->getLabel(), "email");
         $this->assertEquals(get_class($form->get('email')), "Zend\Form\Element\Email");
         $this->assertEquals($form->get('optin')->getLabel(), "optin");
@@ -171,8 +175,36 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_class($form->get('comment')), "Zend\Form\Element\Textarea");
         $this->assertEquals($form->get('file')->getLabel(), "file");
         $this->assertEquals(get_class($form->get('file')), "Zend\Form\Element\File");
- 
- 
+    }
+
+    public function testSetFormgemMapper()
+    {
+        $service = new \PlaygroundCore\Service\Formgen();
+        $service->setServiceManager(Bootstrap::getServiceManager());
+        $service->setFormgenMapper($service->getServiceManager()->get('playgroundcore_formgen_mapper'));
+        $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Mapper\Formgen");
+    }
+
+    public function testGetFormgemMapper()
+    {
+        $service = new \PlaygroundCore\Service\Formgen();
+        $service->setServiceManager(Bootstrap::getServiceManager());
+        $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Mapper\Formgen");
     }
     
+
+    public function testSetOptions()
+    {
+        $service = new \PlaygroundCore\Service\Formgen();
+        $service->setServiceManager(Bootstrap::getServiceManager());
+        $service->setFormgenMapper($service->getServiceManager()->get('playgroundcore_module_options'));
+        $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Option\Options");
+    }
+
+    public function testGetOptions()
+    {
+        $service = new \PlaygroundCore\Service\Formgen();
+        $service->setServiceManager(Bootstrap::getServiceManager());
+        $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Option\Options");
+    }
 }

@@ -108,7 +108,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 if ($lengthMax && $lengthMax > $lengthMin) {
                     $options['max'] = $lengthMax;
                     $element->setAttribute('maxlength', $lengthMax);
-                    $options['messages'] = array(\Zend\Validator\StringLength::TOO_LONG => sprintf($this->getServiceLocator()->get('translator')->translate('This field contains more than %s characters', 'playgroundgame'), $lengthMax));
+                    $options['messages'] = array(\Zend\Validator\StringLength::TOO_LONG => sprintf($this->getServiceManager()->get('translator')->translate('This field contains more than %s characters', 'playgroundgame'), $lengthMax));
                 }
                 $inputFilter->add($factory->createInput(array(
                     'name'     => $name,
@@ -161,7 +161,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 if ($lengthMax && $lengthMax > $lengthMin) {
                     $options['max'] = $lengthMax;
                     $element->setAttribute('maxlength', $lengthMax);
-                    $options['messages'] = array(\Zend\Validator\StringLength::TOO_LONG => sprintf($this->getServiceLocator()->get('translator')->translate('This field contains more than %s characters', 'playgroundgame'), $lengthMax));
+                    $options['messages'] = array(\Zend\Validator\StringLength::TOO_LONG => sprintf($this->getServiceManager()->get('translator')->translate('This field contains more than %s characters', 'playgroundgame'), $lengthMax));
                 }
                 $inputFilter->add($factory->createInput(array(
                     'name'     => $name,

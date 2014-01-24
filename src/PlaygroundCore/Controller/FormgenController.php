@@ -9,6 +9,7 @@ class FormgenController extends AbstractActionController
 {
 
     protected $formgenService;
+    protected $websiteService;
 
 
     public function indexAction()
@@ -20,6 +21,7 @@ class FormgenController extends AbstractActionController
     {
         $mapper = $this->getFormgenService()->getformgenMapper();
         $forms = $mapper->findAll();
+
         return new ViewModel(array(
             'forms' => $forms,
         ));
@@ -32,8 +34,10 @@ class FormgenController extends AbstractActionController
             $formGenService = $this->getFormgenService();
             $formGenService->insert($data);
         }
+        
+        $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
         return new ViewModel(array(
-            //'form' => $form,
+            'websites' => $websites,
         ));
     }
 
@@ -217,6 +221,15 @@ class FormgenController extends AbstractActionController
         }
 
         return $this->formgenService;
+    }
+
+    public function getWebsiteService()
+    {
+        if (!$this->websiteService) {
+            $this->websiteService = $this->getServiceLocator()->get('playgroundcore_website_service');
+        }
+
+        return $this->websiteService;
     }
 
     public function setFormgenService($formgenService)

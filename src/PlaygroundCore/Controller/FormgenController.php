@@ -40,6 +40,22 @@ class FormgenController extends AbstractActionController
             'websites' => $websites,
         ));
     }
+    public function editAction()
+    {
+        if ($this->getRequest()->isPost()) {
+                $data = $this->getRequest()->getPost()->toArray();
+                $formGenService = $this->getFormgenService();
+                $formGenService->update($data);
+        }
+        $formId = $this->getEvent()->getRouteMatch()->getParam('formId');
+        $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->findById($formId);
+
+        $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
+        return new ViewModel(array(
+           'websites' => $websites,
+           'form' => $formgen,
+        ));
+    }
 
     public function activateAction()
     {

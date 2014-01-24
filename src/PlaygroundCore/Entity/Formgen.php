@@ -53,6 +53,11 @@ class Formgen implements InputFilterAwareInterface
     protected $formtemplate;
 
      /**
+     * @ORM\ManyToOne(targetEntity="PlaygroundCore\Entity\Website", inversedBy="statistique")
+     */
+    protected $website;
+
+     /**
      * active
      * @ORM\Column(type="boolean")
      */
@@ -231,6 +236,20 @@ class Formgen implements InputFilterAwareInterface
         return $this;
     }
 
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * @return datetime $updated_at
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
     /**
      * Populate from an array.
      *

@@ -47,9 +47,9 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $service->setFormgenMapper($mapper);
 
         $formgenDataFromForm = $this->formgenData;
-        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
+        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","website":"","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
         $formgenDataFromForm['form_template'] = $this->formgenData['formtemplate'];
-
+        $formgenDataFromForm['website'] = null;
         $formgen = $service->insert($formgenDataFromForm);
 
         $this->assertEquals($this->formgenData['title'], $formgen->getTitle());
@@ -122,6 +122,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                             );
         $formGem[] = $element;
 
+
         $element = new stdClass();
         $element->line_paragraph = array( (object) array('name' => 'comment',
                                      'type' => 'Zend\\Form\\Element\\TextArea"',
@@ -159,6 +160,54 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                 )
                             );
         $formGem[] = $element;
+
+        $element = new stdClass();
+        $element->line_radio = array( (object) array('name' => 'civility',
+                                     'type' => 'Zend\\Form\\Element\\Radio"',
+                                     'order' => '5',
+                                     'data' => (object) array(
+                                        'placeholder' => '',
+                                        'label' => 'civility',
+                                        'required' => '0',
+                                        'class' => '',
+                                        'id' => '',
+                                        'innerData'=> array(  (object) array(
+                                            'label' => 'M',
+                                            'label' => 'Mne',
+
+                                        )),
+                                         'length' => (object) array(
+                                            'min' => '',
+                                            'max' =>''
+                                        )
+                                    )
+                                )
+                            );
+        $formGem[] = $element;
+
+        $element = new stdClass();
+        $element->line_dropdown = array( (object) array('name' => 'country',
+                                     'type' => 'Zend\\Form\\Element\\Select"',
+                                     'order' => '5',
+                                     'data' => (object) array(
+                                        'placeholder' => '',
+                                        'label' => 'country',
+                                        'required' => '0',
+                                        'class' => '',
+                                        'id' => '',
+                                        'dropdownValues'=> array(  (object) array(
+                                            'dropdown_label' => 'France',
+                                            'dropdown_label' => 'Angleterre',
+
+                                        )),
+                                         'length' => (object) array(
+                                            'min' => '',
+                                            'max' =>''
+                                        )
+                                    )
+                                )
+                            );
+        $formGem[] = $element;
         
 
         $form = $service->render($formGem, "formtest");
@@ -175,6 +224,11 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_class($form->get('comment')), "Zend\Form\Element\Textarea");
         $this->assertEquals($form->get('file')->getLabel(), "file");
         $this->assertEquals(get_class($form->get('file')), "Zend\Form\Element\File");
+        $this->assertEquals($form->get('civility')->getLabel(), "civility");
+        $this->assertEquals(get_class($form->get('civility')), "Zend\Form\Element\Radio");
+        $this->assertEquals($form->get('country')->getLabel(), "country");
+        $this->assertEquals(get_class($form->get('country')), "Zend\Form\Element\Select");
+
     }
 
     public function testSetFormgemMapper()
@@ -190,6 +244,13 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $service = new \PlaygroundCore\Service\Formgen();
         $service->setServiceManager(Bootstrap::getServiceManager());
         $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Mapper\Formgen");
+    }
+
+    public function testGetWebsiteService()
+    {
+        $service = new \PlaygroundCore\Service\Formgen();
+        $service->setServiceManager(Bootstrap::getServiceManager());
+        $this->assertEquals(get_class($service->getWebsiteService()), "PlaygroundCore\Service\Website");
     }
     
 

@@ -17,9 +17,14 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
 {
 
     /**
-     * @var localeMapper
+     * @var formgenMapper
      */
     protected $formgenMapper;
+
+     /**
+     * @var websiteService
+     */
+    protected $websiteService;
 
     /**
      * @var ServiceManager
@@ -35,6 +40,9 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         $formgen = new \PlaygroundCore\Entity\Formgen();
         $data = $this->getData($data);
         $formgen->populate($data);
+        if (!empty($data['website'])) {
+            $formgen->setWebsite($this->getWebsiteService()->getWebsiteMapper()->findById($data['website']));
+        }
         return $this->getFormgenMapper()->insert($formgen);
     }
 
@@ -49,6 +57,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     $attributes = $element->form_properties[0];
                     $title = $attributes->title;
                     $description = $attributes->description;
+                    $website = $attributes->website;
                     break;
                 }
             }
@@ -56,6 +65,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         $return = array();
         $return['title'] = $title;
         $return['description'] = $description;
+        $return['website'] = $website;
         $return['formjsonified'] = $data['form_jsonified'];
         $return['formtemplate'] = $data['form_template'];
         $return['active'] = true;
@@ -308,6 +318,81 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 )));
 
             }
+
+             if (isset($element->line_radio)) {
+                 $attributes  = $element->line_radio[0];
+                $name        = isset($attributes->name)? $attributes->name : '';
+                $type        = isset($attributes->type)? $attributes->type : '';
+                $position    = isset($attributes->order)? $attributes->order : '';
+                $label       = isset($attributes->data->label)? $attributes->data->label : '';
+
+//                 $required    = ($attributes->data->required == 'yes') ? true : false;
+                $required = false;
+                $class       = isset($attributes->data->class)? $attributes->data->class : '';
+                $id          = isset($attributes->data->id)? $attributes->data->id : '';
+                $lengthMin   = isset($attributes->data->length)? $attributes->data->length->min : '';
+                $lengthMax   = isset($attributes->data->length)? $attributes->data->length->max : '';
+                $innerData   = isset($attributes->data->innerData)? $attributes->data->innerData : array();
+
+                $element = new Element\Radio($name);
+                $element->setLabel($label);
+                $element->setName($label);
+
+                $element->setAttributes(
+                    array(
+                        'name'     => $name,
+                        'required'      => $required,
+                        'allowEmpty'    => !$required,
+                        'class'         => $class,
+                        'id'            => $id
+                    )
+                );
+                $values = array();
+                foreach($innerData as $value){
+                    $values[] = $value->label;
+                }
+                $element->setValueOptions($values);
+                $form->add($element);                
+            }
+
+
+            if (isset($element->line_dropdown)) {
+                $attributes  = $element->line_dropdown[0];
+                $name        = isset($attributes->name)? $attributes->name : '';
+                $type        = isset($attributes->type)? $attributes->type : '';
+                $position    = isset($attributes->order)? $attributes->order : '';
+                $label       = isset($attributes->data->label)? $attributes->data->label : '';
+
+//                 $required    = ($attributes->data->required == 'yes') ? true : false;
+                $required = false;
+                $class       = isset($attributes->data->class)? $attributes->data->class : '';
+                $id          = isset($attributes->data->id)? $attributes->data->id : '';
+                $lengthMin   = isset($attributes->data->length)? $attributes->data->length->min : '';
+                $lengthMax   = isset($attributes->data->length)? $attributes->data->length->max : '';
+                $dropdownValues   = isset($attributes->data->dropdownValues)? $attributes->data->dropdownValues : array();
+
+                $element = new Element\Select($name);
+                $element->setLabel($label);
+                $element->setName($label);
+
+                $element->setAttributes(
+                    array(
+                        'name'     => $name,
+                        'required'      => $required,
+                        'allowEmpty'    => !$required,
+                        'class'         => $class,
+                        'id'            => $id
+                    )
+                );
+                $values = array();
+                foreach($dropdownValues as $value){
+                    $values[] = $value->dropdown_label;
+                }
+                $element->setValueOptions($values);
+                $form->add($element);                
+            }
+
+
         }
 
         $form->setInputFilter($inputFilter);
@@ -327,6 +412,16 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         }
 
         return $this->formgenMapper;
+    }
+
+
+    public function getWebsiteService()
+    {
+        if (null === $this->websiteService) {
+            $this->websiteService = $this->getServiceManager()->get('playgroundcore_website_service');
+        }
+
+        return $this->websiteService;
     }
 
     /**

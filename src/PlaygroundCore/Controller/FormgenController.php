@@ -33,11 +33,35 @@ class FormgenController extends AbstractActionController
             $data = $this->getRequest()->getPost()->toArray();
             $formGenService = $this->getFormgenService();
             $formGenService->insert($data);
+            return $this->redirect()->toRoute('admin/formgen/list');
         }
         
         $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
         return new ViewModel(array(
             'websites' => $websites,
+        ));
+    }
+    public function editAction()
+    {
+
+
+        if ($this->getRequest()->isPost()) {
+                $data = $this->getRequest()->getPost()->toArray();
+                $formGenService = $this->getFormgenService();
+                $formgen = $this->getFormgenService()->getFormgenMapper()->findById($data['formId']);
+                $formGenService->update($formgen, $data);
+                
+                return $this->redirect()->toRoute('admin/formgen/list');
+        }
+        
+        $formId = $this->getEvent()->getRouteMatch()->getParam('formId');
+        $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->findById($formId);
+
+
+        $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
+        return new ViewModel(array(
+           'websites' => $websites,
+           'form' => $formgen,
         ));
     }
 

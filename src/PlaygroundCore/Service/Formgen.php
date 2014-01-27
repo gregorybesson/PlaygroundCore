@@ -36,7 +36,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
      */
     protected $options;
 
-    public function insert($data) {
+    public function insert($data) 
+    {
         $formgen = new \PlaygroundCore\Entity\Formgen();
         $data = $this->getData($data);
         $formgen->populate($data);
@@ -44,6 +45,19 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
             $formgen->setWebsite($this->getWebsiteService()->getWebsiteMapper()->findById($data['website']));
         }
         return $this->getFormgenMapper()->insert($formgen);
+    }
+
+    public function update($formgen, $data) 
+    {
+        $data = $this->getData($data);
+        $formgen->setTitle($data['title']);
+        $formgen->setDescription($data['description']);
+        $formgen->setFormjsonified($data['formjsonified']);
+        $formgen->setFormTemplate($data['formtemplate']);
+        if (!empty($data['website'])) {
+            $formgen->setWebsite($this->getWebsiteService()->getWebsiteMapper()->findById($data['website']));
+        }
+        return $this->getFormgenMapper()->update($formgen);
     }
 
     private function getData($data) {

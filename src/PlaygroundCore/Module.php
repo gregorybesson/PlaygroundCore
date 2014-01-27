@@ -39,12 +39,8 @@ class Module implements
                 if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_back')) {
                     $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_back');
                 }
-            }else{
-                // Gestion locale pour le front
-                if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_front')) {
-                    $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_front');
-                }
             }
+            
             if(empty($locale)){
                 if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
                     $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);

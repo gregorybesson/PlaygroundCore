@@ -74,7 +74,7 @@ class Module implements
         // If no translation is found, fallback to entity data
         $translatableListener->setTranslationFallback(true);
         // set Locale
-        if(isset($locale)){
+        if(!empty($locale)){
             $translatableListener->setTranslatableLocale($locale);
         }
 

@@ -161,8 +161,22 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locales = $this->getLocaleMapper()->findAll();
         $this->assertEquals(count($locales), 0);
     }
-  
 
+    public function testGetFlag(){
+        $locale = new localeEntity();
+        $locale->setName('French');
+        $locale->setLocale('fr_FR');
+        $locale->setActiveFront(1);
+        $locale->setActiveBack(1);
+        $this->getLocaleMapper()->insert($locale);
+
+        $flag = $locale->getFlag();
+        $this->assertEquals($flag, '/lib/images/flag/fr');
+        
+        $locale->setLocale('');
+        $flag = $locale->getFlag();
+        $this->assertEquals($flag, '');
+    }
        
     public function getLocaleMapper()
     {

@@ -208,8 +208,8 @@ class Locale implements InputFilterAwareInterface
     public function getFlag()
     {
         $flags = explode('_', $this->getLocale());
-
-        if(empty($flags)) {
+        
+        if(empty($flags[1])) {
             return '';
         }
 

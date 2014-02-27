@@ -17,7 +17,6 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $this->website = array(
             'name' => 'Frenchfff',
             'code' => 'frff',
-            'phase'  => 't0',
             'default' => '0',
             'active' => '0',
             'locales' => null,
@@ -32,7 +31,6 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $websiteEntity->populate($this->website);
         $this->assertEquals($this->website["name"], $websiteEntity->getName());
         $this->assertEquals($this->website["code"], $websiteEntity->getCode());
-        $this->assertEquals($this->website["phase"], $websiteEntity->getPhase());
         $this->assertEquals($this->website["default"], $websiteEntity->getDefault());
         $this->assertEquals($this->website["locales"], $websiteEntity->getLocales());
         $this->assertEquals($this->website["active"], $websiteEntity->getActive());          

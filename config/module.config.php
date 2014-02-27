@@ -376,6 +376,7 @@ return array(
                                     ),
                                 ),
                             ),
+
                             'edit-active' => array(
                                 'type' => 'Segment',
                                 'options' => array(

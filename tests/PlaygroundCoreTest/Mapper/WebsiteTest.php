@@ -45,7 +45,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('France');
         $website->setCode('FR');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -55,7 +55,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('Italy');
         $website->setCode('IT');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -82,7 +82,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('France');
         $website->setCode('FR');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -92,7 +92,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('Italy');
         $website->setCode('IT');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -121,7 +121,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('France');
         $website->setCode('FR');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -131,7 +131,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('Italy');
         $website->setCode('IT');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -161,7 +161,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('France');
         $website->setCode('FR');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -171,7 +171,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('Italy');
         $website->setCode('IT');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -205,7 +205,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('France');
         $website->setCode('FR');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);
@@ -215,7 +215,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = new websiteEntity();
         $website->setName('Italy');
         $website->setCode('IT');
-        $website->setPhase(0);
+        
         $website->setActive(true);
         $website->setDefault(0);
         $website->addLocale($locale);

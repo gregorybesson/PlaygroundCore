@@ -56,7 +56,7 @@ class Website extends EventProvider implements ServiceManagerAwareInterface
     {
         $this->websiteMapper = $websiteMapper;
 
-        return $siteCountryMapper;
+        return $this;
     }
 
     /**

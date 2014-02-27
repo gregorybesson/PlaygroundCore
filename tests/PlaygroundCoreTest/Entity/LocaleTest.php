@@ -32,9 +32,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->locale["name"], $localeEntity->getName());
         $this->assertEquals($this->locale["locale"], $localeEntity->getLocale());
         $this->assertEquals($this->locale["active_back"], $localeEntity->getActiveBack());
-        $this->assertEquals($this->locale["active_front"], $localeEntity->getActiveFront());
-
-        
+        $this->assertEquals($this->locale["active_front"], $localeEntity->getActiveFront());  
     }
 
     public function testTimestampables()
@@ -56,6 +54,14 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $localeEntity->populate($this->locale);
 
         $this->assertEquals("/lib/images/flag/fr", $localeEntity->getFlag());
+    }
+
+    public function testSetId()
+    {
+        $id = 1;
+        $localeEntity = new LocaleEntity;
+        $localeEntity->setId($id);
+        $this->assertEquals($id, $localeEntity->getId());
     }
 
 }

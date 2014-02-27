@@ -53,7 +53,7 @@ class Locale extends EventProvider implements ServiceManagerAwareInterface
      */
     public function setLocaleMapper($localeMapper)
     {
-        $this->localeMapper = $localeMappers;
+        $this->localeMapper = $localeMapper;
 
         return $this;
     }

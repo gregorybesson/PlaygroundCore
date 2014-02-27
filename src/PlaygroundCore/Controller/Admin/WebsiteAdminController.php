@@ -49,19 +49,7 @@ class WebsiteAdminController extends AbstractActionController
 		
         return $this->redirect()->toRoute('admin');
 	}
-
-    public function editphaseAction()
-    {
-        $websiteId = $this->getEvent()->getRouteMatch()->getParam('websiteId');
-        $phase = $this->getEvent()->getRouteMatch()->getParam('phase');
-        $website = $this->getWebsiteService()->getWebsiteMapper()->findById($websiteId);
-        $website->setPhase($phase);
-        
-        $this->getWebsiteService()->getWebsiteMapper()->update($website);
-        
-        return $this->redirect()->toRoute('admin');
-    }
-
+    
 	public function getWebsiteService()
     {
         if (null === $this->websiteService) {

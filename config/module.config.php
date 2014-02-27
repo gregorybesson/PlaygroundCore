@@ -390,22 +390,6 @@ return array(
                                     ),
                                 ),
                             ),
-
-                            'edit-phase' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                     'route' => '/edit-phase/[:websiteId]/[:phase]',
-                                    'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
-                                        'action'     => 'editphase',
-                                    ),
-                                    'constraints' => array(
-                                        'websiteId' => '[0-9]*',
-                                        'phase' => '[0-9]*',
-                                    ),
-                                ),
-                            ),
-                            
                         ),
                     ),
                 ),

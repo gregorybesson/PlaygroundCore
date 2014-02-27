@@ -41,12 +41,6 @@ class Website implements InputFilterAwareInterface
     protected $code;
     
     /**
-     * phase
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    protected $phase;
-    
-    /**
      * active
      * @ORM\Column(type="boolean", nullable=false)
      */
@@ -149,25 +143,6 @@ class Website implements InputFilterAwareInterface
     	$this->code = (string) $code;
     
     	return $this;
-    }
-
-    /**
-     * @return string $phase
-     */
-    public function getPhase()
-    {
-        return $this->phase;
-    }
-    
-    /**
-     * @param string $phase
-     * @return Website
-     */
-    public function setPhase($phase)
-    {
-        $this->phase = (string) $phase;
-    
-        return $this;
     }
 
     /**

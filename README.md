@@ -1,15 +1,15 @@
-AdfabCore
+PlaygroundCore
 =========
 
-Cette librairie permet l'usage de fonctionnalités communes aux projets AdFab :
+This library contains the following features :
 
-- Google Analytics : Tagging Google Analytics (fork du projet de Jurian Sluiman : https://github.com/juriansluiman/SlmGoogleAnalytics)
-- CKEditor :  A disposition pour proposer du Wysiwyg (fork de https://github.com/Celtico/QuCKEditor de l'excellent Celtico)
-- ELFinder :permettant la gestion des assets sur le serveur. (fork de https://github.com/Celtico/QuElFinder). S'intègre avec élégance dans CKEditor
-- Cron : Moteur de planification de Cron (fork du projet : https://github.com/heartsentwined/zf2-cron avec refactoring important afin de bénéficier de la gestion des events dans ZF2)
-- ShortenUrl : Raccourcisseur d'URL basé sur Bit.ly
-- MailService : Service d'envoi de mails permettant de se baser sur des templates de mail.
-- Slugify : Fonctionnalité permettant de transformer du texte en "slug" utilisable comme url
-- Core layout : Fonctionnalité permettant de réaliser le design structurel de votre site.
+- Google Analytics : Tagging Google Analytics (fork of Jurian Sluiman project : https://github.com/juriansluiman/SlmGoogleAnalytics)
+- CKEditor : Wysiwyg editor (fork of https://github.com/Celtico/QuCKEditor from Celtico)
+- ELFinder : Added to CKEditor to manage assets on server. (fork of https://github.com/Celtico/QuElFinder).
+- Cron : Cron Engine (fork of https://github.com/heartsentwined/zf2-cron with deep refactoring so that it's now based on ZF2 events)
+- ShortenUrl : URL Shortener based on Bit.ly
+- MailService : Templating mails.
+- Slugify : Transform text into slug (useful for creating url)
+- Core layout : The base for creating the structure layout of a website.
 
-Chacune de ces fonctionnalités est expliquée dans le wiki : https://github.com/gregorybesson/AdfabCore/wiki
+Each feature is explained in the wiki : https://github.com/gregorybesson/PlaygroundCore/wiki

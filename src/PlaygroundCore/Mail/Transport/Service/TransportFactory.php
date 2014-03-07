@@ -13,7 +13,7 @@ class TransportFactory implements FactoryInterface
         $transportOptions = (isset($config['playgroundcore']) ? $config['playgroundcore'] : array());
 
         if (!isset($transportOptions['transport_class'])) {
-            throw new Exception('Transport class has to be configured');
+            throw new \Exception('Transport class has to be configured');
         }
 
         $transportClass = $transportOptions['transport_class'];

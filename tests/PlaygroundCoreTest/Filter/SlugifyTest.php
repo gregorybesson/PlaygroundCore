@@ -31,6 +31,10 @@ class CronTest extends \PHPUnit_Framework_TestCase
         $return = $this->slugify->filter($string);
         $this->assertEquals("gross", $return);
 
+        $string = "Προσεγμένο ταμπλό"; // greek
+        $return = $this->slugify->filter($string);
+        $this->assertEquals("prosegmeno-tamplo", $return);
+
     }
 
 }

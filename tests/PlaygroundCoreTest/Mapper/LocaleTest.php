@@ -108,8 +108,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locale->setActiveBack(1);
         $this->getLocaleMapper()->insert($locale);
 
-        $locales = $this->getLocaleMapper()->findAll();
-        $this->assertEquals(count($locales), 1);
 
         $locale = new localeEntity();
         $locale->setName('English');
@@ -119,7 +117,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->getLocaleMapper()->insert($locale);
 
         $locales = $this->getLocaleMapper()->findAll();
-        $this->assertEquals(count($locales), 2);
+        $this->assertEquals(count($locales), 1);
         $locale = $locales[0];
 
 

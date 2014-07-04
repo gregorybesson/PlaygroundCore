@@ -108,9 +108,6 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $formgen->setFormtemplate('<li>test</li>');
         $this->getFormgenMapper()->insert($formgen);
 
-        $formgens = $this->getFormgenMapper()->findAll();
-        $this->assertEquals(count($formgens), 1);
-
         $formgen = new formgenEntity();
         $formgen->setTitle('Titre de test 2');
         $formgen->setDescription('Description de test 2');
@@ -119,7 +116,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $this->getFormgenMapper()->insert($formgen);
 
         $formgens = $this->getFormgenMapper()->findAll();
-        $this->assertEquals(count($formgens), 2);
+        $this->assertEquals(count($formgens), 1);
         $formgen = $formgens[0];
 
 

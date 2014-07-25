@@ -54,9 +54,9 @@ class Website
     *
     * @return collection $websites collection de PlaygroundCore\Entity\Website
     */
-    public function findBy($array)
+    public function findBy($filter, $order = null, $limit = null, $offset = null)
     {
-        return $this->getEntityRepository()->findBy($array);
+        return $this->getEntityRepository()->findBy($filter, $order, $limit, $offset);
     }
 
     /**

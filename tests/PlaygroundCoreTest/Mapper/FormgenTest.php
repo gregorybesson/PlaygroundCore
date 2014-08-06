@@ -156,7 +156,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
-        $this->assertEquals(count($formgens), 1);
+        $this->assertEquals(count($formgens), 2);
         $formgen = $formgens[0];
 
 

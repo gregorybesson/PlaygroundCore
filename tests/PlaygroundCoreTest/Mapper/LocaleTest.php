@@ -155,7 +155,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->em->clear();
 
         $locales = $this->getLocaleMapper()->findAll();
-        $this->assertEquals(count($locales), 1);
+        $this->assertEquals(count($locales), 2);
         $locale = $locales[0];
 
 

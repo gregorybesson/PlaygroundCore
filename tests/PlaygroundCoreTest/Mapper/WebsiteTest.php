@@ -33,35 +33,40 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         foreach ($websites as $website) {
            $this->getWebsiteMapper()->remove($website); 
         }
+
+        $this->em->flush();
+        $this->em->clear();
         
-        $locale = new localeEntity();
-        $locale->setName('French');
-        $locale->setLocale('fr_FR');
-        $locale->setActiveFront(1);
-        $locale->setActiveBack(1);
-        $this->getLocaleMapper()->insert($locale);
 
 
-        $website = new websiteEntity();
-        $website->setName('France');
-        $website->setCode('FR');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
+        $this->em->transactional(function($em) {
+            $website = new websiteEntity();
+            $website->setName('France');
+            $website->setCode('FR');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
 
-        $this->getWebsiteMapper()->insert($website);
+            $this->getWebsiteMapper()->insert($website);
+        });
 
-        $website = new websiteEntity();
-        $website->setName('Italy');
-        $website->setCode('IT');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
+        $this->em->flush();
+        $this->em->clear();
 
-        $this->getWebsiteMapper()->insert($website);
+        $this->em->transactional(function($em) {
 
+            $website = new websiteEntity();
+            $website->setName('Italy');
+            $website->setCode('IT');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
+
+            $this->getWebsiteMapper()->insert($website);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
 
         $websites = $this->getWebsiteMapper()->findAll();
         $this->assertEquals(count($websites), 2);
@@ -70,35 +75,37 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testFindBy(){
-
-        $locale = new localeEntity();
-        $locale->setName('French');
-        $locale->setLocale('fr_FR');
-        $locale->setActiveFront(1);
-        $locale->setActiveBack(1);
-        $this->getLocaleMapper()->insert($locale);
-
-
-        $website = new websiteEntity();
-        $website->setName('France');
-        $website->setCode('FR');
         
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
 
-        $this->getWebsiteMapper()->insert($website);
 
-        $website = new websiteEntity();
-        $website->setName('Italy');
-        $website->setCode('IT');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
+        $this->em->transactional(function($em) {
+            $website = new websiteEntity();
+            $website->setName('France');
+            $website->setCode('FR');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
 
-        $this->getWebsiteMapper()->insert($website);
+            $this->getWebsiteMapper()->insert($website);
+        });
 
+        $this->em->flush();
+        $this->em->clear();
+
+        $this->em->transactional(function($em) {
+
+            $website = new websiteEntity();
+            $website->setName('Italy');
+            $website->setCode('IT');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
+
+            $this->getWebsiteMapper()->insert($website);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
 
         $websites = $this->getWebsiteMapper()->findAll();
         $this->assertEquals(count($websites), 2);
@@ -110,34 +117,37 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
     public function testFindById()
     {
-        $locale = new localeEntity();
-        $locale->setName('French');
-        $locale->setLocale('fr_FR');
-        $locale->setActiveFront(1);
-        $locale->setActiveBack(1);
-        $this->getLocaleMapper()->insert($locale);
 
+       
+        $this->em->transactional(function($em) {
 
-        $website = new websiteEntity();
-        $website->setName('France');
-        $website->setCode('FR');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
+            $website = new websiteEntity();
+            $website->setName('France');
+            $website->setCode('FR');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
 
-        $this->getWebsiteMapper()->insert($website);
+            $this->getWebsiteMapper()->insert($website);
+        });
 
-        $website = new websiteEntity();
-        $website->setName('Italy');
-        $website->setCode('IT');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
+        $this->em->flush();
+        $this->em->clear();
 
-        $this->getWebsiteMapper()->insert($website);
+        $this->em->transactional(function($em) {
 
+            $website = new websiteEntity();
+            $website->setName('Italy');
+            $website->setCode('IT');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
+
+            $this->getWebsiteMapper()->insert($website);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
 
         $websites = $this->getWebsiteMapper()->findAll();
         $this->assertEquals(count($websites), 2);
@@ -150,33 +160,38 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
-        $locale = new localeEntity();
-        $locale->setName('French');
-        $locale->setLocale('fr_FR');
-        $locale->setActiveFront(1);
-        $locale->setActiveBack(1);
-        $this->getLocaleMapper()->insert($locale);
+       
 
 
-        $website = new websiteEntity();
-        $website->setName('France');
-        $website->setCode('FR');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
+        $this->em->transactional(function($em) {
 
-        $this->getWebsiteMapper()->insert($website);
+            $website = new websiteEntity();
+            $website->setName('France');
+            $website->setCode('FR');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
 
-        $website = new websiteEntity();
-        $website->setName('Italy');
-        $website->setCode('IT');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
+            $this->getWebsiteMapper()->insert($website);
+        });
 
-        $this->getWebsiteMapper()->insert($website);
+        $this->em->flush();
+        $this->em->clear();
+
+        $this->em->transactional(function($em) {
+
+            $website = new websiteEntity();
+            $website->setName('Italy');
+            $website->setCode('IT');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
+
+            $this->getWebsiteMapper()->insert($website);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
 
 
         $websites = $this->getWebsiteMapper()->findAll();
@@ -186,6 +201,9 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website->setName('France2');
         $website = $this->getWebsiteMapper()->update($website);
 
+        $this->em->flush();
+        $this->em->clear();
+
         $websites = $this->getWebsiteMapper()->findBy(array('name'=>'France2'));
         $this->assertEquals(count($websites), 1);
 
@@ -194,41 +212,43 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $locale = new localeEntity();
-        $locale->setName('French');
-        $locale->setLocale('fr_FR');
-        $locale->setActiveFront(1);
-        $locale->setActiveBack(1);
-        $this->getLocaleMapper()->insert($locale);
+        $this->em->transactional(function($em) {
+
+            $website = new websiteEntity();
+            $website->setName('France');
+            $website->setCode('FR');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
+
+            $this->getWebsiteMapper()->insert($website);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
+
+        $this->em->transactional(function($em) {
+
+            $website = new websiteEntity();
+            $website->setName('Italy');
+            $website->setCode('IT');
+            
+            $website->setActive(true);
+            $website->setDefault(0);
+
+            $this->getWebsiteMapper()->insert($website);
+        });
 
 
-        $website = new websiteEntity();
-        $website->setName('France');
-        $website->setCode('FR');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
-
-        $this->getWebsiteMapper()->insert($website);
-
-        $website = new websiteEntity();
-        $website->setName('Italy');
-        $website->setCode('IT');
-        
-        $website->setActive(true);
-        $website->setDefault(0);
-        $website->addLocale($locale);
-
-        $this->getWebsiteMapper()->insert($website);
-
+        $this->em->flush();
+        $this->em->clear();
 
         $websites = $this->getWebsiteMapper()->findAll();
         $this->assertEquals(count($websites), 2);
 
 
         foreach ($websites as $website) {
-           $this->getWebsiteMapper()->remove($website); 
+            $this->getWebsiteMapper()->remove($website); 
         }
 
         $websites = $this->getWebsiteMapper()->findAll();

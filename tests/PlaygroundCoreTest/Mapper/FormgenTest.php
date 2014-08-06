@@ -23,23 +23,32 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testInsert()
-    {
-        $formgen = new FormgenEntity();
-        $formgen->setTitle('Titre de test');
-        $formgen->setDescription('Description de test');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+    {   
+        $this->em->transactional(function($em) {
+            $formgen = new FormgenEntity();
+            $formgen->setTitle('Titre de test');
+            $formgen->setDescription('Description de test');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 1);
 
-        $formgen = new formgenEntity();
-        $formgen->setTitle('Titre de test 2');
-        $formgen->setDescription('Description de test 2');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->transactional(function($em) {
+            $formgen = new formgenEntity();
+            $formgen->setTitle('Titre de test 2');
+            $formgen->setDescription('Description de test 2');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 2);
@@ -47,22 +56,31 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
     public function testFindBy(){
 
-        $formgen = new FormgenEntity();
-        $formgen->setTitle('Titre de test');
-        $formgen->setDescription('Description de test');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->transactional(function($em) {
+            $formgen = new FormgenEntity();
+            $formgen->setTitle('Titre de test');
+            $formgen->setDescription('Description de test');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 1);
 
-        $formgen = new formgenEntity();
-        $formgen->setTitle('Titre de test 2');
-        $formgen->setDescription('Description de test 2');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->transactional(function($em) {
+            $formgen = new formgenEntity();
+            $formgen->setTitle('Titre de test 2');
+            $formgen->setDescription('Description de test 2');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 2);
@@ -73,22 +91,30 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
     public function testFindById()
     {
-        $formgen = new FormgenEntity();
-        $formgen->setTitle('Titre de test');
-        $formgen->setDescription('Description de test');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->transactional(function($em) {
+            $formgen = new FormgenEntity();
+            $formgen->setTitle('Titre de test');
+            $formgen->setDescription('Description de test');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 1);
 
-        $formgen = new formgenEntity();
-        $formgen->setTitle('Titre de test 2');
-        $formgen->setDescription('Description de test 2');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->transactional(function($em) {
+            $formgen = new formgenEntity();
+            $formgen->setTitle('Titre de test 2');
+            $formgen->setDescription('Description de test 2');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 2);
@@ -101,19 +127,33 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
-        $formgen = new FormgenEntity();
-        $formgen->setTitle('Titre de test');
-        $formgen->setDescription('Description de test');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->transactional(function($em) {
+            $formgen = new FormgenEntity();
+            $formgen->setTitle('Titre de test');
+            $formgen->setDescription('Description de test');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
 
-        $formgen = new formgenEntity();
-        $formgen->setTitle('Titre de test 2');
-        $formgen->setDescription('Description de test 2');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->flush();
+        $this->em->clear();
+
+        $formgens = $this->getFormgenMapper()->findAll();
+        $this->assertEquals(count($formgens), 1);
+
+
+
+        $this->em->transactional(function($em) {
+            $formgen2 = new formgenEntity();
+            $formgen2->setTitle('Titre de test 2');
+            $formgen2->setDescription('Description de test 2');
+            $formgen2->setFormjsonified('[{"dujsondetest2"}]');
+            $formgen2->setFormtemplate('<li>test2</li>');
+            $this->getFormgenMapper()->insert($formgen2);
+        });
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 1);
@@ -131,28 +171,38 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $formgen = new FormgenEntity();
-        $formgen->setTitle('Titre de test');
-        $formgen->setDescription('Description de test');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->transactional(function($em) {
+            $formgen = new FormgenEntity();
+            $formgen->setTitle('Titre de test');
+            $formgen->setDescription('Description de test');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 1);
 
-        $formgen = new formgenEntity();
-        $formgen->setTitle('Titre de test 2');
-        $formgen->setDescription('Description de test 2');
-        $formgen->setFormjsonified('[{"dujsondetest"}]');
-        $formgen->setFormtemplate('<li>test</li>');
-        $this->getFormgenMapper()->insert($formgen);
+        $this->em->transactional(function($em) {
+            $formgen = new formgenEntity();
+            $formgen->setTitle('Titre de test 2');
+            $formgen->setDescription('Description de test 2');
+            $formgen->setFormjsonified('[{"dujsondetest"}]');
+            $formgen->setFormtemplate('<li>test</li>');
+            $this->getFormgenMapper()->insert($formgen);
+        });
+
+        $this->em->flush();
+        $this->em->clear();
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 2);
         
         foreach ($formgens as $formgen) {
-           $this->getFormgenMapper()->remove($formgen); 
+            $this->getFormgenMapper()->remove($formgen); 
         }
 
         $formgens = $this->getFormgenMapper()->findAll();

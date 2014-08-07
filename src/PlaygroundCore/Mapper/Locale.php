@@ -54,9 +54,9 @@ class Locale
     *
     * @return collection $locales collection de PlaygroundCore\Entity\Locale
     */
-    public function findBy($array)
+    public function findBy($filter, $order = null, $limit = null, $offset = null)
     {
-        return $this->getEntityRepository()->findBy($array);
+        return $this->getEntityRepository()->findBy($filter, $order, $limit, $offset);
     }
 
     /**

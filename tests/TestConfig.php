@@ -8,7 +8,8 @@ return array(
    		'Jhu\ZdtLoggerModule',
     	'AsseticBundle',
     	'ZfcBase',
-   		'PlaygroundCore'
+        'PlaygroundCore',
+   		'PlaygroundDesign'
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(

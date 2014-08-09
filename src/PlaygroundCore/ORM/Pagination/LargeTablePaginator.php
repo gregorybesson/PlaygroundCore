@@ -42,8 +42,7 @@ class LargeTablePaginator extends DoctrinePaginator
                 }
                 $result = $countQuery->getSingleScalarResult();
                 $this->largeTableComputedCount = (int) $result;
-            }
-            else {
+            } else {
                 $this->largeTableComputedCount = $this->count();
             }
         }

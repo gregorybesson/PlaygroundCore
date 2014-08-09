@@ -11,7 +11,7 @@ class Tracker
      * @var string
      */
     protected $id;
-    
+
     protected $tags;
 
     /**
@@ -37,28 +37,28 @@ class Tracker
     {
         $this->id = $id;
     }
-    
+
     public function enabled()
     {
         return $this->enableOpengraph;
     }
-    
+
     public function setEnableOpengraph($enableOpengraph = true)
     {
         $this->enableOpengraph = (bool) $enableOpengraph;
     }
-    
+
     public function tags()
     {
         return $this->tags;
     }
-    
-    public function addTag (Tag $tag)
+
+    public function addTag(Tag $tag)
     {
         if (null === $this->tags) {
             $this->tags = array();
         }
-    
+
         $this->tags[] = $tag;
     }
 }

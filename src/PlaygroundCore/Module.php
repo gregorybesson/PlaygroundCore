@@ -40,7 +40,7 @@ class Module implements
                     $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_back');
                 }
             }
-            
+
             if(empty($locale)){
                 if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
                     $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
@@ -103,7 +103,7 @@ class Module implements
 
         // Google Analytics : When the render event is triggered, we invoke the view helper to
         // render the javascript code.
-        $e->getApplication()->getEventManager()->attach(\Zend\Mvc\MvcEvent::EVENT_RENDER, function(\Zend\Mvc\MvcEvent $e) use ($serviceManager) {
+        $e->getApplication()->getEventManager()->attach(\Zend\Mvc\MvcEvent::EVENT_RENDER, function (\Zend\Mvc\MvcEvent $e) use ($serviceManager) {
             $view   = $serviceManager->get('ViewHelperManager');
             $plugin = $view->get('googleAnalytics');
             $plugin();
@@ -111,12 +111,12 @@ class Module implements
             $pluginOG = $view->get('facebookOpengraph');
             $pluginOG();
 
-            $viewModel 		 = $e->getViewModel();
-            $match			 = $e->getRouteMatch();
-            $channel		 = isset($match)? $match->getParam('channel', ''):'';
+            $viewModel         = $e->getViewModel();
+            $match             = $e->getRouteMatch();
+            $channel         = isset($match)? $match->getParam('channel', ''):'';
             $viewModel->channel = $channel;
             foreach($viewModel->getChildren() as $child){
-            	$child->channel = $channel;
+                $child->channel = $channel;
             }
         });
 
@@ -180,7 +180,7 @@ class Module implements
                     return $QuCk;
                 },
 
-                'googleAnalytics' => function($sm) {
+                'googleAnalytics' => function ($sm) {
                 $tracker = $sm->getServiceLocator()->get('google-analytics');
 
                 $helper  = new View\Helper\GoogleAnalytics($tracker, $sm->getServiceLocator()->get('Request'));
@@ -188,7 +188,7 @@ class Module implements
                 return $helper;
                 },
 
-                'facebookOpengraph' => function($sm) {
+                'facebookOpengraph' => function ($sm) {
                     $tracker = $sm->getServiceLocator()->get('facebook-opengraph');
 
                     $helper  = new View\Helper\FacebookOpengraph($tracker, $sm->getServiceLocator()->get('Request'));
@@ -238,41 +238,41 @@ class Module implements
                         return new Options\ModuleOptions(isset($config['playgroundcore']) ? $config['playgroundcore'] : array());
                     },
 
-                    'playgroundcore_formgen_mapper' => function  ($sm) {
+                    'playgroundcore_formgen_mapper' => function ($sm) {
                         return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
-                    'playgroundcore_website_mapper' => function  ($sm) {
+                    'playgroundcore_website_mapper' => function ($sm) {
 
                         return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
-                    'playgroundcore_formgen_mapper' => function  ($sm) {
+                    'playgroundcore_formgen_mapper' => function ($sm) {
 
                         return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
-                    'playgroundcore_locale_mapper' => function  ($sm) {
+                    'playgroundcore_locale_mapper' => function ($sm) {
                         return new Mapper\Locale($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
                     'playgroundcore_transport' => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
-                    'PlaygroundCore\Analytics\Tracker' => function($sm) {
+                    'PlaygroundCore\Analytics\Tracker' => function ($sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']) ? $config['playgroundcore']['googleAnalytics'] : array('id' => 'UA-XXXXXXXX-X');
 
                         $tracker = new Analytics\Tracker($config['id']);
 
-						if (isset($config['custom_vars'])) {
-							foreach($config['custom_vars'] as $customVar) {
-								$customVarId 		= $customVar['id'];
-								$customVarName 		= $customVar['name'];
-								$customVarValue 	= $customVar['value'];
-								$customVarOptScope  = $customVar['optScope'];
-								$customVar = new Analytics\CustomVar ($customVarId, $customVarName, $customVarValue, $customVarOptScope);
-								$tracker->addCustomVar($customVar);
-							}
-						}
+                        if (isset($config['custom_vars'])) {
+                            foreach($config['custom_vars'] as $customVar) {
+                                $customVarId        = $customVar['id'];
+                                $customVarName        = $customVar['name'];
+                                $customVarValue    = $customVar['value'];
+                                $customVarOptScope  = $customVar['optScope'];
+                                $customVar = new Analytics\CustomVar ($customVarId, $customVarName, $customVarValue, $customVarOptScope);
+                                $tracker->addCustomVar($customVar);
+                            }
+                        }
 
                         if (isset($config['domain_name'])) {
                             $tracker->setDomainName($config['domain_name']);
@@ -282,13 +282,13 @@ class Module implements
                             $tracker->setAllowLinker($config['allow_linker']);
                         }
 
-						if (isset($config['allow_hash'])) {
+                        if (isset($config['allow_hash'])) {
                             $tracker->setAllowHash($config['allow_hash']);
                         }
 
                         return $tracker;
                     },
-                    'PlaygroundCore\Opengraph\Tracker' => function($sm) {
+                    'PlaygroundCore\Opengraph\Tracker' => function ($sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']['facebookOpengraph']) ? $config['playgroundcore']['facebookOpengraph'] : array('appId' => '');
 

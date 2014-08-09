@@ -1,6 +1,8 @@
 PlaygroundCore
 =========
 
+[![Develop Branch Build Status](https://travis-ci.org/gregorybesson/PlaygroundCore.svg)](http://travis-ci.org/gregorybesson/PlaygroundCore)
+
 This library contains the following features :
 
 - Google Analytics : Tagging Google Analytics (fork of Jurian Sluiman project : https://github.com/juriansluiman/SlmGoogleAnalytics)

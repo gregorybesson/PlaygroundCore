@@ -54,6 +54,12 @@ return array(
     'router' => array(
         'routes' => array(
             'frontend' => array(
+                'type' => 'PlaygroundCore\Mvc\Router\Http\RegexSlash',
+                'priority' => -1000,
+                'options' => array(
+                    'regex' => '\/(?<locale>([a-z]{2})(\/|\z)+)?(?<channel>(embed|facebook|platform|mobile|preview)+)?\/?',
+                    'spec' => '/%channel%/',
+                ),
                 'child_routes' => array(
                     'locale' => array(
                         'type' => 'Segment',
@@ -112,6 +118,11 @@ return array(
         		),
         	),
             'admin' => array(
+                'type' => 'Literal',
+                'priority' => -1000,
+                'options' => array(
+                    'route'    => '/admin',
+                ),
                 'child_routes' => array(
                     'formgen' => array(
                         'type'    => 'Literal',

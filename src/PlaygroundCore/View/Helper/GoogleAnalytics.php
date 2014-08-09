@@ -65,23 +65,23 @@ class GoogleAnalytics extends AbstractHelper
     protected $rendered = false;
     protected $request;
 
-    public function __construct (Tracker $tracker, RequestInterface $request)
+    public function __construct(Tracker $tracker, RequestInterface $request)
     {
         $this->tracker = $tracker;
         $this->request = $request;
     }
 
-    public function getContainer ()
+    public function getContainer()
     {
         return $this->container;
     }
 
-    public function setContainer ($container)
+    public function setContainer($container)
     {
         $this->container = $container;
     }
 
-    public function __invoke ()
+    public function __invoke()
     {
         // Do not render the GA twice
         if ($this->rendered) {
@@ -110,8 +110,8 @@ class GoogleAnalytics extends AbstractHelper
 
         $script  = "var _gaq = _gaq || [];\n";
         $script .= sprintf("_gaq.push(['_setAccount', '%s']);\n", $tracker->getId());
-		
-		if (null !== ($customVars = $tracker->customVars())) {
+
+        if (null !== ($customVars = $tracker->customVars())) {
             foreach ($customVars as $customVar) {
                 $script .= sprintf("_gaq.push(['_setCustomVar', %s, '%s', '%s', %s]);\n",
                        $customVar->getId(),
@@ -128,13 +128,13 @@ class GoogleAnalytics extends AbstractHelper
         if ($tracker->getAllowLinker()) {
             $script .= "_gaq.push(['_setAllowLinker', true]);\n";
         } else {
-        	$script .= "_gaq.push(['_setAllowLinker', false]);\n";
+            $script .= "_gaq.push(['_setAllowLinker', false]);\n";
         }
-		
-		if ($tracker->getAllowHash()) {
+
+        if ($tracker->getAllowHash()) {
             $script .= "_gaq.push(['_setAllowHash', true]);\n";
         } else {
-        	$script .= "_gaq.push(['_setAllowHash', false]);\n";
+            $script .= "_gaq.push(['_setAllowHash', false]);\n";
         }
 
         if ($tracker->getAnonymizeIp()) {
@@ -144,8 +144,8 @@ class GoogleAnalytics extends AbstractHelper
         if ($tracker->enabledPageTracking()) {
             $script .= "_gaq.push(['_trackPageview']);\n";
         }
-		
-		if ($tracker->enabledPageLoadTime()) {
+
+        if ($tracker->enabledPageLoadTime()) {
             $script .= "_gaq.push(['_trackPageLoadTime']);\n";
         }
 
@@ -188,15 +188,15 @@ class GoogleAnalytics extends AbstractHelper
         }
 
         $script .= <<<SCRIPT
-(function() {
+(function () {
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();\n
 SCRIPT;
 
-		// Addthis analytics integration code for google analytics
-		$script .= sprintf("var addthis_config = {
+        // Addthis analytics integration code for google analytics
+        $script .= sprintf("var addthis_config = {
 data_ga_property: '%s',
 data_track_clickback: true
 };\n", $tracker->getId());

@@ -34,7 +34,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param  string $value
      * @return string
      */
-    public function filter ($value)
+    public function filter($value)
     {
         //translitere specific chars
         $value = $this->_transliterateCzech($value);
@@ -46,7 +46,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
         $value = $this->_transliteratePolish($value);
         $value = $this->_transliterateDanish($value);
         $value = $this->_transliterateCroatian($value);
-        
+
         //split string to single characters
         $characters = mb_split("~(.)~", $value);
 
@@ -54,7 +54,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
         foreach ($characters as $character) {
             /*  maybe should contain also //IGNORE  */
             $converted = iconv("utf-8", "ASCII//TRANSLIT", $character);
-            
+
             //if character was converted, strip out wrong marks
             if ($character !== $converted) {
                 $return .= preg_replace('~["\'^]+~', '', $converted);
@@ -71,7 +71,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateRussian ($s)
+    private function _transliterateRussian($s)
     {
         $table = array (
             "А" => "A",
@@ -149,14 +149,14 @@ class Transliteration implements \Zend\Filter\FilterInterface
         );
         return strtr($s, $table);
     }
-    
-  	/**
+
+    /**
      * Transliterate Czech chars
      *
      * @param string $s
      * @return string
      */
-    private function _transliterateCzech ($s)
+    private function _transliterateCzech($s)
     {
         $table = array (
             'á' => 'a',
@@ -174,13 +174,13 @@ class Transliteration implements \Zend\Filter\FilterInterface
             'ů' => 'u',
             'ý' => 'y',
             'ž' => 'z',
-         	'Á' => 'A',
+             'Á' => 'A',
             'Č' => 'C',
             'Ď' => 'D',
             'É' => 'E',
             'Ě' => 'E',
             'Í' => 'I',
-        	'Ň' => 'N',
+            'Ň' => 'N',
             'Ó' => 'O',
             'Ř' => 'R',
             'Š' => 'S',
@@ -192,14 +192,14 @@ class Transliteration implements \Zend\Filter\FilterInterface
         );
         return strtr($s, $table);
     }
-    
-	/**
+
+    /**
      * Transliterate German chars
      *
      * @param string $s
      * @return string
      */
-    private function _transliterateGerman ($s)
+    private function _transliterateGerman($s)
     {
         $table = array (
             //'ä' => 'ae', //messes up with slovak -> they have ä -> a
@@ -216,15 +216,15 @@ class Transliteration implements \Zend\Filter\FilterInterface
         );
         return strtr($s, $table);
     }
-    
-	/**
+
+    /**
      * Transliterate French chars
      *
      * @param string $s
      * @return string
      */
-    private function _transliterateFrench ($s)
-    {        
+    private function _transliterateFrench($s)
+    {
         $table = array (
             'â' => 'a',
             'ê' => 'e',
@@ -240,19 +240,19 @@ class Transliteration implements \Zend\Filter\FilterInterface
             'æ' => 'ae',
             'Ÿ' => 'Y',
             'ç' => 'c',
-        	'Ç' => 'C',
+            'Ç' => 'C',
         );
         return strtr($s, $table);
     }
-    
-	/**
+
+    /**
      * Transliterate Hungarian chars
      *
      * @param string $s
      * @return string
      */
-    private function _transliterateHungarian ($s)
-    {        
+    private function _transliterateHungarian($s)
+    {
         $table = array (
             'á' => 'a',
             'é' => 'e',
@@ -273,78 +273,78 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliteratePolish ($s)
+    private function _transliteratePolish($s)
     {
         $table = array(
-        'ą' => 'a', 
-        'ę' => 'e', 
-        'ó' => 'o', 
-        'ć' => 'c', 
-        'ł' => 'l', 
-        'ń' => 'n', 
-        'ś' => 's', 
-        'ż' => 'z', 
-        'ź' => 'z', 
-        'Ó' => 'O', 
-        'Ć' => 'C', 
-        'Ł' => 'L', 
-        'Ś' => 'S', 
-        'Ż' => 'Z', 
-        'Ź' => 'Z' 
+        'ą' => 'a',
+        'ę' => 'e',
+        'ó' => 'o',
+        'ć' => 'c',
+        'ł' => 'l',
+        'ń' => 'n',
+        'ś' => 's',
+        'ż' => 'z',
+        'ź' => 'z',
+        'Ó' => 'O',
+        'Ć' => 'C',
+        'Ł' => 'L',
+        'Ś' => 'S',
+        'Ż' => 'Z',
+        'Ź' => 'Z'
         );
         return strtr($s, $table);
     }
 
-	/**
+    /**
      * Transliterate Danish chars
      *
      * @param string $s
      * @return string
      */
-    private function _transliterateDanish ($s)
+    private function _transliterateDanish($s)
     {
         $table = array(
-        'æ' => 'ae', 
-        'ø' => 'oe', 
-        'å' => 'aa', 
-        'Æ' => 'Ae', 
-        'Ø' => 'Oe', 
-        'Å' => 'Aa' 
+        'æ' => 'ae',
+        'ø' => 'oe',
+        'å' => 'aa',
+        'Æ' => 'Ae',
+        'Ø' => 'Oe',
+        'Å' => 'Aa'
         );
         return strtr($s, $table);
     }
-    
- 	/**
+
+    /**
      * Transliterate Croatian chars
      *
      * @param string $s
      * @return string
-     */ 
-    private function _transliterateCroatian ($s) 
-    { 
-        $table = array ( 
-            'Č' => 'C', 
-            'Ć' => 'C', 
-            'Ž' => 'Z', 
-            'Š' => 'S', 
-            'Đ' => 'D', 
-            'č' => 'c', 
-            'ć' => 'c', 
-            'ž' => 'z', 
-            'š' => 's', 
-            'đ' => 'd', 
-        ); 
-        return strtr($s, $table); 
+     */
+    private function _transliterateCroatian($s)
+    {
+        $table = array (
+            'Č' => 'C',
+            'Ć' => 'C',
+            'Ž' => 'Z',
+            'Š' => 'S',
+            'Đ' => 'D',
+            'č' => 'c',
+            'ć' => 'c',
+            'ž' => 'z',
+            'š' => 's',
+            'đ' => 'd',
+        );
+        return strtr($s, $table);
     }
 
-	/**
+    /**
      * Transliterate Slovak chars
      *
      * @param string $s
      * @return string
      */
-    private function _transliterateSlovak ($s)
-    {        
+    private function _transliterateSlovak($s)
+    {
         $table = array (
             'á' => 'a',
             'Á' => 'A',
@@ -366,7 +366,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
             'Ň' => 'N',
             'ó' => 'o',
             'Ó' => 'O',
-            'ô' => 'o', 
+            'ô' => 'o',
             'Ô' => 'O',
             'ŕ' => 'r',
             'Ŕ' => 'R',

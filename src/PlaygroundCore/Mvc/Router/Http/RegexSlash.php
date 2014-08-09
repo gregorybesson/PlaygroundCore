@@ -53,12 +53,12 @@ class RegexSlash extends \Zend\Mvc\Router\Http\Regex implements \Zend\Mvc\Router
             $spec = '%' . $key . '%';
 
             if (strpos($url, $spec) !== false) {
-            	// $url is this form : 'spec' => '/%channel%/',
-            	// if $channel == '' we must remove the last '/' too.
-            	if (empty($value) && strpos($url, $spec.'/') !== false) {
-            		$spec .= '/';
-            	}
-            	$url = str_replace($spec, rawurlencode($value), $url);
+                // $url is this form : 'spec' => '/%channel%/',
+                // if $channel == '' we must remove the last '/' too.
+                if (empty($value) && strpos($url, $spec.'/') !== false) {
+                    $spec .= '/';
+                }
+                $url = str_replace($spec, rawurlencode($value), $url);
                 $this->assembledParams[] = $key;
             }
         }

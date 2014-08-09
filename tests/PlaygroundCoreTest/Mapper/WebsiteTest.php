@@ -28,6 +28,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
     public function testInsert()
     {
 
+        $self = $this;
         $websites = $this->getWebsiteMapper()->findAll();
         
         foreach ($websites as $website) {
@@ -37,9 +38,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $this->em->flush();
         $this->em->clear();
         
-
-
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
@@ -47,13 +46,13 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -62,7 +61,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
@@ -76,9 +75,9 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
     public function testFindBy(){
         
+        $self = $this;
 
-
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
@@ -86,13 +85,13 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -101,7 +100,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
@@ -118,8 +117,9 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
     public function testFindById()
     {
 
-       
-        $this->em->transactional(function($em) {
+        $self = $this;
+        
+        $this->em->transactional(function($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('France');
@@ -128,13 +128,13 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -143,7 +143,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
@@ -161,9 +161,9 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
        
+        $self = $this;
 
-
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('France');
@@ -172,13 +172,13 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -187,7 +187,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
@@ -212,7 +212,9 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $this->em->transactional(function($em) {
+        $self = $this;
+        
+        $this->em->transactional(function($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('France');
@@ -221,13 +223,13 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -236,7 +238,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website->setActive(true);
             $website->setDefault(0);
 
-            $this->getWebsiteMapper()->insert($website);
+            $self->getWebsiteMapper()->insert($website);
         });
 
 

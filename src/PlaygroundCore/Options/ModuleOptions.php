@@ -18,19 +18,19 @@ class ModuleOptions extends AbstractOptions
     protected $defaultShareMessage = 'Venez jouer';
     protected $facebookOpengraph = array('appId' => '');
     protected $locale = null;
-    
+
 
     protected $ckeditor = array();
-    
+
     public function getDefaultShareMessage()
     {
         return $this->defaultShareMessage;
     }
-    
+
     public function setDefaultShareMessage($defaultShareMessage)
     {
         $this->defaultShareMessage = $defaultShareMessage;
-    
+
         return $this;
     }
 
@@ -38,14 +38,14 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->adServing;
     }
-    
+
     public function setAdServing($adServing)
     {
         $this->adServing = $adServing;
-    
+
         return $this;
     }
-    
+
     public function getGoogleAnalytics()
     {
         return $this->googleAnalytics;
@@ -57,16 +57,16 @@ class ModuleOptions extends AbstractOptions
 
         return $this;
     }
-    
+
     public function getFacebookOpengraph()
     {
         return $this->facebookOpengraph;
     }
-    
+
     public function setFacebookOpengraph($facebookOpengraph)
     {
         $this->facebookOpengraph = $facebookOpengraph;
-    
+
         return $this;
     }
 

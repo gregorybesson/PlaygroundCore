@@ -27,7 +27,7 @@ class Website implements InputFilterAwareInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * name
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -39,7 +39,7 @@ class Website implements InputFilterAwareInterface
      * @ORM\Column(type="string", length=2, nullable=false)
      */
     protected $code;
-    
+
     /**
      * active
      * @ORM\Column(type="boolean", nullable=false)
@@ -63,7 +63,7 @@ class Website implements InputFilterAwareInterface
      */
     protected $locales;
 
- 
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -106,7 +106,7 @@ class Website implements InputFilterAwareInterface
     {
         $this->updated_at = new \DateTime("now");
     }
-    
+
     /**
      * @return string $name
      */
@@ -114,7 +114,7 @@ class Website implements InputFilterAwareInterface
     {
     	return $this->name;
     }
-    
+
     /**
      * @param string $name
      * @return Website
@@ -122,10 +122,10 @@ class Website implements InputFilterAwareInterface
     public function setName($name)
     {
     	$this->name = (string) $name;
-    
+
     	return $this;
     }
-    
+
     /**
      * @return string $code
      */
@@ -133,7 +133,7 @@ class Website implements InputFilterAwareInterface
     {
     	return $this->code;
     }
-    
+
     /**
      * @param string $code
      * @return Website
@@ -141,7 +141,7 @@ class Website implements InputFilterAwareInterface
     public function setCode($code)
     {
     	$this->code = (string) $code;
-    
+
     	return $this;
     }
 
@@ -152,7 +152,7 @@ class Website implements InputFilterAwareInterface
     {
         return $this->active;
     }
-    
+
     /**
      * @param string $active
      * @return Website
@@ -160,7 +160,7 @@ class Website implements InputFilterAwareInterface
     public function setActive($active)
     {
         $this->active = (int) $active;
-    
+
         return $this;
     }
 
@@ -171,7 +171,7 @@ class Website implements InputFilterAwareInterface
     {
         return $this->byDefault;
     }
-    
+
     /**
      * @param string $default
      * @return Website
@@ -179,7 +179,7 @@ class Website implements InputFilterAwareInterface
     public function setDefault($default)
     {
         $this->byDefault = (int) $default;
-    
+
         return $this;
     }
 
@@ -190,7 +190,7 @@ class Website implements InputFilterAwareInterface
     {
         return $this->locales;
     }
-    
+
     /**
      * @param PlaygroundCore\Entity\Locale $locales
      * @return Website
@@ -198,10 +198,10 @@ class Website implements InputFilterAwareInterface
     public function setLocales($locales)
     {
         $this->locales = $locales;
-    
+
         return $this;
     }
-    
+
     /**
      * @param PlaygroundCore\Entity\Locale $locale
      * @return Website
@@ -209,7 +209,7 @@ class Website implements InputFilterAwareInterface
     public function addLocale($locale)
     {
     	$this->locales[] = $locale;
-    
+
     	return $this;
     }
 
@@ -252,7 +252,7 @@ class Website implements InputFilterAwareInterface
     /**
     * getFlag : get path for flag associate to the country
     *
-    * @param string $flag 
+    * @param string $flag
     */
     public function getFlag()
     {

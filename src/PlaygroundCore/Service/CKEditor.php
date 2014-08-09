@@ -231,7 +231,7 @@ class CKEditor
             }
         } else {
             $classDetection = "";
-            $js .= "CKEDITOR.replaceAll( function(textarea, config) {\n";
+            $js .= "CKEDITOR.replaceAll( function (textarea, config) {\n";
             if (!empty($className)) {
                 $js .= "	var classRegex = new RegExp('(?:^| )' + '". $className ."' + '(?:$| )');\n";
                 $js .= "	if (!classRegex.test(textarea.className))\n";
@@ -382,7 +382,7 @@ class CKEditor
                 } elseif (count($handlers) == 1) {
                     $_config['on'][$eventName] = '@@'.$handlers[0];
                 } else {
-                    $_config['on'][$eventName] = '@@function (ev){';
+                    $_config['on'][$eventName] = '@@function (ev) {';
                     foreach ($handlers as $handler => $code) {
                         $_config['on'][$eventName] .= '('.$code.')(ev);';
                     }

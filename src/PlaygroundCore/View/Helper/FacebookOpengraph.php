@@ -26,23 +26,23 @@ class FacebookOpengraph extends AbstractHelper
     protected $rendered = false;
     protected $request;
 
-    public function __construct (Tracker $tracker, RequestInterface $request)
+    public function __construct(Tracker $tracker, RequestInterface $request)
     {
         $this->tracker = $tracker;
         $this->request = $request;
     }
 
-    public function getContainer ()
+    public function getContainer()
     {
         return $this->container;
     }
 
-    public function setContainer ($container)
+    public function setContainer($container)
     {
         $this->container = $container;
     }
 
-    public function __invoke ()
+    public function __invoke()
     {
         // Do not render the GA twice
         if ($this->rendered) {
@@ -70,7 +70,7 @@ class FacebookOpengraph extends AbstractHelper
         }
 
         $container->appendProperty('fb:app', $tracker->getId());
-        
+
         if (null !== ($tags = $tracker->tags())) {
             foreach ($tags as $tag) {
                 $container->appendProperty($tag->getProperty(), $tag->getValue());

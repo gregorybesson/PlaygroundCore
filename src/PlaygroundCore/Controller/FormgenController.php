@@ -35,7 +35,7 @@ class FormgenController extends AbstractActionController
             $formGenService->insert($data);
             return $this->redirect()->toRoute('admin/formgen/list');
         }
-        
+
         $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
         return new ViewModel(array(
             'websites' => $websites,
@@ -50,10 +50,10 @@ class FormgenController extends AbstractActionController
                 $formGenService = $this->getFormgenService();
                 $formgen = $this->getFormgenService()->getFormgenMapper()->findById($data['formId']);
                 $formGenService->update($formgen, $data);
-                
+
                 return $this->redirect()->toRoute('admin/formgen/list');
         }
-        
+
         $formId = $this->getEvent()->getRouteMatch()->getParam('formId');
         $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->findById($formId);
 

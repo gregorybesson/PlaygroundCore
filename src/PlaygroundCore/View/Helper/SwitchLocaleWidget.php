@@ -6,7 +6,7 @@ use Zend\View\Helper\AbstractHelper;
 
 class SwitchLocaleWidget extends AbstractHelper
 {
-    
+
     protected $localeService;
     /**
      * __invoke
@@ -35,16 +35,16 @@ class SwitchLocaleWidget extends AbstractHelper
             $websites = $this->getWebsiteService()->getWebsiteMapper()->findBy(array('code' => $locale));
             if(empty($websites)){
                return array('locales' => array());
-            } 
+            }
             $website = $websites[0];
             $locales['locales'] = $website->getLocales();
             if(count($locales['locales']) == 1) {
                 return array('locales' => array());
             }
         } else {
-           $locales['locales'] = $this->getLocaleService()->getLocaleMapper()->findBy($filters); 
+           $locales['locales'] = $this->getLocaleService()->getLocaleMapper()->findBy($filters);
         }
-        
+
         $locales['context'] = $options['context'];
 
         return $locales;
@@ -66,11 +66,11 @@ class SwitchLocaleWidget extends AbstractHelper
     /**
     * setLocaleService : set le service locale
     */
-    public function setLocaleService ($localeService)
+    public function setLocaleService($localeService)
     {
         $this->localeService = $localeService;
     }
-    
+
     public function setRouteMatch($routeMatch)
     {
         $this->routeMatch = $routeMatch;
@@ -78,7 +78,7 @@ class SwitchLocaleWidget extends AbstractHelper
 
      public function getRouteMatch()
     {
-      
+
         return $this->routeMatch;
     }
 

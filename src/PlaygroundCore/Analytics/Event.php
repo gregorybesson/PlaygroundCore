@@ -47,7 +47,7 @@ class Event
     protected $label;
     protected $value;
 
-    public function __construct ($category, $action, $label = null, $value = null)
+    public function __construct($category, $action, $label = null, $value = null)
     {
         $this->category = $category;
         $this->action   = $action;
@@ -55,42 +55,42 @@ class Event
         $this->value    = $value;
     }
 
-    public function getCategory ()
+    public function getCategory()
     {
         return $this->category;
     }
 
-    public function setCategory ($category)
+    public function setCategory($category)
     {
         $this->category = $category;
     }
 
-    public function getAction ()
+    public function getAction()
     {
         return $this->action;
     }
 
-    public function setAction ($action)
+    public function setAction($action)
     {
         $this->action = $action;
     }
 
-    public function getLabel ()
+    public function getLabel()
     {
         return $this->label;
     }
 
-    public function setLabel ($label)
+    public function setLabel($label)
     {
         $this->label = $label;
     }
 
-    public function getValue ()
+    public function getValue()
     {
         return $this->value;
     }
 
-    public function setValue ($value)
+    public function setValue($value)
     {
         $this->value = $value;
     }

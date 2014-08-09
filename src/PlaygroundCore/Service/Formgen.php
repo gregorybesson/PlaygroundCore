@@ -36,7 +36,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
      */
     protected $options;
 
-    public function insert($data) 
+    public function insert($data)
     {
         $formgen = new \PlaygroundCore\Entity\Formgen();
         $data = $this->getData($data);
@@ -47,7 +47,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         return $this->getFormgenMapper()->insert($formgen);
     }
 
-    public function update($formgen, $data) 
+    public function update($formgen, $data)
     {
         $data = $this->getData($data);
         $formgen->setTitle($data['title']);
@@ -60,7 +60,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         return $this->getFormgenMapper()->update($formgen);
     }
 
-    private function getData($data) {
+    private function getData($data)
+    {
         $title = '';
         $description = '';
         if ($data['form_jsonified']) {
@@ -85,7 +86,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         $return['active'] = true;
         return $return;
     }
-    
+
 
     public function render($formPV, $id)
     {
@@ -121,7 +122,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     )
                 );
 
-      
+
                 $form->add($element);
 
                 $options = array();
@@ -366,7 +367,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     $values[] = $value->label;
                 }
                 $element->setValueOptions($values);
-                $form->add($element);                
+                $form->add($element);
             }
 
 
@@ -403,7 +404,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     $values[] = $value->dropdown_label;
                 }
                 $element->setValueOptions($values);
-                $form->add($element);                
+                $form->add($element);
             }
 
 
@@ -447,7 +448,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     public function setFormgenMapper($formgenMapper)
     {
         $this->formgenMapper = $formgenMapper;
-        
+
         return $this;
     }
 

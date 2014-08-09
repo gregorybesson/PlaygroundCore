@@ -53,12 +53,12 @@ class ElfinderController extends AbstractActionController
         if(isset($this->Config['QuRoots'])){
             $root = $this->Config['QuRoots'];
         }
-        
+
         $opts = array(
             'debug' => false,
             'roots' => array($root)
         );
-        
+
         $connector = new \elFinderConnector(new \elFinder($opts));
         $connector->run();
 

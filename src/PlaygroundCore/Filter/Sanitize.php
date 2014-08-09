@@ -52,8 +52,8 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @var array
      */
     protected $_wordDelimiters = array(' ', '.', '\\', '/', '-', '_');
-    
-    
+
+
     /**
      * Which characters are not replaced
      *
@@ -66,21 +66,21 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $delimiterReplacement
      * @param string|array $wordDelimiters
      */
-    public function __construct ($delimiterReplacement = '-', $wordDelimiters = null)
+    public function __construct($delimiterReplacement = '-', $wordDelimiters = null)
     {
         $this->setDelimiterReplacement($delimiterReplacement);
         if (null !== $wordDelimiters) {
             $this->addWordDelimiter($wordDelimiters);
         }
     }
-	
-	public function filter ($s)
+
+    public function filter($s)
     {
-		$filename = pathinfo($s, PATHINFO_FILENAME);
-    	$extension = pathinfo($s, PATHINFO_EXTENSION);
-		return $this->filterSubstring($filename).( $extension  ? '.'.$this->filterSubstring($extension) : '' );
-	}
-	
+        $filename = pathinfo($s, PATHINFO_FILENAME);
+        $extension = pathinfo($s, PATHINFO_EXTENSION);
+        return $this->filterSubstring($filename).( $extension  ? '.'.$this->filterSubstring($extension) : '' );
+    }
+
     /**
      * Defined by Zend_Filter_Interface
      *
@@ -123,24 +123,24 @@ class Sanitize implements \Zend\Filter\FilterInterface
         }
         return $this;
     }
-    
+
     /**
      * returns chars which are not replaced
      *
      * @return array
      */
-    public function getNotReplacedChars ()
+    public function getNotReplacedChars()
     {
         return $this->_notReplacedChars;
     }
-    
-	/**
+
+    /**
      * Remove not replaced character
      *
      * @param string|array $notReplaced
      * @return Zend_Filter_Sanitize
      */
-    public function removeNotReplacedChar ($notReplaced)
+    public function removeNotReplacedChar($notReplaced)
     {
         if (empty($notReplaced)) {
             throw new Exception('Not replaced character cannot be null.');
@@ -163,13 +163,13 @@ class Sanitize implements \Zend\Filter\FilterInterface
         }
         return $this;
     }
-    
+
     /**
      * Returns the delimiterReplacement option
      *
      * @return string
      */
-    public function getDelimiterReplacement ()
+    public function getDelimiterReplacement()
     {
         return $this->_delimiterReplacement;
     }
@@ -180,7 +180,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param  string $delimiterReplacement
      * @return Zend_Filter_Sanitize Provides a fluent interface
      */
-    public function setDelimiterReplacement ($delimiterReplacement)
+    public function setDelimiterReplacement($delimiterReplacement)
     {
         $this->_delimiterReplacement = $delimiterReplacement;
         return $this;
@@ -191,7 +191,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      *
      * @return array
      */
-    public function getWordDelimiters ()
+    public function getWordDelimiters()
     {
         return $this->_wordDelimiters;
     }
@@ -202,7 +202,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string|array $delimiter
      * @return Zend_Filter_Sanitize
      */
-    public function addWordDelimiter ($delimiter)
+    public function addWordDelimiter($delimiter)
     {
         if (in_array($delimiter, $this->getWordDelimiters())) {
             throw new Exception("Word delimiter '$delimiter' is already there.");
@@ -224,7 +224,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string|array $delimiter
      * @return Zend_Filter_Sanitize
      */
-    public function removeWordDelimiter ($delimiter)
+    public function removeWordDelimiter($delimiter)
     {
         if (empty($delimiter)) {
             throw new Exception('Word delimiter cannot be null.');
@@ -254,7 +254,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _trimString ($s)
+    private function _trimString($s)
     {
         $trimFilter = new \Zend\Filter\StringTrim();
         return $trimFilter->filter($s);
@@ -266,7 +266,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _replaceDelimiters ($s)
+    private function _replaceDelimiters($s)
     {
         foreach ($this->getWordDelimiters() as $delimiter) {
             if ($delimiter == $this->getDelimiterReplacement()) {
@@ -275,7 +275,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
             if (in_array($delimiter, $this->getNotReplacedChars())) {
                 continue;
             }
-            
+
             $s = str_replace($delimiter, $this->getDelimiterReplacement(), $s);
         }
         return $s;
@@ -287,9 +287,9 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _convertToAscii ($s)
+    private function _convertToAscii($s)
     {
-        
+
         $f = new \PlaygroundCore\Filter\Transliteration;
         return $f->filter($s);
     }
@@ -300,7 +300,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _toLowerChars ($s)
+    private function _toLowerChars($s)
     {
         $lowerFilter = new \Zend\Filter\StringToLower;
         $lowerFilter->setEncoding('utf-8');
@@ -313,7 +313,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _trimSpecialsChars ($s)
+    private function _trimSpecialsChars($s)
     {
         if (count($this->getNotReplacedChars()) == 0) {
             $reg = '~[^-a-z0-9_]+~';
@@ -329,7 +329,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _replaceDoubleDelimiterReplacementWithSingle ($s)
+    private function _replaceDoubleDelimiterReplacementWithSingle($s)
     {
         $doubleDelimiterReplacement = $this->getDelimiterReplacement() . $this->getDelimiterReplacement();
         while (strpos($s, $doubleDelimiterReplacement) !== false) {
@@ -344,9 +344,8 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _trimStartAndEndSpaceReplacement ($s)
+    private function _trimStartAndEndSpaceReplacement($s)
     {
         return trim($s, $this->getDelimiterReplacement());
     }
 }
-

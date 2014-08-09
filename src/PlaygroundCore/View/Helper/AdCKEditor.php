@@ -46,14 +46,14 @@ class AdCKEditor extends AbstractHelper
         /*
          * General module configurations
          */
-        if(isset($this->Config['BasePath']))	$CKEditor->basePath 			= $this->Config['BasePath'].'/';
-        if(isset($this->Config['Toolbar']))		$CKEditor->config['toolbar']    = $this->Config['Toolbar'];
+        if(isset($this->Config['BasePath']))    $CKEditor->basePath            = $this->Config['BasePath'].'/';
+        if(isset($this->Config['Toolbar']))        $CKEditor->config['toolbar']    = $this->Config['Toolbar'];
         if(isset($this->Config['Width']))       $CKEditor->config['width']      = $this->Config['Width'];
         if(isset($this->Config['Height']))      $CKEditor->config['height']     = $this->Config['Height'];
         if(isset($this->Config['Language']))    $CKEditor->config['language']   = $this->Config['Language'];
         if(isset($this->Config['Color']))       $CKEditor->config['uiColor']    = $this->Config['Color'];
         if(isset($this->Config['stylesSet']))   $CKEditor->config['stylesSet']  = $this->Config['stylesSet'];
-		if(isset($this->Config['contentsCss'])) $CKEditor->config['contentsCss']= $this->Config['contentsCss'];
+        if(isset($this->Config['contentsCss'])) $CKEditor->config['contentsCss']= $this->Config['contentsCss'];
         if(isset($this->Config['templates_files']))   $CKEditor->config['templates_files']  = $this->Config['templates_files'];
 
         // El Finder
@@ -64,7 +64,7 @@ class AdCKEditor extends AbstractHelper
         /*
          * special confirmations in your form
          */
-        if(isset($options['BasePath']))	 $CKEditor->basePath		    = $options['BasePath'].'/';
+        if(isset($options['BasePath']))     $CKEditor->basePath            = $options['BasePath'].'/';
         if(isset($options['Toolbar']))   $CKEditor->config['toolbar']   = $options['Toolbar'];
         if(isset($options['toolbar']))   $CKEditor->config['toolbar']   = $options['toolbar'];
         if(isset($options['Width']))     $CKEditor->config['width']     = $options['Width'];

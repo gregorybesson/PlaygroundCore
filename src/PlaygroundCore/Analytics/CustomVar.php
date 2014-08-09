@@ -2,7 +2,7 @@
 /**
  * @package     PlaygroundCore
  */
- 
+
 namespace PlaygroundCore\Analytics;
 
 class CustomVar
@@ -12,53 +12,53 @@ class CustomVar
     protected $value;
     protected $optScope;
 
-    public function __construct ($id, $name, $value, $optScope = null)
+    public function __construct($id, $name, $value, $optScope = null)
     {
         $this->setId($id);
         $this->setName($name);
         $this->setValue($value);
-		
-		if (null !== $optScope) {
+
+        if (null !== $optScope) {
             $this->setOptScope($optScope);
         }
     }
 
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
 
-    public function setId ($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
 
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
 
-    public function getValue ()
+    public function getValue()
     {
         return $this->value;
     }
 
-    public function setValue ($value)
+    public function setValue($value)
     {
         $this->value = $value;
     }
 
-    public function getOptScope ()
+    public function getOptScope()
     {
         return $this->optScope;
     }
 
-    public function setOptScope ($optScope)
+    public function setOptScope($optScope)
     {
         $this->optScope = $optScope;
     }

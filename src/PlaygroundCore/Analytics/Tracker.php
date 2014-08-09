@@ -62,59 +62,59 @@ class Tracker
     protected $enableTracking = true;
 
     protected $enablePageTracking = true;
-	protected $enabledPageLoadTime = true;
+    protected $enabledPageLoadTime = true;
 
     protected $allowLinker = false;
-	protected $allowHash = false;
+    protected $allowHash = false;
     protected $domainName;
 
     protected $anonymizeIp = false;
 
     protected $events;
     protected $transactions;
-	protected $customVars;
+    protected $customVars;
 
-    public function __construct ($id)
+    public function __construct($id)
     {
         $this->setId($id);
     }
 
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
 
-    public function setId ($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
 
-    public function enabled ()
+    public function enabled()
     {
         return $this->enableTracking;
     }
 
-    public function setEnableTracking ($enable_tracking = true)
+    public function setEnableTracking($enable_tracking = true)
     {
         $this->enableTracking = (bool) $enable_tracking;
     }
 
-    public function enabledPageTracking ()
+    public function enabledPageTracking()
     {
         return $this->enablePageTracking;
     }
 
-    public function setEnablePageTracking ($enable_page_tracking = true)
+    public function setEnablePageTracking($enable_page_tracking = true)
     {
         $this->enablePageTracking = (bool) $enable_page_tracking;
     }
-	
-	public function enabledPageLoadTime ()
+
+    public function enabledPageLoadTime()
     {
         return $this->enabledPageLoadTime;
     }
 
-    public function setEnabledPageLoadTime ($enable_page_load_time = true)
+    public function setEnabledPageLoadTime($enable_page_load_time = true)
     {
         $this->enabledPageLoadTime = (bool) $enable_page_load_time;
     }
@@ -128,8 +128,8 @@ class Tracker
     {
         return $this->allowLinker;
     }
-	
-	public function setAllowHash($allow_hash)
+
+    public function setAllowHash($allow_hash)
     {
         $this->allowHash = (bool) $allow_hash;
     }
@@ -167,12 +167,12 @@ class Tracker
         $this->anonymizeIp = (bool) $flag;
     }
 
-    public function events ()
+    public function events()
     {
         return $this->events;
     }
 
-    public function addEvent (Event $event)
+    public function addEvent(Event $event)
     {
         if (null === $this->events) {
             $this->events = array();
@@ -181,12 +181,12 @@ class Tracker
         $this->events[] = $event;
     }
 
-    public function transactions ()
+    public function transactions()
     {
         return $this->transactions;
     }
 
-    public function addTransaction (Transaction $transaction)
+    public function addTransaction(Transaction $transaction)
     {
         if (null === $this->transactions) {
             $this->transactions = array();
@@ -202,18 +202,18 @@ class Tracker
 
         $this->transactions[$id] = $transaction;
     }
-	
-	public function customVars ()
+
+    public function customVars()
     {
         return $this->customVars;
     }
-	
-	public function addCustomVar (CustomVar $customVar)
+
+    public function addCustomVar(CustomVar $customVar)
     {
         if (null === $this->customVars) {
             $this->customVars = array();
         }
-		
-		$this->customVars[] = $customVar;
+
+        $this->customVars[] = $customVar;
     }
 }

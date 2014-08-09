@@ -534,7 +534,7 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
             } else {
                 $to = $arg[1];
             }
-            
+
         }
         //handle regular token
         else {

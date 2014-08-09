@@ -27,7 +27,7 @@ class Formgen implements InputFilterAwareInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * title
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -39,13 +39,13 @@ class Formgen implements InputFilterAwareInterface
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     protected $description;
-    
+
     /**
      * formjsonified
      * @ORM\Column(type="text", nullable=false)
      */
     protected $formjsonified;
-    
+
     /**
      * formtemplate
      * @ORM\Column(type="text", nullable=false)
@@ -104,7 +104,7 @@ class Formgen implements InputFilterAwareInterface
     {
         $this->updated_at = new \DateTime("now");
     }
-    
+
     /**
      * @return string $title
      */
@@ -112,7 +112,7 @@ class Formgen implements InputFilterAwareInterface
     {
         return $this->title;
     }
-    
+
     /**
      * @param string $title
      * @return Formgen
@@ -120,10 +120,10 @@ class Formgen implements InputFilterAwareInterface
     public function setTitle($title)
     {
         $this->title = (string) $title;
-    
+
         return $this;
     }
-    
+
     /**
      * @return string $description
      */
@@ -131,7 +131,7 @@ class Formgen implements InputFilterAwareInterface
     {
         return $this->description;
     }
-    
+
     /**
      * @param string $description
      * @return Formgen
@@ -139,7 +139,7 @@ class Formgen implements InputFilterAwareInterface
     public function setDescription($description)
     {
         $this->description = (string) $description;
-    
+
         return $this;
     }
 
@@ -150,7 +150,7 @@ class Formgen implements InputFilterAwareInterface
     {
         return $this->formjsonified;
     }
-    
+
     /**
      * @param string $formjsonified
      * @return Formgen
@@ -158,7 +158,7 @@ class Formgen implements InputFilterAwareInterface
     public function setFormjsonified($formjsonified)
     {
         $this->formjsonified = $formjsonified;
-    
+
         return $this;
     }
 
@@ -169,7 +169,7 @@ class Formgen implements InputFilterAwareInterface
     {
         return $this->formtemplate;
     }
-    
+
     /**
      * @param string $formtemplate
      * @return Formgen
@@ -177,7 +177,7 @@ class Formgen implements InputFilterAwareInterface
     public function setFormTemplate($formtemplate)
     {
         $this->formtemplate = $formtemplate;
-    
+
         return $this;
     }
 
@@ -188,7 +188,7 @@ class Formgen implements InputFilterAwareInterface
     {
         return $this->active;
     }
-    
+
     /**
      * @param string $active
      * @return Formgen
@@ -196,7 +196,7 @@ class Formgen implements InputFilterAwareInterface
     public function setActive($active)
     {
         $this->active = $active;
-    
+
         return $this;
     }
 

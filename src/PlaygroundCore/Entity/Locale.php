@@ -26,7 +26,7 @@ class Locale implements InputFilterAwareInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * name
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -91,43 +91,43 @@ class Locale implements InputFilterAwareInterface
     {
         $this->updated_at = new \DateTime("now");
     }
-    
+
     /**
      * @return string $name
      */
     public function getName()
     {
-    	return $this->name;
+        return $this->name;
     }
-    
+
     /**
      * @param string $name
      * @return Locale
      */
     public function setName($name)
     {
-    	$this->name = (string) $name;
-    
-    	return $this;
+        $this->name = (string) $name;
+
+        return $this;
     }
-    
+
     /**
      * @return string $locale
      */
     public function getLocale()
     {
-    	return $this->locale;
+        return $this->locale;
     }
-    
+
     /**
      * @param string $locale
      * @return Locale
      */
     public function setLocale($locale)
     {
-    	$this->locale = (string) $locale;
-    
-    	return $this;
+        $this->locale = (string) $locale;
+
+        return $this;
     }
 
 
@@ -208,7 +208,7 @@ class Locale implements InputFilterAwareInterface
     public function getFlag()
     {
         $flags = explode('_', $this->getLocale());
-        
+
         if(empty($flags[1])) {
             return '';
         }
@@ -223,11 +223,11 @@ class Locale implements InputFilterAwareInterface
      */
     public function populate($data = array())
     {
-    	if (isset($data['name']) && $data['name'] != null) {
+        if (isset($data['name']) && $data['name'] != null) {
             $this->name = $data['name'];
         }
         if (isset($data['locale']) && $data['locale'] != null) {
-        	$this->locale = $data['locale'];
+            $this->locale = $data['locale'];
         }
     }
 

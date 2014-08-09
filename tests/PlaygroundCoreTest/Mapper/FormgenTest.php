@@ -176,13 +176,13 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
     public function testRemove()
     {
         $self = $this;
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
             $formgen = new FormgenEntity();
             $formgen->setTitle('Titre de test');
             $formgen->setDescription('Description de test');
             $formgen->setFormjsonified('[{"dujsondetest"}]');
             $formgen->setFormtemplate('<li>test</li>');
-            $this->getFormgenMapper()->insert($formgen);
+            $self->getFormgenMapper()->insert($formgen);
         });
 
         $this->em->flush();
@@ -191,13 +191,13 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 1);
 
-        $this->em->transactional(function($em) {
+        $this->em->transactional(function($em) use ($self) {
             $formgen = new formgenEntity();
             $formgen->setTitle('Titre de test 2');
             $formgen->setDescription('Description de test 2');
             $formgen->setFormjsonified('[{"dujsondetest"}]');
             $formgen->setFormtemplate('<li>test</li>');
-            $this->getFormgenMapper()->insert($formgen);
+            $self->getFormgenMapper()->insert($formgen);
         });
 
         $this->em->flush();

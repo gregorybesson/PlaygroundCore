@@ -69,7 +69,7 @@ class FacebookOpengraph extends AbstractHelper
             ));
         }
 
-        $container->appendProperty('fb:app', $tracker->getId());
+        $container->appendName('fb:app', $tracker->getId());
 
         if (null !== ($tags = $tracker->tags())) {
             foreach ($tags as $tag) {

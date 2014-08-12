@@ -28,6 +28,36 @@ return array(
         'cookie_httponly' => true,
     ),
 
+    'bjyauthorize' => array(
+        'resource_providers' => array(
+            'BjyAuthorize\Provider\Resource\Config' => array(
+                'core'          => array(),
+            ),
+        ),
+    
+        'rule_providers' => array(
+            'BjyAuthorize\Provider\Rule\Config' => array(
+                'allow' => array(
+                    array(array('admin'), 'core',           array('dashboard', 'edit')),
+                ),
+            ),
+        ),
+    
+        'guards' => array(
+            'BjyAuthorize\Guard\Controller' => array(
+                // CRON / Console
+                array('controller' => 'AsseticBundle\Controller\Console',                       'roles' => array('guest', 'user')),
+                array('controller' => 'DoctrineModule\Controller\Cli',                          'roles' => array('guest', 'user')),
+                array('controller' => 'playgroundcore_console',                                 'roles' => array('guest', 'user')),
+    
+                // Admin area
+                array('controller' => 'PlaygroundCore\Controller\Formgen',                      'roles' => array('admin')),
+                array('controller' => 'elfinder',                                               'roles' => array('admin')),
+                array('controller' => 'DoctrineORMModule\Yuml\YumlController',                  'roles' => array('admin')),
+            ),
+        ),
+    ),
+    
     'assetic_configuration' => array(
         'modules' => array(
             'core_lib' => array(

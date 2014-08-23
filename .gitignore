@@ -5,3 +5,5 @@
 composer.phar
 /.buildpath
 /build
+/vendor
+/composer.lock

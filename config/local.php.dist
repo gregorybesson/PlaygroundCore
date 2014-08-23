@@ -1,18 +1,19 @@
 <?php
- 
-$dbParams = array(
-	'database'  => 'appcore',
-	'username'  => 'root',
-	'password'  => '',
-	'hostname'  => 'localhost',
-	'port'		=> '3306',
-	'charset'	=> 'utf8',
-	'driverOptions' => array(
-		1002 => 'SET NAMES utf8',
-	),
-);
 
 return array(
+	'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                'params' => array(
+                    'host'          => 'localhost',
+                    'port'          => '3306',
+                    'user'          => 'root',
+                    'password'      => 'root',
+                    'dbname'        => 'lahalle',
+                )
+            )
+        )
+    ),
 	// Assetic configuration
 	'assetic_configuration' => array(
 		'buildOnRequest' => true,
@@ -45,22 +46,5 @@ return array(
     'contact' => array( 'email' => 'contact1@test.com'),
     'rss' => array(
         'url' => 'http://www.metrofrance.com/rss.xml?c=1157379272-9',
-    ),
-    'doctrine' => array(
-        'connection' => array(
-            // default connection name
-            'orm_default' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
-                'params' => array(
-                    'host'     => $dbParams['hostname'],
-                    'port'     => $dbParams['port'],
-                    'user'     => $dbParams['username'],
-                    'password' => $dbParams['password'],
-                    'dbname'   => $dbParams['database'],
-                	'charset'  => $dbParams['charset'],
-                	'driverOptions' => $dbParams['driverOptions'],
-                )
-            )
-        ),
     ),
 );

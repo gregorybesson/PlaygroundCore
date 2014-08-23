@@ -19,6 +19,21 @@ return array(
                     'PlaygroundCore\Entity'  => 'playgroundcore_entity'
                 )
             )
+        ),
+        'connection' => array(
+            // default connection name
+            'orm_default' => array(
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => array(
+                    'host'          => '127.0.0.1',
+                    'port'          => '3306',
+                    'user'          => 'root',
+                    'password'      => 'root',
+                    'dbname'        => '',
+                    'charset'       => 'utf8',
+                    'driverOptions' => array(1002 => 'SET NAMES utf8'),
+                )
+            )
         )
     ),
 

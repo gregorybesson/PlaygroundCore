@@ -10,4 +10,8 @@ return array(
 			)
 		)
 	),
+    'playgroundcore' => array(
+        'bitlyUsername' => '',
+        'bitlyApiKey'   => '',
+    ),
 );

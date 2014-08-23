@@ -6,8 +6,8 @@ use Zend\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions
 {
-    protected $bitlyUsername = 'o_7t2s2bjmun';
-    protected $bitlyApiKey   = 'R_335290ffb3f5fc08b45d3e0e6678c3db';
+    protected $bitlyUsername = '';
+    protected $bitlyApiKey   = '';
     protected $bitlyUrl      = 'http://api.bit.ly/v3/shorten';
     protected $transport_class = 'Zend\Mail\Transport\File';
     protected $options_class   = 'Zend\Mail\Transport\FileOptions';

@@ -36,5 +36,10 @@
 		"psr-0" : {
 			"PlaygroundCore" : "src/"
 		}
-	}
+	},
+	"extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    }
 }

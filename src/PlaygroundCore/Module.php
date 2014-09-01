@@ -110,14 +110,6 @@ class Module implements
 
             $pluginOG = $view->get('facebookOpengraph');
             $pluginOG();
-
-            $viewModel         = $e->getViewModel();
-            $match             = $e->getRouteMatch();
-            $channel         = isset($match)? $match->getParam('channel', ''):'';
-            $viewModel->channel = $channel;
-            foreach($viewModel->getChildren() as $child){
-                $child->channel = $channel;
-            }
         });
 
 

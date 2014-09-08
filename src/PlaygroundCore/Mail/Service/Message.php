@@ -68,8 +68,6 @@ class Message implements ServiceManagerAwareInterface
 
         $renderer = $this->getRenderer();
 
-        $this->themeMapper = $this->getServiceManager()->get('playgrounddesign_theme_mapper');
-
         $content = $renderer->render($nameOrModel, $values);
         $html = new MimePart($content);
         $html->type = "text/html";

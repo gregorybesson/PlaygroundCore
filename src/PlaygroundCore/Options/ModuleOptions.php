@@ -12,6 +12,7 @@ class ModuleOptions extends AbstractOptions
     protected $transport_class = 'Zend\Mail\Transport\File';
     protected $options_class   = 'Zend\Mail\Transport\FileOptions';
     protected $options   = array('path' => 'data/mail/');
+    protected $twilio = array();
     protected $quConfig = array();
     protected $googleAnalytics = array('id' => '');
     protected $adServing = array();
@@ -118,7 +119,23 @@ class ModuleOptions extends AbstractOptions
         return $this;
     }
 
-    public function getOptions()
+    /**
+     * @return the $twilio
+     */
+    public function getTwilio()
+    {
+        return $this->twilio;
+    }
+
+	/**
+     * @param multitype: $twilio
+     */
+    public function setTwilio($twilio)
+    {
+        $this->twilio = $twilio;
+    }
+
+	public function getOptions()
     {
         return $this->options;
     }

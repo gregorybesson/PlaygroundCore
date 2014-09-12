@@ -65,14 +65,24 @@ class Message implements ServiceManagerAwareInterface
      */
     public function createHtmlMessage($from, $to, $subject, $nameOrModel, $values = array())
     {
+
         $renderer = $this->getRenderer();
+
         $content = $renderer->render($nameOrModel, $values);
-
-        $text = new MimePart('');
-        $text->type = "text/plain";
-
         $html = new MimePart($content);
         $html->type = "text/html";
+
+        $resolver = $this->getServiceManager()
+                         ->get('Zend\View\Resolver\TemplatePathStack');
+
+        // check if plain text email template exist
+        if($resolver->resolve($nameOrModel . '-plain')) {
+            $contentText = $renderer->render($nameOrModel . '-plain', $values);
+            $text = new MimePart($contentText);
+        }else {
+            $text = new MimePart('');
+        }
+        $text->type = "text/plain";
 
         $body = new MimeMessage();
         $body->setParts(array($text, $html));
@@ -160,6 +170,8 @@ class Message implements ServiceManagerAwareInterface
             ->setSubject($subject)
             ->setBody($body)
             ->setTo($to);
+
+        $message->getHeaders()->get('content-type')->setType('multipart/alternative');
 
         return $message;
     }

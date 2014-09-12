@@ -36,6 +36,19 @@ $settings = array(
             return 'Message_' . microtime(true) . '_' . mt_rand() . '.txt';
         },
     ),
+    
+    'twilio' => array(
+        /**
+         * The SID to for your Twilio account.
+         */
+        'sid' => '',
+
+        /**
+         * The token for your Twilio account.
+         */
+        'token' => '',
+
+    ),
 
     'ckeditor' => array(
         'BasePath' =>'zfcadmin/js/lib/ckeditor',

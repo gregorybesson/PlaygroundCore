@@ -216,6 +216,7 @@ class Module implements
                     'playgroundcore_doctrine_em' => 'doctrine.entitymanager.orm_default',
                     'google-analytics'           => 'PlaygroundCore\Analytics\Tracker',
                     'facebook-opengraph'         => 'PlaygroundCore\Opengraph\Tracker',
+                    'twilio'                     => 'playgroundcore_twilio'
                 ),
 
                 'shared' => array(
@@ -247,15 +248,11 @@ class Module implements
                         return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
-                    'playgroundcore_formgen_mapper' => function ($sm) {
-
-                        return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
-                    },
-
                     'playgroundcore_locale_mapper' => function ($sm) {
                         return new Mapper\Locale($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
+                    'playgroundcore_twilio' => 'PlaygroundCore\Service\Factory\TwilioServiceFactory',
                     'playgroundcore_transport' => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
                     'PlaygroundCore\Analytics\Tracker' => function ($sm) {
                         $config = $sm->get('config');

@@ -6,6 +6,8 @@ PlaygroundCore
 This library contains the following features :
 
 - Google Analytics : Tagging Google Analytics (fork of Jurian Sluiman project : https://github.com/juriansluiman/SlmGoogleAnalytics)
+- Facebook Tags
+- Twilio
 - CKEditor : Wysiwyg editor (fork of https://github.com/Celtico/QuCKEditor from Celtico)
 - ELFinder : Added to CKEditor to manage assets on server. (fork of https://github.com/Celtico/QuElFinder).
 - Cron : Cron Engine (fork of https://github.com/heartsentwined/zf2-cron with deep refactoring so that it's now based on ZF2 events)

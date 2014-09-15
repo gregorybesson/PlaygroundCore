@@ -75,20 +75,15 @@ return array(
     
     'assetic_configuration' => array(
         'modules' => array(
-            'core_lib' => array(
-                # module root path for your css and js files
-                'root_path' => array(
-                    __DIR__ . '/../view/images',
-                ),
-                # collection of assets
+            'lib' => array(
                 'collections' => array(    
-                    'flags' => array(
+                    'core_flags' => array(
                         'assets' => array(
-                            'flag/*.png',
+                            __DIR__ . '/../view/images/flag/*.png',
                         ),
                         'options' => array(
                             'move_raw' => true,
-                            'output' => 'lib/images',
+                            'output' => 'lib/images/flag',
                         )
                     ),
                 ),

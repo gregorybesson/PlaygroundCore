@@ -22,9 +22,9 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     protected $formgenMapper;
 
      /**
-     * @var websiteService
+     * @var localeService
      */
-    protected $websiteService;
+    protected $localeService;
 
     /**
      * @var ServiceManager
@@ -41,8 +41,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         $formgen = new \PlaygroundCore\Entity\Formgen();
         $data = $this->getData($data);
         $formgen->populate($data);
-        if (!empty($data['website'])) {
-            $formgen->setWebsite($this->getWebsiteService()->getWebsiteMapper()->findById($data['website']));
+        if (!empty($data['locale'])) {
+            $formgen->setLocale($this->getLocaleService()->getLocaleMapper()->findById($data['locale']));
         }
         return $this->getFormgenMapper()->insert($formgen);
     }
@@ -54,8 +54,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         $formgen->setDescription($data['description']);
         $formgen->setFormjsonified($data['formjsonified']);
         $formgen->setFormTemplate($data['formtemplate']);
-        if (!empty($data['website'])) {
-            $formgen->setWebsite($this->getWebsiteService()->getWebsiteMapper()->findById($data['website']));
+        if (!empty($data['locale'])) {
+            $formgen->setLocale($this->getLocaleService()->getLocaleMapper()->findById($data['locale']));
         }
         return $this->getFormgenMapper()->update($formgen);
     }
@@ -64,7 +64,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     {
         $title = '';
         $description = '';
-        if ($data['form_jsonified']) {
+        if (isset($data['form_jsonified']) && $data['form_jsonified']) {
             $jsonTmp = str_replace('\\', '_', $data['form_jsonified']);
             $jsonPV = json_decode($jsonTmp);
             foreach ($jsonPV as $element) {
@@ -72,7 +72,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     $attributes = $element->form_properties[0];
                     $title = $attributes->title;
                     $description = $attributes->description;
-                    $website = $attributes->website;
+                    $locale = $attributes->locale;
                     break;
                 }
             }
@@ -80,9 +80,9 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         $return = array();
         $return['title'] = $title;
         $return['description'] = $description;
-        $return['website'] = $website;
-        $return['formjsonified'] = $data['form_jsonified'];
-        $return['formtemplate'] = $data['form_template'];
+        $return['locale'] = isset($locale) ? $locale : null;
+        $return['formjsonified'] = isset($data['form_jsonified']) ? $data['form_jsonified'] : null;
+        $return['formtemplate'] = isset($data['form_template']) ? $data['form_template'] : null;
         $return['active'] = true;
         return $return;
     }
@@ -430,13 +430,13 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     }
 
 
-    public function getWebsiteService()
+    public function getLocaleService()
     {
-        if (null === $this->websiteService) {
-            $this->websiteService = $this->getServiceManager()->get('playgroundcore_website_service');
+        if (null === $this->localeService) {
+            $this->localeService = $this->getServiceManager()->get('playgroundcore_locale_service');
         }
 
-        return $this->websiteService;
+        return $this->localeService;
     }
 
     /**

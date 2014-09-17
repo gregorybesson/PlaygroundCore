@@ -274,13 +274,6 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $service->setServiceManager(Bootstrap::getServiceManager());
         $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Mapper\Formgen");
     }
-
-    public function testGetWebsiteService()
-    {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
-        $this->assertEquals(get_class($service->getWebsiteService()), "PlaygroundCore\Service\Website");
-    }
     
 
     public function testSetOptions()

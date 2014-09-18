@@ -47,9 +47,9 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $service->setFormgenMapper($mapper);
 
         $formgenDataFromForm = $this->formgenData;
-        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","website":"","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
+        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","locale":"","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
         $formgenDataFromForm['form_template'] = $this->formgenData['formtemplate'];
-        $formgenDataFromForm['website'] = null;
+        $formgenDataFromForm['locale'] = null;
         $formgen = $service->insert($formgenDataFromForm);
 
         $this->assertEquals($this->formgenData['title'], $formgen->getTitle());
@@ -76,9 +76,9 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $service->setFormgenMapper($mapper);
 
         $formgenDataFromForm = $this->formgenData;
-        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","website":"1","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
+        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","locale":"1","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
         $formgenDataFromForm['form_template'] = $this->formgenData['formtemplate'];
-        $formgenDataFromForm['website'] = null;
+        $formgenDataFromForm['locale'] = null;
         $formgen = $service->update($formgenPostUpdate, $formgenDataFromForm);
 
         $this->assertEquals("Titre du formulaire", $formgen->getTitle());
@@ -274,15 +274,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $service->setServiceManager(Bootstrap::getServiceManager());
         $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Mapper\Formgen");
     }
-
-    public function testGetWebsiteService()
-    {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
-        $this->assertEquals(get_class($service->getWebsiteService()), "PlaygroundCore\Service\Website");
-    }
     
-
     public function testSetOptions()
     {
         $service = new \PlaygroundCore\Service\Formgen();

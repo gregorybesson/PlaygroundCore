@@ -53,9 +53,9 @@ class Formgen implements InputFilterAwareInterface
     protected $formtemplate;
 
      /**
-     * @ORM\ManyToOne(targetEntity="PlaygroundCore\Entity\Website", inversedBy="statistique")
+     * @ORM\ManyToOne(targetEntity="PlaygroundCore\Entity\Locale", inversedBy="locale")
      */
-    protected $website;
+    protected $locale;
 
      /**
      * active
@@ -75,7 +75,7 @@ class Formgen implements InputFilterAwareInterface
 
     /**
      * @param string $id
-     * @return Website
+     * @return Locale
      */
     public function setId($id)
     {
@@ -236,9 +236,9 @@ class Formgen implements InputFilterAwareInterface
         return $this;
     }
 
-    public function setWebsite($website)
+    public function setLocale($locale)
     {
-        $this->website = $website;
+        $this->locale = $locale;
 
         return $this;
     }
@@ -246,9 +246,9 @@ class Formgen implements InputFilterAwareInterface
     /**
      * @return datetime $updated_at
      */
-    public function getWebsite()
+    public function getLocale()
     {
-        return $this->website;
+        return $this->locale;
     }
     /**
      * Populate from an array.

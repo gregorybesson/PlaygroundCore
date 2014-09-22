@@ -18,6 +18,7 @@ class ModuleOptions extends AbstractOptions
     protected $adServing = array();
     protected $defaultShareMessage = 'Venez jouer';
     protected $facebookOpengraph = array('appId' => '');
+    protected $twitterCard = array();
     protected $locale = null;
 
 
@@ -68,6 +69,17 @@ class ModuleOptions extends AbstractOptions
     {
         $this->facebookOpengraph = $facebookOpengraph;
 
+        return $this;
+    }
+    
+    public function getTwitterCard()
+    {
+        return $this->twitterCard;
+    }
+    
+    public function setTwitterCard($twitterCard)
+    {
+        $this->twitterCard = $twitterCard;
         return $this;
     }
 

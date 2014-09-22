@@ -110,6 +110,9 @@ class Module implements
 
             $pluginOG = $view->get('facebookOpengraph');
             $pluginOG();
+            
+            $pluginTC = $view->get('twitterCard');
+            $pluginTC();
         });
 
 
@@ -173,11 +176,11 @@ class Module implements
                 },
 
                 'googleAnalytics' => function ($sm) {
-                $tracker = $sm->getServiceLocator()->get('google-analytics');
-
-                $helper  = new View\Helper\GoogleAnalytics($tracker, $sm->getServiceLocator()->get('Request'));
-
-                return $helper;
+                    $tracker = $sm->getServiceLocator()->get('google-analytics');
+    
+                    $helper  = new View\Helper\GoogleAnalytics($tracker, $sm->getServiceLocator()->get('Request'));
+    
+                    return $helper;
                 },
 
                 'facebookOpengraph' => function ($sm) {
@@ -187,8 +190,17 @@ class Module implements
 
                     return $helper;
                 },
+                
+                'twitterCard' => function($sm) {
+                    $viewHelper = new View\Helper\TwitterCard();
+                    $viewHelper->setTranslator($sm->getServiceLocator()->get('translator'));
+                    $viewHelper->setRouteMatch($sm->getServiceLocator()->get('Application')->getMvcEvent()->getRouteMatch());
+                    $viewHelper->setConfig($sm->getServiceLocator()->get('twitter-card'));
+                    $viewHelper->setRequest($sm->getServiceLocator()->get('Request'));
+                    return $viewHelper;
+                },
 
-                 'switchLocaleWidget' => function ($sm) {
+                'switchLocaleWidget' => function ($sm) {
                     $viewHelper = new View\Helper\SwitchLocaleWidget();
                     $viewHelper->setLocaleService($sm->getServiceLocator()->get('playgroundcore_locale_service'));
                     $viewHelper->setWebsiteService($sm->getServiceLocator()->get('playgroundcore_website_service'));
@@ -208,6 +220,7 @@ class Module implements
                     'playgroundcore_doctrine_em' => 'doctrine.entitymanager.orm_default',
                     'google-analytics'           => 'PlaygroundCore\Analytics\Tracker',
                     'facebook-opengraph'         => 'PlaygroundCore\Opengraph\Tracker',
+                    'twitter-card'               => 'PlaygroundCore\TwitterCard\Config',
                     'twilio'                     => 'playgroundcore_twilio'
                 ),
 
@@ -295,6 +308,11 @@ class Module implements
                         }
 
                         return $tracker;
+                    },
+                    'PlaygroundCore\TwitterCard\Config' => function ($sm) {
+                        $config = $sm->get('config');
+                        $config = isset($config['playgroundcore']['twitterCard']) ? $config['playgroundcore']['twitterCard'] : array();
+                        return new TwitterCard\Config($config);
                     },
                 ),
         );

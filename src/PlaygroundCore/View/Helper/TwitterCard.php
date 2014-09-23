@@ -7,17 +7,7 @@ use Zend\View\Helper\HeadMeta;
 
 class TwitterCard extends AbstractHelper
 {
-    
-    /**
-     * @var \Zend\Mvc\I18n\Translator
-     */
-    protected $translator;
-    
-    /**
-     * @var \Zend\Mvc\Router\Http\RouteMatch
-     */
-    protected $routeMatch;
-    
+
     /**
      * @var \Zend\View\Helper\HeadMeta
      */
@@ -78,70 +68,12 @@ class TwitterCard extends AbstractHelper
         
         $this->pluginContainer = $container;
         
-        if (!$this->routeMatch) {
-            return;
+        foreach ($config->getTags() as $key => $value) {
+            $container->appendProperty($key, $value);
         }
-        
-        $name = $this->routeMatch->getMatchedRouteName();
-        $this->addPropertyIfTranslated('twitter:card', 'Twitter Card');
-        $this->addPropertyIfTranslated('twitter:site', 'Twitter Site');
-        $this->addPropertyIfTranslated('twitter:title', 'Twitter ' . $name . ' Title');
-        $this->addPropertyIfTranslated('twitter:description', 'Twitter ' . $name . ' Description');
-        $this->addPropertyIfTranslated('twitter:image:src', 'Twitter ' . $name . ' Image Src');
         
         // Mark this tag as rendered
         $this->rendered = true;
-    }
-    
-    /**
-     * @param string $key
-     * @param string $string
-     * @param boolean $canUseDefault
-     * @return \PlaygroundCore\View\Helper\TwitterCard
-     */
-    private function addPropertyIfTranslated($key, $string, $canUseDefault = true)
-    {
-        $value = $this->getTranslationIfExists($string);
-        if (!$value || $value == $string || $value == ' ') {
-            // get default insteed of translated if exists / alowed
-            if ($canUseDefault && ($default = $this->config->getDefault($key))) {
-                $value = $this->translator->translate($default);
-            } else {
-                return $this;
-            }
-        }
-        $this->pluginContainer->appendProperty($key, $value);
-        return $this;
-    }
-    
-    /**
-     * return the translated string if exists, false otherwise
-     * @param string $string
-     * @return string|false
-     */
-    private function getTranslationIfExists($string)
-    {
-        $translated = $this->translator->translate($string);
-        if ($translated == $string || $translated == " ") {
-            return false; // not translated ?
-        }
-        return $translated;
-    }
-    
-    /**
-     * @param \Zend\Mvc\I18n\Translator $translator
-     */
-    public function setTranslator($translator)
-    {
-        $this->translator = $translator;
-    }
-    
-    /**
-     * @param \Zend\Mvc\Router\Http\RouteMatch $routeMatch
-     */
-    public function setRouteMatch($routeMatch)
-    {
-        $this->routeMatch = $routeMatch;
     }
     
     /**

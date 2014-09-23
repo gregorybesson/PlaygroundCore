@@ -193,8 +193,6 @@ class Module implements
                 
                 'twitterCard' => function($sm) {
                     $viewHelper = new View\Helper\TwitterCard();
-                    $viewHelper->setTranslator($sm->getServiceLocator()->get('translator'));
-                    $viewHelper->setRouteMatch($sm->getServiceLocator()->get('Application')->getMvcEvent()->getRouteMatch());
                     $viewHelper->setConfig($sm->getServiceLocator()->get('twitter-card'));
                     $viewHelper->setRequest($sm->getServiceLocator()->get('Request'));
                     return $viewHelper;

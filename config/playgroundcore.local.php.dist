@@ -18,6 +18,18 @@ $settings = array(
         'cat3' => ''
     ),
     
+    'twitterCard' => array(
+        'enable'     => false, // can be enable for a specific page
+        'useDefault' => true, // use defaults tag below if a tag is not set
+        'default'    => array(
+            'twitter:site'          => 'Site Playground',
+            'twitter:card'          => 'summary_large_image',
+            'twitter:title'         => 'Title Playground',
+            'twitter:description'   => 'Description Playground',
+            'twitter:image:src'     => '',
+        ),
+    ),
+    
     /**
     * Social messages
     */

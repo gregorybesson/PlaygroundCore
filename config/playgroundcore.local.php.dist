@@ -19,8 +19,8 @@ $settings = array(
     ),
     
     'twitterCard' => array(
-        'enable'     => false,
-        'useDefault' => true,
+        'enable'     => false, // can be enable for a specific page
+        'useDefault' => true, // use defaults tag below if a tag is not set
         'default'    => array(
             'twitter:site'          => 'Site Playground',
             'twitter:card'          => 'summary_large_image',

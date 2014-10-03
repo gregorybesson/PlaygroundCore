@@ -234,6 +234,7 @@ class Module implements
                     'playgroundcore_website_service'     => 'PlaygroundCore\Service\Website',
                     'playgroundcore_locale_service'      => 'PlaygroundCore\Service\Locale',
                     'playgroundcore_formgen_service'     => 'PlaygroundCore\Service\Formgen',
+                    'playgroundcore_image_service'       => 'PlaygroundCore\Service\Image',
                 ),
                 'factories' => array(
                     'playgroundcore_module_options' => function ($sm) {

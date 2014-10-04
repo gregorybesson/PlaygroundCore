@@ -57,7 +57,9 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
      */
     public function canCorrectOrientation()
     {
-        return function_exists('exif_read_data');
+        return function_exists('exif_read_data')
+                && (substr($this->file, -strlen('.jpg')) === '.jpg'
+                    || substr($this->file, -strlen('.jpeg')) === '.jpeg');
     }
     
     /**

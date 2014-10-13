@@ -114,6 +114,15 @@ $settings = array(
         'domain_name'   => '',
         'allow_linker' => false,
     ),
+    
+    'facebookOpengraph' => array(
+        'enable' => true,
+        'appId'  => '118474821657382',
+        'tags'   => array(
+            'og:site_name'  => 'Site Playground',
+            'og:type'       => 'game',
+        ),
+    ),
 );
  
 $zenddevelopertools = array(

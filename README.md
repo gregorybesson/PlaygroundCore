@@ -15,5 +15,6 @@ This library contains the following features :
 - MailService : Templating mails.
 - Slugify : Transform text into slug (useful for creating url)
 - Core layout : The base for creating the structure layout of a website.
+- FFMpeg : Based on PHP-FFMpeg (https://github.com/PHP-FFMpeg/PHP-FFMpeg).
 
 Each feature is explained in the wiki : https://github.com/gregorybesson/PlaygroundCore/wiki

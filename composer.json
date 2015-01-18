@@ -28,7 +28,8 @@
 		"jhuet/zdt-logger-module" : "0.*",
 		"zf-commons/zfc-base" : "0.*",
 		"bjyoungblood/bjy-authorize" : "1.1.*",
-		"twilio/sdk" : "3.*"	
+		"twilio/sdk" : "3.*",
+		"buggedcom/phpvideotoolkit" : "2.*"
     },
 	"require-dev" : {
 		"phpunit/phpunit" : "3.7.*"

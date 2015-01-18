@@ -69,7 +69,11 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
      */
     public function correctOrientation()
     {
-        $exif = exif_read_data($this->file);
+        try {
+            $exif = exif_read_data($this->file);
+        } catch (\Exception $e) {
+            return $this;
+        }
         if(!empty($exif['Orientation'])) {
             switch($exif['Orientation']) {
                 case 8:

@@ -13,6 +13,7 @@ class ModuleOptions extends AbstractOptions
     protected $options_class   = 'Zend\Mail\Transport\FileOptions';
     protected $options   = array('path' => 'data/mail/');
     protected $twilio = array();
+    protected $phpvideotoolkit = array();
     protected $quConfig = array();
     protected $googleAnalytics = array('id' => '');
     protected $adServing = array();
@@ -147,6 +148,22 @@ class ModuleOptions extends AbstractOptions
         $this->twilio = $twilio;
     }
 
+    /**
+     * @return the $phpvideotoolkit
+     */
+    public function getPhpvideotoolkit()
+    {
+        return $this->phpvideotoolkit;
+    }
+    
+    /**
+     * @param multitype: $phpvideotoolkit
+     */
+    public function setPhpvideotoolkit($phpvideotoolkit)
+    {
+        $this->phpvideotoolkit = $phpvideotoolkit;
+    }
+    
 	public function getOptions()
     {
         return $this->options;

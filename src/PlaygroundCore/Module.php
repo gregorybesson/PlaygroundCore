@@ -219,7 +219,8 @@ class Module implements
                     'google-analytics'           => 'PlaygroundCore\Analytics\Tracker',
                     'facebook-opengraph'         => 'PlaygroundCore\Opengraph\Tracker',
                     'twitter-card'               => 'PlaygroundCore\TwitterCard\Config',
-                    'twilio'                     => 'playgroundcore_twilio'
+                    'twilio'                     => 'playgroundcore_twilio',
+                    'ffmpeg'                     => 'playgroundcore_phpvideotoolkit'
                 ),
 
                 'shared' => array(
@@ -235,6 +236,7 @@ class Module implements
                     'playgroundcore_locale_service'      => 'PlaygroundCore\Service\Locale',
                     'playgroundcore_formgen_service'     => 'PlaygroundCore\Service\Formgen',
                     'playgroundcore_image_service'       => 'PlaygroundCore\Service\Image',
+                    'playgroundcore_ffmpeg_service'      => 'PlaygroundCore\Service\Ffmpeg',
                 ),
                 'factories' => array(
                     'playgroundcore_module_options' => function ($sm) {
@@ -257,6 +259,7 @@ class Module implements
                     },
 
                     'playgroundcore_twilio' => 'PlaygroundCore\Service\Factory\TwilioServiceFactory',
+                    'playgroundcore_phpvideotoolkit' => 'PlaygroundCore\Service\Factory\PhpvideotoolkitServiceFactory',
                     'playgroundcore_transport' => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
                     'PlaygroundCore\Analytics\Tracker' => function ($sm) {
                         $config = $sm->get('config');

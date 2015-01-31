@@ -27,7 +27,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
      */
     public function createVideoFromImages($path = 'data/etape%01d.jpg', $target = false, $framerate = '1/5', $fps = 25)
     {
-        $ffmpeg = $this->getServiceManager()->get('ffmpeg')
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
         ->addPreInputCommand('-framerate', $framerate)
         ->addCommand('-i', $path)
         ->addCommand('-c:v', 'libx264')
@@ -53,7 +55,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                     $concat .= $path;
                     $i++;
                 }
-                $ffmpeg = $this->getServiceManager()->get('ffmpeg')
+                // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+                $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+                $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
                     ->addCommand('-i', $concat)
                     ->addCommand('-c', 'copy')
                     ->addCommand('-bsf:a', 'aac_adtstoasc')

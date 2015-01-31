@@ -36,6 +36,25 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         ->addCommand('-vf', 'fps='. $fps .',format=yuv420p')
         ->setOutputPath($target)
         ->execute();
+
+        return $target;
+    }
+
+    /**
+     * This method takes a mp4 source and transform it to Mpeg (with .ts as extension)
+     *
+     */
+    public function transformMp4ToMpg($source, $target){
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        ->addCommand('-i', $source)
+        ->addCommand('-c', 'copy')
+        ->addCommand('-bsf:v', 'h264_mp4toannexb')
+        ->addCommand('-f', 'mpegts')
+        ->setOutputPath($target)
+        ->execute();
+
+        return $target;
     }
     
     /**
@@ -48,17 +67,10 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         if(is_array($videos)){
             try
             {
-                $concat = 'concat:';
-                $i = 0;
-                foreach($videos as $path){
-                    if($i>0) $concat .= '|';
-                    $concat .= $path;
-                    $i++;
-                }
                 // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
                 $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
                 $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
-                    ->addCommand('-i', $concat)
+                    ->addCommand('-i', 'concat:' . implode('|', $videos))
                     ->addCommand('-c', 'copy')
                     ->addCommand('-bsf:a', 'aac_adtstoasc')
                     ->setOutputPath($target)
@@ -92,6 +104,22 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                 throw new InvalidArgumentException('Error when merging videos');
             }
         }
+
+        return $target;
+    }
+
+    public function mergeMp3ToMp4($audioSource, $videoSource, $target){
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addCommand('-i', $videoSource)
+            ->addCommand('-i', $audioSource, true)
+            ->addCommand('-map', '0')
+            ->addCommand('-map', '1', true)
+            ->addCommand('-codec', 'copy')
+            ->addCommand('-shortest', false)
+            ->setOutputPath($target)
+            ->execute();
 
         return $target;
     }

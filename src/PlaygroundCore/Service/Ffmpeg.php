@@ -33,7 +33,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         ->addPreInputCommand('-framerate', $framerate)
         ->addCommand('-i', $path)
         ->addCommand('-c:v', 'libx264')
-        ->addCommand('-pix_fmt', 'yuv420p')
+        ->addCommand('-vf', 'fps='. $fps .',format=yuv420p')
         ->setOutputPath($target)
         ->execute();
 

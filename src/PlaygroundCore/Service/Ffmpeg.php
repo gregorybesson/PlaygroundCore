@@ -109,20 +109,16 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     }
 
     public function mergeMp3ToMp4($audioSource, $videoSource, $target){
-        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
-        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
-            ->addCommand('-i', $videoSource)
-            ->addCommand('-i', $audioSource, true)
-            ->addCommand('-map', '0')
-            ->addCommand('-map', '1', true)
-            ->addCommand('-codec', 'copy')
-            ->addCommand('-shortest', false)
-            ->setOutputPath($target)
-            ->execute();
-
-        return $target;
-    }
+       // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+       $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+       $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+           ->addCommand('-i', $videoSource)
+           ->addCommand('-i', $audioSource, true)
+           ->setOutputPath($target)
+           ->execute();
+       return $target;
+   }
 
     public function setOptions($options)
     {

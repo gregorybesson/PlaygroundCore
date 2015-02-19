@@ -33,7 +33,8 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         ->addPreInputCommand('-framerate', $framerate)
         ->addCommand('-i', $path)
         ->addCommand('-c:v', 'libx264')
-        ->addCommand('-vf', 'fps='. $fps .',format=yuv420p')
+        ->addCommand('-vf', 'fps='. $fps)
+        ->addCommand('-pix_fmt', 'yuv420p')
         ->setOutputPath($target)
         ->execute();
 
@@ -73,6 +74,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                     ->addCommand('-i', 'concat:' . implode('|', $videos))
                     ->addCommand('-c', 'copy')
                     ->addCommand('-bsf:a', 'aac_adtstoasc')
+                    ->addCommand('-bufsize', '1835k')
+                    ->addCommand('-fflags', 'genpts')
+                    ->addCommand('-f', 'vob')
                     ->setOutputPath($target)
                     ->execute();
             }

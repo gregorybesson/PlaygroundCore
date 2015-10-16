@@ -224,7 +224,9 @@ class Module implements
                 ),
 
                 'shared' => array(
-                    'playgroundcore_message' => false
+                    'playgroundcore_message' => false,
+                    // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+                    'playgroundcore_ffmpeg_service' => false
                 ),
 
                 'invokables' => array(

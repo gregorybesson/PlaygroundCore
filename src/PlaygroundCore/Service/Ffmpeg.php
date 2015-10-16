@@ -122,7 +122,19 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
            ->setOutputPath($target)
            ->execute();
        return $target;
-   }
+    }
+
+    public function convertMp4ToOgv($videoSource, $target){
+       // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addCommand('-i', $videoSource)
+            ->setOutputPath($target)
+            ->execute();
+        
+        return $target;
+    }
 
     public function setOptions($options)
     {

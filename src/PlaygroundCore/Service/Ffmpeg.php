@@ -136,6 +136,31 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         return $target;
     }
 
+    public function mergeMp4($videoSource, $target){
+       // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addCommand('-i', $videoSource)
+            ->setOutputPath($target)
+            ->execute();
+        
+        return $target;
+    }
+
+    /**
+     * This method will merge 2 MP4 videos
+     * But it needs MP4Box as a dependency !!!
+     * @param  array $videos
+     * @return string
+     */
+    public function mergeMp4Videos($videoSource, $target)
+    {
+        exec('MP4Box -add $videoSource -brand mp42 $target');
+
+        return $target;
+    }
+
     public function setOptions($options)
     {
         $this->options = $options;

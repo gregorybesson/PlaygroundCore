@@ -247,6 +247,25 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         return $target;
     }
 
+    public function convertToMp3($source, $target){
+        //ffmpeg -i son_origine.avi -vn -ar 44100 -ac 2 -ab 192 -f mp3 son_final.mp3
+       // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y')
+            ->addCommand('-i', $source)
+            ->addCommand('-vn')
+            ->addCommand('-ar', '44100')
+            ->addCommand('-ac', '2')
+            ->addCommand('-ab', '192')
+            ->addCommand('-f', 'mp3')
+            ->setOutputPath($target)
+            ->execute();
+        
+        return $target;
+    }
+
     public function convertMovToMp4($videoSource, $target){
        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
@@ -277,19 +296,19 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     }
 
     /*
-    *  this method takes an image (with alpha) or a mov video (the format to keep alpha channel) and overlay
-    *  it on a video. 
+    *  this method takes an image (with alpha) or a mov video (the format to keep alpha channel) and overlay this layer
+    *  on a background video. 
     */
-    public function overlayOnMp4($imageSource, $videoSource, $target){
+    public function overlayOnMp4($source, $layer, $target, $x='main_w/2-overlay_w/2', $y='main_h/2-overlay_h/2'){
         //ffmpeg -i gnd.mov -i test.png -filter_complex "[0:0][1:0]overlay=format=rgb[out]" -map [out] -vcodec qtrle test.mov
         // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
        
         $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
-            ->addCommand('-i', $videoSource, true)
-            ->addCommand('-i', $imageSource, true)
-            ->addCommand('-filter_complex', '[0:0][1:0]overlay=format=rgb[out]')
+            ->addCommand('-i', $source, true)
+            ->addCommand('-i', $layer, true)
+            ->addCommand('-filter_complex', '[0:0][1:0]overlay=x='.$x.':y='.$y.':format=rgb[out]')
             ->addCommand('-map', '[out]')
             ->addCommand('-vcodec', 'qtrle')
             ->setOutputPath($target)
@@ -299,6 +318,77 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         
         return $target;
     }
+
+    /*
+    *  this method takes an image (with alpha) or a mov video (the format to keep alpha channel) and overlay this layer
+    *  on a background video. 
+    */
+    public function overlayTextOnMp4($source, $font, $fontSize, $fontColor, $message, $x, $y, $target){
+        // ffmpeg -i sub_video3.mp4 -vf drawtext="fontfile=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSerif.ttf: \
+        // text='Text to write is this one, overlaid':fontsize=20:fontcolor=red:x=100:y=100" with_text.mp4
+        
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+
+        $text = "fontfile=$font:text='". $message."':fontsize=". $fontSize .":fontcolor=" . $fontColor . ":x=".$x.":y=".$y;
+       
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y')
+            ->addCommand('-i', $source)
+            ->addCommand('-vf', 'drawtext='.$text)
+            ->setOutputPath($target)
+            ->execute();
+
+        \PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        
+        return $target;
+    }
+
+    /*
+    *  this method extracts an image form a video at the $time second in the video. 
+    */
+    public function extractImage($source, $time, $target){
+        //ffmpeg -i webcam_2012-03-18_00_33_58.mp4 -r 0.1 -t 20 image%3d.jpg
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y')
+            ->addCommand('-i', $source)
+            ->addCommand('-r', '0.1')
+            ->addCommand('-t', $time)
+            ->setOutputPath($target)
+            ->execute();
+
+        //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        
+        return $target;
+    }
+
+    /*
+    *  this method takes an image (with alpha) or a mov video (the format to keep alpha channel) and overlay
+    *  it on a video. 
+    */
+    // public function overlayComplexOnMp4($imageSource, $videoSource, $target){
+    //     //ffmpeg -i bg.mp4 -i fg.mkv -filter_complex "[0:v][1:v]overlay=enable='between=(t,10,20)':x=720+t*28:y=t*10[out]" -map "[out]" output.mkv
+    //     // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+    //     $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+    //     $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+    //         ->addPreInputCommand('-y')
+    //         ->addCommand('-i', $videoSource, true)
+    //         ->addCommand('-i', $imageSource, true)
+    //         ->addCommand('-filter_complex', "'[0:v][1:v]overlay=enable='between=(t,10,20)':x=720+t*28:y=t*10[out]'")
+    //         ->addCommand('-map', '[out]')
+    //         ->addCommand('-vcodec', 'qtrle')
+    //         ->setOutputPath($target)
+    //         ->execute();
+
+    //     //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        
+    //     return $target;
+    // }
+
 
     /**
      * This method will merge 2 MP4 videos

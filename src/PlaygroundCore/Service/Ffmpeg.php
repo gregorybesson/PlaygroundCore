@@ -129,7 +129,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     /**
      * This method takes a mp4 source and transform it to Mpeg (with .ts as extension)
-     *
+     *  ffmpeg -i in.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts out.ts
      */
     public function transformMp4ToMpg($source, $target){
         try {
@@ -138,6 +138,48 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->addCommand('-i', $source)
             ->addCommand('-c', 'copy')
             ->addCommand('-bsf:v', 'h264_mp4toannexb')
+            ->addCommand('-f', 'mpegts')
+            ->setOutputPath($target)
+            ->execute();
+        } catch(FfmpegProcessOutputException $e) {
+            /*echo '<h1>Error</h1>';
+            \PHPVideoToolkit\Trace::vars($e);
+            $ffmpeg = $video->getProcess();
+            if($ffmpeg->isCompleted())
+            {
+                echo '<h1>Raw Executed Command</h1>';
+                \PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+                echo '<hr /><h2>Executed Command</h2>';
+                \PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand());
+                echo '<hr /><h2>FFmpeg Process Messages</h2>';
+                \PHPVideoToolkit\Trace::vars($ffmpeg->getMessages());
+                echo '<hr /><h2>Buffer Output</h2>';
+                \PHPVideoToolkit\Trace::vars($ffmpeg->getBuffer(true));
+            }*/
+            throw new InvalidArgumentException('Error when merging videos');
+        } catch(Exception $e) {
+            /*echo '<h1>Error</h1>';
+            \PHPVideoToolkit\Trace::vars($e->getMessage());
+            echo '<h2>Exception</h2>';
+            \PHPVideoToolkit\Trace::vars($e);
+            */
+            throw new InvalidArgumentException('Error when merging videos');
+        }
+
+        return $target;
+    }
+
+    /**
+     * This method takes a mp4 source and transform it to Mpeg (with .ts as extension)
+     *  ffmpeg -i in.mov -vcodec h264 -pix_fmt yuv420p -f mpegts out.ts
+     */
+    public function transformMovToMpg($source, $target){
+        try {
+            $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+            $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addCommand('-i', $source)
+            ->addCommand('-vcodec', 'h264')
+            ->addCommand('-pix_fmt', 'yuv420p')
             ->addCommand('-f', 'mpegts')
             ->setOutputPath($target)
             ->execute();
@@ -182,10 +224,11 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                 // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
                 $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
                 $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+                    ->addPreInputCommand('-y')
                     ->addCommand('-i', 'concat:' . implode('|', $videos))
                     ->addCommand('-c', 'copy')
                     ->addCommand('-bsf:a', 'aac_adtstoasc')
-                    ->addCommand('-bufsize', '1835k')
+                    //->addCommand('-bufsize', '1835k')
                     ->addCommand('-fflags', 'genpts')
                     ->addCommand('-f', 'vob')
                     ->setOutputPath($target)
@@ -344,24 +387,73 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         return $target;
     }
 
-    /*
+    /**
     *  this method extracts an image form a video at the $time second in the video. 
+    *  ffmpeg -i s06.mov  s06-%03d.png
+    *  ffmpeg -i webcam_2012-03-18_00_33_58.mp4 -r 0.1 -t 20 image%3d.jpg
     */
-    public function extractImage($source, $time, $target){
-        //ffmpeg -i webcam_2012-03-18_00_33_58.mp4 -r 0.1 -t 20 image%3d.jpg
+    public function extractImage($source, $target, $start = null, $duration = null ){
+
         // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
        
         $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
-            ->addCommand('-i', $source)
-            ->addCommand('-r', '0.1')
-            ->addCommand('-t', $time)
-            ->setOutputPath($target)
+            ->addCommand('-i', $source);
+        
+        if(!empty($duration))
+            $ffmpeg->addCommand('-r', $duration);
+        
+        if(!empty($start))
+            $ffmpeg->addCommand('-t', $start);
+
+        $ffmpeg->setOutputPath($target)
             ->execute();
 
         //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
         
+        return $target;
+    }
+
+    /**
+    *  this method splits a video into n chunks defined by the frames array.
+    *  $frames = array(array(0, 12), array(13, 110), array(111, 200), array(201, 268), array(269, 363), array(364, 390), array(391, 417), array(418, 437), array(438, 553), array(554, 600));
+    */
+    public function splitVideo($source, $frames = array(), $target){
+        //ffmpeg -i quickns.mov -an -vf "select=between(n\,110\,200),setpts=PTS-STARTPTS" grg.mov
+        
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        
+        $frames = array(
+            array(0, 12), 
+            array(13, 110), 
+            array(111, 200), 
+            array(201, 268), 
+            array(269, 362), 
+            array(363, 389), 
+            array(390, 416), 
+            array(417, 436), 
+            array(437, 552), 
+            array(553, 600)
+        );
+        //$frames = array(array(0, 12));
+        
+        $i=1;
+        foreach($frames as $frame){
+
+            //echo $frame[0] . " -> " .$frame[1] . "<br/>";
+            $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+                ->addPreInputCommand('-y')
+                ->addCommand('-i', $source)
+                ->addCommand('-an')
+                ->addCommand('-vf', 'select=between(n\,' . $frame[0] . '\,' . $frame[1] . '),setpts=PTS-STARTPTS')
+                ->setOutputPath($target . sprintf('s%02d', $i) . '.mov')
+                ->execute();
+            $i++;
+        }
+        //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+
         return $target;
     }
 

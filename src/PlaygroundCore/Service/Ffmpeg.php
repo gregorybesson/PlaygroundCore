@@ -263,7 +263,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             }
         }
 
-        \PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
 
         return $target;
     }

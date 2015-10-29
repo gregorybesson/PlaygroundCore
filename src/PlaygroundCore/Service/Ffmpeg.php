@@ -228,7 +228,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                     ->addCommand('-i', 'concat:' . implode('|', $videos))
                     ->addCommand('-c', 'copy')
                     ->addCommand('-bsf:a', 'aac_adtstoasc')
-                    //->addCommand('-bufsize', '1835k')
+                    ->addCommand('-bufsize', '1835k')
                     ->addCommand('-fflags', 'genpts')
                     ->addCommand('-f', 'vob')
                     ->setOutputPath($target)
@@ -262,6 +262,8 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                 throw new InvalidArgumentException('Error when merging videos');
             }
         }
+
+        \PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
 
         return $target;
     }
@@ -342,16 +344,28 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     *  this method takes an image (with alpha) or a mov video (the format to keep alpha channel) and overlay this layer
     *  on a background video. 
     */
-    public function overlayOnMp4($source, $layer, $target, $x='main_w/2-overlay_w/2', $y='main_h/2-overlay_h/2'){
+    public function overlayOnMp4($source, $layer, $target){
         //ffmpeg -i gnd.mov -i test.png -filter_complex "[0:0][1:0]overlay=format=rgb[out]" -map [out] -vcodec qtrle test.mov
         // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+
+        if(!is_array($layer)){
+            $layer = array($layer);
+        }
+        $overlay = '';
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
        
         $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
-            ->addCommand('-i', $source, true)
-            ->addCommand('-i', $layer, true)
-            ->addCommand('-filter_complex', '[0:0][1:0]overlay=x='.$x.':y='.$y.':format=rgb[out]')
+            ->addCommand('-i', $source, true);
+
+        foreach($layer as $k=>$l){
+            $ffmpeg->addCommand('-i', $l, true);
+            $overlay .= 'overlay=format=rgb';
+            if($k<count($layer)-1) 
+                $overlay .= ',';
+        }
+
+        $ffmpeg->addCommand('-filter_complex', $overlay.'[out]')
             ->addCommand('-map', '[out]')
             ->addCommand('-vcodec', 'qtrle')
             ->setOutputPath($target)
@@ -426,16 +440,16 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
         
         $frames = array(
-            array(0, 12), 
-            array(13, 110), 
-            array(111, 200), 
-            array(201, 268), 
-            array(269, 362), 
-            array(363, 389), 
-            array(390, 416), 
-            array(417, 436), 
-            array(437, 552), 
-            array(553, 600)
+            array(0, 13), 
+            array(14, 111), 
+            array(112, 201), 
+            array(202, 269), 
+            array(270, 363), 
+            array(364, 390), 
+            array(391, 417), 
+            array(418, 437), 
+            array(438, 553), 
+            array(554, 600)
         );
         //$frames = array(array(0, 12));
         
@@ -448,7 +462,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                 ->addCommand('-i', $source)
                 ->addCommand('-an')
                 ->addCommand('-vf', 'select=between(n\,' . $frame[0] . '\,' . $frame[1] . '),setpts=PTS-STARTPTS')
-                ->setOutputPath($target . sprintf('s%02d', $i) . '.mov')
+                ->setOutputPath($target . sprintf('s%02d/', $i) . sprintf('s%02d', $i) . '.mov')
                 ->execute();
             $i++;
         }

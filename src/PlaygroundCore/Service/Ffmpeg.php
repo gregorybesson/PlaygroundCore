@@ -375,6 +375,31 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         
         return $target;
     }
+    
+    /*
+    *  this method takes an image (with alpha) or a mov video (the format to keep alpha channel) and overlay this layer
+    *  on a background video. 
+    */
+    public function addWavToMp4($video, $sound, $target){
+        //ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac -strict experimental output.mp4
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y')
+            ->addCommand('-i', $video, true)
+            ->addCommand('-i', $sound, true)
+            ->addCommand('-c:v', 'copy')
+            ->addCommand('-c:a', 'aac')
+            ->addCommand('-strict', 'experimental')
+            ->setOutputPath($target)
+            ->execute();
+
+        //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        
+        return $target;
+    }
 
     /*
     *  this method takes an image (with alpha) or a mov video (the format to keep alpha channel) and overlay this layer

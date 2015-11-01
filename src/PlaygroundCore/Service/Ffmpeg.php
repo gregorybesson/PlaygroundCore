@@ -531,7 +531,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     /**
     *  this method extracts an image form a video at the $time second in the video. 
-    *   
+    *  ffmpeg -i s06.mov  s06-%03d.png
     *  ffmpeg -i webcam_2012-03-18_00_33_58.mp4 -r 0.1 -t 20 image%3d.jpg
     */
     public function extractImage($source, $target, $start = null, $duration = null ){

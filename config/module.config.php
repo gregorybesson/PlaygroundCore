@@ -496,4 +496,10 @@ return array(
             __DIR__ . '/../view/frontend',
         ),
     ),
+
+    'validators' => array(
+        'invokables' => array(
+            'Special' => 'PlaygroundCore\Validator\Blacklist' 
+         ),
+    ),
 );

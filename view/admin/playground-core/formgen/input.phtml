@@ -36,6 +36,11 @@
             <label><?php echo $this->translate('Id');?></label>
             <input type="text" name="number_id" maxlength="255" placeholder="id">
         </li>
+        <li>
+            <label><?php echo $this->translate('Additional validator');?></label>
+            <input type="text" name="validator" maxlength="255" placeholder="validator">
+            <p><small>(ie. \Zend\Validator\File\WordCount(100, 5000)</small></p>
+        </li>
 		<li>
 			<button class="btn btn-primary" id="add_form_text"><?php echo $this->translate('Save');?></button>
 		</li>

@@ -346,7 +346,6 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     */
     public function overlayOnMp4($source, $layer, $target){
         //ffmpeg -i gnd.mov -i test.png -filter_complex "[0:0][1:0]overlay=format=rgb[out]" -map [out] -vcodec qtrle test.mov
-        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
 
         if(!is_array($layer)){
             $layer = array($layer);
@@ -402,6 +401,110 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     }
 
     /*
+    *  this method takes an audio file and increase its level
+    *  on a background video. 
+    */
+    public function increaseVolumeSound($source, $level, $target){
+        // ffmpeg -i title.wav -af "volume=4" titleok.wav
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y')
+            ->addCommand('-i', $source, true)
+            ->addCommand('-af', 'volume='.$level)
+            ->setOutputPath($target)
+            ->execute();
+
+        //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        
+        return $target;
+    }
+
+    /*
+    *  this method creates an audio file of $duration seconds with no sound
+    *  on a background video. 
+    */
+    public function createNullSound($duration=1, $target){
+        // ffmpeg -y -filter_complex 'aevalsrc=0:d=1.6' silence.wav
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+       
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y')
+            ->addCommand('-filter_complex', 'aevalsrc=0:d='.$duration)
+            ->setOutputPath($target)
+            ->execute();
+
+        //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        
+        return $target;
+    }
+
+    /**
+    * This method concatenate an array of sounds
+    */
+    public function concatenateSounds($sounds = array(), $target){
+        // ffmpeg -y -i silence1-1.wav -i titleok.wav -i silence1-2.wav -filter_complex '[0:0][1:0][2:0]concat=n=3:v=0:a=1[out]' -map '[out]' sound1.wav
+        
+        if(!is_array($sounds)){
+            $sounds = array($sounds);
+        }
+
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y');
+
+        $concat = '';
+        foreach($sounds as $k=>$s){
+            $ffmpeg->addCommand('-i', $s, true);
+            $concat .= '['.$k.':0]';
+        }
+        $concat .= 'concat=n='. count($sounds) .':v=0:a=1[out]';
+
+        $ffmpeg->addCommand('-filter_complex', $concat)
+            ->addCommand('-map', '[out]')
+            ->setOutputPath($target)
+            ->execute();
+
+        //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+
+        return $target;
+    }
+
+    /**
+    * This method merge an array of sounds
+    */
+    public function mergeSounds($sounds = array(), $target){
+        // ffmpeg -i bearnaise.wav -i sound1.wav -i sound2.wav -filter_complex "[0:a][1:a][2:a]amerge=inputs=3[aout]" -map "[aout]" -ac 2 sound.wav
+        
+        if(!is_array($sounds)){
+            $sounds = array($sounds);
+        }
+
+        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y');
+
+        $merge = '';
+        foreach($sounds as $k=>$s){
+            $ffmpeg->addCommand('-i', $s, true);
+            $merge .= '['.$k.':a]';
+        }
+        $merge .= 'amerge=inputs='. count($sounds) .'[aout]';
+
+        $ffmpeg->addCommand('-filter_complex', $merge)
+            ->addCommand('-map', '[aout]')
+            ->addCommand('-ac', '2')
+            ->setOutputPath($target)
+            ->execute();
+
+        //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        
+        return $target;
+    }
+
+    /*
     *  this method takes an image (with alpha) or a mov video (the format to keep alpha channel) and overlay this layer
     *  on a background video. 
     */
@@ -428,7 +531,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     /**
     *  this method extracts an image form a video at the $time second in the video. 
-    *  ffmpeg -i s06.mov  s06-%03d.png
+    *   
     *  ffmpeg -i webcam_2012-03-18_00_33_58.mp4 -r 0.1 -t 20 image%3d.jpg
     */
     public function extractImage($source, $target, $start = null, $duration = null ){
@@ -464,20 +567,6 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
         // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
         
-        $frames = array(
-            array(0, 13), 
-            array(14, 111), 
-            array(112, 201), 
-            array(202, 269), 
-            array(270, 363), 
-            array(364, 390), 
-            array(391, 417), 
-            array(418, 437), 
-            array(438, 553), 
-            array(554, 600)
-        );
-        //$frames = array(array(0, 12));
-        
         $i=1;
         foreach($frames as $frame){
 
@@ -487,7 +576,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                 ->addCommand('-i', $source)
                 ->addCommand('-an')
                 ->addCommand('-vf', 'select=between(n\,' . $frame[0] . '\,' . $frame[1] . '),setpts=PTS-STARTPTS')
-                ->setOutputPath($target . sprintf('s%02d/', $i) . sprintf('s%02d', $i) . '.mov')
+                ->setOutputPath($target . sprintf('s%02d', $i) . '.mov')
                 ->execute();
             $i++;
         }

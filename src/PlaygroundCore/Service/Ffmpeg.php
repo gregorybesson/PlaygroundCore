@@ -321,6 +321,8 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->addCommand('-vcodec', 'h264')
             ->addCommand('-acodec', 'aac')
             ->addCommand('-strict', '2')
+            ->addCommand('-pix_fmt', 'yuv420p')
+            ->addCommand('-movflags', '+faststart')
             ->setOutputPath($target)
             ->execute();
         

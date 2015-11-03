@@ -542,10 +542,10 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->addPreInputCommand('-y');
 
         if(!empty($start))
-            $ffmpeg->addPreInputCommand('-ss', $start)
+            $ffmpeg->addPreInputCommand('-ss', $start);
 
-        $ffmpeg->addCommand('-i', $source);
-            ->addCommand('-vframes', $frames);
+        $ffmpeg->addCommand('-i', $source)
+            ->addCommand('-vframes', $frames)
             ->setOutputPath($target)
             ->execute();
 

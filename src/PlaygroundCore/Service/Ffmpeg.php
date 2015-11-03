@@ -531,25 +531,22 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     /**
     *  this method extracts an image form a video at the $time second in the video. 
-    *  ffmpeg -i s06.mov  s06-%03d.png
-    *  ffmpeg -i webcam_2012-03-18_00_33_58.mp4 -r 0.1 -t 20 image%3d.jpg
+    *  ffmpeg -ss 00:00:04 -i video.mp4 -vframes 1 out.png
     */
-    public function extractImage($source, $target, $start = null, $duration = null ){
+    public function extractImage($source, $target, $start = '00:00:01', $frames = 1 ){
 
         // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
        
         $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
-            ->addPreInputCommand('-y')
-            ->addCommand('-i', $source);
-        
-        if(!empty($duration))
-            $ffmpeg->addCommand('-r', $duration);
-        
-        if(!empty($start))
-            $ffmpeg->addCommand('-t', $start);
+            ->addPreInputCommand('-y');
 
-        $ffmpeg->setOutputPath($target)
+        if(!empty($start))
+            $ffmpeg->addPreInputCommand('-ss', $start)
+
+        $ffmpeg->addCommand('-i', $source);
+            ->addCommand('-vframes', $frames);
+            ->setOutputPath($target)
             ->execute();
 
         //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));

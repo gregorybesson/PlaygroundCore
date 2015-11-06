@@ -171,7 +171,11 @@ class Message implements ServiceManagerAwareInterface
             ->setBody($body)
             ->setTo($to);
 
-        $message->getHeaders()->get('content-type')->setType('multipart/alternative');
+        $message->getHeaders()->removeHeader('Content-Type');
+
+        $contentTypeHeader = new \Zend\Mail\Header\ContentType();
+        $contentTypeHeader->setType('multipart/alternative');
+        $message->getHeaders()->addHeader($contentTypeHeader);
 
         return $message;
     }

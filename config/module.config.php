@@ -475,7 +475,11 @@ return array(
     ),
     'controller_plugins' => array(
         'invokables' => array(
-            'shortenUrl' => 'PlaygroundCore\Controller\Plugin\ShortenUrl',
+            'shortenUrl'    => 'PlaygroundCore\Controller\Plugin\ShortenUrl',
+        ),
+        'factories' => array(
+            'translate'       => 'PlaygroundCore\Service\Factory\TranslateFactory',
+            'translatePlural' => 'PlaygroundCore\Service\Factory\TranslatePluralFactory',
         ),
     ),
     'translator' => array(

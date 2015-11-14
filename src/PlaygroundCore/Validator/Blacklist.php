@@ -19,12 +19,13 @@ class Blacklist extends AbstractValidator
      
     public function __construct($options = null)
     {
-    	//die('in');
+
         if (is_string($options)) {
-			$this->options = array('file' => str_replace('\\', '/', getcwd()) . $options);
+			$this->options = array('file' => str_replace('\\', '/', getcwd()) . '/' . ltrim($options, '/'));
         } elseif(is_array($options)){
             $this->options = array('file' => str_replace('\\', '/', getcwd()) . $options[0]);
         }
+
 		parent::__construct($options);
 
     }

@@ -20,9 +20,12 @@
  */
 
 /**
- * EN-Revision: 09.Sept.2012
+ * NL-Revision: 06 Nov 2015 *** G.Besson ***
  */
 return array(
+    // PlaygroundCore\Validator\Blacklist
+    "You're not allowed to use this word" => "You're not allowed to use this word",
+    
     // Zend_I18n_Validator_Alnum
     "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
     "The input contains characters which are non alphabetic and no digits" => "The input contains characters which are non alphabetic and no digits",

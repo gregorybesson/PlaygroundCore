@@ -21,6 +21,55 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
      */
     protected $options;
 
+
+    
+    /**
+     * This method create images from a video.
+     * ffmpeg -i input.mov output_%03d.png
+     */
+    public function createImagesFromVideos($source, $target = 'step-%03d.jpg')
+    {
+        try {
+            // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+            $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+            /*
+                ->addPreInputCommand('-y') : overwrite existing file
+            */
+            $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            ->addPreInputCommand('-y')
+            ->addCommand('-i', $source)
+            ->setOutputPath($target)
+            ->execute();
+
+            //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+        } catch(FfmpegProcessOutputException $e) {
+            /*echo '<h1>Error</h1>';
+            \PHPVideoToolkit\Trace::vars($e);
+            $ffmpeg = $video->getProcess();
+            if($ffmpeg->isCompleted())
+            {
+                echo '<h1>Raw Executed Command</h1>';
+                \PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
+                echo '<hr /><h2>Executed Command</h2>';
+                \PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand());
+                echo '<hr /><h2>FFmpeg Process Messages</h2>';
+                \PHPVideoToolkit\Trace::vars($ffmpeg->getMessages());
+                echo '<hr /><h2>Buffer Output</h2>';
+                \PHPVideoToolkit\Trace::vars($ffmpeg->getBuffer(true));
+            }*/
+            throw new InvalidArgumentException('Error when merging videos');
+        } catch(Exception $e) {
+            /*echo '<h1>Error</h1>';
+            \PHPVideoToolkit\Trace::vars($e->getMessage());
+            echo '<h2>Exception</h2>';
+            \PHPVideoToolkit\Trace::vars($e);
+            */
+            throw new InvalidArgumentException('Error when merging videos');
+        }
+
+        return $target;
+    }
+
     /**
      * This method create a video from still images (jpg or png).
      * ffmpeg -framerate 1/5 -i etape%01d.jpg -c:v libx264 -vf "fps=25,format=yuv420p" out.mp4

@@ -11,7 +11,9 @@ class Registry
      * singleton
      */
     private static $instance = null;
-    private function __construct() {}
+    private function __construct()
+    {
+    }
     public static function getInstance()
     {
         if (!self::$instance instanceof self) {
@@ -63,8 +65,11 @@ class Registry
      * @return self
      */
     public static function register(
-        $code, $frequency, $callback, array $args = array())
-    {
+        $code,
+        $frequency,
+        $callback,
+        array $args = array()
+    ) {
         //ArgValidator::assert($code, array('string', 'min' => 1));
         //ArgValidator::assert($callback, 'callable');
         if (!is_callable($callback)) {

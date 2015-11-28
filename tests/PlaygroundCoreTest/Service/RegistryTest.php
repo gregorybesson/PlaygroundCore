@@ -37,10 +37,10 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     public function testCronRegistry()
     {
         Registry::register(
-        'test',
-        '* * * * *',
-        array($this, 'dummy'),
-        array()
+            'test',
+            '* * * * *',
+            array($this, 'dummy'),
+            array()
         );
     
         $expectedCronRegistry = array(
@@ -56,5 +56,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
     
     //dummy function to act as cron job
-    public function dummy() {}
+    public function dummy()
+    {
+    }
 }

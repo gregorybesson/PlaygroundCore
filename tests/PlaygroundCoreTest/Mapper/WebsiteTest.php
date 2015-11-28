@@ -32,13 +32,13 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $websites = $this->getWebsiteMapper()->findAll();
         
         foreach ($websites as $website) {
-           $this->getWebsiteMapper()->remove($website); 
+            $this->getWebsiteMapper()->remove($website);
         }
 
         $this->em->flush();
         $this->em->clear();
         
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
@@ -52,7 +52,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -73,11 +73,12 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
  
     }
 
-    public function testFindBy(){
+    public function testFindBy()
+    {
         
         $self = $this;
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
@@ -91,7 +92,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -119,7 +120,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
         $self = $this;
         
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('France');
@@ -134,7 +135,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -154,7 +155,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = $websites[0];
 
         $websites = $this->getWebsiteMapper()->findById($website->getId());
-        $this->assertEquals(count($websites), 1); 
+        $this->assertEquals(count($websites), 1);
     }
 
 
@@ -163,7 +164,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
        
         $self = $this;
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('France');
@@ -178,7 +179,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -214,7 +215,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
     {
         $self = $this;
         
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('France');
@@ -229,7 +230,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $this->em->flush();
         $this->em->clear();
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('Italy');
@@ -250,7 +251,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
 
         foreach ($websites as $website) {
-            $this->getWebsiteMapper()->remove($website); 
+            $this->getWebsiteMapper()->remove($website);
         }
 
         $websites = $this->getWebsiteMapper()->findAll();
@@ -269,7 +270,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         return $this->websiteMapper;
     }
 
-      public function getLocaleMapper()
+    public function getLocaleMapper()
     {
 
         if (null === $this->localeMapper) {
@@ -286,6 +287,4 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         unset($this->em);
         parent::tearDown();
     }
-
-
 }

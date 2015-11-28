@@ -25,7 +25,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     public function testInsert()
     {
         $self = $this;
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('French');
             $locale->setLocale('fr_FR');
@@ -40,7 +40,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locales = $this->getLocaleMapper()->findAll();
         $this->assertEquals(count($locales), 1);
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('English');
             $locale->setLocale('en_UK');
@@ -59,7 +59,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     public function testFindBy()
     {
         $self = $this;
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('French');
             $locale->setLocale('fr_FR');
@@ -74,7 +74,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locales = $this->getLocaleMapper()->findAll();
         $this->assertEquals(count($locales), 1);
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('English');
             $locale->setLocale('en_UK');
@@ -95,7 +95,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     public function testFindById()
     {
         $self = $this;
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('French');
             $locale->setLocale('fr_FR');
@@ -110,7 +110,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locales = $this->getLocaleMapper()->findAll();
         $this->assertEquals(count($locales), 1);
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('English');
             $locale->setLocale('en_UK');
@@ -127,14 +127,14 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locale = $locales[0];
 
         $locales = $this->getLocaleMapper()->findById($locale->getId());
-        $this->assertEquals(count($locales), 1); 
+        $this->assertEquals(count($locales), 1);
     }
 
 
     public function testUpdate()
     {
         $self = $this;
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('French');
             $locale->setLocale('fr_FR');
@@ -147,7 +147,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->em->clear();
 
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('English');
             $locale->setLocale('en_UK');
@@ -176,7 +176,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     public function testRemove()
     {
         $self = $this;
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('French');
             $locale->setLocale('fr_FR');
@@ -191,7 +191,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locales = $this->getLocaleMapper()->findAll();
         $this->assertEquals(count($locales), 1);
 
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('English');
             $locale->setLocale('en_UK');
@@ -207,7 +207,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($locales), 2);
         
         foreach ($locales as $locale) {
-            $this->getLocaleMapper()->remove($locale); 
+            $this->getLocaleMapper()->remove($locale);
         }
 
         $this->em->flush();
@@ -220,7 +220,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     public function testGetFlag()
     {
         $self = $this;
-        $this->em->transactional(function($em) use ($self) {
+        $this->em->transactional(function ($em) use ($self) {
             $locale = new localeEntity();
             $locale->setName('French');
             $locale->setLocale('fr_FR');
@@ -259,6 +259,4 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         unset($this->em);
         parent::tearDown();
     }
-
-
 }

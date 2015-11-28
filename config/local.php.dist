@@ -31,13 +31,6 @@ return array(
 		'cacheEnabled' => false,
 		'cachePath' => __DIR__ . '/../../../data/cache',
 	),
-    // Licence keys and api keys
-    // The reason why having a Facebook subdomain is better is for separating sessions between plateform and facebook.
-    // This channel stuff gives the opportunity to know on which channel we are.
-    'channel' => array(
-        'facebook' => 'facebook.local',
-        'platform' => 'appuser.local',
-    ),
     'facebook' => array(
         'fb_appid'  => '118474821657382',
         'fb_secret' => 'fde26982baea07cab11881876a45a5fe',

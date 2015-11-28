@@ -104,7 +104,7 @@ class GoogleAnalytics extends AbstractHelper
         if (!$container instanceof HeadScript) {
             throw new RuntimeException(sprintf(
                 'Container %s does not extend HeadScript view helper',
-                 $this->getContainer()
+                $this->getContainer()
             ));
         }
 
@@ -113,11 +113,13 @@ class GoogleAnalytics extends AbstractHelper
 
         if (null !== ($customVars = $tracker->customVars())) {
             foreach ($customVars as $customVar) {
-                $script .= sprintf("_gaq.push(['_setCustomVar', %s, '%s', '%s', %s]);\n",
-                       $customVar->getId(),
-                       $customVar->getName(),
-                       $customVar->getValue(),
-                       $customVar->getOptScope() ?: '');
+                $script .= sprintf(
+                    "_gaq.push(['_setCustomVar', %s, '%s', '%s', %s]);\n",
+                    $customVar->getId(),
+                    $customVar->getName(),
+                    $customVar->getValue(),
+                    $customVar->getOptScope() ?: ''
+                );
             }
         }
 
@@ -151,35 +153,41 @@ class GoogleAnalytics extends AbstractHelper
 
         if (null !== ($events = $tracker->events())) {
             foreach ($events as $event) {
-                $script .= sprintf("_gaq.push(['_trackEvent', '%s', '%s', '%s', '%s']);\n",
-                       $event->getCategory(),
-                       $event->getAction(),
-                       $event->getLabel() ?: '',
-                       $event->getValue() ?: '');
+                $script .= sprintf(
+                    "_gaq.push(['_trackEvent', '%s', '%s', '%s', '%s']);\n",
+                    $event->getCategory(),
+                    $event->getAction(),
+                    $event->getLabel() ?: '',
+                    $event->getValue() ?: ''
+                );
             }
         }
 
         if (null !== ($transactions = $tracker->transactions())) {
             foreach ($transactions as $transaction) {
-                $script .= sprintf("_gaq.push(['_addTrans', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s']);\n",
-                       $transaction->getId(),
-                       $transaction->getAffiliation() ?: '',
-                       $transaction->getTotal(),
-                       $transaction->getTax() ?: '',
-                       $transaction->getShipping() ?: '',
-                       $transaction->getCity() ?: '',
-                       $transaction->getState() ?: '',
-                       $transaction->getCountry() ?: '');
+                $script .= sprintf(
+                    "_gaq.push(['_addTrans', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s']);\n",
+                    $transaction->getId(),
+                    $transaction->getAffiliation() ?: '',
+                    $transaction->getTotal(),
+                    $transaction->getTax() ?: '',
+                    $transaction->getShipping() ?: '',
+                    $transaction->getCity() ?: '',
+                    $transaction->getState() ?: '',
+                    $transaction->getCountry() ?: ''
+                );
 
                 if (null !== ($items = $transaction->items())) {
                     foreach ($items as $item) {
-                        $script .= sprintf("_gaq.push(['_addItem', '%s', '%s', '%s', '%s', '%s', '%s']);\n",
-                                           $transaction->getId(),
-                                           $item->getSku() ?: '',
-                                           $item->getProduct() ?: '',
-                                           $item->getCategory() ?: '',
-                                           $item->getPrice(),
-                                           $item->getQuantity());
+                        $script .= sprintf(
+                            "_gaq.push(['_addItem', '%s', '%s', '%s', '%s', '%s', '%s']);\n",
+                            $transaction->getId(),
+                            $item->getSku() ?: '',
+                            $item->getProduct() ?: '',
+                            $item->getCategory() ?: '',
+                            $item->getPrice(),
+                            $item->getQuantity()
+                        );
                     }
                 }
             }

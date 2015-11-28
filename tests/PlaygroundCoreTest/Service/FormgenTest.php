@@ -85,11 +85,12 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testRender(){
+    public function testRender()
+    {
         $service = new \PlaygroundCore\Service\Formgen();
         $service->setServiceManager(Bootstrap::getServiceManager());
 
-        $formGem = array(); 
+        $formGem = array();
         $element = new stdClass();
         $element->line_text = array( (object) array('name' => 'firstname',
                                      'type' => 'Zend\\Form\\Element\\Text"',
@@ -103,8 +104,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'length' => (object) array(
                                             'min' => '10',
                                             'max' => '20'
-                                        )
-                                    )
+                                         )
+                                     )
                                 )
                             );
         $formGem[] = $element;
@@ -122,8 +123,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'length' => (object) array(
                                             'min' => '10',
                                             'max' => '20'
-                                        )
-                                    )
+                                         )
+                                     )
                                 )
                             );
         $formGem[] = $element;
@@ -145,8 +146,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'length' => (object) array(
                                             'min' => '',
                                             'max' =>''
-                                        )
-                                    )
+                                         )
+                                     )
                                 )
                             );
         $formGem[] = $element;
@@ -165,8 +166,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'length' =>   (object) array(
                                             'min' => '10',
                                             'max' => '20'
-                                        )
-                                    )
+                                         )
+                                     )
                                 )
                             );
         $formGem[] = $element;
@@ -184,8 +185,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'length' => (object) array(
                                             'min' => '',
                                             'max' =>''
-                                        )
-                                    )
+                                         )
+                                     )
                                 )
                             );
         $formGem[] = $element;
@@ -208,8 +209,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'length' => (object) array(
                                             'min' => '',
                                             'max' =>''
-                                        )
-                                    )
+                                         )
+                                     )
                                 )
                             );
         $formGem[] = $element;
@@ -232,8 +233,8 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                                          'length' => (object) array(
                                             'min' => '',
                                             'max' =>''
-                                        )
-                                    )
+                                         )
+                                     )
                                 )
                             );
         $formGem[] = $element;

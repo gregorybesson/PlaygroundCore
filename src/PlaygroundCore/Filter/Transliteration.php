@@ -13,15 +13,15 @@ namespace PlaygroundCore\Filter;
  * obtain it through the world-wide-web, please send an email
  * to mhujer@gmail.com so I can send you a copy immediately.
  *
- * @category   	Mhujer
- * @package    	Mhujer_View_Helper
- * @author 		Martin Hujer mhujer@gmail.com
+ * @category    Mhujer
+ * @package     Mhujer_View_Helper
+ * @author      Martin Hujer mhujer@gmail.com
  */
 
 /**
  * @category   Mhujer
  * @package    Mhujer_Filter
- * @author 	   Martin Hujer mhujer@gmail.com
+ * @author     Martin Hujer mhujer@gmail.com
  */
 class Transliteration implements \Zend\Filter\FilterInterface
 {

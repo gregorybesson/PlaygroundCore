@@ -107,5 +107,4 @@ class TwitterCard extends AbstractHelper
     {
         $this->request = $request;
     }
-
 }

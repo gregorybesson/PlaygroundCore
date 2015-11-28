@@ -25,7 +25,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-    public function testPopulate() 
+    public function testPopulate()
     {
         $websiteEntity = new WebsiteEntity;
         $websiteEntity->populate($this->website);
@@ -33,7 +33,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->website["code"], $websiteEntity->getCode());
         $this->assertEquals($this->website["default"], $websiteEntity->getDefault());
         $this->assertEquals($this->website["locales"], $websiteEntity->getLocales());
-        $this->assertEquals($this->website["active"], $websiteEntity->getActive());          
+        $this->assertEquals($this->website["active"], $websiteEntity->getActive());
 
         unset($websiteEntity);
     }
@@ -62,7 +62,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         unset($websiteEntity);
     }
 
-     public function testGetFalg()
+    public function testGetFalg()
     {
         $websiteEntity = new WebsiteEntity;
         $websiteEntity->populate($this->website);

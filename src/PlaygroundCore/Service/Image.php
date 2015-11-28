@@ -6,11 +6,11 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 
 /**
- * 
+ *
  * @author AdFab
- * 
+ *
  * require php_exif for some methods
- * 
+ *
  * TODO only jpeg is possible for now, it would be nice to allow png, gif, ...
  *
  */
@@ -24,7 +24,7 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
      */
     protected $image;
     
-    public function __construct(/*$file*/)
+    public function __construct()
     {
         /*if (!file_exists($file)) {
             throw new \Exception('Not a file: "' . $file . '"', null, null);
@@ -74,16 +74,16 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
         } catch (\Exception $e) {
             return $this;
         }
-        if(!empty($exif['Orientation'])) {
-            switch($exif['Orientation']) {
+        if (!empty($exif['Orientation'])) {
+            switch ($exif['Orientation']) {
                 case 8:
-                    $this->image = imagerotate($this->image,90,0);
+                    $this->image = imagerotate($this->image, 90, 0);
                     break;
                 case 3:
-                    $this->image = imagerotate($this->image,180,0);
+                    $this->image = imagerotate($this->image, 180, 0);
                     break;
                 case 6:
-                    $this->image = imagerotate($this->image,-90,0);
+                    $this->image = imagerotate($this->image, -90, 0);
                     break;
             }
         }
@@ -129,5 +129,4 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
         $this->serviceManager = $serviceManager;
         return $this;
     }
-    
 }

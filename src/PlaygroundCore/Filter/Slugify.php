@@ -60,7 +60,7 @@ class Slugify extends \Zend\Filter\AbstractUnicode
 
         $value = strtr($value, $unwanted_array);
 
-        $value = iconv("UTF-8","ASCII//TRANSLIT",$value);
+        $value = iconv("UTF-8", "ASCII//TRANSLIT", $value);
         $value = strtolower($value);
         $value = str_replace("'", '', $value);
         $value = preg_replace('([^a-zA-Z0-9_-]+)', '-', $value);

@@ -97,8 +97,8 @@ return array(
                 'type' => 'PlaygroundCore\Mvc\Router\Http\RegexSlash',
                 'priority' => -1000,
                 'options' => array(
-                    'regex' => '\/(?<locale>([a-z]{2})(\/|\z)+)?(?<channel>(embed|facebook|platform|mobile|preview)+)?\/?',
-                    'spec' => '/%channel%/',
+                    'regex' => '\/(?<locale>([a-z_-]{2,5})(\/|\z)+)?\/?',
+                    'spec' => '/',
                 ),
                 'child_routes' => array(
                     'locale' => array(

@@ -181,7 +181,6 @@ class elFinder
 
         // "mount" volumes
         if (isset($opts['roots']) && is_array($opts['roots'])) {
-
             foreach ($opts['roots'] as $i => $o) {
                 $class = 'elFinderVolume'.(isset($o['driver']) ? $o['driver'] : '');
 
@@ -472,7 +471,6 @@ class elFinder
         // get folders trees
         if ($args['tree']) {
             foreach ($this->volumes as $id => $v) {
-
                 if (($tree = $v->tree('', 0, $cwd['hash'])) != false) {
                     $files = array_merge($files, $tree);
                 }
@@ -1149,5 +1147,4 @@ class elFinder
 
         return (double) $time[1] + (double) $time[0];
     }
-
 } // END class

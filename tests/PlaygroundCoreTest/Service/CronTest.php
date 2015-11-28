@@ -94,7 +94,7 @@ class CronTest extends \PHPUnit_Framework_TestCase
 
         $retour = $cronService->getPending();
         $this->assertInternalType('array', $retour);
-        $this->assertEmpty($retour); 
+        $this->assertEmpty($retour);
 
     }
     
@@ -337,7 +337,7 @@ class CronTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testMatchTimeWithMoreThanFiveArgs($time = null, string $expr = null )
+    public function testMatchTimeWithMoreThanFiveArgs($time = null, string $expr = null)
     {
         $expr = '0-5,10-59/5 * 2-10,15-25 january-june/2 mon-fri OneMoreArgument';
 
@@ -345,7 +345,7 @@ class CronTest extends \PHPUnit_Framework_TestCase
         $retour = $cronService::matchTime($time, $expr);
     }
     
-    public function testMatchTimeWithCorrectValue($time = null, string $expr = null )
+    public function testMatchTimeWithCorrectValue($time = null, string $expr = null)
     {
         $expr = '* * 2-10 january-june *'; // Toutes les heures, toutes les minutes du 2 au 10 entre le mois de janvier et juin
         $time = 1357640100; // 8 Janvier 2013 à 10h15
@@ -357,7 +357,7 @@ class CronTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($retour);
     }
     
-    public function testMatchTimeWithIncorrectValue($time = null, string $expr = null )
+    public function testMatchTimeWithIncorrectValue($time = null, string $expr = null)
     {
         $expr = '* * 2-10 january-june *'; // Toutes les heures, toutes les minutes du 2 au 10 entre le mois de janvier et juin
         $time = 1383905700; // 8 Novembre 2013 à 10h15
@@ -373,7 +373,8 @@ class CronTest extends \PHPUnit_Framework_TestCase
     {
         $cronService = $this->getMock(
             'PlaygroundCore\Service\Cron',
-            array('schedule', 'process', 'cleanup'));
+            array('schedule', 'process', 'cleanup')
+        );
         
         $cronService
         ->expects($this->once())
@@ -396,7 +397,8 @@ class CronTest extends \PHPUnit_Framework_TestCase
     {
         $cronService = $this->getMock(
             'PlaygroundCore\Service\Cron',
-            array('recoverRunning', 'cleanLog'));
+            array('recoverRunning', 'cleanLog')
+        );
         
         $cronService
         ->expects($this->once())
@@ -410,5 +412,4 @@ class CronTest extends \PHPUnit_Framework_TestCase
         $retour = $cronService->cleanup();
         $this->assertInstanceOf('PlaygroundCore\Service\Cron', $retour);
     }
-
 }

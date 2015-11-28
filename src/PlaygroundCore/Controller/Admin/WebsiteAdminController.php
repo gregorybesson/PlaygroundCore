@@ -15,42 +15,41 @@ use Zend\View\Model\ViewModel;
 class WebsiteAdminController extends AbstractActionController
 {
 
-	protected $websiteService;
+    protected $websiteService;
 
-	protected $localeService;
+    protected $localeService;
 
-	public function indexAction()
-	{
-		return new ViewModel();
-	}
+    public function indexAction()
+    {
+        return new ViewModel();
+    }
 
-	public function listAction()
-	{
+    public function listAction()
+    {
         $locales = $this->getLocaleService()->getLocaleMapper()->findBy(array('active_front' => 1));
         $user = $this->zfcUserAuthentication()->getIdentity();
 
         $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
 
         return new ViewModel(compact("websites", "locales", "user"));
-	}
+    }
 
-	public function editActiveAction()
-	{
-		$websiteId = $this->getEvent()->getRouteMatch()->getParam('websiteId');
-		$website = $this->getWebsiteService()->getWebsiteMapper()->findBy(array('id' => $websiteId));
-		$website = $website[0];
+    public function editActiveAction()
+    {
+        $websiteId = $this->getEvent()->getRouteMatch()->getParam('websiteId');
+        $website = $this->getWebsiteService()->getWebsiteMapper()->findBy(array('id' => $websiteId));
+        $website = $website[0];
 
-        if($website->getDefault()) {
-
+        if ($website->getDefault()) {
             return $this->redirect()->toRoute('admin');
         }
-		$website->setActive(!$website->getActive());
-		$this->getWebsiteService()->getWebsiteMapper()->update($website);
+        $website->setActive(!$website->getActive());
+        $this->getWebsiteService()->getWebsiteMapper()->update($website);
 
         return $this->redirect()->toRoute('admin');
-	}
+    }
 
-	public function getWebsiteService()
+    public function getWebsiteService()
     {
         if (null === $this->websiteService) {
             $this->websiteService = $this->getServiceLocator()->get('playgroundcore_website_service');

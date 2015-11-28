@@ -1,5 +1,6 @@
 <?php
 namespace PlaygroundCore\Service;
+
 /*
 * Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
 * For licensing, see LICENSE.html or http://ckeditor.com/license
@@ -143,10 +144,11 @@ class CKEditor
         $_config = $this->configSettings($config, $events);
 
         $js = $this->returnGlobalEvents();
-        if (!empty($_config))
+        if (!empty($_config)) {
             $js .= "CKEDITOR.replace('".$name."', ".$this->jsEncode($_config).");";
-        else
+        } else {
             $js .= "CKEDITOR.replace('".$name."');";
+        }
 
         $out .= $this->script($js);
 
@@ -489,7 +491,7 @@ class CKEditor
             /**
              * realpath - Returns canonicalized absolute pathname
              */
-            $realPath = realpath( './' ) ;
+            $realPath = realpath('./') ;
         }
 
         /**
@@ -532,7 +534,7 @@ class CKEditor
             return str_replace(',', '.', $val);
         }
         if (is_array($val) || is_object($val)) {
-            if (is_array($val) && (array_keys($val) === range(0,count($val)-1))) {
+            if (is_array($val) && (array_keys($val) === range(0, count($val)-1))) {
                 return '[' . implode(',', array_map(array($this, 'jsEncode'), $val)) . ']';
             }
             $temp = array();
@@ -543,10 +545,12 @@ class CKEditor
             return '{' . implode(',', $temp) . '}';
         }
         // String otherwise
-        if (strpos($val, '@@') === 0)
+        if (strpos($val, '@@') === 0) {
             return substr($val, 2);
-        if (strtoupper(substr($val, 0, 9)) == 'CKEDITOR.')
+        }
+        if (strtoupper(substr($val, 0, 9)) == 'CKEDITOR.') {
             return $val;
+        }
 
         return '"' . str_replace(array("\\", "/", "\n", "\t", "\r", "\x08", "\x0c", '"'), array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'), $val) . '"';
     }

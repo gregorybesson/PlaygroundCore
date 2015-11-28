@@ -12,7 +12,6 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\Factory as InputFactory;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
 /**
  * @ORM\Entity @HasLifecycleCallbacks
  * @ORM\Table(name="website")
@@ -112,7 +111,7 @@ class Website implements InputFilterAwareInterface
      */
     public function getName()
     {
-    	return $this->name;
+        return $this->name;
     }
 
     /**
@@ -121,9 +120,9 @@ class Website implements InputFilterAwareInterface
      */
     public function setName($name)
     {
-    	$this->name = (string) $name;
+        $this->name = (string) $name;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -131,7 +130,7 @@ class Website implements InputFilterAwareInterface
      */
     public function getCode()
     {
-    	return $this->code;
+        return $this->code;
     }
 
     /**
@@ -140,9 +139,9 @@ class Website implements InputFilterAwareInterface
      */
     public function setCode($code)
     {
-    	$this->code = (string) $code;
+        $this->code = (string) $code;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -208,9 +207,9 @@ class Website implements InputFilterAwareInterface
      */
     public function addLocale($locale)
     {
-    	$this->locales[] = $locale;
+        $this->locales[] = $locale;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -267,17 +266,17 @@ class Website implements InputFilterAwareInterface
      */
     public function populate($data = array())
     {
-    	if (isset($data['name']) && $data['name'] != null) {
+        if (isset($data['name']) && $data['name'] != null) {
             $this->name = $data['name'];
         }
         if (isset($data['code']) && $data['code'] != null) {
-        	$this->code = $data['code'];
+            $this->code = $data['code'];
         }
         if (isset($data['phase']) && $data['phase'] != null) {
-        	$this->phase = $data['phase'];
+            $this->phase = $data['phase'];
         }
         if (isset($data['active']) && $data['active'] != null) {
-        	$this->active = $data['active'];
+            $this->active = $data['active'];
         }
     }
 

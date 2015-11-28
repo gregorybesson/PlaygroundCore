@@ -50,7 +50,7 @@ class ElfinderController extends AbstractActionController
         $this->getConfig();
 
         $root = array();
-        if(isset($this->Config['QuRoots'])){
+        if (isset($this->Config['QuRoots'])) {
             $root = $this->Config['QuRoots'];
         }
 
@@ -89,7 +89,7 @@ class ElfinderController extends AbstractActionController
     {
         if (!$this->Config) {
             $config       = $this->getServiceLocator()->get('config');
-            if(isset($config['playgroundcore']) && isset($config['playgroundcore']['QuConfig']) && isset($config['playgroundcore']['QuConfig']['QuElFinder'])){
+            if (isset($config['playgroundcore']) && isset($config['playgroundcore']['QuConfig']) && isset($config['playgroundcore']['QuConfig']['QuElFinder'])) {
                 $this->Config = $config['playgroundcore']['QuConfig']['QuElFinder'];
             } else {
                 $this->Config = array();
@@ -98,5 +98,4 @@ class ElfinderController extends AbstractActionController
 
         return $this->Config;
     }
-
 }

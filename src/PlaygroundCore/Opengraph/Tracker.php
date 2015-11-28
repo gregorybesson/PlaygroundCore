@@ -60,21 +60,22 @@ class Tracker
         }
 
         $done = false;
-        foreach($this->tags as $k=>$tg){
-            if ($tg->getProperty() == $tag->getProperty()){
+        foreach ($this->tags as $k => $tg) {
+            if ($tg->getProperty() == $tag->getProperty()) {
                 $this->tags[$k] = $tag;
                 $done = true;
                 break;
             }
         }
-        if (!$done)
+        if (!$done) {
             $this->tags[] = $tag;
+        }
     }
 
     public function removeTag($property)
     {
-        foreach($this->tags as $k=>$tg){
-            if ($tg->getProperty() == $property){
+        foreach ($this->tags as $k => $tg) {
+            if ($tg->getProperty() == $property) {
                 unset($this->tags[$k]);
                 break;
             }

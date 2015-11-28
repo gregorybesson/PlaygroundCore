@@ -22,7 +22,7 @@ class SwitchLocaleWidget extends AbstractHelper
             return;
         }
 
-        if(empty($options['context'])){
+        if (empty($options['context'])) {
             $locales['locales'] = $this->getLocaleService()->getLocaleMapper()->findAll();
             $locales['context'] = null;
 
@@ -30,19 +30,19 @@ class SwitchLocaleWidget extends AbstractHelper
         }
         $activeFilter = 'active_'.$options['context'];
         $filters = array($activeFilter => 1);
-        if($options['context'] == 'front') {
+        if ($options['context'] == 'front') {
             $locale = str_replace("/", "", $this->getRouteMatch()->getParam('locale'));
             $websites = $this->getWebsiteService()->getWebsiteMapper()->findBy(array('code' => $locale));
-            if(empty($websites)){
-               return array('locales' => array());
+            if (empty($websites)) {
+                return array('locales' => array());
             }
             $website = $websites[0];
             $locales['locales'] = $website->getLocales();
-            if(count($locales['locales']) == 1) {
+            if (count($locales['locales']) == 1) {
                 return array('locales' => array());
             }
         } else {
-           $locales['locales'] = $this->getLocaleService()->getLocaleMapper()->findBy($filters);
+            $locales['locales'] = $this->getLocaleService()->getLocaleMapper()->findBy($filters);
         }
 
         $locales['context'] = $options['context'];
@@ -57,7 +57,7 @@ class SwitchLocaleWidget extends AbstractHelper
     */
     public function getLocaleService()
     {
-        if($this->localeService === null){
+        if ($this->localeService === null) {
             $this->localeService = $this->getServiceLocator()->get('playgroundcore_locale_service');
         }
         return $this->localeService;
@@ -76,7 +76,7 @@ class SwitchLocaleWidget extends AbstractHelper
         $this->routeMatch = $routeMatch;
     }
 
-     public function getRouteMatch()
+    public function getRouteMatch()
     {
 
         return $this->routeMatch;

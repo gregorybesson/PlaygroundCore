@@ -22,7 +22,7 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
         
         $retour = $optionsTest->getDefaultShareMessage();
         $this->assertInternalType(gettype($testMessage), $retour);
-        $this->assertEquals($testMessage, $retour); 
+        $this->assertEquals($testMessage, $retour);
     }
     
     public function testSetAndGetAdServing()

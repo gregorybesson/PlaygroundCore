@@ -140,7 +140,7 @@ class ModuleOptions extends AbstractOptions
         return $this->twilio;
     }
 
-	/**
+    /**
      * @param multitype: $twilio
      */
     public function setTwilio($twilio)
@@ -164,7 +164,7 @@ class ModuleOptions extends AbstractOptions
         $this->phpvideotoolkit = $phpvideotoolkit;
     }
     
-	public function getOptions()
+    public function getOptions()
     {
         return $this->options;
     }

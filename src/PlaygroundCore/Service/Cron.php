@@ -270,7 +270,9 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
 
                 $job = new Entity\Cronjob;
                 if ($this->matchTime(
-                    $scheduleTimestamp, $item['frequency'])) {
+                    $scheduleTimestamp,
+                    $item['frequency']
+                )) {
                     $job
                         ->setCode($code)
                         ->setStatus(Mapper\Cronjob::STATUS_PENDING)
@@ -364,8 +366,11 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
      * @see Registry::register()
      */
     public static function register(
-        $code, $frequency, $callback, array $args = array())
-    {
+        $code,
+        $frequency,
+        $callback,
+        array $args = array()
+    ) {
         Registry::register($code, $frequency, $callback, $args);
     }
 
@@ -428,12 +433,14 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
         $cronExpr = preg_split('/\s+/', $expr, null, PREG_SPLIT_NO_EMPTY);
         if (count($cronExpr) !== 5) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'cron expression should have exactly 5 arguments, "%s" given',
-                    $expr
+                'cron expression should have exactly 5 arguments, "%s" given',
+                $expr
             ));
         }
 
-        if (is_string($time)) $time = strtotime($time);
+        if (is_string($time)) {
+            $time = strtotime($time);
+        }
 
         $date = getdate($time);
 
@@ -490,16 +497,16 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
             $arg = explode('/', $expr);
             if (count($arg) !== 2) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                        'invalid cron expression component: '
-                        . 'expecting match/modulus, "%s" given',
-                        $expr
+                    'invalid cron expression component: '
+                    . 'expecting match/modulus, "%s" given',
+                    $expr
                 ));
             }
             if (!is_numeric($arg[1])) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                        'invalid cron expression component: '
-                        . 'expecting numeric modulus, "%s" given',
-                        $expr
+                    'invalid cron expression component: '
+                    . 'expecting numeric modulus, "%s" given',
+                    $expr
                 ));
             }
 
@@ -513,30 +520,28 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
         if ($expr === '*') {
             $from = 0;
             $to   = 60;
-        }
-        //handle range
+        } //handle range
         elseif (strpos($expr, '-') !== false) {
             $arg = explode('-', $expr);
             if (count($arg) !== 2) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                        'invalid cron expression component: '
-                        . 'expecting from-to structure, "%s" given',
-                        $expr
+                    'invalid cron expression component: '
+                    . 'expecting from-to structure, "%s" given',
+                    $expr
                 ));
             }
-            if(!is_numeric($arg[0])) {
+            if (!is_numeric($arg[0])) {
                 $from = self::exprToNumeric($arg[0]);
             } else {
                 $from = $arg[0];
             }
-            if(!is_numeric($arg[1])) {
+            if (!is_numeric($arg[1])) {
                 $to = self::exprToNumeric($arg[1]);
             } else {
                 $to = $arg[1];
             }
 
-        }
-        //handle regular token
+        } //handle regular token
         else {
             $from = self::exprToNumeric($expr);
             $to = $from;
@@ -544,9 +549,9 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
 
         if ($from === false || $to === false) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'invalid cron expression component: '
-                    . 'expecting numeric or valid string, "%s" given',
-                    $expr
+                'invalid cron expression component: '
+                . 'expecting numeric or valid string, "%s" given',
+                $expr
             ));
         }
 

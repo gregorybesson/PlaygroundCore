@@ -23,7 +23,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-    public function testPopulate() 
+    public function testPopulate()
     {
         $formgenEntity = new FormgenEntity;
         $formgenEntity->populate($this->formgen);
@@ -34,5 +34,4 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
         
     }
-
 }

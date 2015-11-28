@@ -12,7 +12,6 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\Factory as InputFactory;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
 /**
  * @ORM\Entity @HasLifecycleCallbacks
  * @ORM\Table(name="formgen")

@@ -273,7 +273,6 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver
         }
 
         switch ($mode) {
-
             case 'propresize':
                 $result = $this->imgResize($img, $width, $height, true, true);
                 break;
@@ -292,7 +291,6 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver
         }
 
         if ($result) {
-
             $sql = sprintf('UPDATE %s SET content=LOAD_FILE("%s"), mtime=UNIX_TIMESTAMP() WHERE id=%d', $this->tbf, $this->loadFilePath($img), $path);
 
             if (!$this->query($sql)) {
@@ -630,7 +628,7 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver
      * @return resource|false
      * @author Dmitry (dio) Levashov
      **/
-    protected function _fopen($path, $mode='rb')
+    protected function _fopen($path, $mode = 'rb')
     {
         $fp = $this->tmbPath
             ? @fopen($this->tmpname($path), 'w+')
@@ -658,7 +656,7 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver
      * @return bool
      * @author Dmitry (dio) Levashov
      **/
-    protected function _fclose($fp, $path='')
+    protected function _fclose($fp, $path = '')
     {
         @fclose($fp);
         if ($path) {
@@ -938,5 +936,4 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver
     {
         return false;
     }
-
 } // END class

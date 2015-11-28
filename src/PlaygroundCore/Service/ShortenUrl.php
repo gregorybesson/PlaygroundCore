@@ -28,7 +28,7 @@ class ShortenUrl extends EventProvider implements ServiceManagerAwareInterface
      */
     public function shortenUrl($url)
     {
-        if($this->getOptions()->getBitlyApiKey() && $this->getOptions()->getBitlyUsername()){
+        if ($this->getOptions()->getBitlyApiKey() && $this->getOptions()->getBitlyUsername()) {
             $client = new \Zend\Http\Client($this->getOptions()->getBitlyUrl());
             $client->setParameterGet(array(
                 'format'  => 'json',

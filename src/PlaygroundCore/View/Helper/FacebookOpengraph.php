@@ -65,7 +65,7 @@ class FacebookOpengraph extends AbstractHelper
         if (!$container instanceof HeadMeta) {
             throw new RuntimeException(sprintf(
                 'Container %s does not extend HeadMeta view helper',
-                 $this->getContainer()
+                $this->getContainer()
             ));
         }
 

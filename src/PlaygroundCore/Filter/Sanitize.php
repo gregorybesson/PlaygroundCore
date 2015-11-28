@@ -13,9 +13,9 @@ namespace PlaygroundCore\Filter;
  * obtain it through the world-wide-web, please send an email
  * to mhujer@gmail.com so I can send you a copy immediately.
  *
- * @category   	Mhujer
- * @package    	Mhujer_View_Helper
- * @author 		Martin Hujer mhujer@gmail.com
+ * @category    Mhujer
+ * @package     Mhujer_View_Helper
+ * @author      Martin Hujer mhujer@gmail.com
  */
 
 /**
@@ -32,7 +32,7 @@ use PlaygroundCore\Filter\Transliteration;
 /**
  * @category   Mhujer
  * @package    Mhujer_Filter
- * @author 	   Martin Hujer mhujer@gmail.com
+ * @author     Martin Hujer mhujer@gmail.com
  */
 
 
@@ -318,7 +318,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
         if (count($this->getNotReplacedChars()) == 0) {
             $reg = '~[^-a-z0-9_]+~';
         } else {
-            $reg = '~[^-a-z0-9_' . implode('',$this->getNotReplacedChars()) .']+~';
+            $reg = '~[^-a-z0-9_' . implode('', $this->getNotReplacedChars()) .']+~';
         }
         return preg_replace($reg, '', $s);
     }

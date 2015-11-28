@@ -76,10 +76,10 @@ class Message implements ServiceManagerAwareInterface
                          ->get('Zend\View\Resolver\TemplatePathStack');
 
         // check if plain text email template exist
-        if($resolver->resolve($nameOrModel . '-plain')) {
+        if ($resolver->resolve($nameOrModel . '-plain')) {
             $contentText = $renderer->render($nameOrModel . '-plain', $values);
             $text = new MimePart($contentText);
-        }else {
+        } else {
             $text = new MimePart('');
         }
         $text->type = "text/plain";

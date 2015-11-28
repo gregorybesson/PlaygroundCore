@@ -409,7 +409,7 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver
      * @return resource|false
      * @author Dmitry (dio) Levashov
      **/
-    protected function _fopen($path, $mode='rb')
+    protected function _fopen($path, $mode = 'rb')
     {
         return @fopen($path, 'r');
     }
@@ -421,7 +421,7 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver
      * @return bool
      * @author Dmitry (dio) Levashov
      **/
-    protected function _fclose($fp, $path='')
+    protected function _fclose($fp, $path = '')
     {
         return @fclose($fp);
     }
@@ -824,7 +824,7 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver
                 // create unique name for directory
                 $name = basename($path);
                 if (preg_match('/\.((tar\.(gz|bz|bz2|z|lzo))|cpio\.gz|ps\.gz|xcf\.(gz|bz2)|[a-z0-9]{1,4})$/i', $name, $m)) {
-                    $name = substr($name, 0,  strlen($name)-strlen($m[0]));
+                    $name = substr($name, 0, strlen($name)-strlen($m[0]));
                 }
                 $test = dirname($path).DIRECTORY_SEPARATOR.$name;
                 if (file_exists($test) || is_link($test)) {
@@ -872,5 +872,4 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver
 
         return file_exists($path) ? $path : false;
     }
-
 } // END class

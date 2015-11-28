@@ -19,6 +19,6 @@ class FormgenControllerTest extends AbstractHttpControllerTestCase
 
     public function testViewAction()
     {
-    	$this->assertTrue(true);
+        $this->assertTrue(true);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace PlaygroundCoreTest\Filter;
 
-
-
 class CronTest extends \PHPUnit_Framework_TestCase
 {
     protected $traceError = true;
@@ -11,7 +9,7 @@ class CronTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->slugify  = new \PlaygroundCore\Filter\Slugify; 
+        $this->slugify  = new \PlaygroundCore\Filter\Slugify;
     }
 
     public function testSlugify()
@@ -36,5 +34,4 @@ class CronTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("prosegmeno-tamplo", $return);
 
     }
-
 }

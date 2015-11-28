@@ -21,12 +21,12 @@ class Blacklist extends AbstractValidator
     {
 
         if (is_string($options)) {
-			$this->options = array('file' => str_replace('\\', '/', getcwd()) . '/' . ltrim($options, '/'));
-        } elseif(is_array($options)){
+            $this->options = array('file' => str_replace('\\', '/', getcwd()) . '/' . ltrim($options, '/'));
+        } elseif (is_array($options)) {
             $this->options = array('file' => str_replace('\\', '/', getcwd()) . $options[0]);
         }
 
-		parent::__construct($options);
+        parent::__construct($options);
 
     }
 
@@ -62,11 +62,11 @@ class Blacklist extends AbstractValidator
     {
         $this->setValue(strtolower($value));
 
-		if(strpos(file_get_contents($this->getFile()), strtolower($value)) !== false) {
-		    $this->error(self::FORBIDDEN);
-           	return false;
-		}
+        if (strpos(file_get_contents($this->getFile()), strtolower($value)) !== false) {
+            $this->error(self::FORBIDDEN);
+            return false;
+        }
  
-       	return true;
+        return true;
     }
 }

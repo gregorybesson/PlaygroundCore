@@ -232,7 +232,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     )
                 );
                 $values = array();
-                foreach($innerData as $value){
+                foreach ($innerData as $value) {
                     $values[] = $value->label;
                 }
                 $element->setValueOptions($values);
@@ -328,14 +328,14 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                             array('name' => '\Zend\Validator\File\Size', 'options' => array('max' => 10*1024*1024)),
                             array('name' => '\Zend\Validator\File\Extension', 'options'  => array('png,PNG,jpg,JPG,jpeg,JPEG,gif,GIF', 'messages' => array(
                             \Zend\Validator\File\Extension::FALSE_EXTENSION => 'Veuillez télécharger une image' ))
-                        ),
+                            ),
                     ),
                 )));
 
             }
 
-             if (isset($element->line_radio)) {
-                 $attributes  = $element->line_radio[0];
+            if (isset($element->line_radio)) {
+                $attributes  = $element->line_radio[0];
                 $name        = isset($attributes->name)? $attributes->name : '';
                 $type        = isset($attributes->type)? $attributes->type : '';
                 $position    = isset($attributes->order)? $attributes->order : '';
@@ -355,15 +355,15 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
 
                 $element->setAttributes(
                     array(
-                        'name'     => $name,
-                        'required'      => $required,
-                        'allowEmpty'    => !$required,
-                        'class'         => $class,
-                        'id'            => $id
+                       'name'     => $name,
+                       'required'      => $required,
+                       'allowEmpty'    => !$required,
+                       'class'         => $class,
+                       'id'            => $id
                     )
                 );
                 $values = array();
-                foreach($innerData as $value){
+                foreach ($innerData as $value) {
                     $values[] = $value->label;
                 }
                 $element->setValueOptions($values);
@@ -400,7 +400,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     )
                 );
                 $values = array();
-                foreach($dropdownValues as $value){
+                foreach ($dropdownValues as $value) {
                     $values[] = $value->dropdown_label;
                 }
                 $element->setValueOptions($values);

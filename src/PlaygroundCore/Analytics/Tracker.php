@@ -141,8 +141,9 @@ class Tracker
 
     public function setDomainName($domain_name)
     {
-        if (!is_string($domain_name))
+        if (!is_string($domain_name)) {
             throw new InvalidArgumentException('$domain_name is not a string');
+        }
 
         $this->domainName = $domain_name;
     }

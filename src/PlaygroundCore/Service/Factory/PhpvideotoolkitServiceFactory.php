@@ -40,22 +40,16 @@ class PhpvideotoolkitServiceFactory implements FactoryInterface
             throw new InvalidArgumentException('No phpvideotoolkit configuration found');
         }
 
-        try
-        {
+        try {
             $config = new \PHPVideoToolkit\Config($phpvideotoolkitOptions);
-        }
-        catch(\PHPVideoToolkit\Exception $e)
-        {
+        } catch (\PHPVideoToolkit\Exception $e) {
             throw new InvalidArgumentException('phpvideotoolkit error during configuration load');
             // \PHPVideoToolkit\Trace::vars($e);
         }
         
-        try
-        {
+        try {
             $service = new \PHPVideoToolkit\FfmpegProcess('ffmpeg', $config);
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             throw new InvalidArgumentException('phpvideotoolkit process creation error');
             // \PHPVideoToolkit\Trace::vars($e->getMessage());
             // \PHPVideoToolkit\Trace::vars($e);

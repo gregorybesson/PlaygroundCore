@@ -25,14 +25,14 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-    public function testPopulate() 
+    public function testPopulate()
     {
         $localeEntity = new LocaleEntity;
         $localeEntity->populate($this->locale);
         $this->assertEquals($this->locale["name"], $localeEntity->getName());
         $this->assertEquals($this->locale["locale"], $localeEntity->getLocale());
         $this->assertEquals($this->locale["active_back"], $localeEntity->getActiveBack());
-        $this->assertEquals($this->locale["active_front"], $localeEntity->getActiveFront());  
+        $this->assertEquals($this->locale["active_front"], $localeEntity->getActiveFront());
     }
 
     public function testTimestampables()
@@ -63,5 +63,4 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $localeEntity->setId($id);
         $this->assertEquals($id, $localeEntity->getId());
     }
-
 }

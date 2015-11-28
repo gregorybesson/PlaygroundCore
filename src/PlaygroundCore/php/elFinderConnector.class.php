@@ -34,7 +34,7 @@ class elFinderConnector
      * @return void
      * @author Dmitry (dio) Levashov
      **/
-    public function __construct($elFinder, $debug=false)
+    public function __construct($elFinder, $debug = false)
     {
         $this->elFinder = $elFinder;
         if ($debug) {
@@ -131,5 +131,4 @@ class elFinderConnector
         }
 
     }
-
 }// END class

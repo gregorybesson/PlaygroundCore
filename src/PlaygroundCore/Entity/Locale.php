@@ -11,7 +11,6 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\Factory as InputFactory;
 
-
 /**
  * @ORM\Entity @HasLifecycleCallbacks
  * @ORM\Table(name="locale")
@@ -209,7 +208,7 @@ class Locale implements InputFilterAwareInterface
     {
         $flags = explode('_', $this->getLocale());
 
-        if(empty($flags[1])) {
+        if (empty($flags[1])) {
             return '';
         }
 

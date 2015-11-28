@@ -35,16 +35,16 @@ class Module implements
             //translator
 
             // Gestion locale pour le back
-            if($serviceManager->get('router')->match($serviceManager->get('request')) && strpos($serviceManager->get('router')->match($serviceManager->get('request'))->getMatchedRouteName(), 'admin') !==false){
+            if ($serviceManager->get('router')->match($serviceManager->get('request')) && strpos($serviceManager->get('router')->match($serviceManager->get('request'))->getMatchedRouteName(), 'admin') !==false) {
                 if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_back')) {
                     $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_back');
                 }
             }
 
-            if(empty($locale)){
-                if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
+            if (empty($locale)) {
+                if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
                     $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-                }else{
+                } else {
                     $locale = 'fr_FR';
                 }
             }
@@ -60,7 +60,7 @@ class Module implements
         // positionnement de la langue pour les traductions de date avec strftime
         setlocale(LC_TIME, "fr_FR", 'fr_FR.utf8', 'fra');
 
-        AbstractValidator::setDefaultTranslator($translator,'playgroundcore');
+        AbstractValidator::setDefaultTranslator($translator, 'playgroundcore');
 
         /*
          * Entity translation based on Doctrine Gedmo library
@@ -74,7 +74,7 @@ class Module implements
         // If no translation is found, fallback to entity data
         $translatableListener->setTranslationFallback(true);
         // set Locale
-        if(!empty($locale)){
+        if (!empty($locale)) {
             $translatableListener->setTranslatableLocale($locale);
         }
 
@@ -85,7 +85,8 @@ class Module implements
          */
         $filterChain = new \Zend\Filter\FilterChain();
         $filterChain->getPluginManager()->setInvokableClass(
-            'slugify', 'PlaygroundCore\Filter\Slugify'
+            'slugify',
+            'PlaygroundCore\Filter\Slugify'
         );
         $filterChain->attach(new Filter\Slugify());
 
@@ -123,14 +124,13 @@ class Module implements
                 list($encoded_sig, $payload) = explode('.', $fb, 2);
                 $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
                 $data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
-                $session->offsetSet('signed_request',  $data);
+                $session->offsetSet('signed_request', $data);
 
                 // This fix exists only for safari on Windows : we need to redirect the user to the page outside of iframe
                 // for the cookie to be accepted. Core just adds a 'redir_fb_page_id' var to alert controllers
                 // that they need to send the user back to FB...
 
                 if (!count($_COOKIE) > 0 && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari')) {
-
                     echo '<script type="text/javascript">' .
                     'window.top.location.href = window.location.href+"?redir_fb_page_id='. $data["page"]["id"]. '";' .
                     '</script>';
@@ -191,7 +191,7 @@ class Module implements
                     return $helper;
                 },
                 
-                'twitterCard' => function($sm) {
+                'twitterCard' => function ($sm) {
                     $viewHelper = new View\Helper\TwitterCard();
                     $viewHelper->setConfig($sm->getServiceLocator()->get('twitter-card'));
                     $viewHelper->setRequest($sm->getServiceLocator()->get('Request'));
@@ -270,12 +270,12 @@ class Module implements
                         $tracker = new Analytics\Tracker($config['id']);
 
                         if (isset($config['custom_vars'])) {
-                            foreach($config['custom_vars'] as $customVar) {
+                            foreach ($config['custom_vars'] as $customVar) {
                                 $customVarId        = $customVar['id'];
                                 $customVarName        = $customVar['name'];
                                 $customVarValue    = $customVar['value'];
                                 $customVarOptScope  = $customVar['optScope'];
-                                $customVar = new Analytics\CustomVar ($customVarId, $customVarName, $customVarValue, $customVarOptScope);
+                                $customVar = new Analytics\CustomVar($customVarId, $customVarName, $customVarValue, $customVarOptScope);
                                 $tracker->addCustomVar($customVar);
                             }
                         }
@@ -305,8 +305,8 @@ class Module implements
                         }
 
                         if (isset($config['tags'])) {
-                            foreach($config['tags'] as $type => $value) {
-                                $tag = new Opengraph\Tag ($type, $value);
+                            foreach ($config['tags'] as $type => $value) {
+                                $tag = new Opengraph\Tag($type, $value);
                                 $tracker->addTag($tag);
                             }
                         }

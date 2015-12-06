@@ -31,7 +31,7 @@ return array(
                     'password'      => 'root',
                     'dbname'        => '',
                     'charset'       => 'utf8',
-                    'driverOptions' => array(1002 => 'SET NAMES utf8'),
+                    'driverOptions' => array(1002 => 'SET sql_mode="TRADITIONAL"'),
                 )
             )
         )

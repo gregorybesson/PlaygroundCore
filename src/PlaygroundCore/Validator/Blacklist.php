@@ -1,10 +1,10 @@
 <?php
 //filename : module/TutorialValidator/src/TutorialValidator/Validator/Special.php
 namespace PlaygroundCore\Validator;
- 
+
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
-                     
+
 class Blacklist extends AbstractValidator
 {
     const FORBIDDEN = 'FORBIDDEN';
@@ -19,7 +19,6 @@ class Blacklist extends AbstractValidator
      
     public function __construct($options = null)
     {
-
         if (is_string($options)) {
             $this->options = array('file' => str_replace('\\', '/', getcwd()) . '/' . ltrim($options, '/'));
         } elseif (is_array($options)) {
@@ -27,7 +26,6 @@ class Blacklist extends AbstractValidator
         }
 
         parent::__construct($options);
-
     }
 
     /**
@@ -49,7 +47,6 @@ class Blacklist extends AbstractValidator
      */
     public function setFile($file)
     {
-
         if (empty($file) || false === stream_resolve_include_path($file)) {
             throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }

@@ -44,7 +44,6 @@ use Zend\View\Helper\AbstractHelper;
 use Zend\View\Helper\HeadScript;
 use PlaygroundCore\Analytics\Tracker;
 use Zend\Stdlib\RequestInterface;
-
 use PlaygroundCore\Exception\RuntimeException;
 
 class GoogleAnalytics extends AbstractHelper

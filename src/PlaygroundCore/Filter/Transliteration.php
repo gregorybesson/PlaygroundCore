@@ -73,7 +73,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      */
     private function _transliterateRussian($s)
     {
-        $table = array (
+        $table = array(
             "А" => "A",
             "Б" => "B",
             "В" => "V",
@@ -158,7 +158,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      */
     private function _transliterateCzech($s)
     {
-        $table = array (
+        $table = array(
             'á' => 'a',
             'č' => 'c',
             'ď' => 'd',
@@ -201,7 +201,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      */
     private function _transliterateGerman($s)
     {
-        $table = array (
+        $table = array(
             //'ä' => 'ae', //messes up with slovak -> they have ä -> a
             'ë' => 'e',
             'ï' => 'i',
@@ -225,7 +225,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      */
     private function _transliterateFrench($s)
     {
-        $table = array (
+        $table = array(
             'â' => 'a',
             'ê' => 'e',
             'î' => 'i',
@@ -253,7 +253,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      */
     private function _transliterateHungarian($s)
     {
-        $table = array (
+        $table = array(
             'á' => 'a',
             'é' => 'e',
             'í' => 'i',
@@ -322,7 +322,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      */
     private function _transliterateCroatian($s)
     {
-        $table = array (
+        $table = array(
             'Č' => 'C',
             'Ć' => 'C',
             'Ž' => 'Z',
@@ -345,7 +345,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      */
     private function _transliterateSlovak($s)
     {
-        $table = array (
+        $table = array(
             'á' => 'a',
             'Á' => 'A',
             'ä' => 'a',

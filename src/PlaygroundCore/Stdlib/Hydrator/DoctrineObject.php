@@ -50,7 +50,6 @@ class DoctrineObject extends \DoctrineModule\Stdlib\Hydrator\DoctrineObject
                     } else {
                         $value = new DateTime($value);
                     }
-
                 }
 
                 break;

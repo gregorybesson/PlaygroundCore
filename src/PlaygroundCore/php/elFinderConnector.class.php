@@ -129,6 +129,5 @@ class elFinderConnector
                 exit(json_encode($data));
             }
         }
-
     }
 }// END class

@@ -3,7 +3,6 @@
 namespace PlaygroundCore\Service;
 
 use PlaygroundCore\Entity\Locale as LocaleEntity;
-
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;

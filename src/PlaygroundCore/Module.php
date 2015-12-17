@@ -138,7 +138,7 @@ class Module implements
 
                 // This fix exists only for IE6+, when this app is embedded into an iFrame : The P3P policy has to be set.
                 $response = $e->getResponse();
-                if ($response instanceof \Zend\Http\Response && ( strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') || strpos($_SERVER['HTTP_USER_AGENT'], 'rv:11.'))) {
+                if ($response instanceof \Zend\Http\Response && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') || strpos($_SERVER['HTTP_USER_AGENT'], 'rv:11.'))) {
                     $response->getHeaders()->addHeaderLine('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
                 }
             }
@@ -207,7 +207,6 @@ class Module implements
                 },
             ),
         );
-
     }
 
     public function getServiceConfig()

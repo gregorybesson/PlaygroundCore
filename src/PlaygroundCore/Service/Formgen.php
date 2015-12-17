@@ -149,7 +149,6 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                         ),
                     ),
                 )));
-
             }
             if (isset($element->line_email)) {
                 $attributes  = $element->line_email[0];
@@ -202,7 +201,6 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                         ),
                     ),
                 )));
-
             }
             if (isset($element->line_checkbox)) {
                 $attributes  = $element->line_checkbox[0];
@@ -245,7 +243,6 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     'required' => $required,
                     'allowEmpty' => !$required,
                 )));
-
             }
             if (isset($element->line_paragraph)) {
                 $attributes  = $element->line_paragraph[0];
@@ -331,7 +328,6 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                             ),
                     ),
                 )));
-
             }
 
             if (isset($element->line_radio)) {
@@ -406,8 +402,6 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 $element->setValueOptions($values);
                 $form->add($element);
             }
-
-
         }
 
         $form->setInputFilter($inputFilter);

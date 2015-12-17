@@ -78,7 +78,6 @@ class SwitchLocaleWidget extends AbstractHelper
 
     public function getRouteMatch()
     {
-
         return $this->routeMatch;
     }
 

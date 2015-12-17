@@ -97,7 +97,6 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver
             $this->archivers['extract'] = array();
             $this->disabled[] = 'extract';
         }
-
     }
 
     /*********************************************************************/
@@ -817,8 +816,6 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver
             if (count($ls) == 1) {
                 $this->_unpack($path, $arc);
                 $result = dirname($path).DIRECTORY_SEPARATOR.$ls[0];
-
-
             } else {
                 // for several files - create new directory
                 // create unique name for directory

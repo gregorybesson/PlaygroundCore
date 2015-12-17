@@ -214,7 +214,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
                 $job
                     ->setStatus(Mapper\Cronjob::STATUS_SUCCESS)
                     ->setFinishTime(new \DateTime);
-
             } catch (\Exception $e) {
                 $job
                     ->setStatus($errorStatus)
@@ -540,7 +539,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
             } else {
                 $to = $arg[1];
             }
-
         } //handle regular token
         else {
             $from = self::exprToNumeric($expr);

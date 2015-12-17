@@ -65,7 +65,6 @@ class Message implements ServiceManagerAwareInterface
      */
     public function createHtmlMessage($from, $to, $subject, $nameOrModel, $values = array())
     {
-
         $renderer = $this->getRenderer();
 
         $content = $renderer->render($nameOrModel, $values);

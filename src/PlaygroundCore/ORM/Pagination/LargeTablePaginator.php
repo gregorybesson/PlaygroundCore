@@ -17,10 +17,10 @@ class LargeTablePaginator extends DoctrinePaginator
         if ($this->largeTableComputedCount === null) {
             $query = $this->getQuery();
             $sql = $query->getSQL();
-            if (( substr_count($sql, 'SELECT') == 1 ) &&
-                ( strpos($sql, 'GROUP BY') === false ) &&
-                ( strpos($sql, 'SUM(') === false ) &&
-                ( strpos($sql, 'COUNT(') === false )
+            if ((substr_count($sql, 'SELECT') == 1) &&
+                (strpos($sql, 'GROUP BY') === false) &&
+                (strpos($sql, 'SUM(') === false) &&
+                (strpos($sql, 'COUNT(') === false)
             ) {
                 $sql = preg_replace(array(
                     '/^SELECT ((?! FROM).+) FROM/ims',

@@ -26,7 +26,6 @@ use Zend\Filter\StringToLower;
  * @see Zend_Filter_StringTrim
  */
 use Zend\Filter\StringTrim;
-
 use PlaygroundCore\Filter\Transliteration;
 
 /**
@@ -78,7 +77,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
     {
         $filename = pathinfo($s, PATHINFO_FILENAME);
         $extension = pathinfo($s, PATHINFO_EXTENSION);
-        return $this->filterSubstring($filename).( $extension  ? '.'.$this->filterSubstring($extension) : '' );
+        return $this->filterSubstring($filename).($extension  ? '.'.$this->filterSubstring($extension) : '');
     }
 
     /**
@@ -289,7 +288,6 @@ class Sanitize implements \Zend\Filter\FilterInterface
      */
     private function _convertToAscii($s)
     {
-
         $f = new \PlaygroundCore\Filter\Transliteration;
         return $f->filter($s);
     }

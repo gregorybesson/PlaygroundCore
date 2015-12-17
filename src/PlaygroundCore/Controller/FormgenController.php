@@ -14,7 +14,7 @@ class FormgenController extends AbstractActionController
 
     public function indexAction()
     {
-        return array ();
+        return array();
     }
 
     public function listAction()
@@ -43,15 +43,13 @@ class FormgenController extends AbstractActionController
     }
     public function editAction()
     {
-
-
         if ($this->getRequest()->isPost()) {
-                $data = $this->getRequest()->getPost()->toArray();
-                $formGenService = $this->getFormgenService();
-                $formgen = $this->getFormgenService()->getFormgenMapper()->findById($data['formId']);
-                $formGenService->update($formgen, $data);
+            $data = $this->getRequest()->getPost()->toArray();
+            $formGenService = $this->getFormgenService();
+            $formgen = $this->getFormgenService()->getFormgenMapper()->findById($data['formId']);
+            $formGenService->update($formgen, $data);
 
-                return $this->redirect()->toRoute('admin/formgen/list');
+            return $this->redirect()->toRoute('admin/formgen/list');
         }
 
         $formId = $this->getEvent()->getRouteMatch()->getParam('formId');

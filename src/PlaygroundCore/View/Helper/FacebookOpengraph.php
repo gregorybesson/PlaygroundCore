@@ -5,7 +5,6 @@ use Zend\View\Helper\AbstractHelper;
 use Zend\View\Helper\HeadMeta;
 use PlaygroundCore\Opengraph\Tracker;
 use Zend\Stdlib\RequestInterface;
-
 use PlaygroundCore\Exception\RuntimeException;
 
 class FacebookOpengraph extends AbstractHelper

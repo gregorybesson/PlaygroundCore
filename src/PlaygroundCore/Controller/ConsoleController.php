@@ -17,7 +17,6 @@ class ConsoleController extends AbstractActionController
 
     public function cronAction()
     {
-
         $request = $this->getRequest();
         $response = $this->getResponse();
 

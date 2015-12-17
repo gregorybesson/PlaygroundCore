@@ -241,7 +241,6 @@ class CKEditor
             }
             $js .= "	CKEDITOR.tools.extend(config, ". $this->jsEncode($_config) .", true);";
             $js .= "} );";
-
         }
 
         $out .= $this->script($js);

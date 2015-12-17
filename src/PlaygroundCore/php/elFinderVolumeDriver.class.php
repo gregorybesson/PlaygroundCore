@@ -490,7 +490,6 @@ abstract class elFinderVolumeDriver
         } else {
             $this->imgLib = function_exists('gd_info') ? 'gd' : '';
         }
-
     }
 
     /*********************************************************************/
@@ -645,9 +644,9 @@ abstract class elFinderVolumeDriver
         $regexp = '/text\/x\-(php|c\+\+)/';
         if (($type == 'finfo' || $type == 'auto')
         && class_exists('finfo')
-        && ( $listExploded = explode(';', @finfo_file(finfo_open(FILEINFO_MIME), __FILE__)) )
-        && ( $firstListItem = array_shift($listExploded) )
-        && preg_match($regexp, $firstListItem) ) {
+        && ($listExploded = explode(';', @finfo_file(finfo_open(FILEINFO_MIME), __FILE__)))
+        && ($firstListItem = array_shift($listExploded))
+        && preg_match($regexp, $firstListItem)) {
             $type = 'finfo';
             $this->finfo = finfo_open(FILEINFO_MIME);
         } elseif (($type == 'mime_content_type' || $type == 'auto')
@@ -1738,7 +1737,7 @@ abstract class elFinderVolumeDriver
             return $this->stat($path);
         }
 
-           return false;
+        return false;
     }
 
     /**
@@ -2096,7 +2095,6 @@ abstract class elFinderVolumeDriver
                         $stat['dirs'] = isset($this->cache[$stat['target']])
                             ? intval(isset($this->cache[$stat['target']]['dirs']))
                             : $this->_subdirs($stat['target']);
-
                     } elseif ($this->_subdirs($path)) {
                         $stat['dirs'] = 1;
                     }
@@ -2110,7 +2108,6 @@ abstract class elFinderVolumeDriver
                     $tmb = $this->gettmb($p, $stat);
                     $stat['tmb'] = $tmb ? $tmb : 1;
                 }
-
             }
         }
 
@@ -2184,7 +2181,6 @@ abstract class elFinderVolumeDriver
         return $type == 'unknown' && $this->mimeDetect != 'internal'
             ? elFinderVolumeDriver::mimetypeInternalDetect($path)
             : $type;
-
     }
 
     /**
@@ -2200,7 +2196,6 @@ abstract class elFinderVolumeDriver
         $ext   = isset($pinfo['extension']) ? strtolower($pinfo['extension']) : '';
 
         return isset(elFinderVolumeDriver::$mimetypes[$ext]) ? elFinderVolumeDriver::$mimetypes[$ext] : 'unknown';
-
     }
 
     /**
@@ -2516,7 +2511,6 @@ abstract class elFinderVolumeDriver
                     return false;
                 }
             }
-
         } else {
             $mime = $source['mime'];
             $w = $h = 0;
@@ -2573,7 +2567,6 @@ abstract class elFinderVolumeDriver
             if (!$this->_rmdir($path)) {
                 return $this->setError(elFinder::ERROR_RM, $this->_path($path));
             }
-
         } else {
             if (!$this->_unlink($path)) {
                 return $this->setError(elFinder::ERROR_RM, $this->_path($path));
@@ -2702,11 +2695,10 @@ abstract class elFinderVolumeDriver
         /* If image smaller or equal thumbnail size - just fitting to thumbnail square */
         if ($s[0] <= $tmbSize && $s[1]  <= $tmbSize) {
             $result = $this->imgSquareFit($tmb, $tmbSize, $tmbSize, 'center', 'middle', $this->options['tmbBgColor'], 'png');
-
         } else {
             if ($this->options['tmbCrop']) {
                 /* Resize and crop if image bigger than thumbnail */
-                if (!(($s[0] > $tmbSize && $s[1] <= $tmbSize) || ($s[0] <= $tmbSize && $s[1] > $tmbSize) ) || ($s[0] > $tmbSize && $s[1] > $tmbSize)) {
+                if (!(($s[0] > $tmbSize && $s[1] <= $tmbSize) || ($s[0] <= $tmbSize && $s[1] > $tmbSize)) || ($s[0] > $tmbSize && $s[1] > $tmbSize)) {
                     $result = $this->imgResize($tmb, $tmbSize, $tmbSize, true, false, 'png');
                 }
 
@@ -2715,12 +2707,10 @@ abstract class elFinderVolumeDriver
                     $y = $s[1] > $tmbSize ? intval(($s[1] - $tmbSize)/2) : 0;
                     $result = $this->imgCrop($tmb, $tmbSize, $tmbSize, $x, $y, 'png');
                 }
-
             } else {
                 $result = $this->imgResize($tmb, $tmbSize, $tmbSize, true, true, $this->imgLib, 'png');
                 $result = $this->imgSquareFit($tmb, $tmbSize, $tmbSize, 'center', 'middle', $this->options['tmbBgColor'], 'png');
             }
-
         }
         if (!$result) {
             unlink($tmb);
@@ -2755,11 +2745,11 @@ abstract class elFinderVolumeDriver
         list($size_w, $size_h) = array($width, $height);
 
         if ($keepProportions == true) {
-              list($orig_w, $orig_h, $new_w, $new_h) = array($s[0], $s[1], $width, $height);
+            list($orig_w, $orig_h, $new_w, $new_h) = array($s[0], $s[1], $width, $height);
 
               /* Calculating image scale width and height */
               $xscale = $orig_w / $new_w;
-              $yscale = $orig_h / $new_h;
+            $yscale = $orig_h / $new_h;
 
               /* Resizing by biggest side */
 
@@ -2768,14 +2758,13 @@ abstract class elFinderVolumeDriver
                     $size_h = $orig_h * $width / $orig_w;
                     $size_w = $width;
                 } else {
-                      $size_w = $orig_w * $height / $orig_h;
-                      $size_h = $height;
+                    $size_w = $orig_w * $height / $orig_h;
+                    $size_h = $height;
                 }
-
             } else {
                 if ($orig_w > $orig_h) {
-                      $size_w = $orig_w * $height / $orig_h;
-                      $size_h = $height;
+                    $size_w = $orig_w * $height / $orig_h;
+                    $size_h = $height;
                 } else {
                     $size_h = $orig_h * $width / $orig_w;
                     $size_w = $width;
@@ -2812,7 +2801,7 @@ abstract class elFinderVolumeDriver
 
                 if ($img &&  false != ($tmp = imagecreatetruecolor($size_w, $size_h))) {
                     if (!imagecopyresampled($tmp, $img, 0, 0, 0, 0, $size_w, $size_h, $s[0], $s[1])) {
-                            return false;
+                        return false;
                     }
 
                     if ($destformat == 'jpg'  || ($destformat == null && $s['mime'] == 'image/jpeg')) {
@@ -2827,7 +2816,6 @@ abstract class elFinderVolumeDriver
                     imagedestroy($tmp);
 
                     return $result ? $path : false;
-
                 }
                 break;
         }
@@ -2900,7 +2888,6 @@ abstract class elFinderVolumeDriver
                     imagedestroy($tmp);
 
                     return $result ? $path : false;
-
                 }
                 break;
         }
@@ -3103,11 +3090,9 @@ abstract class elFinderVolumeDriver
             fclose($pipes[1]);
             fclose($pipes[2]);
             $return_var = proc_close($process);
-
         }
 
         return $return_var;
-
     }
 
     /**

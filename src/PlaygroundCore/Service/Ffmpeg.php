@@ -284,7 +284,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                     ->setOutputPath($target)
                     ->execute();
             } catch (FfmpegProcessOutputException $e) {
-            /*echo '<h1>Error</h1>';
+                /*echo '<h1>Error</h1>';
                 \PHPVideoToolkit\Trace::vars($e);
                 $ffmpeg = $video->getProcess();
                 if($ffmpeg->isCompleted())
@@ -300,7 +300,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                 }*/
                 throw new InvalidArgumentException('Error when merging videos');
             } catch (Exception $e) {
-            /*echo '<h1>Error</h1>';
+                /*echo '<h1>Error</h1>';
                 \PHPVideoToolkit\Trace::vars($e->getMessage());
                 echo '<h2>Exception</h2>';
                 \PHPVideoToolkit\Trace::vars($e);
@@ -316,7 +316,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     public function mergeMp3ToMp4($audioSource, $videoSource, $target)
     {
-       // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
        
         $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
@@ -329,7 +329,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     public function convertMp4ToOgv($videoSource, $target)
     {
-       // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
        
         $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
@@ -362,7 +362,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     public function convertMovToMp4($videoSource, $target)
     {
-       // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
        
         $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
@@ -381,7 +381,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     public function mergeMp4($videoSource, $target)
     {
-       // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
+        // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
        
         $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
@@ -426,7 +426,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->execute();
 
         //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
-        
+
         return $target;
     }
     
@@ -452,7 +452,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->execute();
 
         //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
-        
+
         return $target;
     }
 
@@ -474,7 +474,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->execute();
 
         //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
-        
+
         return $target;
     }
 
@@ -495,7 +495,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->execute();
 
         //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
-        
+
         return $target;
     }
 
@@ -505,7 +505,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     public function concatenateSounds($sounds = array(), $target)
     {
         // ffmpeg -y -i silence1-1.wav -i titleok.wav -i silence1-2.wav -filter_complex '[0:0][1:0][2:0]concat=n=3:v=0:a=1[out]' -map '[out]' sound1.wav
-        
+
         if (!is_array($sounds)) {
             $sounds = array($sounds);
         }
@@ -537,7 +537,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     public function mergeSounds($sounds = array(), $target)
     {
         // ffmpeg -i bearnaise.wav -i sound1.wav -i sound2.wav -filter_complex "[0:a][1:a][2:a]amerge=inputs=3[aout]" -map "[aout]" -ac 2 sound.wav
-        
+
         if (!is_array($sounds)) {
             $sounds = array($sounds);
         }
@@ -560,7 +560,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->execute();
 
         //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
-        
+
         return $target;
     }
 
@@ -572,7 +572,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     {
         // ffmpeg -i sub_video3.mp4 -vf drawtext="fontfile=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSerif.ttf: \
         // text='Text to write is this one, overlaid':fontsize=20:fontcolor=red:x=100:y=100" with_text.mp4
-        
+
         // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
 
@@ -613,7 +613,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->execute();
 
         //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
-        
+
         return $target;
     }
 
@@ -624,7 +624,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     public function splitVideo($source, $frames = array(), $target)
     {
         //ffmpeg -i quickns.mov -an -vf "select=between(n\,110\,200),setpts=PTS-STARTPTS" grg.mov
-        
+
         // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
         $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
         
@@ -653,7 +653,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     //     //ffmpeg -i bg.mp4 -i fg.mkv -filter_complex "[0:v][1:v]overlay=enable='between=(t,10,20)':x=720+t*28:y=t*10[out]" -map "[out]" output.mkv
     //     // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
     //     $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
-       
+
     //     $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
     //         ->addPreInputCommand('-y')
     //         ->addCommand('-i', $videoSource, true)
@@ -665,7 +665,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     //         ->execute();
 
     //     //\PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
-        
+
     //     return $target;
     // }
 

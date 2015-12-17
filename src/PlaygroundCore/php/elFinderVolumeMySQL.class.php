@@ -311,7 +311,7 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver
             return $this->stat($path);
         }
 
-           return false;
+        return false;
     }
 
     /*********************************************************************/
@@ -572,7 +572,6 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver
             unset($stat['parent_id']);
 
             return $stat;
-
         }
 
         return array();
@@ -779,8 +778,6 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver
         rewind($fp);
         $fstat = fstat($fp);
         $size = $fstat['size'];
-
-
     }
 
     /**

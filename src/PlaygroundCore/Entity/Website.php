@@ -266,16 +266,16 @@ class Website implements InputFilterAwareInterface
      */
     public function populate($data = array())
     {
-        if (isset($data['name']) && $data['name'] != null) {
+        if (isset($data['name']) && $data['name'] !== null) {
             $this->name = $data['name'];
         }
-        if (isset($data['code']) && $data['code'] != null) {
+        if (isset($data['code']) && $data['code'] !== null) {
             $this->code = $data['code'];
         }
-        if (isset($data['phase']) && $data['phase'] != null) {
+        if (isset($data['phase']) && $data['phase'] !== null) {
             $this->phase = $data['phase'];
         }
-        if (isset($data['active']) && $data['active'] != null) {
+        if (isset($data['active']) && $data['active'] !== null) {
             $this->active = $data['active'];
         }
     }

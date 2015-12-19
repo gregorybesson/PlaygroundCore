@@ -222,10 +222,10 @@ class Locale implements InputFilterAwareInterface
      */
     public function populate($data = array())
     {
-        if (isset($data['name']) && $data['name'] != null) {
+        if (isset($data['name']) && $data['name'] !== null) {
             $this->name = $data['name'];
         }
-        if (isset($data['locale']) && $data['locale'] != null) {
+        if (isset($data['locale']) && $data['locale'] !== null) {
             $this->locale = $data['locale'];
         }
     }

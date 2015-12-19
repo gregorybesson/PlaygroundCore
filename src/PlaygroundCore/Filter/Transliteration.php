@@ -37,15 +37,15 @@ class Transliteration implements \Zend\Filter\FilterInterface
     public function filter($value)
     {
         //translitere specific chars
-        $value = $this->_transliterateCzech($value);
-        $value = $this->_transliterateSlovak($value);
-        $value = $this->_transliterateRussian($value);
-        $value = $this->_transliterateGerman($value);
-        $value = $this->_transliterateFrench($value);
-        $value = $this->_transliterateHungarian($value);
-        $value = $this->_transliteratePolish($value);
-        $value = $this->_transliterateDanish($value);
-        $value = $this->_transliterateCroatian($value);
+        $value = $this->transliterateCzech($value);
+        $value = $this->transliterateSlovak($value);
+        $value = $this->transliterateRussian($value);
+        $value = $this->transliterateGerman($value);
+        $value = $this->transliterateFrench($value);
+        $value = $this->transliterateHungarian($value);
+        $value = $this->transliteratePolish($value);
+        $value = $this->transliterateDanish($value);
+        $value = $this->transliterateCroatian($value);
 
         //split string to single characters
         $characters = mb_split("~(.)~", $value);
@@ -71,7 +71,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateRussian($s)
+    private function transliterateRussian($s)
     {
         $table = array(
             "А" => "A",
@@ -156,7 +156,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateCzech($s)
+    private function transliterateCzech($s)
     {
         $table = array(
             'á' => 'a',
@@ -199,7 +199,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateGerman($s)
+    private function transliterateGerman($s)
     {
         $table = array(
             //'ä' => 'ae', //messes up with slovak -> they have ä -> a
@@ -223,7 +223,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateFrench($s)
+    private function transliterateFrench($s)
     {
         $table = array(
             'â' => 'a',
@@ -251,7 +251,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateHungarian($s)
+    private function transliterateHungarian($s)
     {
         $table = array(
             'á' => 'a',
@@ -273,7 +273,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliteratePolish($s)
+    private function transliteratePolish($s)
     {
         $table = array(
         'ą' => 'a',
@@ -301,7 +301,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateDanish($s)
+    private function transliterateDanish($s)
     {
         $table = array(
         'æ' => 'ae',
@@ -320,7 +320,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateCroatian($s)
+    private function transliterateCroatian($s)
     {
         $table = array(
             'Č' => 'C',
@@ -343,7 +343,7 @@ class Transliteration implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _transliterateSlovak($s)
+    private function transliterateSlovak($s)
     {
         $table = array(
             'á' => 'a',

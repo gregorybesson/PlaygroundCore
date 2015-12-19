@@ -91,19 +91,19 @@ class Sanitize implements \Zend\Filter\FilterInterface
     public function filterSubstring($s)
     {
         //convert to ascii -> translate strange chars
-        $s = $this->_convertToAscii($s);
+        $s = $this->convertToAscii($s);
         //trim spaces
-        $s = $this->_trimString($s);
+        $s = $this->trimString($s);
         //replace delimiters with another character
-        $s = $this->_replaceDelimiters($s);
+        $s = $this->replaceDelimiters($s);
         //lower chars
-        $s = $this->_toLowerChars($s);
+        $s = $this->toLowerChars($s);
         //delete chars except a-z0-9
-        $s = $this->_trimSpecialsChars($s);
+        $s = $this->trimSpecialsChars($s);
         //replace double dashes with single one
-        $s = $this->_replaceDoubleDelimiterReplacementWithSingle($s);
+        $s = $this->replaceDoubleDelimiterReplacementWithSingle($s);
         //trim dashes on beginning/end of the string
-        $s = $this->_trimStartAndEndSpaceReplacement($s);
+        $s = $this->trimStartAndEndSpaceReplacement($s);
         return $s;
     }
 
@@ -253,7 +253,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _trimString($s)
+    private function trimString($s)
     {
         $trimFilter = new \Zend\Filter\StringTrim();
         return $trimFilter->filter($s);
@@ -265,7 +265,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _replaceDelimiters($s)
+    private function replaceDelimiters($s)
     {
         foreach ($this->getWordDelimiters() as $delimiter) {
             if ($delimiter == $this->getDelimiterReplacement()) {
@@ -286,7 +286,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _convertToAscii($s)
+    private function convertToAscii($s)
     {
         $f = new \PlaygroundCore\Filter\Transliteration;
         return $f->filter($s);
@@ -298,7 +298,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _toLowerChars($s)
+    private function toLowerChars($s)
     {
         $lowerFilter = new \Zend\Filter\StringToLower;
         $lowerFilter->setEncoding('utf-8');
@@ -311,7 +311,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _trimSpecialsChars($s)
+    private function trimSpecialsChars($s)
     {
         if (count($this->getNotReplacedChars()) == 0) {
             $reg = '~[^-a-z0-9_]+~';
@@ -327,7 +327,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _replaceDoubleDelimiterReplacementWithSingle($s)
+    private function replaceDoubleDelimiterReplacementWithSingle($s)
     {
         $doubleDelimiterReplacement = $this->getDelimiterReplacement() . $this->getDelimiterReplacement();
         while (strpos($s, $doubleDelimiterReplacement) !== false) {
@@ -342,7 +342,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      * @param string $s
      * @return string
      */
-    private function _trimStartAndEndSpaceReplacement($s)
+    private function trimStartAndEndSpaceReplacement($s)
     {
         return trim($s, $this->getDelimiterReplacement());
     }

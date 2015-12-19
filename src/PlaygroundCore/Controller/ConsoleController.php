@@ -16,7 +16,6 @@ class ConsoleController extends AbstractActionController
 
     public function cronAction()
     {
-        $request = $this->getRequest();
         $response = $this->getResponse();
 
         /*if (!$request instanceof ConsoleRequest) {
@@ -28,7 +27,7 @@ class ConsoleController extends AbstractActionController
         $cronjobs->getCronjobs();
 
         if (count($cronjobs) > 0) {
-            $cron  = $cronjobs->run();
+            $cronjobs->run();
         }
 
         if (!$response instanceof ConsoleResponse) {

@@ -383,7 +383,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
     public function tryLockJob(Entity\Cronjob $job)
     {
         $em = $this->getEm();
-        $repo = $em->getRepository('PlaygroundCore\Entity\Cronjob');
         if ($job->getStatus() === Mapper\Cronjob::STATUS_PENDING) {
             $job->setStatus(Mapper\Cronjob::STATUS_RUNNING);
             $em->persist($job);

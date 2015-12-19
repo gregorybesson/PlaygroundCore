@@ -319,7 +319,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                     'name'     => $name,
                     'required' => $required,
                     'validators' => array(
-                            array('name' => '\Zend\Validator\File\Size', 'options' => array('max' => 10*1024*1024)),
+                            array('name' => '\Zend\Validator\File\Size', 'options' => array('min' => $filesizeMin, 'max' => $filesizeMax)),
                             array('name' => '\Zend\Validator\File\Extension', 'options'  => array('png,PNG,jpg,JPG,jpeg,JPEG,gif,GIF', 'messages' => array(
                             \Zend\Validator\File\Extension::FALSE_EXTENSION => 'Veuillez télécharger une image' ))
                             ),
@@ -333,8 +333,6 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 $type        = isset($attributes->type)? $attributes->type : '';
                 $position    = isset($attributes->order)? $attributes->order : '';
                 $label       = isset($attributes->data->label)? $attributes->data->label : '';
-
-//                 $required    = ($attributes->data->required == 'yes') ? true : false;
                 $required = false;
                 $class       = isset($attributes->data->class)? $attributes->data->class : '';
                 $id          = isset($attributes->data->id)? $attributes->data->id : '';

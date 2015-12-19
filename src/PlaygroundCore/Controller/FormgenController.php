@@ -67,7 +67,8 @@ class FormgenController extends AbstractActionController
         $formId = $this->getEvent()->getRouteMatch()->getParam('formId');
         $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->findById($formId);
         $formgen->setActive(!$formgen->getActive());
-        $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->update($formgen);
+        $this->getFormgenService()->getFormgenMapper()->update($formgen);
+
         return $this->redirect()->toRoute('admin/formgen/list');
     }
 
@@ -92,7 +93,6 @@ class FormgenController extends AbstractActionController
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/json.form.js');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/edit.form.js');
 
-        //$form = '';
         return array();
     }
 

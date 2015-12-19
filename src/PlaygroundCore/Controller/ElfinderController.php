@@ -1,9 +1,4 @@
 <?php
-/**
- * @Author: Cel Ticó Petit
- * @Contact: cel@cenics.net
- * @Company: Cencis s.c.p.
- */
 namespace PlaygroundCore\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;

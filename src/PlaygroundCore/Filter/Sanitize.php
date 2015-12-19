@@ -234,7 +234,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
             }
         } else {
             if (! in_array($delimiter, $this->getWordDelimiters())) {
-                throw new Exception("Word delimiter '$delimiter' is not in delimiters array.");
+                throw new \Exception("Word delimiter '$delimiter' is not in delimiters array.");
             }
             $newArray = array();
             foreach ($this->_wordDelimiters as $delim) {

@@ -4,6 +4,7 @@ namespace PlaygroundCore\Service;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use ZfcBase\EventManager\EventProvider;
+use PHPVideoToolkit\FfmpegProcessOutputException;
 
 /**
  * main class
@@ -299,13 +300,13 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
                     \PHPVideoToolkit\Trace::vars($ffmpeg->getBuffer(true));
                 }*/
                 throw new InvalidArgumentException('Error when merging videos');
-            } catch (Exception $e) {
+            } catch (\PHPVideoToolkit\Exception $e) {
                 /*echo '<h1>Error</h1>';
                 \PHPVideoToolkit\Trace::vars($e->getMessage());
                 echo '<h2>Exception</h2>';
                 \PHPVideoToolkit\Trace::vars($e);
                 */
-                throw new InvalidArgumentException('Error when merging videos');
+                throw new \PHPVideoToolkit\InvalidArgumentException('Error when merging videos');
             }
         }
 

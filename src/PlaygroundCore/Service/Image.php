@@ -6,13 +6,7 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 
 /**
- *
- * @author AdFab
- *
  * require php_exif for some methods
- *
- * TODO only jpeg is possible for now, it would be nice to allow png, gif, ...
- *
  */
 class Image extends EventProvider implements ServiceManagerAwareInterface
 {

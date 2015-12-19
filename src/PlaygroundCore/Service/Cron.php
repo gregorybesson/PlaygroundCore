@@ -207,7 +207,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
 
                 $job->setExecuteTime(new \DateTime);
                 $em->persist($job);
-                $em->flush();
 
                 call_user_func_array($callback, $args);
 
@@ -222,9 +221,9 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
             }
 
             $em->persist($job);
-            $em->flush();
         }
-
+        $em->flush();
+        
         return $this;
     }
 

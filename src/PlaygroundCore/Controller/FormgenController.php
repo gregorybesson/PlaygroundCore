@@ -83,26 +83,6 @@ class FormgenController extends AbstractActionController
         return array('form_id' => $formId);
     }
 
-    public function testAction()
-    {
-        $form = new AddUser();
-        $request = $this->getRequest();
-
-        if ($request->isPost()) {
-            $user = new User();
-            $formValidator = new AddUserValidator();
-
-            $form->setInputFilter($formValidator->getInputFilter());
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-                $user->exchangeArray($form->getData());
-            }
-        }
-
-        return array('form' => $form);
-    }
-
     public function createAction()
     {
         $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');

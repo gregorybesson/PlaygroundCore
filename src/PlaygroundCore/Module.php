@@ -119,7 +119,6 @@ class Module implements
             $fb = $e->getRequest()->getPost()->get('signed_request');
             if ($fb) {
                 list($encoded_sig, $payload) = explode('.', $fb, 2);
-                $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
                 $data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
                 $session->offsetSet('signed_request', $data);
 

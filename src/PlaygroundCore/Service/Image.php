@@ -18,17 +18,6 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
      */
     protected $image;
     
-    public function __construct()
-    {
-        /*if (!file_exists($file)) {
-            throw new \Exception('Not a file: "' . $file . '"', null, null);
-        }
-        $this->file = $file;
-        $this->image = imagecreatefromstring(
-            file_get_contents($file)
-        );*/
-    }
-    
     /**
      * @param string $file
      * @throws \Exception if the file does not exists

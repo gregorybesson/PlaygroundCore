@@ -424,9 +424,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
      */
     public static function matchTime($time, $expr)
     {
-        //ArgValidator::assert($time, array('string', 'numeric'));
-        //ArgValidator::assert($expr, 'string');
-
         $cronExpr = preg_split('/\s+/', $expr, null, PREG_SPLIT_NO_EMPTY);
         if (count($cronExpr) !== 5) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -469,9 +466,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
      */
     public static function matchTimeComponent($expr, $num)
     {
-        //ArgValidator::assert($expr, 'string');
-        //ArgValidator::assert($num, 'numeric');
-
         //handle all match
         if ($expr === '*') {
             return true;
@@ -566,7 +560,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
      */
     public static function exprToNumeric($value)
     {
-        //ArgValidator::assert($value, array('string', 'numeric'));
 
         static $data = array(
                 'jan'   => 1,

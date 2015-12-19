@@ -65,7 +65,7 @@ class FormgenController extends AbstractActionController
     public function activateAction()
     {
         $formId = $this->getEvent()->getRouteMatch()->getParam('formId');
-        $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->findById($formId);
+        $formgen = $this->getFormgenService()->getFormgenMapper()->findById($formId);
         $formgen->setActive(!$formgen->getActive());
         $this->getFormgenService()->getFormgenMapper()->update($formgen);
 

@@ -293,7 +293,6 @@ class Formgen implements InputFilterAwareInterface
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
             $this->inputFilter = $inputFilter;
-            $factory = new InputFactory();
         }
         return $this->inputFilter;
     }

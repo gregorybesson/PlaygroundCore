@@ -115,6 +115,8 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     public function decorate($element, $attr, $inputFilter)
     {
         $factory = new InputFactory();
+        $element->setName($attr['label']);
+        $element->setLabel($attr['label']);
         $element->setAttributes(
             array(
                 'placeholder'   => $attr['placeholder'],

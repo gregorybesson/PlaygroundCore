@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\InputFilter\Factory as InputFactory;
 
 /**
  * @ORM\Entity @HasLifecycleCallbacks

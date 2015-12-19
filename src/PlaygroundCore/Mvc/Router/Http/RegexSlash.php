@@ -9,9 +9,6 @@
 
 namespace PlaygroundCore\Mvc\Router\Http;
 
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\RequestInterface as Request;
-
 /**
  * Regex route.
  */

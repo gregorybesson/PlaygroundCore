@@ -28,6 +28,7 @@
 		"jhuet/zdt-logger-module" : "0.*",
 		"zf-commons/zfc-base" : "0.*",
 		"bjyoungblood/bjy-authorize" : "1.*",
+        "studio-42/elfinder": "2.*",
 		"twilio/sdk" : "3.*",
 		"buggedcom/phpvideotoolkit" : "2.*"
     },

@@ -22,7 +22,7 @@ class ElfinderController extends AbstractActionController
         $view = new ViewModel();
         $this->getConfig();
         $view->BasePath = $this->Config['BasePath'];
-        $view->ConnectorPath = '/elfinder/connector';
+        $view->ConnectorPath = '/admin/elfinder/connector';
 
         return $view;
     }
@@ -35,7 +35,7 @@ class ElfinderController extends AbstractActionController
         $view = new ViewModel();
         $this->getConfig();
         $view->BasePath    = $this->Config['BasePath'];
-        $view->ConnectorPath = '/elfinder/connector';
+        $view->ConnectorPath = '/admin/elfinder/connector';
         $view->setTerminal(true);
 
         return $view;

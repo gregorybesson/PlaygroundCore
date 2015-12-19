@@ -48,17 +48,16 @@ class PhpvideotoolkitServiceFactory implements FactoryInterface
             throw new \Zend\ServiceManager\Exception\InvalidArgumentException(
                 'phpvideotoolkit error during configuration load'
             );
-            // \PHPVideoToolkit\Trace::vars($e);
         }
         
         try {
             $service = new \PHPVideoToolkit\FfmpegProcess('ffmpeg', $config);
-        } catch (Exception $e) {
+        } catch (\PHPVideoToolkit\Exception $e) {
             throw new \Zend\ServiceManager\Exception\InvalidArgumentException(
                 'phpvideotoolkit process creation error'
             );
-            // \PHPVideoToolkit\Trace::vars($e->getMessage());
-            // \PHPVideoToolkit\Trace::vars($e);
+            \PHPVideoToolkit\Trace::vars($e->getMessage());
+            \PHPVideoToolkit\Trace::vars($e);
         }
 
         return $service;

@@ -226,7 +226,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
     public function removeWordDelimiter($delimiter)
     {
         if (empty($delimiter)) {
-            throw new Exception('Word delimiter cannot be null.');
+            throw new \Exception('Word delimiter cannot be null.');
         }
         if (is_array($delimiter)) {
             foreach ($delimiter as $delim) {

@@ -110,10 +110,10 @@ class Sanitize implements \Zend\Filter\FilterInterface
     public function addNotReplacedChars($notReplaced)
     {
         if (in_array($notReplaced, $this->getNotReplacedChars())) {
-            throw new Exception("Not replaced characterr '$notReplaced' is already there.");
+            throw new \Exception("Not replaced characterr '$notReplaced' is already there.");
         }
         if (empty($notReplaced)) {
-            throw new Exception('Not replaced character cannot be null.');
+            throw new \Exception('Not replaced character cannot be null.');
         }
         if (is_array($notReplaced)) {
             $this->_notReplacedChars = array_merge($this->getNotReplacedChars(), $notReplaced);
@@ -142,7 +142,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
     public function removeNotReplacedChar($notReplaced)
     {
         if (empty($notReplaced)) {
-            throw new Exception('Not replaced character cannot be null.');
+            throw new \Exception('Not replaced character cannot be null.');
         }
         if (is_array($notReplaced)) {
             foreach ($notReplaced as $n) {
@@ -150,7 +150,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
             }
         } else {
             if (! in_array($notReplaced, $this->getNotReplacedChars())) {
-                throw new Exception("Not replaced character '$notReplaced' is not in array.");
+                throw new \Exception("Not replaced character '$notReplaced' is not in array.");
             }
             $newArray = array();
             foreach ($this->_notReplacedChars as $n) {
@@ -204,10 +204,10 @@ class Sanitize implements \Zend\Filter\FilterInterface
     public function addWordDelimiter($delimiter)
     {
         if (in_array($delimiter, $this->getWordDelimiters())) {
-            throw new Exception("Word delimiter '$delimiter' is already there.");
+            throw new \Exception("Word delimiter '$delimiter' is already there.");
         }
         if (empty($delimiter)) {
-            throw new Exception('Word delimiter cannot be null.');
+            throw new \Exception('Word delimiter cannot be null.');
         }
         if (is_array($delimiter)) {
             $this->_wordDelimiters = array_merge($this->getWordDelimiters(), $delimiter);

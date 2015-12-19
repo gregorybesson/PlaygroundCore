@@ -134,7 +134,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
             $element->setAttribute('maxlength', $attr['lengthMax']);
             $options['messages'] = array(
                 \Zend\Validator\StringLength::TOO_LONG => sprintf(
-                    $this->getServiceLocator()->get('translator')->translate(
+                    $this->getServiceManager()->get('translator')->translate(
                         'This field contains more than %s characters',
                         'playgroundcore'
                     ),

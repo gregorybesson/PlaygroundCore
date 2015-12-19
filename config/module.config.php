@@ -111,39 +111,6 @@ return array(
                             ),
                         ),
                     ),
-		            'elfinder' => array(
-		                'type' => 'Literal',
-		                'options' => array(
-		                    'route' => 'elfinder',
-		                    'defaults' => array(
-		                        'controller' => 'elfinder',
-		                        'action'     => 'index',
-		                    ),
-		                ),
-		                'may_terminate' => true,
-		                'child_routes' => array(
-		                    'connector' => array(
-		                        'type' => 'Literal',
-		                        'options' => array(
-		                            'route' => '/connector',
-		                            'defaults' => array(
-		                                'controller' => 'elfinder',
-		                                'action'     => 'connector',
-		                            ),
-		                        ),
-		                    ),
-		                    'ckeditor' => array(
-		                        'type' => 'Literal',
-		                        'options' => array(
-		                            'route' => '/ckeditor',
-		                            'defaults' => array(
-		                                'controller' => 'elfinder',
-		                                'action'     => 'ckeditor',
-		                            ),
-		                        ),
-		                    ),
-		                ),
-		            ),
 		            // Give the possibility to call Cron from browser
 		            'cron' => array(
 		                'type' => 'Literal',
@@ -164,6 +131,39 @@ return array(
                     'route'    => '/admin',
                 ),
                 'child_routes' => array(
+                    'elfinder' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/elfinder',
+                            'defaults' => array(
+                                'controller' => 'elfinder',
+                                'action'     => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'connector' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/connector',
+                                    'defaults' => array(
+                                        'controller' => 'elfinder',
+                                        'action'     => 'connector',
+                                    ),
+                                ),
+                            ),
+                            'ckeditor' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/ckeditor',
+                                    'defaults' => array(
+                                        'controller' => 'elfinder',
+                                        'action'     => 'ckeditor',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
                     'formgen' => array(
                         'type'    => 'Literal',
                         'options' => array(

@@ -7,16 +7,6 @@ $settings = array(
     'bitlyUsername' => 'o_7t2s2bjmun',
     'bitlyApiKey'   => 'R_335290ffb3f5fc08b45d3e0e6678c3db',
     'bitlyUrl'      => 'http://api.bit.ly/v3/shorten',
-
-
-    /**
-    * AdServing parameters
-    */
-    'adserving' => array(
-        'cat1' => 'fr_playground',
-        'cat2' => '',
-        'cat3' => ''
-    ),
     
     'twitterCard' => array(
         'enable'     => false, // can be enable for a specific page
@@ -100,7 +90,7 @@ $settings = array(
             array('TextColor','BGColor' ),
             array('Maximize', 'ShowBlocks','-','About'),
         ),
-        'ElFinderBaseURL'      => '/elfinder/ckeditor',
+        'ElFinderBaseURL'      => '/admin/elfinder/ckeditor',
         'ElFinderWindowWidth'  => "1000",
         'ElFinderWindowHeight' => "650",
     ),

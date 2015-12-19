@@ -84,6 +84,25 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
         return $return;
     }
 
+    public function getAttributes($attributes)
+    {
+        $a = array();
+
+        $a['name'] = isset($attributes->name)? $attributes->name : '';
+        $a['type'] = isset($attributes->type)? $attributes->type : '';
+        $a['position'] = isset($attributes->order)? $attributes->order : '';
+        $a['placeholder'] = isset($attributes->data->placeholder)? $attributes->data->placeholder : '';
+        $a['label'] = isset($attributes->data->label)? $attributes->data->label : '';
+        $a['required'] = (isset($attributes->data->required) && $attributes->data->required == 'true')?
+            true:
+            false;
+        $a['class'] = isset($attributes->data->class)? $attributes->data->class : '';
+        $a['id'] = isset($attributes->data->id)? $attributes->data->id : '';
+        $a['lengthMin'] = isset($attributes->data->length)? $attributes->data->length->min : '';
+        $a['lengthMax'] = isset($attributes->data->length)? $attributes->data->length->max : '';
+
+        return $a;
+    }
 
     public function render($formPV, $id)
     {
@@ -94,27 +113,17 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
 
         foreach ($formPV as $element) {
             if (isset($element->line_text)) {
-                $attributes  = $element->line_text[0];
-                $name        = isset($attributes->name)? $attributes->name : '';
-                $type        = isset($attributes->type)? $attributes->type : '';
-                $position    = isset($attributes->order)? $attributes->order : '';
-                $placeholder = isset($attributes->data->placeholder)? $attributes->data->placeholder : '';
-                $label       = isset($attributes->data->label)? $attributes->data->label : '';
-                $required = false;
-                $class       = isset($attributes->data->class)? $attributes->data->class : '';
-                $id          = isset($attributes->data->id)? $attributes->data->id : '';
-                $lengthMin   = isset($attributes->data->length)? $attributes->data->length->min : '';
-                $lengthMax   = isset($attributes->data->length)? $attributes->data->length->max : '';
+                $attr  = $this->getAttributes($element->line_text[0]);
 
-                $element = new Element\Text($name);
-                $element->setName($label);
-                $element->setLabel($label);
+                $element = new Element\Text($attr['name']);
+                $element->setName($attr['label']);
+                $element->setLabel($attr['label']);
                 $element->setAttributes(
                     array(
-                        'placeholder'   => $placeholder,
-                        'required'      => $required,
-                        'class'         => $class,
-                        'id'            => $id
+                        'placeholder'   => $attr['placeholder'],
+                        'required'      => $attr['required'],
+                        'class'         => $attr['class'],
+                        'id'            => $attr['id']
                     )
                 );
 
@@ -129,7 +138,12 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 if ($lengthMax && $lengthMax > $lengthMin) {
                     $options['max'] = $lengthMax;
                     $element->setAttribute('maxlength', $lengthMax);
-                    $options['messages'] = array(\Zend\Validator\StringLength::TOO_LONG => sprintf($this->getServiceManager()->get('translator')->translate('This field contains more than %s characters', 'playgroundgame'), $lengthMax));
+                    $options['messages'] = array(\Zend\Validator\StringLength::TOO_LONG => sprintf(
+                        $this->getServiceManager()->get('translator')->translate(
+                            'This field contains more than %s characters',
+                            'playgroundgame'
+                        ),
+                    $lengthMax));
                 }
                 $inputFilter->add($factory->createInput(array(
                     'name'     => $name,
@@ -147,27 +161,17 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
                 )));
             }
             if (isset($element->line_email)) {
-                $attributes  = $element->line_email[0];
-                $name        = isset($attributes->name)? $attributes->name : '';
-                $type        = isset($attributes->type)? $attributes->type : '';
-                $position    = isset($attributes->order)? $attributes->order : '';
-                $placeholder = isset($attributes->data->placeholder)? $attributes->data->placeholder : '';
-                $label       = isset($attributes->data->label)? $attributes->data->label : '';
-                $required = false;
-                $class       = isset($attributes->data->class)? $attributes->data->class : '';
-                $id          = isset($attributes->data->id)? $attributes->data->id : '';
-                $lengthMin   = isset($attributes->data->length)? $attributes->data->length->min : '';
-                $lengthMax   = isset($attributes->data->length)? $attributes->data->length->max : '';
+                $attr  = $this->getAttributes($element->line_email[0]);
 
-                $element = new Element\Email($name);
-                $element->setLabel($label);
-                $element->setName($label);
+                $element = new Element\Email($attr['name']);
+                $element->setName($attr['label']);
+                $element->setLabel($attr['label']);
                 $element->setAttributes(
                     array(
-                        'placeholder'   => $placeholder,
-                        'required'      => $required,
-                        'class'         => $class,
-                        'id'            => $id
+                        'placeholder'   => $attr['placeholder'],
+                        'required'      => $attr['required'],
+                        'class'         => $attr['class'],
+                        'id'            => $attr['id']
                     )
                 );
                 $form->add($element);

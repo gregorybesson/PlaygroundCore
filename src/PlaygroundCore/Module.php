@@ -118,7 +118,8 @@ class Module implements
             $session = new Container('facebook');
             $fb = $e->getRequest()->getPost()->get('signed_request');
             if ($fb) {
-                list($encoded_sig, $payload) = explode('.', $fb, 2);
+                $signedReq = explode('.', $fb, 2);
+                $payload = $signedReq[1];
                 $data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
                 $session->offsetSet('signed_request', $data);
 

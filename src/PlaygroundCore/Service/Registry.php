@@ -70,7 +70,6 @@ class Registry
         $callback,
         array $args = array()
     ) {
-
         if (!is_callable($callback)) {
             throw new \RuntimeException('The callback must be callable');
         }

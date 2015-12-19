@@ -9,14 +9,14 @@ use PHPVideoToolkit\FfmpegProcessOutputException;
 /**
  * main class
  * To trace an execute command: \PHPVideoToolkit\Trace::vars($ffmpeg->getExecutedCommand(true));
- * 
- * 
+ *
+ *
  * On exception:
  *     $ffmpeg = $e->getProcess();
  *     execute command : \PHPVideoToolkit\Trace::vars($e);
  *     FFmpeg Process Messages: \PHPVideoToolkit\Trace::vars($ffmpeg->getMessages());
  *     Buffer Output: \PHPVideoToolkit\Trace::vars($ffmpeg->getBuffer(true));
- * 
+ *
  */
 class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 {
@@ -76,7 +76,6 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->addCommand('-pix_fmt', 'yuv420p')
             ->setOutputPath($target)
             ->execute();
-
         } catch (FfmpegProcessOutputException $e) {
             throw new \PHPVideoToolkit\InvalidArgumentException('Error when merging videos');
         } catch (\PHPVideoToolkit\Exception $e) {
@@ -107,7 +106,6 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             ->addCommand('-vf', 'fps='. $fps)
             ->setOutputPath($target)
             ->execute();
-
         } catch (FfmpegProcessOutputException $e) {
             throw new \PHPVideoToolkit\InvalidArgumentException('Error when merging videos');
         } catch (\PHPVideoToolkit\Exception $e) {
@@ -166,7 +164,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     }
     
     /**
-     * This method will merge videos in .mpg format with exactly the same codec and codec parameters : 
+     * This method will merge videos in .mpg format with exactly the same codec and codec parameters :
      * http://trac.ffmpeg.org/wiki/Concatenate
      * @param  array $videos
      * @return string
@@ -369,7 +367,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     /**
     * This method concatenate an array of sounds
-    * ffmpeg -y -i in-1.wav -i in-2.wav -i in-3.wav 
+    * ffmpeg -y -i in-1.wav -i in-2.wav -i in-3.wav
     * -filter_complex '[0:0][1:0][2:0]concat=n=3:v=0:a=1[out]' -map '[out]' out.wav
     */
     public function concatenateSounds($sounds = array(), $target)
@@ -399,7 +397,7 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     /**
     * This method merge an array of sounds
-    * ffmpeg -i in-1.wav -i in-2.wav -i in-3.wav 
+    * ffmpeg -i in-1.wav -i in-2.wav -i in-3.wav
     * -filter_complex "[0:a][1:a][2:a]amerge=inputs=3[aout]" -map "[aout]" -ac 2 out.wav
     */
     public function mergeSounds($sounds = array(), $target)

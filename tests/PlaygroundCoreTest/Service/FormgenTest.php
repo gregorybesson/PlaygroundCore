@@ -150,7 +150,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
                 )
             )
         )
-    );
+        );
         $formGem[] = $element;
 
 

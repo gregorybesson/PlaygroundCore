@@ -560,7 +560,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
      */
     public static function exprToNumeric($value)
     {
-
         static $data = array(
                 'jan'   => 1,
                 'feb'   => 2,

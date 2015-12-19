@@ -3,7 +3,6 @@ namespace PlaygroundCore\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\View\Renderer\PhpRenderer;
 
 class FormgenController extends AbstractActionController
 {

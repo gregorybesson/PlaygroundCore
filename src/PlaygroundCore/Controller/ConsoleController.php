@@ -3,7 +3,6 @@
 namespace PlaygroundCore\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Console\Request as ConsoleRequest;
 use Zend\Console\Response as ConsoleResponse;
 use PlaygroundCore\Service\Cron;
 

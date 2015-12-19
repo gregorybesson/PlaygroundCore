@@ -5,11 +5,8 @@ namespace PlaygroundCore\Service;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Validator\NotEmpty;
 use ZfcBase\EventManager\EventProvider;
 use PlaygroundCore\Options\ModuleOptions;
-use DoctrineModule\Validator\NoObjectExists as NoObjectExistsValidator;
-use Zend\Stdlib\ErrorHandler;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFactory;
 

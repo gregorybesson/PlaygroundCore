@@ -2,7 +2,6 @@
 namespace PlaygroundCore\Stdlib\Hydrator\Strategy;
 
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
-use DoctrineModule\Stdlib\Hydrator\Strategy\AbstractCollectionStrategy;
 
 class BooleanStrategy implements StrategyInterface
 {

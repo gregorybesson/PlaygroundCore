@@ -9,8 +9,6 @@
 
 namespace PlaygroundCore\Mvc\Router\Http;
 
-use Traversable;
-use Zend\Mvc\Router\Exception;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
 

@@ -10,7 +10,6 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\Factory as InputFactory;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity @HasLifecycleCallbacks

@@ -3,7 +3,6 @@
 namespace PlaygroundCore\Mapper;
 
 use Doctrine\ORM\EntityManager;
-use ZfcBase\Mapper\AbstractDbMapper;
 use PlaygroundCore\Options\ModuleOptions;
 
 class Website

@@ -1,9 +1,6 @@
 <?php
 namespace PlaygroundCore\Opengraph;
 
-use PlaygroundCore\Analytics\Ecommerce\Transaction;
-use PlaygroundCore\Exception\InvalidArgumentException;
-
 class Tracker
 {
     /**

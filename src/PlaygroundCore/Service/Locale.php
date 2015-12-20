@@ -2,15 +2,10 @@
 
 namespace PlaygroundCore\Service;
 
-use PlaygroundCore\Entity\Locale as LocaleEntity;
-use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Validator\NotEmpty;
 use ZfcBase\EventManager\EventProvider;
 use PlaygroundCore\Options\ModuleOptions;
-use DoctrineModule\Validator\NoObjectExists as NoObjectExistsValidator;
-use Zend\Stdlib\ErrorHandler;
 
 class Locale extends EventProvider implements ServiceManagerAwareInterface
 {

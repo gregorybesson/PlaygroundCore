@@ -2,15 +2,10 @@
 
 namespace PlaygroundCore\Service;
 
-use PlaygroundCore\Entity\Website as WebsiteEntity;
-use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Validator\NotEmpty;
 use ZfcBase\EventManager\EventProvider;
 use PlaygroundCore\Options\ModuleOptions;
-use DoctrineModule\Validator\NoObjectExists as NoObjectExistsValidator;
-use Zend\Stdlib\ErrorHandler;
 
 class Website extends EventProvider implements ServiceManagerAwareInterface
 {

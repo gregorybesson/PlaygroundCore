@@ -6,8 +6,6 @@ use Zend\Session\SessionManager;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container;
 use Zend\Validator\AbstractValidator;
-use Zend\ModuleManager\ModuleManager;
-use Zend\ModuleManager\ModuleEvent;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
@@ -69,7 +67,6 @@ class Module implements
         $evm = $doctrine->getEventManager();
 
         $translatableListener = new \Gedmo\Translatable\TranslatableListener();
-        // TODO : Set the Default locale to be taken from config
         $translatableListener->setDefaultLocale('fr_FR');
         // If no translation is found, fallback to entity data
         $translatableListener->setTranslationFallback(true);
@@ -121,8 +118,8 @@ class Module implements
             $session = new Container('facebook');
             $fb = $e->getRequest()->getPost()->get('signed_request');
             if ($fb) {
-                list($encoded_sig, $payload) = explode('.', $fb, 2);
-                $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+                $signedReq = explode('.', $fb, 2);
+                $payload = $signedReq[1];
                 $data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
                 $session->offsetSet('signed_request', $data);
 
@@ -168,14 +165,14 @@ class Module implements
     {
         return array(
             'factories' => array(
-                'QgCKEditor' => function ($sm) {
+                'QgCKEditor' => function (\Zend\ServiceManager\ServiceManager $sm) {
                     $config = $sm->getServiceLocator()->get('config');
                     $QuCk = new View\Helper\AdCKEditor($config['playgroundcore']['ckeditor']);
 
                     return $QuCk;
                 },
 
-                'googleAnalytics' => function ($sm) {
+                'googleAnalytics' => function (\Zend\ServiceManager\ServiceManager $sm) {
                     $tracker = $sm->getServiceLocator()->get('google-analytics');
     
                     $helper  = new View\Helper\GoogleAnalytics($tracker, $sm->getServiceLocator()->get('Request'));
@@ -183,7 +180,7 @@ class Module implements
                     return $helper;
                 },
 
-                'facebookOpengraph' => function ($sm) {
+                'facebookOpengraph' => function (\Zend\ServiceManager\ServiceManager $sm) {
                     $tracker = $sm->getServiceLocator()->get('facebook-opengraph');
 
                     $helper  = new View\Helper\FacebookOpengraph($tracker, $sm->getServiceLocator()->get('Request'));
@@ -191,14 +188,14 @@ class Module implements
                     return $helper;
                 },
                 
-                'twitterCard' => function ($sm) {
+                'twitterCard' => function (\Zend\ServiceManager\ServiceManager $sm) {
                     $viewHelper = new View\Helper\TwitterCard();
                     $viewHelper->setConfig($sm->getServiceLocator()->get('twitter-card'));
                     $viewHelper->setRequest($sm->getServiceLocator()->get('Request'));
                     return $viewHelper;
                 },
 
-                'switchLocaleWidget' => function ($sm) {
+                'switchLocaleWidget' => function (\Zend\ServiceManager\ServiceManager $sm) {
                     $viewHelper = new View\Helper\SwitchLocaleWidget();
                     $viewHelper->setLocaleService($sm->getServiceLocator()->get('playgroundcore_locale_service'));
                     $viewHelper->setWebsiteService($sm->getServiceLocator()->get('playgroundcore_website_service'));
@@ -240,29 +237,29 @@ class Module implements
                     'playgroundcore_ffmpeg_service'      => 'PlaygroundCore\Service\Ffmpeg',
                 ),
                 'factories' => array(
-                    'playgroundcore_module_options' => function ($sm) {
+                    'playgroundcore_module_options' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('Configuration');
 
                         return new Options\ModuleOptions(isset($config['playgroundcore']) ? $config['playgroundcore'] : array());
                     },
 
-                    'playgroundcore_formgen_mapper' => function ($sm) {
+                    'playgroundcore_formgen_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
-                    'playgroundcore_website_mapper' => function ($sm) {
+                    'playgroundcore_website_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
 
                         return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
-                    'playgroundcore_locale_mapper' => function ($sm) {
+                    'playgroundcore_locale_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         return new Mapper\Locale($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
                     },
 
                     'playgroundcore_twilio' => 'PlaygroundCore\Service\Factory\TwilioServiceFactory',
                     'playgroundcore_phpvideotoolkit' => 'PlaygroundCore\Service\Factory\PhpvideotoolkitServiceFactory',
                     'playgroundcore_transport' => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
-                    'PlaygroundCore\Analytics\Tracker' => function ($sm) {
+                    'PlaygroundCore\Analytics\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']) ? $config['playgroundcore']['googleAnalytics'] : array('id' => 'UA-XXXXXXXX-X');
 
@@ -293,7 +290,7 @@ class Module implements
 
                         return $tracker;
                     },
-                    'PlaygroundCore\Opengraph\Tracker' => function ($sm) {
+                    'PlaygroundCore\Opengraph\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']['facebookOpengraph']) ? $config['playgroundcore']['facebookOpengraph'] : array('appId' => '');
 
@@ -312,7 +309,7 @@ class Module implements
 
                         return $tracker;
                     },
-                    'PlaygroundCore\TwitterCard\Config' => function ($sm) {
+                    'PlaygroundCore\TwitterCard\Config' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']['twitterCard']) ? $config['playgroundcore']['twitterCard'] : array();
                         return new TwitterCard\Config($config);

@@ -5,7 +5,6 @@ return array(
         'DoctrineORMModule',
         'DoctrineDataFixtureModule',
         'ZendDeveloperTools',
-        'Jhu\ZdtLoggerModule',
         'AsseticBundle',
         'ZfcBase',
         'PlaygroundCore'

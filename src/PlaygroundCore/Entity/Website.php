@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\InputFilter\Factory as InputFactory;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity @HasLifecycleCallbacks
@@ -266,16 +264,16 @@ class Website implements InputFilterAwareInterface
      */
     public function populate($data = array())
     {
-        if (isset($data['name']) && $data['name'] != null) {
+        if (isset($data['name']) && $data['name'] !== null) {
             $this->name = $data['name'];
         }
-        if (isset($data['code']) && $data['code'] != null) {
+        if (isset($data['code']) && $data['code'] !== null) {
             $this->code = $data['code'];
         }
-        if (isset($data['phase']) && $data['phase'] != null) {
+        if (isset($data['phase']) && $data['phase'] !== null) {
             $this->phase = $data['phase'];
         }
-        if (isset($data['active']) && $data['active'] != null) {
+        if (isset($data['active']) && $data['active'] !== null) {
             $this->active = $data['active'];
         }
     }
@@ -301,7 +299,6 @@ class Website implements InputFilterAwareInterface
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
             $this->inputFilter = $inputFilter;
-            $factory = new InputFactory();
         }
         return $this->inputFilter;
     }

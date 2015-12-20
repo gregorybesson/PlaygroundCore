@@ -207,7 +207,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
 
                 $job->setExecuteTime(new \DateTime);
                 $em->persist($job);
-                $em->flush();
 
                 call_user_func_array($callback, $args);
 
@@ -222,9 +221,9 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
             }
 
             $em->persist($job);
-            $em->flush();
         }
-
+        $em->flush();
+        
         return $this;
     }
 
@@ -384,7 +383,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
     public function tryLockJob(Entity\Cronjob $job)
     {
         $em = $this->getEm();
-        $repo = $em->getRepository('PlaygroundCore\Entity\Cronjob');
         if ($job->getStatus() === Mapper\Cronjob::STATUS_PENDING) {
             $job->setStatus(Mapper\Cronjob::STATUS_RUNNING);
             $em->persist($job);
@@ -426,9 +424,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
      */
     public static function matchTime($time, $expr)
     {
-        //ArgValidator::assert($time, array('string', 'numeric'));
-        //ArgValidator::assert($expr, 'string');
-
         $cronExpr = preg_split('/\s+/', $expr, null, PREG_SPLIT_NO_EMPTY);
         if (count($cronExpr) !== 5) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -471,9 +466,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
      */
     public static function matchTimeComponent($expr, $num)
     {
-        //ArgValidator::assert($expr, 'string');
-        //ArgValidator::assert($num, 'numeric');
-
         //handle all match
         if ($expr === '*') {
             return true;
@@ -568,8 +560,6 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
      */
     public static function exprToNumeric($value)
     {
-        //ArgValidator::assert($value, array('string', 'numeric'));
-
         static $data = array(
                 'jan'   => 1,
                 'feb'   => 2,

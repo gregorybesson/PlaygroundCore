@@ -1,7 +1,14 @@
 PlaygroundCore
 =========
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a27d7563-4f8d-4c79-bde4-df8148e14344/big.png)](https://insight.sensiolabs.com/projects/a27d7563-4f8d-4c79-bde4-df8148e14344)
+
 [![Develop Branch Build Status](https://travis-ci.org/gregorybesson/PlaygroundCore.svg)](http://travis-ci.org/gregorybesson/PlaygroundCore)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/gregorybesson/PlaygroundCore/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/gregorybesson/PlaygroundCore/)
+[![Coverage Status](https://coveralls.io/repos/gregorybesson/PlaygroundCore/badge.svg?branch=develop&service=github)](https://coveralls.io/github/gregorybesson/PlaygroundCore?branch=develop)
+
+[![Latest Stable Version](https://poser.pugx.org/playground/core/v/stable)](https://packagist.org/packages/playground/core) [![Total Downloads](https://poser.pugx.org/playground/core/downloads)](https://packagist.org/packages/playground/core) [![Latest Unstable Version](https://poser.pugx.org/playground/core/v/unstable)](https://packagist.org/packages/playground/core) [![License](https://poser.pugx.org/playground/core/license)](https://packagist.org/packages/playground/core)
+
 
 This library contains the following features :
 

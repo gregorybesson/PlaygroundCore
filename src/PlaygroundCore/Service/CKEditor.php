@@ -19,13 +19,9 @@ namespace PlaygroundCore\Service;
 class CKEditor
 {
     /**
-     * The version of %CKEditor.
-     */
-    const version = '3.6.3';
-    /**
      * A constant string unique for each release of %CKEditor.
      */
-    const timestamp = 'C3HA5RM';
+    const TIMESTAMP = 'C3HA5RM';
 
     /**
      * URL to the %CKEditor installation directory (absolute or relative to document root).
@@ -232,7 +228,6 @@ class CKEditor
                 $js .= "CKEDITOR.replaceAll('".$className."');";
             }
         } else {
-            $classDetection = "";
             $js .= "CKEDITOR.replaceAll( function (textarea, config) {\n";
             if (!empty($className)) {
                 $js .= "	var classRegex = new RegExp('(?:^| )' + '". $className ."' + '(?:$| )');\n";
@@ -458,7 +453,7 @@ class CKEditor
         $out .= "<script type=\"text/javascript\" src=\"" . $ckeditorPath . 'ckeditor.js' . $args . "\"></script>\n";
 
         $extraCode = "";
-        if ($this->timestamp != self::timestamp) {
+        if ($this->timestamp != self::TIMESTAMP) {
             $extraCode .= ($extraCode ? "\n" : "") . "CKEDITOR.timestamp = '". $this->timestamp ."';";
         }
         if ($extraCode) {

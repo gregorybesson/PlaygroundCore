@@ -3,7 +3,6 @@ namespace PlaygroundCore\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\View\Renderer\PhpRenderer;
 
 class FormgenController extends AbstractActionController
 {
@@ -66,9 +65,10 @@ class FormgenController extends AbstractActionController
     public function activateAction()
     {
         $formId = $this->getEvent()->getRouteMatch()->getParam('formId');
-        $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->findById($formId);
+        $formgen = $this->getFormgenService()->getFormgenMapper()->findById($formId);
         $formgen->setActive(!$formgen->getActive());
-        $formgen = $formGenService = $this->getFormgenService()->getFormgenMapper()->update($formgen);
+        $this->getFormgenService()->getFormgenMapper()->update($formgen);
+
         return $this->redirect()->toRoute('admin/formgen/list');
     }
 
@@ -83,26 +83,6 @@ class FormgenController extends AbstractActionController
         return array('form_id' => $formId);
     }
 
-    public function testAction()
-    {
-        $form = new AddUser();
-        $request = $this->getRequest();
-
-        if ($request->isPost()) {
-            $user = new User();
-            $formValidator = new AddUserValidator();
-
-            $form->setInputFilter($formValidator->getInputFilter());
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-                $user->exchangeArray($form->getData());
-            }
-        }
-
-        return array('form' => $form);
-    }
-
     public function createAction()
     {
         $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
@@ -113,7 +93,6 @@ class FormgenController extends AbstractActionController
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/json.form.js');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/edit.form.js');
 
-        //$form = '';
         return array();
     }
 

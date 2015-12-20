@@ -28,7 +28,7 @@ class AdCKEditor extends AbstractHelper
      */
     public function __invoke($name, $options)
     {
-        return $this->AdCKEditor($name, $options);
+        return $this->adCKEditor($name, $options);
     }
 
     /**
@@ -37,7 +37,7 @@ class AdCKEditor extends AbstractHelper
      *
      * @return string
      */
-    public function AdCKEditor($name, $options = array())
+    public function adCKEditor($name, $options = array())
     {
         $CKEditor = new \PlaygroundCore\Service\CKEditor();
 

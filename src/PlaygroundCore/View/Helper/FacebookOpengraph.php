@@ -31,35 +31,21 @@ class FacebookOpengraph extends AbstractHelper
         $this->request = $request;
     }
 
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    public function setContainer($container)
-    {
-        $this->container = $container;
-    }
-
     public function __invoke()
     {
-        // Do not render the GA twice
         if ($this->rendered) {
             return;
         }
 
-        // Do not render when tracker is disabled
         $tracker = $this->tracker;
         if (!$tracker->enabled()) {
             return;
         }
 
-        // We return if we are in a console request
         if ((get_class($this->request) == 'Zend\Console\Request')) {
             return;
         }
 
-        // We need to be sure $container->appendProperty() can be called
         $container = $this->view->plugin($this->getContainer());
         if (!$container instanceof HeadMeta) {
             throw new RuntimeException(sprintf(
@@ -76,8 +62,17 @@ class FacebookOpengraph extends AbstractHelper
             }
         }
 
-        // Mark this OG as rendered
         $this->rendered = true;
+    }
+
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    public function setContainer($container)
+    {
+        $this->container = $container;
     }
 
     public function setRequest($request)

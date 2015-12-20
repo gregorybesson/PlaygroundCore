@@ -92,151 +92,150 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
         $formGem = array();
         $element = new stdClass();
-        $element->line_text = array( (object) array('name' => 'firstname',
-                                     'type' => 'Zend\\Form\\Element\\Text"',
-                                     'order' => '1',
-                                     'data' => (object) array(
-                                        'placeholder' => 'Your firstname...',
-                                         'label' => 'firstname',
-                                         'required' => '0',
-                                         'class' => '',
-                                         'id' => '',
-                                         'length' => (object) array(
-                                            'min' => '10',
-                                            'max' => '20'
-                                         )
-                                     )
-                                )
-                            );
+        $element->line_text = array( (object) array(
+            'name' => 'firstname',
+            'type' => 'Zend\\Form\\Element\\Text"',
+            'order' => '1',
+            'data' => (object) array(
+                'placeholder' => 'Your firstname...',
+                'label' => 'firstname',
+                'required' => '0',
+                'class' => '',
+                'id' => '',
+                'length' => (object) array(
+                    'min' => '10',
+                    'max' => '20'
+                )
+            )
+        ));
         $formGem[] = $element;
 
         $element = new stdClass();
-        $element->line_email = array( (object) array('name' => 'email',
-                                     'type' => 'Zend\\Form\\Element\\Mail"',
-                                     'order' => '2',
-                                     'data' => (object) array(
-                                        'placeholder' => 'Your mail...',
-                                         'label' => 'email',
-                                         'required' => '0',
-                                         'class' => '',
-                                         'id' => '',
-                                         'length' => (object) array(
-                                            'min' => '10',
-                                            'max' => '20'
-                                         )
-                                     )
-                                )
-                            );
-        $formGem[] = $element;
-
-
-        $element = new stdClass();
-        $element->line_checkbox = array( (object) array('name' => 'optin',
-                                     'type' => 'Zend\\Form\\Element\\Checkbox"',
-                                     'order' => '3',
-                                     'data' => (object) array(
-                                        'placeholder' => '',
-                                        'label' => 'optin',
-                                        'required' => '0',
-                                        'class' => '',
-                                        'id' => '',
-                                        'innerData'=> array(  (object) array(
-                                            'label' => 'optin'
-                                        )),
-                                         'length' => (object) array(
-                                            'min' => '',
-                                            'max' =>''
-                                         )
-                                     )
-                                )
-                            );
+        $element->line_email = array( (object) array(
+            'name' => 'email',
+            'type' => 'Zend\\Form\\Element\\Mail"',
+            'order' => '2',
+            'data' => (object) array(
+                'placeholder' => 'Your mail...',
+                'label' => 'email',
+                'required' => '0',
+                'class' => '',
+                'id' => '',
+                'length' => (object) array(
+                    'min' => '10',
+                    'max' => '20'
+                )
+            )
+        ));
         $formGem[] = $element;
 
 
         $element = new stdClass();
-        $element->line_paragraph = array( (object) array('name' => 'comment',
-                                     'type' => 'Zend\\Form\\Element\\TextArea"',
-                                     'order' => '4',
-                                     'data' => (object) array(
-                                        'placeholder' => 'Your comment',
-                                         'label' => 'comment',
-                                         'required' => '0',
-                                         'class' => '',
-                                         'id' => '',
-                                         'length' =>   (object) array(
-                                            'min' => '10',
-                                            'max' => '20'
-                                         )
-                                     )
-                                )
-                            );
+        $element->line_checkbox = array( (object) array(
+            'name' => 'optin',
+            'type' => 'Zend\\Form\\Element\\Checkbox"',
+            'order' => '3',
+            'data' => (object) array(
+                'placeholder' => '',
+                'label' => 'optin',
+                'required' => '0',
+                'class' => '',
+                'id' => '',
+                'innerData'=> array(  (object) array(
+                    'label' => 'optin'
+                )),
+                'length' => (object) array(
+                    'min' => '',
+                    'max' =>''
+                )
+            )
+        )
+        );
+        $formGem[] = $element;
+
+
+        $element = new stdClass();
+        $element->line_paragraph = array( (object) array(
+            'name' => 'comment',
+            'type' => 'Zend\\Form\\Element\\TextArea"',
+            'order' => '4',
+            'data' => (object) array(
+                'placeholder' => 'Your comment',
+                'label' => 'comment',
+                'required' => '0',
+                'class' => '',
+                'id' => '',
+                'length' =>   (object) array(
+                    'min' => '10',
+                    'max' => '20'
+                )
+            )
+        ));
         $formGem[] = $element;
 
         $element = new stdClass();
-        $element->line_upload = array( (object) array('name' => 'file',
-                                     'type' => 'Zend\\Form\\Element\\File"',
-                                     'order' => '4',
-                                     'data' => (object) array(
-                                        'placeholder' => '',
-                                         'label' => 'file',
-                                         'required' => '0',
-                                         'class' => '',
-                                         'id' => '',
-                                         'length' => (object) array(
-                                            'min' => '',
-                                            'max' =>''
-                                         )
-                                     )
-                                )
-                            );
+        $element->line_upload = array( (object) array(
+            'name' => 'file',
+            'type' => 'Zend\\Form\\Element\\File"',
+            'order' => '4',
+            'data' => (object) array(
+                'placeholder' => '',
+                'label' => 'file',
+                'required' => '0',
+                'class' => '',
+                'id' => '',
+                'length' => (object) array(
+                    'min' => '',
+                    'max' =>''
+                )
+            )
+        ));
         $formGem[] = $element;
 
         $element = new stdClass();
-        $element->line_radio = array( (object) array('name' => 'civility',
-                                     'type' => 'Zend\\Form\\Element\\Radio"',
-                                     'order' => '5',
-                                     'data' => (object) array(
-                                        'placeholder' => '',
-                                        'label' => 'civility',
-                                        'required' => '0',
-                                        'class' => '',
-                                        'id' => '',
-                                        'innerData'=> array(  (object) array(
-                                            'label' => 'M',
-                                            'label' => 'Mne',
-
-                                        )),
-                                         'length' => (object) array(
-                                            'min' => '',
-                                            'max' =>''
-                                         )
-                                     )
-                                )
-                            );
+        $element->line_radio = array( (object) array(
+            'name' => 'civility',
+            'type' => 'Zend\\Form\\Element\\Radio"',
+            'order' => '5',
+            'data' => (object) array(
+                'placeholder' => '',
+                'label' => 'civility',
+                'required' => '0',
+                'class' => '',
+                'id' => '',
+                'innerData'=> array(  (object) array(
+                    'label' => 'M',
+                    'label' => 'Mne',
+                )),
+                'length' => (object) array(
+                    'min' => '',
+                    'max' =>''
+                )
+             )
+        ));
         $formGem[] = $element;
 
         $element = new stdClass();
-        $element->line_dropdown = array( (object) array('name' => 'country',
-                                     'type' => 'Zend\\Form\\Element\\Select"',
-                                     'order' => '5',
-                                     'data' => (object) array(
-                                        'placeholder' => '',
-                                        'label' => 'country',
-                                        'required' => '0',
-                                        'class' => '',
-                                        'id' => '',
-                                        'dropdownValues'=> array(  (object) array(
-                                            'dropdown_label' => 'France',
-                                            'dropdown_label' => 'Angleterre',
-
-                                        )),
-                                         'length' => (object) array(
-                                            'min' => '',
-                                            'max' =>''
-                                         )
-                                     )
-                                )
-                            );
+        $element->line_dropdown = array( (object) array(
+            'name' => 'country',
+            'type' => 'Zend\\Form\\Element\\Select"',
+            'order' => '5',
+            'data' => (object) array(
+                'placeholder' => '',
+                'label' => 'country',
+                'required' => '0',
+                'class' => '',
+                'id' => '',
+                'dropdownValues'=> array(  (object) array(
+                    'dropdown_label' => 'France',
+                    'dropdown_label' => 'Angleterre',
+                )),
+                'length' => (object) array(
+                    'min' => '',
+                    'max' =>''
+                )
+            )
+        ));
         $formGem[] = $element;
         
 
@@ -245,7 +244,6 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(get_class($form), "Zend\Form\Form");
         $this->assertEquals($form->get('firstname')->getLabel(), "firstname");
         $this->assertEquals(get_class($form->get('firstname')), "Zend\Form\Element\Text");
-
         $this->assertEquals($form->get('email')->getLabel(), "email");
         $this->assertEquals(get_class($form->get('email')), "Zend\Form\Element\Email");
         $this->assertEquals($form->get('optin')->getLabel(), "optin");

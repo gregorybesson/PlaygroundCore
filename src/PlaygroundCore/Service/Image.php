@@ -6,13 +6,7 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 
 /**
- *
- * @author AdFab
- *
  * require php_exif for some methods
- *
- * TODO only jpeg is possible for now, it would be nice to allow png, gif, ...
- *
  */
 class Image extends EventProvider implements ServiceManagerAwareInterface
 {
@@ -23,17 +17,6 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
      * @var resource
      */
     protected $image;
-    
-    public function __construct()
-    {
-        /*if (!file_exists($file)) {
-            throw new \Exception('Not a file: "' . $file . '"', null, null);
-        }
-        $this->file = $file;
-        $this->image = imagecreatefromstring(
-            file_get_contents($file)
-        );*/
-    }
     
     /**
      * @param string $file

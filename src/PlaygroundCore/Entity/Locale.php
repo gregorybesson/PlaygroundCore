@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\InputFilter\Factory as InputFactory;
 
 /**
  * @ORM\Entity @HasLifecycleCallbacks
@@ -222,10 +221,10 @@ class Locale implements InputFilterAwareInterface
      */
     public function populate($data = array())
     {
-        if (isset($data['name']) && $data['name'] != null) {
+        if (isset($data['name']) && $data['name'] !== null) {
             $this->name = $data['name'];
         }
-        if (isset($data['locale']) && $data['locale'] != null) {
+        if (isset($data['locale']) && $data['locale'] !== null) {
             $this->locale = $data['locale'];
         }
     }
@@ -251,7 +250,6 @@ class Locale implements InputFilterAwareInterface
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
             $this->inputFilter = $inputFilter;
-            $factory = new InputFactory();
         }
         return $this->inputFilter;
     }

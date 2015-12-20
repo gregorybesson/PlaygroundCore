@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\InputFilter\Factory as InputFactory;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity @HasLifecycleCallbacks
@@ -256,19 +254,19 @@ class Formgen implements InputFilterAwareInterface
      */
     public function populate($data = array())
     {
-        if (isset($data['title']) && $data['title'] != null) {
+        if (isset($data['title']) && $data['title'] !== null) {
             $this->title = $data['title'];
         }
-        if (isset($data['description']) && $data['description'] != null) {
+        if (isset($data['description']) && $data['description'] !== null) {
             $this->description = $data['description'];
         }
-        if (isset($data['formjsonified']) && $data['formjsonified'] != null) {
+        if (isset($data['formjsonified']) && $data['formjsonified'] !== null) {
             $this->formjsonified = $data['formjsonified'];
         }
-        if (isset($data['formtemplate']) && $data['formtemplate'] != null) {
+        if (isset($data['formtemplate']) && $data['formtemplate'] !== null) {
             $this->formtemplate = $data['formtemplate'];
         }
-        if (isset($data['active']) && $data['active'] != null) {
+        if (isset($data['active']) && $data['active'] !== null) {
             $this->active = $data['active'];
         }
     }
@@ -294,7 +292,6 @@ class Formgen implements InputFilterAwareInterface
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
             $this->inputFilter = $inputFilter;
-            $factory = new InputFactory();
         }
         return $this->inputFilter;
     }

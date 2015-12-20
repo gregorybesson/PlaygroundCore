@@ -12,7 +12,6 @@ namespace PlaygroundCore\Controller\Frontend;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 
 class SwitchLocaleController extends AbstractActionController implements ServiceLocatorAwareInterface
 {

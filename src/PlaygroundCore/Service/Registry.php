@@ -70,8 +70,6 @@ class Registry
         $callback,
         array $args = array()
     ) {
-        //ArgValidator::assert($code, array('string', 'min' => 1));
-        //ArgValidator::assert($callback, 'callable');
         if (!is_callable($callback)) {
             throw new \RuntimeException('The callback must be callable');
         }

@@ -31,28 +31,13 @@ class SwitchLocaleController extends AbstractActionController implements Service
     public function switchAction()
     {
         $locale = $this->getEvent()->getRouteMatch()->getParam('locale');
-        $context = $this->getEvent()->getRouteMatch()->getParam('context');
-        $referer = urldecode($this->getEvent()->getRouteMatch()->getParam('referer'));
+        $context = $this->getEvent()->getRouteMatch()->getParam('area');
+        $redirect = (!empty($this->getEvent()->getRouteMatch()->getParam('redirect')))? urldecode($this->getEvent()->getRouteMatch()->getParam('redirect')) : '/';
 
-        if ($context == 'front') {
-            $referer = str_replace("//", '/', $referer);
-        }
+        $cookie = new \Zend\Http\Header\SetCookie('pg_locale_'.$context, $locale, time() + 60*60*24*365, '/');
+        $this->getResponse()->getHeaders()->addHeader($cookie);
 
-        $filter = 'active_'.$context;
-        $locales = $this->getLocaleService()->getLocaleMapper()->findBy(array($filter => 1, 'locale' => $locale));
-
-        // Si pas de locale, on redirige sans rien faire
-        if (count($locales) != 1) {
-            return $this->redirect()->toUrl($referer);
-        }
-
-        if ($context != 'front') {
-            $locale = $locales[0];
-            $cookie = new \Zend\Http\Header\SetCookie('pg_locale_'.$context, $locale->getLocale(), time() + 60*60*24*365, '/');
-            $this->getResponse()->getHeaders()->addHeader($cookie);
-        }
-
-        return $this->redirect()->toUrl($referer);
+        return $this->redirect()->toUrl($redirect); 
     }
 
 

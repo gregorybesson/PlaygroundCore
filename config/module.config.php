@@ -60,15 +60,18 @@ return array(
     
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
+                // Frontend
+                array('controller' => 'PlaygroundCore\Controller\Frontend\SwitchLocale', 'roles' => array('guest', 'user')),
+
                 // CRON / Console
-                array('controller' => 'AsseticBundle\Controller\Console',                       'roles' => array('guest', 'user')),
-                array('controller' => 'DoctrineModule\Controller\Cli',                          'roles' => array('guest', 'user')),
-                array('controller' => 'playgroundcore_console',                                 'roles' => array('guest', 'user')),
+                array('controller' => 'AsseticBundle\Controller\Console', 'roles' => array('guest', 'user')),
+                array('controller' => 'DoctrineModule\Controller\Cli', 'roles' => array('guest', 'user')),
+                array('controller' => 'playgroundcore_console', 'roles' => array('guest', 'user')),
     
                 // Admin area
-                array('controller' => 'PlaygroundCore\Controller\Formgen',                      'roles' => array('admin')),
-                array('controller' => 'elfinder',                                               'roles' => array('admin')),
-                array('controller' => 'DoctrineORMModule\Yuml\YumlController',                  'roles' => array('admin')),
+                array('controller' => 'PlaygroundCore\Controller\Formgen', 'roles' => array('admin')),
+                array('controller' => 'elfinder', 'roles' => array('admin')),
+                array('controller' => 'DoctrineORMModule\Yuml\YumlController', 'roles' => array('admin')),
             ),
         ),
     ),
@@ -104,7 +107,7 @@ return array(
                     'locale' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => 'switch/[:locale]/[:context]/[:referer]',
+                            'route' => 'switch[/:locale][/:redirect]',
                             'defaults' => array(
                                 'controller' => 'PlaygroundCore\Controller\Frontend\SwitchLocale',
                                 'action'     => 'switch',

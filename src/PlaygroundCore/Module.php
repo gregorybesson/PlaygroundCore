@@ -37,6 +37,10 @@ class Module implements
                 if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_back')) {
                     $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_back');
                 }
+            } else {
+                if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_frontend')) {
+                    $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_frontend');
+                }
             }
 
             if (empty($locale)) {

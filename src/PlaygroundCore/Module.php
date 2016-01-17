@@ -26,39 +26,86 @@ class Module implements
         $serviceManager = $e->getApplication()->getServiceManager();
         $config = $e->getApplication()->getServiceManager()->get('config');
 
+        // Locale management
         $translator = $serviceManager->get('translator');
+        $defaultLocale = 'fr_FR';
 
         // Gestion de la locale
         if (PHP_SAPI !== 'cli') {
-            //translator
+            $config = $e->getApplication()->getServiceManager()->get('config');
+            if (isset($config['playgroundLocale'])) {
+                $pgLocale = $config['playgroundLocale'];
+                $defaultLocale = $pgLocale['default'];
 
-            // Gestion locale pour le back
-            if ($serviceManager->get('router')->match($serviceManager->get('request')) && strpos($serviceManager->get('router')->match($serviceManager->get('request'))->getMatchedRouteName(), 'admin') !==false) {
-                if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_back')) {
-                    $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_back');
+                if (isset($pgLocale['strategies'])) {
+                    $pgstrat = $pgLocale['strategies'];
+
+                    // Is there a locale in the URL ?
+                    if (in_array('uri', $pgstrat)) {
+                        $path = $e->getRequest()->getUri()->getPath();
+                        $parts = explode('/', trim($path, '/'));
+                        $localeCandidate = array_shift($parts);
+                        
+                        if (in_array($localeCandidate, $pgLocale['supported'])) {
+                            $locale = $localeCandidate;
+                        }
+                    }
+
+                    // Is there a cookie for the locale ?
+                    if (empty($locale) && in_array('cookie', $pgstrat)) {
+                        $serviceManager->get('router')->setTranslator($translator);
+                        if ($serviceManager->get('router')->match($serviceManager->get('request')) &&
+                            strpos($serviceManager->get('router')->match($serviceManager->get('request'))->getMatchedRouteName(), 'admin') !==false
+                        ) {
+                            if ($e->getRequest()->getCookie() &&
+                                $e->getRequest()->getCookie()->offsetExists('pg_locale_back')
+                            ) {
+                                $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_back');
+                            }
+                        } else {
+                            if ($e->getRequest()->getCookie() &&
+                                $e->getRequest()->getCookie()->offsetExists('pg_locale_frontend')
+                            ) {
+                                $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_frontend');
+                            }
+                        }
+                    }
+
+                    // Is there a locale in the request Header ?
+                    if (empty($locale) && in_array('header', $pgstrat)) {
+                        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+                            $localeCandidate = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                            if (in_array($localeCandidate, $pgLocale['supported'])) {
+                                $locale = $localeCandidate;
+                            }
+                        }
+                    }
                 }
-            } else {
-                if ($e->getRequest()->getCookie() && $e->getRequest()->getCookie()->offsetExists('pg_locale_frontend')) {
-                    $locale = $e->getRequest()->getCookie()->offsetGet('pg_locale_frontend');
+                // I take the default locale
+                if (empty($locale)) {
+                    $locale = $defaultLocale;
                 }
             }
-
+            
+            // I take the default locale
             if (empty($locale)) {
-                if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-                    $locale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-                } else {
-                    $locale = 'fr_FR';
-                }
+                $locale = $defaultLocale;
             }
+
             $translator->setLocale($locale);
 
-            // plugins
+            // Attach the translator to the router
+            $e->getRouter()->setTranslator($translator);
+            $e->getRouter()->setTranslatorTextDomain('playgrounddesign');
+
+            // Attach the translator to the plugins
             $translate = $serviceManager->get('viewhelpermanager')->get('translate');
             $translate->getTranslator()->setLocale($locale);
 
             $options = $serviceManager->get('playgroundcore_module_options');
             $options->setLocale($locale);
         }
+
         // positionnement de la langue pour les traductions de date avec strftime
         setlocale(LC_TIME, "fr_FR", 'fr_FR.utf8', 'fra');
 
@@ -71,9 +118,11 @@ class Module implements
         $evm = $doctrine->getEventManager();
 
         $translatableListener = new \Gedmo\Translatable\TranslatableListener();
-        $translatableListener->setDefaultLocale('fr_FR');
+        $translatableListener->setDefaultLocale($defaultLocale);
+        
         // If no translation is found, fallback to entity data
         $translatableListener->setTranslationFallback(true);
+        
         // set Locale
         if (!empty($locale)) {
             $translatableListener->setTranslatableLocale($locale);

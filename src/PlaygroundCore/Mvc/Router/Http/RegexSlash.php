@@ -53,6 +53,10 @@ class RegexSlash extends \Zend\Mvc\Router\Http\Regex implements \Zend\Mvc\Router
             }
         }
 
+        if (strpos($url, "%") !== false) {
+            $url = preg_replace("/%.*%\//", '', $url);
+        }
+
         return $url;
     }
 }

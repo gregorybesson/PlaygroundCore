@@ -95,14 +95,30 @@ return array(
     ),
 
     'router' => array(
+        'router_class' => '\Zend\Mvc\Router\Http\TranslatorAwareTreeRouteStack',
         'routes' => array(
             'frontend' => array(
-                'type' => 'PlaygroundCore\Mvc\Router\Http\RegexSlash',
-                'priority' => -1000,
-                'options' => array(
-                    'regex' => '\/(?<locale>([a-z_-]{2,5})(\/|\z)+)?\/?',
-                    'spec' => '/',
-                ),
+                // 'type' => 'PlaygroundCore\Mvc\Router\Http\RegexSlash',
+                // 'priority' => -1000,
+                // 'options' => array(
+                //     'regex' => '^\/(?<locale>[a-z_-]{2,5})\/',
+                //     //'regex' => '\/(?<locale>[a-z_-]{2,5})\/?',
+                //     'defaults' => array(
+                //         'locale' => 'fr',
+                //     ),
+                //     'spec' => '/%locale%/',
+                    
+                // ),
+                'type'    => 'Segment', 
+                'options' => array( 
+                    'route'    => '/[:locale[/]]', 
+                    'defaults' => array( 
+                        'locale' => 'fr', 
+                    ), 
+                    'constraints' => array( 
+                        'locale'       => '[a-zA-Z_-]{2,5}',
+                    ), 
+                ), 
                 'child_routes' => array(
                     'locale' => array(
                         'type' => 'Segment',
@@ -485,6 +501,19 @@ return array(
             'translatePlural' => 'PlaygroundCore\Service\Factory\TranslatePluralFactory',
         ),
     ),
+
+    'playgroundLocale' => array(
+        'default' => 'fr_FR',
+        'strategies' => array(
+            'uri',
+            'cookie',
+            'header'
+        ),
+        'supported' => array(
+            'fr_FR'
+        )
+    ),
+
     'translator' => array(
         'locale' => 'fr_FR',
         'translation_file_patterns' => array(

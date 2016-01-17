@@ -37,7 +37,7 @@ class SwitchLocaleController extends AbstractActionController implements Service
         $cookie = new \Zend\Http\Header\SetCookie('pg_locale_'.$context, $locale, time() + 60*60*24*365, '/');
         $this->getResponse()->getHeaders()->addHeader($cookie);
 
-        return $this->redirect()->toUrl($redirect); 
+        return $this->redirect()->toUrl($redirect);
     }
 
 

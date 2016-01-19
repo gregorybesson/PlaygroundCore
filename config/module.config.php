@@ -98,32 +98,27 @@ return array(
         'router_class' => '\Zend\Mvc\Router\Http\TranslatorAwareTreeRouteStack',
         'routes' => array(
             'frontend' => array(
-                // 'type' => 'PlaygroundCore\Mvc\Router\Http\RegexSlash',
-                // 'priority' => -1000,
-                // 'options' => array(
-                //     'regex' => '^\/(?<locale>[a-z_-]{2,5})\/',
-                //     //'regex' => '\/(?<locale>[a-z_-]{2,5})\/?',
-                //     'defaults' => array(
-                //         'locale' => 'fr',
-                //     ),
-                //     'spec' => '/%locale%/',
-                    
-                // ),
-                'type'    => 'Segment', 
-                'options' => array( 
-                    'route'    => '/[:locale[/]]', 
-                    'defaults' => array( 
-                        'locale' => 'fr', 
-                    ), 
-                    'constraints' => array( 
-                        'locale'       => '[a-zA-Z_-]{2,5}',
-                    ), 
-                ), 
+                'type'      => 'Segment',
+                'may_terminate' => true,
+                'options'   => array(
+                    'route'    => '/[:locale[/]]',
+                    'constraints' => array(
+                        //'locale' => 'en|fr',
+                        // the last part is a non-capturing group so that
+                        // /fr or / or /contact of/en/contact or /fr_FR/contact do match !
+                        'locale' => '[a-zA-Z_-]{2,5}(?=/|$)'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'index',
+                        'locale' => 'fr'
+                    ),
+                ),
                 'child_routes' => array(
-                    'locale' => array(
+                    'switchlocale' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => 'switch[/:locale][/:redirect]',
+                            'route' => 'switch[/:lang][/:redirect]',
                             'defaults' => array(
                                 'controller' => 'PlaygroundCore\Controller\Frontend\SwitchLocale',
                                 'action'     => 'switch',

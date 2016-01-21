@@ -318,6 +318,10 @@ class Module implements
 
                         $tracker = new Analytics\Tracker($config['id']);
 
+                        if(isset($config['enable_tracking'])){
+                            $tracker->setEnableTracking($config['enable_tracking']);
+                        }
+
                         if (isset($config['custom_vars'])) {
                             foreach ($config['custom_vars'] as $customVar) {
                                 $customVarId        = $customVar['id'];

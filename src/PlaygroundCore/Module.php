@@ -28,7 +28,7 @@ class Module implements
 
         // Locale management
         $translator = $serviceManager->get('translator');
-        $defaultLocale = 'fr_FR';
+        $defaultLocale = 'fr';
 
         // Gestion de la locale
         if (PHP_SAPI !== 'cli') {
@@ -45,6 +45,8 @@ class Module implements
                         $path = $e->getRequest()->getUri()->getPath();
                         $parts = explode('/', trim($path, '/'));
                         $localeCandidate = array_shift($parts);
+                        // I switch from locale to... language
+                        $localeCandidate = substr($localeCandidate, 0, 2);
                         
                         if (in_array($localeCandidate, $pgLocale['supported'])) {
                             $locale = $localeCandidate;
@@ -75,6 +77,8 @@ class Module implements
                     if (empty($locale) && in_array('header', $pgstrat)) {
                         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
                             $localeCandidate = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                            // I switch from locale to... language
+                            $localeCandidate = substr($localeCandidate, 0, 2);
                             if (in_array($localeCandidate, $pgLocale['supported'])) {
                                 $locale = $localeCandidate;
                             }
@@ -96,7 +100,7 @@ class Module implements
 
             // Attach the translator to the router
             $e->getRouter()->setTranslator($translator);
-            $e->getRouter()->setTranslatorTextDomain('playgrounddesign');
+            $e->getRouter()->setTranslatorTextDomain('routes');
 
             // Attach the translator to the plugins
             $translate = $serviceManager->get('viewhelpermanager')->get('translate');

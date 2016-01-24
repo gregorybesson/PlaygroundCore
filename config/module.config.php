@@ -498,7 +498,7 @@ return array(
     ),
 
     'playgroundLocale' => array(
-        'default' => 'fr_FR',
+        'default' => 'fr',
         'strategies' => array(
             'uri',
             'cookie',
@@ -512,6 +512,24 @@ return array(
     'translator' => array(
         'locale' => 'fr_FR',
         'translation_file_patterns' => array(
+            array(
+                'type'         => 'phpArray',
+                'base_dir'     => __DIR__ . '/../../../../language',
+                'pattern'      => 'routes_%s.php',
+                'text_domain'  => 'routes'
+            ),
+            array(
+                'type'         => 'phpArray',
+                'base_dir'     => __DIR__ . '/../language',
+                'pattern'      => 'routes_%s.php',
+                'text_domain'  => 'routes'
+            ),
+            array(
+                'type'         => 'phpArray',
+                'base_dir'     => __DIR__ . '/../../../../language',
+                'pattern'      => '%s.php',
+                'text_domain'  => 'playgroundcore'
+            ),
             array(
                 'type'         => 'phpArray',
                 'base_dir'     => __DIR__ . '/../language',
@@ -530,7 +548,8 @@ return array(
 
     'validators' => array(
         'invokables' => array(
-            'Special' => 'PlaygroundCore\Validator\Blacklist' 
+            'NotInBlacklist' => 'PlaygroundCore\Validator\Blacklist',
+            'InMailDomainList' => 'PlaygroundCore\Validator\MailDomain',
          ),
     ),
 );

@@ -107,6 +107,7 @@ $settings = array(
         ),
     ),
     'googleAnalytics' => array(
+        'enable_tracking' => true,
         'id' => 'UA-32092452-1',
 
         /**

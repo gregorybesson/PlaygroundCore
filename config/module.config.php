@@ -505,6 +505,7 @@ return array(
             'header'
         ),
         'supported' => array(
+            'fr',
             'fr_FR'
         )
     ),

@@ -66,7 +66,7 @@ class MailDomain extends AbstractValidator
             $this->error(self::FORBIDDEN);
 
             return false;
-        } 
+        }
 
         return true;
     }

@@ -249,6 +249,7 @@ class Module implements
                     $viewHelper = new View\Helper\TwitterCard();
                     $viewHelper->setConfig($sm->getServiceLocator()->get('twitter-card'));
                     $viewHelper->setRequest($sm->getServiceLocator()->get('Request'));
+
                     return $viewHelper;
                 },
 
@@ -257,6 +258,14 @@ class Module implements
                     $viewHelper->setLocaleService($sm->getServiceLocator()->get('playgroundcore_locale_service'));
                     $viewHelper->setWebsiteService($sm->getServiceLocator()->get('playgroundcore_website_service'));
                     $viewHelper->setRouteMatch($sm->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch());
+                    
+                    return $viewHelper;
+                },
+
+                'countryName' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    $service = $sm->getServiceLocator()->get('playgroundcore_country_service');
+                    $viewHelper = new View\Helper\CountryName($service);
+
                     return $viewHelper;
                 },
             ),
@@ -292,6 +301,7 @@ class Module implements
                     'playgroundcore_formgen_service'     => 'PlaygroundCore\Service\Formgen',
                     'playgroundcore_image_service'       => 'PlaygroundCore\Service\Image',
                     'playgroundcore_ffmpeg_service'      => 'PlaygroundCore\Service\Ffmpeg',
+                    'playgroundcore_country_service'     => 'PlaygroundCore\Service\Country',
                 ),
                 'factories' => array(
                     'playgroundcore_module_options' => function (\Zend\ServiceManager\ServiceManager $sm) {
@@ -322,7 +332,7 @@ class Module implements
 
                         $tracker = new Analytics\Tracker($config['id']);
 
-                        if(isset($config['enable_tracking'])){
+                        if (isset($config['enable_tracking'])) {
                             $tracker->setEnableTracking($config['enable_tracking']);
                         }
 

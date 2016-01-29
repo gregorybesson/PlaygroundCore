@@ -9,7 +9,9 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
 {
     private $translatedTo;
 
-    private $path = 'language/countries';
+    private $path;
+
+    private $corePath;
 
     public function getTranslatedTo()
     {
@@ -25,14 +27,20 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
 
     public function getPath()
     {
+        if(empty($this->path)){
+            $this->path = str_replace('\\', '/', getcwd()) . '/language/countries';
+        }
+
         return $this->path;
     }
 
-    public function setPath($path)
+    public function getCorePath()
     {
-        $this->path = (string) $path;
+        if(empty($this->corePath)){
+            $this->corePath = __DIR__ . '/../../../language/countries';
+        }
 
-        return $this;
+        return $this->corePath;
     }
 
     public function getAllCountries($translatedTo = null)
@@ -40,9 +48,14 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
         if (null === $translatedTo) {
             $translatedTo = $this->getServiceManager()->get('translator')->getLocale();
         }
-        $fileName = $this->path.'/'.$translatedTo.'.php';
+        
+        $fileName = $this->getPath().'/'.$translatedTo.'.php';
         if (! file_exists($fileName)) {
-            throw new \InvalidArgumentException("Language $translatedTo not found.");
+            $fileName = $this->getCorePath().'/'.$translatedTo.'.php';
+
+            if (! file_exists($fileName)) {
+                throw new \InvalidArgumentException("Language $translatedTo not found.");
+            }
         }
 
         return include $fileName;
@@ -53,9 +66,12 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
         if (null === $translatedTo) {
             $translatedTo = $this->getServiceManager()->get('translator')->getLocale();
         }
-        $fileName = $this->path.'/'.$translatedTo.'.php';
+        $fileName = $this->getPath().'/'.$translatedTo.'.php';
         if (! file_exists($fileName)) {
-            throw new \InvalidArgumentException("Language $translatedTo not found.");
+            $fileName = $this->getCorePath().'/'.$translatedTo.'.php';
+            if (! file_exists($fileName)) {
+                throw new \InvalidArgumentException("Language $translatedTo not found.");
+            }
         }
 
         $list = include $fileName;

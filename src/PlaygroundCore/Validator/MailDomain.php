@@ -61,13 +61,15 @@ class MailDomain extends AbstractValidator
         $domain = explode('@', $value);
         $domain = end($domain);
         $this->setValue(strtolower($value));
+        $domains = file($this->getFile(), FILE_IGNORE_NEW_LINES);
 
-        if (strpos(file_get_contents($this->getFile()), strtolower($domain)) === false) {
-            $this->error(self::FORBIDDEN);
+        if(is_array($domains) && in_array(strtolower($domain), $domains)){
 
-            return false;
+            return true;
         }
 
-        return true;
+        $this->error(self::FORBIDDEN);
+
+        return false;
     }
 }

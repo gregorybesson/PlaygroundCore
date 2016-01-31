@@ -41,7 +41,7 @@ class Module implements
     {
         $config = $e->getConfigListener()->getMergedConfig(false);
 
-        if (isset($config['playgroundLocale']) && isset($config['playgroundLocale']['enable'])) {
+        if (isset($config['playgroundLocale']) && isset($config['playgroundLocale']['enable']) && $config['playgroundLocale']['enable']) {
             $config['router']['routes']['frontend']['options']['route'] = '/[:locale[/]]';
             $config['router']['routes']['frontend']['options']['constraints']['locale'] = '[a-z]{2}([-_][A-Z]{2})?(?=/|$)';
             $config['router']['routes']['frontend']['options']['defaults']['locale'] = $config['playgroundLocale']['default'];

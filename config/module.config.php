@@ -491,7 +491,7 @@ return array(
     ),
 
     'playgroundLocale' => array(
-        'enable' => true,
+        'enable' => false,
         'default' => 'fr',
         'strategies' => array(
             'uri',

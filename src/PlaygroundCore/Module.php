@@ -12,6 +12,7 @@ use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
+use Zend\ModuleManager\ModuleManager;
 
 class Module implements
     AutoloaderProviderInterface,
@@ -20,6 +21,34 @@ class Module implements
     ServiceProviderInterface,
     ViewHelperProviderInterface
 {
+    public function init(ModuleManager $manager)
+    {
+        $eventManager = $manager->getEventManager();
+    
+        /*
+         * This event change the config before it's cached
+        * The change will apply to 'template_path_stack' and 'assetic_configuration'
+        * These 2 config take part in the Playground Theme Management
+        */
+        $eventManager->attach(\Zend\ModuleManager\ModuleEvent::EVENT_MERGE_CONFIG, array($this, 'onMergeConfig'), 100);
+    }
+
+    /**
+     * This method is called only when the config is not cached.
+     * @param \Zend\ModuleManager\ModuleEvent $e
+     */
+    public function onMergeConfig(\Zend\ModuleManager\ModuleEvent $e)
+    {
+        $config = $e->getConfigListener()->getMergedConfig(false);
+
+        if (isset($config['playgroundLocale']) && isset($config['playgroundLocale']['enable'])) {
+            $config['router']['routes']['frontend']['options']['route'] = '/[:locale[/]]';
+            $config['router']['routes']['frontend']['options']['constraints']['locale'] = '[a-z]{2}([-_][A-Z]{2})?(?=/|$)';
+            $config['router']['routes']['frontend']['options']['defaults']['locale'] = $config['playgroundLocale']['default'];
+        }
+
+        $e->getConfigListener()->setMergedConfig($config);
+    }
 
     public function onBootstrap(EventInterface $e)
     {

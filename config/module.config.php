@@ -101,17 +101,10 @@ return array(
                 'type'      => 'Segment',
                 'may_terminate' => true,
                 'options'   => array(
-                    'route'    => '/[:locale[/]]',
-                    'constraints' => array(
-                        //'locale' => 'en|fr',
-                        // the last part is a non-capturing group so that
-                        // /fr or / or /contact of/en/contact or /fr_FR/contact do match !
-                        'locale' => '[a-zA-Z_-]{2,5}(?=/|$)'
-                    ),
+                    'route'    => '/',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
-                        'locale' => 'fr'
                     ),
                 ),
                 'child_routes' => array(
@@ -498,6 +491,7 @@ return array(
     ),
 
     'playgroundLocale' => array(
+        'enable' => false,
         'default' => 'fr',
         'strategies' => array(
             'uri',

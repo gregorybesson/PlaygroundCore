@@ -5,7 +5,8 @@ use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\Mail\Message as MailMessage;
 use Zend\Mime\Message as MimeMessage;
-use Zend\Mime\Part as MimePart;
+use Zend\Mime\Mime;
+use Zend\Mime\Part;
 
 class Message implements ServiceManagerAwareInterface
 {

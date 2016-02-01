@@ -65,28 +65,47 @@ class Message implements ServiceManagerAwareInterface
      */
     public function createHtmlMessage($from, $to, $subject, $nameOrModel, $values = array())
     {
+        if (is_string($from)) {
+            $from = array('email' => $from, 'name' => $from);
+        }
         $renderer = $this->getRenderer();
-
         $content = $renderer->render($nameOrModel, $values);
-        $html = new MimePart($content);
-        $html->type = "text/html";
-
-        $resolver = $this->getServiceManager()
-                         ->get('Zend\View\Resolver\TemplatePathStack');
-
+        $resolver = $this->getServiceManager()->get('Zend\View\Resolver\TemplatePathStack');
         // check if plain text email template exist
         if ($resolver->resolve($nameOrModel . '-plain')) {
             $contentText = $renderer->render($nameOrModel . '-plain', $values);
-            $text = new MimePart($contentText);
         } else {
-            $text = new MimePart('');
+            $contentText = '';
         }
-        $text->type = "text/plain";
 
-        $body = new MimeMessage();
-        $body->setParts(array($text, $html));
+        $mail = new MailMessage();
+        $mail->addTo($to);
+        $mail->addFrom($from['email'], $from['name']);
+        $mail->setSubject($subject);
+        $text              = new Part($contentText);
+        $text->type        = Mime::TYPE_TEXT;
+        $text->encoding    = Mime::ENCODING_QUOTEDPRINTABLE;
+        $text->disposition = Mime::DISPOSITION_INLINE;
+        $text->charset     = 'UTF-8';
+        $html              = new Part($content);
+        $html->type        = Mime::TYPE_HTML;
+        $html->encoding    = Mime::ENCODING_QUOTEDPRINTABLE;
+        $html->disposition = Mime::DISPOSITION_INLINE;
+        $html->charset     = 'UTF-8';
+        $bodyMessage     = new MimeMessage();
 
-        return $this->getDefaultMessage($from, 'utf-8', $to, $subject, $body);
+        $multiPartContentMessage = new MimeMessage();
+        $multiPartContentMessage->addPart($text);
+        $multiPartContentMessage->addPart($html);
+        $multiPartContentMimePart           = new Part($multiPartContentMessage->generateMessage());
+        $multiPartContentMimePart->charset  = 'UTF-8';
+        $multiPartContentMimePart->type     = 'multipart/alternative';
+        $multiPartContentMimePart->boundary = $multiPartContentMessage->getMime()->boundary();
+        $bodyMessage->addPart($multiPartContentMimePart);
+        $mail->setBody($bodyMessage);
+        $mail->setEncoding('UTF-8');
+
+        return $mail;
     }
 
     /**

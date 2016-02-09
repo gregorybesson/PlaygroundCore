@@ -29,7 +29,8 @@
 		"bjyoungblood/bjy-authorize" : "1.*",
         "studio-42/elfinder": "2.*",
 		"twilio/sdk" : "3.*",
-		"buggedcom/phpvideotoolkit" : "2.*"
+		"buggedcom/phpvideotoolkit" : "2.*",
+        "zfr/zfr-cors" : "1.*"
     },
 	"require-dev" : {
 		"phpunit/phpunit" : "4.*",

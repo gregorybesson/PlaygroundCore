@@ -146,20 +146,46 @@ $zenddevelopertools = array(
     ),
 );
 
+// with jquery, the config to call pg as cors is like that
+//    $.ajax({
+//      type: 'POST',
+//      url: loginUrl,
+//      crossDomain: true,
+//      headers: {'X-Requested-With': 'XMLHttpRequest'},
+//      xhrFields: {withCredentials: true},
+//      data: {'email': 'bessong@gmail.com','password': 'aaaaaa'},
+//      dataType: 'json',
+//      success: function(responseData, textStatus, jqXHR) {
+//          console.log(responseData);
+//      },
+//      error: function (responseData, textStatus, errorThrown) {
+//          console.log(errorThrown);
+//      }
+//    });
+
+$zfrcors = array(
+    // cors from a localhost:3000 and Postman (chrome extension)
+    'allowed_origins' => array('http://localhost:3000','chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'),
+    'allowed_methods' => array('GET', 'POST', 'OPTIONS'),
+    // this method is mandatory for pg to return json
+    'allowed_headers' => array('X-Requested-With'),
+    'max_age' => 120,
+    // to use session
+    'allowed_credentials' => true,
+),
+
 // 'Jhu\ZdtLoggerModule' config
 // $sm->get('jhu.zdt_logger')->info('my log');
 $zdt_logger = array(
     'logger' => 'Zend\Log\Logger'
 );
 
-
-
-
 /**
  * You do not need to edit below this line
  */
 return array(
-    'playgroundcore'         => $settings,
+    'playgroundcore' => $settings,
     'zenddevelopertools'=> $zenddevelopertools,
-    'jhu'               => array('zdt_logger' => $zdt_logger)
+    'zfr_cors' => $zfrcors,
+    'jhu' => array('zdt_logger' => $zdt_logger)
 );

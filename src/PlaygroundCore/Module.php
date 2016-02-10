@@ -13,6 +13,7 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 use Zend\ModuleManager\ModuleManager;
+use Zend\Uri\UriFactory;
 
 class Module implements
     AutoloaderProviderInterface,
@@ -52,6 +53,9 @@ class Module implements
 
     public function onBootstrap(EventInterface $e)
     {
+        // this is useful for zfr-cors to accept chrome extension like Postman
+        UriFactory::registerScheme('chrome-extension', 'Zend\Uri\Uri');
+
         $serviceManager = $e->getApplication()->getServiceManager();
         $config = $e->getApplication()->getServiceManager()->get('config');
 

@@ -421,4 +421,11 @@ class Module implements
                 ),
         );
     }
+
+    public function getConsoleUsage(\Zend\Console\Adapter\Posix $console)
+    {
+        return array(
+            'cron'  => 'call this command to enable cron tasks'
+        );
+    }
 }

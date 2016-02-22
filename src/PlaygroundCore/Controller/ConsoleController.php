@@ -32,7 +32,7 @@ class ConsoleController extends AbstractActionController
 
             return $response;
         } else {
-            return 'ok';
+            return;
         }
     }
 

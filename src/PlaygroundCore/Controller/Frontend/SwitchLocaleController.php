@@ -1,24 +1,10 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace PlaygroundCore\Controller\Frontend;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 
-class SwitchLocaleController extends AbstractActionController implements ServiceLocatorAwareInterface
+class SwitchLocaleController extends AbstractActionController
 {
-    /**
-    * @var $localeService : Service des locales
-    */
-    protected $localeService;
 
     /**
     * switchAction : permet de switcher de langue en fonction d'un context (back/front)
@@ -38,36 +24,5 @@ class SwitchLocaleController extends AbstractActionController implements Service
         $this->getResponse()->getHeaders()->addHeader($cookie);
 
         return $this->redirect()->toUrl($redirect);
-    }
-
-
-    /**
-    * getServiceLocator : Recuperer le service locator
-    * @return ServiceLocator $serviceLocator
-    */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    /**
-    * setServiceLocator : set le service locator
-    */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-
-      /**
-    * getLocaleService : Recuperer le service des locales
-    *
-    * @return Service/Locale $localeService
-    */
-    public function getLocaleService()
-    {
-        if ($this->localeService === null) {
-            $this->localeService = $this->getServiceLocator()->get('playgroundcore_locale_service');
-        }
-        return $this->localeService;
     }
 }

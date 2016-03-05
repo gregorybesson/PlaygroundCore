@@ -323,16 +323,28 @@ class Module implements
                     },
 
                     'playgroundcore_formgen_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                        return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                        return new Mapper\Formgen(
+                            $sm->get('playgroundcore_doctrine_em'),
+                            $sm->get('playgroundcore_module_options'),
+                            $sm
+                        );
                     },
 
                     'playgroundcore_website_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
 
-                        return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                        return new Mapper\Website(
+                            $sm->get('playgroundcore_doctrine_em'),
+                            $sm->get('playgroundcore_module_options'),
+                            $sm
+                        );
                     },
 
                     'playgroundcore_locale_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                        return new Mapper\Locale($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                        return new Mapper\Locale(
+                            $sm->get('playgroundcore_doctrine_em'),
+                            $sm->get('playgroundcore_module_options'),
+                            $sm
+                        );
                     },
                     'PlaygroundCore\Analytics\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('config');

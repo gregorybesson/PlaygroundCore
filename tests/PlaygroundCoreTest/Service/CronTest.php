@@ -371,10 +371,10 @@ class CronTest extends \PHPUnit_Framework_TestCase
     
     public function testRun()
     {
-        $cronService = $this->getMock(
-            'PlaygroundCore\Service\Cron',
-            array('schedule', 'process', 'cleanup')
-        );
+        $cronService = $this->getMockBuilder('PlaygroundCore\Service\Cron')
+            ->setMethods(array('schedule', 'process', 'cleanup'))
+            ->disableOriginalConstructor()
+            ->getMock();
         
         $cronService
         ->expects($this->once())
@@ -395,11 +395,11 @@ class CronTest extends \PHPUnit_Framework_TestCase
     
     public function testCleanup()
     {
-        $cronService = $this->getMock(
-            'PlaygroundCore\Service\Cron',
-            array('recoverRunning', 'cleanLog')
-        );
-        
+        $cronService = $this->getMockBuilder('PlaygroundCore\Service\Cron')
+            ->setMethods(array('recoverRunning', 'cleanLog'))
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $cronService
         ->expects($this->once())
         ->method('recoverRunning')

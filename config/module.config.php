@@ -501,10 +501,8 @@ return array(
         ),
     ),
     'controller_plugins' => array(
-        'invokables' => array(
-            'shortenUrl'    => 'PlaygroundCore\Controller\Plugin\ShortenUrl',
-        ),
         'factories' => array(
+            'shortenUrl'    => 'PlaygroundCore\Service\Factory\ControllerPluginShortenUrlFactory',
             'translate'       => 'PlaygroundCore\Service\Factory\TranslateFactory',
             'translatePlural' => 'PlaygroundCore\Service\Factory\TranslatePluralFactory',
         ),

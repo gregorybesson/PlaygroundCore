@@ -2,24 +2,29 @@
 namespace PlaygroundCore\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use ZfcBase\EventManager\EventProvider;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * main class
  */
-class ShortenUrl extends EventProvider implements ServiceManagerAwareInterface
+class ShortenUrl extends EventProvider
 {
-
-    /**
-     * @var ServiceManager
-     */
-    protected $serviceManager;
-
     /**
      * @var ModuleOptions
      */
     protected $options;
+
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
 
     /**
      * This method call Bit.ly to shorten a given URL.
@@ -59,21 +64,9 @@ class ShortenUrl extends EventProvider implements ServiceManagerAwareInterface
     public function getOptions()
     {
         if (!$this->options) {
-            $this->setOptions($this->getServiceManager()->get('playgroundcore_module_options'));
+            $this->setOptions($this->serviceLocator->get('playgroundcore_module_options'));
         }
 
         return $this->options;
-    }
-
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
-
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-
-        return $this;
     }
 }

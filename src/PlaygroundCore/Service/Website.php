@@ -2,12 +2,12 @@
 
 namespace PlaygroundCore\Service;
 
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use ZfcBase\EventManager\EventProvider;
 use PlaygroundCore\Options\ModuleOptions;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Website extends EventProvider implements ServiceManagerAwareInterface
+class Website extends EventProvider
 {
 
     /**
@@ -16,15 +16,20 @@ class Website extends EventProvider implements ServiceManagerAwareInterface
     protected $websiteMapper;
 
     /**
-     * @var ServiceManager
-     */
-    protected $serviceManager;
-
-    /**
      * @var UserServiceOptionsInterface
      */
     protected $options;
 
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
 
     /**
      * getWebsiteMapper
@@ -34,7 +39,7 @@ class Website extends EventProvider implements ServiceManagerAwareInterface
     public function getWebsiteMapper()
     {
         if (null === $this->websiteMapper) {
-            $this->websiteMapper = $this->getServiceManager()->get('playgroundcore_website_mapper');
+            $this->websiteMapper = $this->serviceLocator->get('playgroundcore_website_mapper');
         }
 
         return $this->websiteMapper;
@@ -74,32 +79,9 @@ class Website extends EventProvider implements ServiceManagerAwareInterface
     public function getOptions()
     {
         if (!$this->options instanceof ModuleOptions) {
-            $this->setOptions($this->getServiceManager()->get('playgroundcore_module_options'));
+            $this->setOptions($this->serviceLocator->get('playgroundcore_module_options'));
         }
 
         return $this->options;
-    }
-
-    /**
-     * Retrieve service manager instance
-     *
-     * @return ServiceManager
-     */
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
-
-    /**
-     * Set service manager instance
-     *
-     * @param  ServiceManager $serviceManager
-     * @return User
-     */
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-
-        return $this;
     }
 }

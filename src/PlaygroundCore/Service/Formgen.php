@@ -3,14 +3,14 @@
 namespace PlaygroundCore\Service;
 
 use Zend\Form\Form;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use ZfcBase\EventManager\EventProvider;
 use PlaygroundCore\Options\ModuleOptions;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFactory;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Formgen extends EventProvider implements ServiceManagerAwareInterface
+class Formgen extends EventProvider
 {
 
     /**
@@ -24,14 +24,20 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     protected $localeService;
 
     /**
-     * @var ServiceManager
-     */
-    protected $serviceManager;
-
-    /**
      * @var UserServiceOptionsInterface
      */
     protected $options;
+
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
 
     public function insert($data)
     {
@@ -136,7 +142,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
             $element->setAttribute('maxlength', $attr['lengthMax']);
             $options['messages'] = array(
                 \Zend\Validator\StringLength::TOO_LONG => sprintf(
-                    $this->getServiceManager()->get('translator')->translate(
+                    $this->serviceLocator->get('translator')->translate(
                         'This field contains more than %s characters',
                         'playgroundcore'
                     ),
@@ -367,7 +373,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     public function getFormgenMapper()
     {
         if (null === $this->formgenMapper) {
-            $this->formgenMapper = $this->getServiceManager()->get('playgroundcore_formgen_mapper');
+            $this->formgenMapper = $this->serviceLocator->get('playgroundcore_formgen_mapper');
         }
 
         return $this->formgenMapper;
@@ -377,7 +383,7 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     public function getLocaleService()
     {
         if (null === $this->localeService) {
-            $this->localeService = $this->getServiceManager()->get('playgroundcore_locale_service');
+            $this->localeService = $this->serviceLocator->get('playgroundcore_locale_service');
         }
 
         return $this->localeService;
@@ -417,32 +423,9 @@ class Formgen extends EventProvider implements ServiceManagerAwareInterface
     public function getOptions()
     {
         if (!$this->options instanceof ModuleOptions) {
-            $this->setOptions($this->getServiceManager()->get('playgroundcore_module_options'));
+            $this->setOptions($this->serviceLocator->get('playgroundcore_module_options'));
         }
 
         return $this->options;
-    }
-
-    /**
-     * Retrieve service manager instance
-     *
-     * @return ServiceManager
-     */
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
-
-    /**
-     * Set service manager instance
-     *
-     * @param  ServiceManager $serviceManager
-     * @return User
-     */
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-
-        return $this;
     }
 }

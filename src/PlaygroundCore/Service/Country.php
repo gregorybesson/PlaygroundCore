@@ -38,7 +38,7 @@ final class Country extends EventProvider
 
     public function getPath()
     {
-        if(empty($this->path)){
+        if (empty($this->path)) {
             $this->path = str_replace('\\', '/', getcwd()) . '/language/countries';
         }
 
@@ -47,7 +47,7 @@ final class Country extends EventProvider
 
     public function getCorePath()
     {
-        if(empty($this->corePath)){
+        if (empty($this->corePath)) {
             $this->corePath = __DIR__ . '/../../../language/countries';
         }
 

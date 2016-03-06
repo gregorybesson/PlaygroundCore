@@ -1,13 +1,31 @@
 <?php
-namespace PlaygroundCore\Controller;
+namespace PlaygroundCore\Controller\Admin;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ElfinderController extends AbstractActionController
 {
 
     protected $Config;
+
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
+
+    public function getServiceLocator()
+    {
+        
+        return $this->serviceLocator;
+    }
 
     /**
      * @return array|\Zend\View\Model\ViewModel

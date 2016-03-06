@@ -2,39 +2,23 @@
 namespace PlaygroundCore\Mail\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\Mail\Message as MailMessage;
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Mime;
 use Zend\Mime\Part;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Message implements ServiceManagerAwareInterface
+class Message
 {
     /**
      *
      * @var ServiceManager
      */
-    protected $serviceManager;
+    protected $serviceLocator;
 
-    /**
-     *
-     * @param  ServiceManager  $serviceManager
-     * @return AbstractService
-     */
-    public function setServiceManager(ServiceManager $serviceManager)
+    public function __construct(ServiceLocatorInterface $locator)
     {
-        $this->serviceManager = $serviceManager;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @return ServiceManager
-     */
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
+        $this->serviceLocator = $locator;
     }
 
     /**
@@ -71,7 +55,7 @@ class Message implements ServiceManagerAwareInterface
         }
         $renderer = $this->getRenderer();
         $content = $renderer->render($nameOrModel, $values);
-        $resolver = $this->getServiceManager()->get('Zend\View\Resolver\TemplatePathStack');
+        $resolver = $this->serviceLocator->get('Zend\View\Resolver\TemplatePathStack');
         // check if plain text email template exist
         if ($resolver->resolve($nameOrModel . '-plain')) {
             $contentText = $renderer->render($nameOrModel . '-plain', $values);
@@ -151,8 +135,7 @@ class Message implements ServiceManagerAwareInterface
     protected function getRenderer()
     {
         if ($this->renderer === null) {
-            $this->renderer = $this->getServiceManager()
-                ->get('ViewRenderer');
+            $this->renderer = $this->serviceLocator->get('ViewRenderer');
         }
 
         return $this->renderer;
@@ -166,8 +149,7 @@ class Message implements ServiceManagerAwareInterface
     protected function getTransport()
     {
         if ($this->transport === null) {
-            $this->transport = $this->getServiceManager()
-                ->get('playgroundcore_transport');
+            $this->transport = $this->serviceLocator->get('playgroundcore_transport');
         }
 
         return $this->transport;

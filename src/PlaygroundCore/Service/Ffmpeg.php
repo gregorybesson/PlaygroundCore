@@ -356,8 +356,12 @@ class Ffmpeg extends EventProvider
     *  on a background video.
     *  ffmpeg -y -filter_complex 'aevalsrc=0:d=1.6' silence.wav
     */
-    public function createNullSound($duration = 1, $target)
+    public function createNullSound($duration, $target)
     {
+        if (empty($duration)) {
+            $duration = 1;
+        }
+
         $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
         $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
@@ -374,8 +378,11 @@ class Ffmpeg extends EventProvider
     * ffmpeg -y -i in-1.wav -i in-2.wav -i in-3.wav
     * -filter_complex '[0:0][1:0][2:0]concat=n=3:v=0:a=1[out]' -map '[out]' out.wav
     */
-    public function concatenateSounds($sounds = array(), $target)
+    public function concatenateSounds($sounds, $target)
     {
+        if (empty($sounds)) {
+            $sounds = array();
+        }
         if (!is_array($sounds)) {
             $sounds = array($sounds);
         }
@@ -404,8 +411,11 @@ class Ffmpeg extends EventProvider
     * ffmpeg -i in-1.wav -i in-2.wav -i in-3.wav
     * -filter_complex "[0:a][1:a][2:a]amerge=inputs=3[aout]" -map "[aout]" -ac 2 out.wav
     */
-    public function mergeSounds($sounds = array(), $target)
+    public function mergeSounds($sounds, $target)
     {
+        if (empty($sounds)) {
+            $sounds = array();
+        }
         if (!is_array($sounds)) {
             $sounds = array($sounds);
         }
@@ -440,7 +450,8 @@ class Ffmpeg extends EventProvider
     {
         $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
 
-        $text = "fontfile=$font:text='". $message."':fontsize=". $fontSize .":fontcolor=" . $fontColor . ":x=".$x.":y=".$y;
+        $text = "fontfile=$font:text='". $message."':fontsize=".
+            $fontSize .":fontcolor=" . $fontColor . ":x=".$x.":y=".$y;
        
         $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
@@ -480,8 +491,11 @@ class Ffmpeg extends EventProvider
     *  $frames = array(array(0, 12), array(13, 110), array(111, 200));
     *  ffmpeg -i quickns.mov -an -vf "select=between(n\,110\,200),setpts=PTS-STARTPTS" grg.mov
     */
-    public function splitVideo($source, $frames = array(), $target)
+    public function splitVideo($source, $frames, $target)
     {
+        if (empty($frames)) {
+            $frames = array();
+        }
         $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
         
         $i=1;

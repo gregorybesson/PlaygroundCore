@@ -15,6 +15,6 @@ class ControllerPluginShortenUrlFactory extends AbstractPluginManagerFactory
     {
         $serviceLocator = $serviceLocator->getController()->getServiceLocator();
 
-        return new ShortenUrl($serviceLocator );
+        return new ShortenUrl($serviceLocator);
     }
 }

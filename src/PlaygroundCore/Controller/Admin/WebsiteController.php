@@ -11,13 +11,31 @@ namespace PlaygroundCore\Controller\Admin;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class WebsiteAdminController extends AbstractActionController
+class WebsiteController extends AbstractActionController
 {
 
     protected $websiteService;
 
     protected $localeService;
+
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
+
+    public function getServiceLocator()
+    {
+        
+        return $this->serviceLocator;
+    }
 
     public function indexAction()
     {

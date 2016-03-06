@@ -5,9 +5,26 @@ namespace PlaygroundCore\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Console\Response as ConsoleResponse;
 use PlaygroundCore\Service\Cron;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ConsoleController extends AbstractActionController
 {
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
+
+    public function getServiceLocator()
+    {
+        
+        return $this->serviceLocator;
+    }
 
     /**
      * @var cronService

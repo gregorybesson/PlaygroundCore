@@ -81,7 +81,7 @@ return array(
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
                 // Frontend
-                array('controller' => 'PlaygroundCore\Controller\Frontend\SwitchLocale', 'roles' => array('guest', 'user')),
+                array('controller' => 'playgroundcore_frontend_switchlocale', 'roles' => array('guest', 'user')),
 
                 // CRON / Console
                 array('controller' => 'AsseticBundle\Controller\Console', 'roles' => array('guest', 'user')),
@@ -89,8 +89,8 @@ return array(
                 array('controller' => 'playgroundcore_console', 'roles' => array('guest', 'user')),
     
                 // Admin area
-                array('controller' => 'PlaygroundCore\Controller\Formgen', 'roles' => array('admin')),
-                array('controller' => 'elfinder', 'roles' => array('admin')),
+                array('controller' => 'playgroundcore_admin_formgen', 'roles' => array('admin')),
+                array('controller' => 'playgroundcore_admin_elfinder', 'roles' => array('admin')),
                 array('controller' => 'DoctrineORMModule\Yuml\YumlController', 'roles' => array('admin')),
             ),
         ),
@@ -133,7 +133,7 @@ return array(
                         'options' => array(
                             'route' => 'switch[/:lang][/:redirect]',
                             'defaults' => array(
-                                'controller' => 'PlaygroundCore\Controller\Frontend\SwitchLocale',
+                                'controller' => 'playgroundcore_frontend_switchlocale',
                                 'action'     => 'switch',
                             ),
                         ),
@@ -163,7 +163,7 @@ return array(
                         'options' => array(
                             'route' => '/elfinder',
                             'defaults' => array(
-                                'controller' => 'elfinder',
+                                'controller' => 'playgroundcore_admin_elfinder',
                                 'action'     => 'index',
                             ),
                         ),
@@ -174,7 +174,7 @@ return array(
                                 'options' => array(
                                     'route' => '/connector',
                                     'defaults' => array(
-                                        'controller' => 'elfinder',
+                                        'controller' => 'playgroundcore_admin_elfinder',
                                         'action'     => 'connector',
                                     ),
                                 ),
@@ -184,7 +184,7 @@ return array(
                                 'options' => array(
                                     'route' => '/ckeditor',
                                     'defaults' => array(
-                                        'controller' => 'elfinder',
+                                        'controller' => 'playgroundcore_admin_elfinder',
                                         'action'     => 'ckeditor',
                                     ),
                                 ),
@@ -196,7 +196,7 @@ return array(
                         'options' => array(
                                 'route'    => '/formgen',
                                 'defaults' => array(
-                                        'controller'    => 'PlaygroundCore\Controller\Formgen',
+                                        'controller'    => 'playgroundcore_admin_formgen',
                                         'action'        => 'index',
                                 ),
                         ),
@@ -207,7 +207,7 @@ return array(
                                 'options' => array(
                                     'route' => '/create',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'create',
                                     ),
                                 ),
@@ -217,7 +217,7 @@ return array(
                                 'options' => array(
                                     'route' => '/generate',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'generate',
                                     ),
                                 ),
@@ -227,7 +227,7 @@ return array(
                                 'options' => array(
                                     'route' => '/list',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'list',
                                     ),
                                 ),
@@ -237,7 +237,7 @@ return array(
                                 'options' => array(
                                     'route' => '/edit[/:formId]',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'edit',
                                     ),
                                     'constraints' => array(
@@ -250,7 +250,7 @@ return array(
                                 'options' => array(
                                     'route' => '/activate[/:formId]',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'activate',
                                     ),
                                     'constraints' => array(
@@ -266,7 +266,7 @@ return array(
                                         'form' => '[a-zA-Z0-9_-]+'
                                     ),
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'view',
                                     ),
                                 ),
@@ -276,7 +276,7 @@ return array(
                                 'options' => array(
                                     'route' => '/input',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'input',
                                     ),
                                 ),
@@ -286,7 +286,7 @@ return array(
                                 'options' => array(
                                     'route' => '/paragraph',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'paragraph',
                                     ),
                                 ),
@@ -296,7 +296,7 @@ return array(
                                 'options' => array(
                                     'route' => '/number',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'number',
                                     ),
                                 ),
@@ -306,7 +306,7 @@ return array(
                                 'options' => array(
                                     'route' => '/phone',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'phone',
                                     ),
                                 ),
@@ -316,7 +316,7 @@ return array(
                                 'options' => array(
                                     'route' => '/checkbox',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'checkbox',
                                     ),
                                 ),
@@ -326,7 +326,7 @@ return array(
                                 'options' => array(
                                     'route' => '/radio',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'radio',
                                     ),
                                 ),
@@ -336,7 +336,7 @@ return array(
                                 'options' => array(
                                     'route' => '/dropdown',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'dropdown',
                                     ),
                                 ),
@@ -346,7 +346,7 @@ return array(
                                 'options' => array(
                                     'route' => '/password',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'password',
                                     ),
                                 ),
@@ -356,7 +356,7 @@ return array(
                                 'options' => array(
                                     'route' => '/passwordverify',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'passwordverify',
                                     ),
                                 ),
@@ -366,7 +366,7 @@ return array(
                                 'options' => array(
                                     'route' => '/email',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'email',
                                     ),
                                 ),
@@ -386,7 +386,7 @@ return array(
                                 'options' => array(
                                     'route' => '/upload',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'upload',
                                     ),
                                 ),
@@ -396,7 +396,7 @@ return array(
                                 'options' => array(
                                     'route' => '/creditcard',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'creditcard',
                                     ),
                                 ),
@@ -406,7 +406,7 @@ return array(
                                 'options' => array(
                                     'route' => '/url',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'url',
                                     ),
                                 ),
@@ -416,7 +416,7 @@ return array(
                                 'options' => array(
                                     'route' => '/hidden',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'hidden',
                                     ),
                                 ),
@@ -426,7 +426,7 @@ return array(
                                 'options' => array(
                                     'route' => '/test',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Formgen',
+                                        'controller' => 'playgroundcore_admin_formgen',
                                         'action'     => 'test',
                                     ),
                                 ),
@@ -438,7 +438,7 @@ return array(
                         'options' => array(
                             'route' => '/sitecountry',
                             'defaults' => array(
-                                'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
+                                'controller' => 'playgroundcore_admin_website',
                                 'action'     => 'index',
                             ),
                         ),
@@ -449,7 +449,7 @@ return array(
                                 'options' => array(
                                      'route' => '/list',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
+                                        'controller' => 'playgroundcore_admin_website',
                                         'action'     => 'list',
                                     ),
                                 ),
@@ -460,7 +460,7 @@ return array(
                                 'options' => array(
                                      'route' => '/edit-active/[:websiteId]',
                                     'defaults' => array(
-                                        'controller' => 'PlaygroundCore\Controller\Admin\WebsiteAdmin',
+                                        'controller' => 'playgroundcore_admin_website',
                                         'action'     => 'editactive',
                                     ),
                                     'constraints' => array(
@@ -492,12 +492,13 @@ return array(
     ),
 
     'controllers' => array(
-        'invokables' => array(
-            'PlaygroundCore\Controller\Formgen'   => 'PlaygroundCore\Controller\FormgenController',
-            'playgroundcore_console'              => 'PlaygroundCore\Controller\ConsoleController',
-            'elfinder'                       => 'PlaygroundCore\Controller\ElfinderController',
-            'PlaygroundCore\Controller\Frontend\SwitchLocale' => 'PlaygroundCore\Controller\Frontend\SwitchLocaleController',
-            'PlaygroundCore\Controller\Admin\WebsiteAdmin'    => 'PlaygroundCore\Controller\Admin\WebsiteAdminController',
+        'factories' => array(
+            'playgroundcore_admin_formgen'         => 'PlaygroundCore\Service\Factory\AdminFormgenControllerFactory',
+            'playgroundcore_console'               => 'PlaygroundCore\Service\Factory\ConsoleControllerFactory',
+            'playgroundcore_admin_elfinder'        => 'PlaygroundCore\Service\Factory\AdminElfinderControllerFactory',
+            'playgroundcore_admin_website'         => 'PlaygroundCore\Service\Factory\AdminWebsiteAdminControllerFactory',
+            'playgroundcore_frontend_switchlocale' => 'PlaygroundCore\Service\Factory\FrontendSwitchLocaleControllerFactory',
+            
         ),
     ),
     'controller_plugins' => array(

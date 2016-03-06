@@ -2,9 +2,26 @@
 namespace PlaygroundCore\Controller\Frontend;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class SwitchLocaleController extends AbstractActionController
 {
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
+
+    public function getServiceLocator()
+    {
+        
+        return $this->serviceLocator;
+    }
 
     /**
     * switchAction : permet de switcher de langue en fonction d'un context (back/front)

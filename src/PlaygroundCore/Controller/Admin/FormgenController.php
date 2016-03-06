@@ -1,8 +1,9 @@
 <?php
-namespace PlaygroundCore\Controller;
+namespace PlaygroundCore\Controller\Admin;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class FormgenController extends AbstractActionController
 {
@@ -10,6 +11,22 @@ class FormgenController extends AbstractActionController
     protected $formgenService;
     protected $websiteService;
 
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
+
+    public function getServiceLocator()
+    {
+        
+        return $this->serviceLocator;
+    }
 
     public function indexAction()
     {

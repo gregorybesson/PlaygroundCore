@@ -1,10 +1,30 @@
 <?php
 return array(
-	'service_manager' => array(
-		'factories' => array(
-			'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
-		),
-	),
+    'service_manager' => array(
+        'aliases' => array(
+            'playgroundcore_doctrine_em' => 'doctrine.entitymanager.orm_default',
+            'google-analytics'           => 'PlaygroundCore\Analytics\Tracker',
+            'facebook-opengraph'         => 'PlaygroundCore\Opengraph\Tracker',
+            'twitter-card'               => 'PlaygroundCore\TwitterCard\Config',
+            'twilio'                     => 'playgroundcore_twilio',
+            'ffmpeg'                     => 'playgroundcore_phpvideotoolkit'
+        ),
+        'factories' => array(
+            'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'playgroundcore_message'             => 'PlaygroundCore\Mail\Service\Factory\MessageFactory',
+            'playgroundcore_cron_service'        => 'PlaygroundCore\Service\Factory\CronFactory',
+            'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\Factory\ShortenUrlFactory',
+            'playgroundcore_website_service'     => 'PlaygroundCore\Service\Factory\WebsiteFactory',
+            'playgroundcore_locale_service'      => 'PlaygroundCore\Service\Factory\LocaleFactory',
+            'playgroundcore_formgen_service'     => 'PlaygroundCore\Service\Factory\FormgenFactory',
+            'playgroundcore_image_service'       => 'PlaygroundCore\Service\Factory\ImageFactory',
+            'playgroundcore_ffmpeg_service'      => 'PlaygroundCore\Service\Factory\FfmpegFactory',
+            'playgroundcore_country_service'     => 'PlaygroundCore\Service\Factory\CountryFactory',
+            'playgroundcore_twilio'              => 'PlaygroundCore\Service\Factory\TwilioServiceFactory',
+            'playgroundcore_phpvideotoolkit'     => 'PlaygroundCore\Service\Factory\PhpvideotoolkitServiceFactory',
+            'playgroundcore_transport'           => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
+        ),
+    ),
 
     'doctrine' => array(
         'driver' => array(
@@ -481,10 +501,8 @@ return array(
         ),
     ),
     'controller_plugins' => array(
-        'invokables' => array(
-            'shortenUrl'    => 'PlaygroundCore\Controller\Plugin\ShortenUrl',
-        ),
         'factories' => array(
+            'shortenUrl'    => 'PlaygroundCore\Service\Factory\ControllerPluginShortenUrlFactory',
             'translate'       => 'PlaygroundCore\Service\Factory\TranslateFactory',
             'translatePlural' => 'PlaygroundCore\Service\Factory\TranslatePluralFactory',
         ),

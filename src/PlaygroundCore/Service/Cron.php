@@ -7,8 +7,8 @@ use PlaygroundCore\Mapper;
 use PlaygroundCore\Service\Registry;
 use Doctrine\ORM\EntityManager;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use ZfcBase\EventManager\EventProvider;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * main Cron class
@@ -18,7 +18,7 @@ use ZfcBase\EventManager\EventProvider;
  * @author heartsentwined <heartsentwined@cogito-lab.com>
  * @license GPL http://opensource.org/licenses/gpl-license.php
  */
-class Cron extends EventProvider implements ServiceManagerAwareInterface
+class Cron extends EventProvider
 {
     /**
      * how long ahead to schedule cron jobs
@@ -77,6 +77,17 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
     protected $pending;
 
     /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
+
+    /**
      * main entry function
      *
      * 1. schedule new cron jobs
@@ -103,7 +114,7 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
         if (!$this->cronjobs) {
             $cronjobs = array();
 
-            $results = $this->getServiceManager()
+            $results = $this->serviceLocator
                 ->get('application')
                 ->getEventManager()
                 ->trigger(__FUNCTION__, $this, array(
@@ -670,21 +681,9 @@ class Cron extends EventProvider implements ServiceManagerAwareInterface
     public function getEm()
     {
         if (!$this->em) {
-            $this->setEm($this->getServiceManager()->get('playgroundcore_doctrine_em'));
+            $this->setEm($this->serviceLocator->get('playgroundcore_doctrine_em'));
         }
 
         return $this->em;
-    }
-
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
-
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-
-        return $this;
     }
 }

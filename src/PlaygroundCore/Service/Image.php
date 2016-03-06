@@ -2,13 +2,13 @@
 namespace PlaygroundCore\Service;
 
 use ZfcBase\EventManager\EventProvider;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * require php_exif for some methods
  */
-class Image extends EventProvider implements ServiceManagerAwareInterface
+class Image extends EventProvider
 {
     
     protected $file;
@@ -18,6 +18,17 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
      */
     protected $image;
     
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
+
     /**
      * @param string $file
      * @throws \Exception if the file does not exists
@@ -86,14 +97,6 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
         imagejpeg($this->image, $path);
         return $this;
     }
-
-    /**
-     * @return \Zend\ServiceManager\ServiceManager
-     */
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
     
     /**
      * output as jpeg
@@ -101,15 +104,5 @@ class Image extends EventProvider implements ServiceManagerAwareInterface
     public function __toString()
     {
         echo imagejpeg($this->image);
-    }
-
-    /**
-     * @param ServiceManager $serviceManager
-     * @return \PlaygroundCore\Service\Image
-     */
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-        return $this;
     }
 }

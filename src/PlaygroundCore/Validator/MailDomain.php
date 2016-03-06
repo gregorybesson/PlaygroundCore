@@ -63,8 +63,7 @@ class MailDomain extends AbstractValidator
         $this->setValue(strtolower($value));
         $domains = file($this->getFile(), FILE_IGNORE_NEW_LINES);
 
-        if(is_array($domains) && in_array(strtolower($domain), $domains)){
-
+        if (is_array($domains) && in_array(strtolower($domain), $domains)) {
             return true;
         }
 

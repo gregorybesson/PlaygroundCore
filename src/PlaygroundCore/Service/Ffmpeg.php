@@ -2,9 +2,9 @@
 namespace PlaygroundCore\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use ZfcBase\EventManager\EventProvider;
 use PHPVideoToolkit\FfmpegProcessOutputException;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * main class
@@ -18,20 +18,24 @@ use PHPVideoToolkit\FfmpegProcessOutputException;
  *     Buffer Output: \PHPVideoToolkit\Trace::vars($ffmpeg->getBuffer(true));
  *
  */
-class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
+class Ffmpeg extends EventProvider
 {
-
-    /**
-     * @var ServiceManager
-     */
-    protected $serviceManager;
 
     /**
      * @var ModuleOptions
      */
     protected $options;
 
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
 
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
     
     /**
      * This method create images from a video.
@@ -40,9 +44,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     public function createImagesFromVideos($source, $target = 'step-%03d.jpg')
     {
         try {
-            $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+            $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
 
-            $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-i', $source)
             ->setOutputPath($target)
@@ -64,9 +68,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     {
         try {
             // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
-            $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+            $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
 
-            $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addPreInputCommand('-framerate', $framerate)
             ->addPreInputCommand('-pattern_type', 'glob')
@@ -94,9 +98,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     {
         try {
             // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
-            $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+            $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
 
-            $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addPreInputCommand('-framerate', $framerate)
             //->addPreInputCommand('-start_number', '00154')
@@ -122,8 +126,8 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     public function transformMp4ToMpg($source, $target)
     {
         try {
-            $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
-            $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
+            $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addCommand('-i', $source)
             ->addCommand('-c', 'copy')
             ->addCommand('-bsf:v', 'h264_mp4toannexb')
@@ -146,8 +150,8 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     public function transformMovToMpg($source, $target)
     {
         try {
-            $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
-            $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
+            $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addCommand('-i', $source)
             ->addCommand('-vcodec', 'h264')
             ->addCommand('-pix_fmt', 'yuv420p')
@@ -173,8 +177,8 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     {
         if (is_array($videos)) {
             try {
-                $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
-                $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+                $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
+                $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
                     ->addPreInputCommand('-y')
                     ->addCommand('-i', 'concat:' . implode('|', $videos))
                     ->addCommand('-c', 'copy')
@@ -196,9 +200,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     public function mergeMp3ToMp4($audioSource, $videoSource, $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
            ->addCommand('-i', $videoSource)
            ->addCommand('-i', $audioSource, true)
            ->setOutputPath($target)
@@ -208,9 +212,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     public function convertMp4ToOgv($videoSource, $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addCommand('-i', $videoSource)
             ->setOutputPath($target)
             ->execute();
@@ -223,9 +227,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
      */
     public function convertToMp3($source, $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-i', $source)
             ->addCommand('-vn')
@@ -241,9 +245,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
 
     public function convertMovToMp4($videoSource, $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-i', $videoSource)
             ->addCommand('-vcodec', 'h264')
@@ -260,9 +264,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     public function mergeMp4($videoSource, $target)
     {
         // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-i', $videoSource)
             ->setOutputPath($target)
@@ -282,9 +286,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             $layer = array($layer);
         }
         $overlay = '';
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $ffmpeg = $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-i', $source, true);
 
@@ -312,9 +316,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     */
     public function addWavToMp4($video, $sound, $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-i', $video, true)
             ->addCommand('-i', $sound, true)
@@ -335,9 +339,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     */
     public function increaseVolumeSound($source, $level, $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-i', $source, true)
             ->addCommand('-af', 'volume='.$level)
@@ -354,9 +358,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     */
     public function createNullSound($duration = 1, $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-filter_complex', 'aevalsrc=0:d='.$duration)
             ->setOutputPath($target)
@@ -376,8 +380,8 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             $sounds = array($sounds);
         }
 
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
-        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
+        $ffmpeg = $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y');
 
         $concat = '';
@@ -406,8 +410,8 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
             $sounds = array($sounds);
         }
 
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
-        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
+        $ffmpeg = $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y');
 
         $merge = '';
@@ -434,11 +438,11 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     */
     public function overlayTextOnMp4($source, $font, $fontSize, $fontColor, $message, $x, $y, $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
 
         $text = "fontfile=$font:text='". $message."':fontsize=". $fontSize .":fontcolor=" . $fontColor . ":x=".$x.":y=".$y;
        
-        $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y')
             ->addCommand('-i', $source)
             ->addCommand('-vf', 'drawtext='.$text)
@@ -454,9 +458,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     */
     public function extractImage($source, $target, $start = '00:00:01', $frames = 1)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
        
-        $ffmpeg = $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+        $ffmpeg = $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
             ->addPreInputCommand('-y');
 
         if (!empty($start)) {
@@ -478,11 +482,11 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     */
     public function splitVideo($source, $frames = array(), $target)
     {
-        $this->getServiceManager()->setShared('playgroundcore_phpvideotoolkit', false);
+        $this->serviceLocator->setShared('playgroundcore_phpvideotoolkit', false);
         
         $i=1;
         foreach ($frames as $frame) {
-            $this->getServiceManager()->get('playgroundcore_phpvideotoolkit')
+            $this->serviceLocator->get('playgroundcore_phpvideotoolkit')
                 ->addPreInputCommand('-y')
                 ->addCommand('-i', $source)
                 ->addCommand('-an')
@@ -505,21 +509,9 @@ class Ffmpeg extends EventProvider implements ServiceManagerAwareInterface
     public function getOptions()
     {
         if (!$this->options) {
-            $this->setOptions($this->getServiceManager()->get('playgroundcore_module_options'));
+            $this->setOptions($this->serviceLocator->get('playgroundcore_module_options'));
         }
 
         return $this->options;
-    }
-
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
-
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-
-        return $this;
     }
 }

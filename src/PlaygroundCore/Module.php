@@ -309,33 +309,12 @@ class Module implements
     {
         return array(
 
-                'aliases' => array(
-                    'playgroundcore_doctrine_em' => 'doctrine.entitymanager.orm_default',
-                    'google-analytics'           => 'PlaygroundCore\Analytics\Tracker',
-                    'facebook-opengraph'         => 'PlaygroundCore\Opengraph\Tracker',
-                    'twitter-card'               => 'PlaygroundCore\TwitterCard\Config',
-                    'twilio'                     => 'playgroundcore_twilio',
-                    'ffmpeg'                     => 'playgroundcore_phpvideotoolkit'
-                ),
-
                 'shared' => array(
                     'playgroundcore_message' => false,
                     // don't want this service to be a singleton. I have to reset the ffmpeg parameters for each call.
                     'playgroundcore_ffmpeg_service' => false
                 ),
 
-                'invokables' => array(
-                    'Zend\Session\SessionManager'        => 'Zend\Session\SessionManager',
-                    'playgroundcore_message'             => 'PlaygroundCore\Mail\Service\Message',
-                    'playgroundcore_cron_service'        => 'PlaygroundCore\Service\Cron',
-                    'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\ShortenUrl',
-                    'playgroundcore_website_service'     => 'PlaygroundCore\Service\Website',
-                    'playgroundcore_locale_service'      => 'PlaygroundCore\Service\Locale',
-                    'playgroundcore_formgen_service'     => 'PlaygroundCore\Service\Formgen',
-                    'playgroundcore_image_service'       => 'PlaygroundCore\Service\Image',
-                    'playgroundcore_ffmpeg_service'      => 'PlaygroundCore\Service\Ffmpeg',
-                    'playgroundcore_country_service'     => 'PlaygroundCore\Service\Country',
-                ),
                 'factories' => array(
                     'playgroundcore_module_options' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('Configuration');
@@ -344,21 +323,29 @@ class Module implements
                     },
 
                     'playgroundcore_formgen_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                        return new Mapper\Formgen($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                        return new Mapper\Formgen(
+                            $sm->get('playgroundcore_doctrine_em'),
+                            $sm->get('playgroundcore_module_options'),
+                            $sm
+                        );
                     },
 
                     'playgroundcore_website_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
 
-                        return new Mapper\Website($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                        return new Mapper\Website(
+                            $sm->get('playgroundcore_doctrine_em'),
+                            $sm->get('playgroundcore_module_options'),
+                            $sm
+                        );
                     },
 
                     'playgroundcore_locale_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                        return new Mapper\Locale($sm->get('playgroundcore_doctrine_em'), $sm->get('playgroundcore_module_options'));
+                        return new Mapper\Locale(
+                            $sm->get('playgroundcore_doctrine_em'),
+                            $sm->get('playgroundcore_module_options'),
+                            $sm
+                        );
                     },
-
-                    'playgroundcore_twilio' => 'PlaygroundCore\Service\Factory\TwilioServiceFactory',
-                    'playgroundcore_phpvideotoolkit' => 'PlaygroundCore\Service\Factory\PhpvideotoolkitServiceFactory',
-                    'playgroundcore_transport' => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
                     'PlaygroundCore\Analytics\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']) ? $config['playgroundcore']['googleAnalytics'] : array('id' => 'UA-XXXXXXXX-X');

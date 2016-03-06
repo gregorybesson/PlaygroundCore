@@ -3,10 +3,9 @@
 namespace PlaygroundCore\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ShortenUrl extends AbstractPlugin implements ServiceLocatorAwareInterface
+class ShortenUrl extends AbstractPlugin
 {
     /**
      * @var ServiceLocator
@@ -17,6 +16,11 @@ class ShortenUrl extends AbstractPlugin implements ServiceLocatorAwareInterface
      * @var service
      */
     protected $service;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
 
     /**
      * Returns a shortened Url via bit.ly
@@ -49,29 +53,9 @@ class ShortenUrl extends AbstractPlugin implements ServiceLocatorAwareInterface
     public function getService()
     {
         if (!$this->service) {
-            $this->setService($this->getServiceLocator()->get('playgroundcore_shortenurl_service'));
+            $this->setService($this->serviceLocator->get('playgroundcore_shortenurl_service'));
         }
 
         return $this->service;
-    }
-
-    /**
-     * Retrieve service manager instance
-     *
-     * @return ServiceLocator
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator->getServiceLocator();
-    }
-
-    /**
-     * Set service locator
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
     }
 }

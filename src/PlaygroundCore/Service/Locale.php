@@ -2,12 +2,12 @@
 
 namespace PlaygroundCore\Service;
 
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use ZfcBase\EventManager\EventProvider;
 use PlaygroundCore\Options\ModuleOptions;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Locale extends EventProvider implements ServiceManagerAwareInterface
+class Locale extends EventProvider
 {
 
     /**
@@ -16,14 +16,20 @@ class Locale extends EventProvider implements ServiceManagerAwareInterface
     protected $localeMapper;
 
     /**
-     * @var ServiceManager
-     */
-    protected $serviceManager;
-
-    /**
      * @var UserServiceOptionsInterface
      */
     protected $options;
+
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
 
     /**
      * getLocaleMapper
@@ -33,7 +39,7 @@ class Locale extends EventProvider implements ServiceManagerAwareInterface
     public function getLocaleMapper()
     {
         if (null === $this->localeMapper) {
-            $this->localeMapper = $this->getServiceManager()->get('playgroundcore_locale_mapper');
+            $this->localeMapper = $this->serviceLocator->get('playgroundcore_locale_mapper');
         }
 
         return $this->localeMapper;
@@ -73,32 +79,9 @@ class Locale extends EventProvider implements ServiceManagerAwareInterface
     public function getOptions()
     {
         if (!$this->options instanceof ModuleOptions) {
-            $this->setOptions($this->getServiceManager()->get('playgroundcore_module_options'));
+            $this->setOptions($this->serviceLocator->get('playgroundcore_module_options'));
         }
 
         return $this->options;
-    }
-
-    /**
-     * Retrieve service manager instance
-     *
-     * @return ServiceManager
-     */
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
-
-    /**
-     * Set service manager instance
-     *
-     * @param  ServiceManager $serviceManager
-     * @return User
-     */
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-
-        return $this;
     }
 }

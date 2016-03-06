@@ -28,8 +28,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateTrue()
     {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
+        $service = new \PlaygroundCore\Service\Formgen(Bootstrap::getServiceManager());
 
         $formgenPostUpdate = new FormgenEntity;
         $formgenPostUpdate->populate($this->formgenData);
@@ -57,8 +56,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
+        $service = new \PlaygroundCore\Service\Formgen(Bootstrap::getServiceManager());
 
         $formgenPostUpdate = new FormgenEntity;
         $formgenPostUpdate->populate($this->formgenData);
@@ -87,8 +85,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
     public function testRender()
     {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
+        $service = new \PlaygroundCore\Service\Formgen(Bootstrap::getServiceManager());
 
         $formGem = array();
         $element = new stdClass();
@@ -261,31 +258,27 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
     public function testSetFormgemMapper()
     {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
-        $service->setFormgenMapper($service->getServiceManager()->get('playgroundcore_formgen_mapper'));
+        $service = new \PlaygroundCore\Service\Formgen(Bootstrap::getServiceManager());
+        $service->setFormgenMapper(Bootstrap::getServiceManager()->get('playgroundcore_formgen_mapper'));
         $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Mapper\Formgen");
     }
 
     public function testGetFormgemMapper()
     {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
+        $service = new \PlaygroundCore\Service\Formgen(Bootstrap::getServiceManager());
         $this->assertEquals(get_class($service->getFormgenMapper()), "PlaygroundCore\Mapper\Formgen");
     }
     
     public function testSetOptions()
     {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
-        $service->setOptions($service->getServiceManager()->get('playgroundcore_module_options'));
+        $service = new \PlaygroundCore\Service\Formgen(Bootstrap::getServiceManager());
+        $service->setOptions(Bootstrap::getServiceManager()->get('playgroundcore_module_options'));
         $this->assertEquals(get_class($service->getOptions()), "PlaygroundCore\Options\ModuleOptions");
     }
 
     public function testGetOptions()
     {
-        $service = new \PlaygroundCore\Service\Formgen();
-        $service->setServiceManager(Bootstrap::getServiceManager());
+        $service = new \PlaygroundCore\Service\Formgen(Bootstrap::getServiceManager());
         $this->assertEquals(get_class($service->getOptions()), "PlaygroundCore\Options\ModuleOptions");
     }
 }

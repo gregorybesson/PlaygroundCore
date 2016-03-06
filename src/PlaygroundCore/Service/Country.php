@@ -1,17 +1,28 @@
 <?php
 namespace PlaygroundCore\Service;
 
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use ZfcBase\EventManager\EventProvider;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-final class Country extends EventProvider implements ServiceManagerAwareInterface
+final class Country extends EventProvider
 {
     private $translatedTo;
 
     private $path;
 
     private $corePath;
+
+    /**
+     *
+     * @var ServiceManager
+     */
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $locator)
+    {
+        $this->serviceLocator = $locator;
+    }
 
     public function getTranslatedTo()
     {
@@ -27,7 +38,7 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
 
     public function getPath()
     {
-        if(empty($this->path)){
+        if (empty($this->path)) {
             $this->path = str_replace('\\', '/', getcwd()) . '/language/countries';
         }
 
@@ -36,7 +47,7 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
 
     public function getCorePath()
     {
-        if(empty($this->corePath)){
+        if (empty($this->corePath)) {
             $this->corePath = __DIR__ . '/../../../language/countries';
         }
 
@@ -46,7 +57,7 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
     public function getAllCountries($translatedTo = null)
     {
         if (null === $translatedTo) {
-            $translatedTo = $this->getServiceManager()->get('translator')->getLocale();
+            $translatedTo = $this->serviceLocator->get('translator')->getLocale();
         }
         
         $fileName = $this->getPath().'/'.$translatedTo.'.php';
@@ -64,7 +75,7 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
     public function getCountry($country, $translatedTo = null)
     {
         if (null === $translatedTo) {
-            $translatedTo = $this->getServiceManager()->get('translator')->getLocale();
+            $translatedTo = $this->serviceLocator->get('translator')->getLocale();
         }
         $fileName = $this->getPath().'/'.$translatedTo.'.php';
         if (! file_exists($fileName)) {
@@ -84,28 +95,5 @@ final class Country extends EventProvider implements ServiceManagerAwareInterfac
         }
 
         return $list[$country];
-    }
-
-    /**
-     * Retrieve service manager instance
-     *
-     * @return ServiceManager
-     */
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
-
-    /**
-     * Set service manager instance
-     *
-     * @param  ServiceManager $serviceManager
-     * @return User
-     */
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-
-        return $this;
     }
 }

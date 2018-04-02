@@ -8,6 +8,8 @@ class ModuleOptions extends AbstractOptions
 {
     protected $bitlyUsername = '';
     protected $bitlyApiKey   = '';
+    protected $gReCaptchaKey = '';
+    protected $gReCaptchaUrl = '';
     protected $bitlyUrl      = 'http://api.bit.ly/v3/shorten';
     protected $transport_class = 'Zend\Mail\Transport\File';
     protected $options_class   = 'Zend\Mail\Transport\FileOptions';
@@ -184,6 +186,30 @@ class ModuleOptions extends AbstractOptions
     public function setBitlyUsername($bitlyUsername)
     {
         $this->bitlyUsername = $bitlyUsername;
+
+        return $this;
+    }
+
+    public function getGRecaptchaKey()
+    {
+        return $this->gReCaptchaKey;
+    }
+
+    public function setGRecaptchaKey($gReCaptchaKey)
+    {
+        $this->gReCaptchaKey = $gReCaptchaKey;
+
+        return $this;
+    }
+
+    public function getGRecaptchaUrl()
+    {
+        return $this->gReCaptchaUrl;
+    }
+
+    public function setGRecaptchaUrl($gReCaptchaUrl)
+    {
+        $this->gReCaptchaUrl = $gReCaptchaUrl;
 
         return $this;
     }

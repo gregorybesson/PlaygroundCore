@@ -14,6 +14,7 @@ return array(
             'playgroundcore_message'             => 'PlaygroundCore\Mail\Service\Factory\MessageFactory',
             'playgroundcore_cron_service'        => 'PlaygroundCore\Service\Factory\CronFactory',
             'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\Factory\ShortenUrlFactory',
+            'playgroundcore_recaptcha_service'   => 'PlaygroundCore\Service\Factory\RecaptchaFactory',
             'playgroundcore_website_service'     => 'PlaygroundCore\Service\Factory\WebsiteFactory',
             'playgroundcore_locale_service'      => 'PlaygroundCore\Service\Factory\LocaleFactory',
             'playgroundcore_formgen_service'     => 'PlaygroundCore\Service\Factory\FormgenFactory',
@@ -503,6 +504,7 @@ return array(
     ),
     'controller_plugins' => array(
         'factories' => array(
+            'recaptcha'    => 'PlaygroundCore\Service\Factory\ControllerPluginRecaptchaFactory',
             'shortenUrl'    => 'PlaygroundCore\Service\Factory\ControllerPluginShortenUrlFactory',
             'translate'       => 'PlaygroundCore\Service\Factory\TranslateFactory',
             'translatePlural' => 'PlaygroundCore\Service\Factory\TranslatePluralFactory',

@@ -16,7 +16,6 @@ use Zend\ModuleManager\ModuleManager;
 use Zend\Uri\UriFactory;
 
 class Module implements
-    AutoloaderProviderInterface,
     BootstrapListenerInterface,
     ConfigProviderInterface,
     ServiceProviderInterface,

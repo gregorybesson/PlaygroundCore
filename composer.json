@@ -2,7 +2,7 @@
     "name": "playground/core",
     "description": "Playground Core Module",
     "type": "library",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "keywords": [
         "zf2",
         "playground",

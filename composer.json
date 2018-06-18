@@ -38,8 +38,8 @@
         "satooshi/php-coveralls": "0.*"
 	},
     "autoload" : {
-		"psr-0" : {
-			"PlaygroundCore" : "src/"
+		"psr-4" : {
+			"PlaygroundCore\\" : "src/"
 		}
 	},
 	"extra": {

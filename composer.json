@@ -2,7 +2,7 @@
     "name": "playground/core",
     "description": "Playground Core Module",
     "type": "library",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "keywords": [
         "zf2",
         "playground",
@@ -17,25 +17,25 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-		"zendframework/zendframework" : "2.*",
-        "doctrine/doctrine-orm-module": "0.*",
-        "gedmo/doctrine-extensions": "2.3.*",
-        "beberlei/DoctrineExtensions": "~1.0",
-		"widmogrod/zf2-assetic-module": "1.*",
-		"hounddog/doctrine-data-fixture-module": "0.*",
-		"zendframework/zend-developer-tools" : "1.*@RC",
-		"zf-commons/zfc-base" : "0.*",
-		"bjyoungblood/bjy-authorize" : "1.*",
-        "studio-42/elfinder": "2.*",
-		"twilio/sdk" : "3.*",
-		"buggedcom/phpvideotoolkit" : "2.*",
-        "zfr/zfr-cors" : "1.*"
+        "php": ">=5.5",
+		"zendframework/zendframework" : ">=2.0.0",
+        "doctrine/doctrine-orm-module": ">=0.0.0",
+        "gedmo/doctrine-extensions": ">=2.3.0",
+        "beberlei/DoctrineExtensions": ">=1.0.0",
+		"widmogrod/zf2-assetic-module": ">=1.0.0",
+		"hounddog/doctrine-data-fixture-module": ">=0.0.0",
+		"zendframework/zend-developer-tools" : ">=1.0.0",
+		"zf-commons/zfc-base" : ">=0.0.0",
+		"bjyoungblood/bjy-authorize" : ">=1.0.0",
+        "studio-42/elfinder": ">=2.0.0",
+		"twilio/sdk" : ">=3.0.0",
+		"buggedcom/phpvideotoolkit" : ">=2.0.0",
+        "zfr/zfr-cors" : ">=1.0.0"
     },
 	"require-dev" : {
-		"phpunit/phpunit" : "4.*",
-        "squizlabs/php_codesniffer": "2.*",
-        "satooshi/php-coveralls": "0.*"
+		"phpunit/phpunit" : ">=4.0.0",
+        "squizlabs/php_codesniffer": ">=2.0.0",
+        "php-coverall/php-coveralls": ">=0.0.0"
 	},
     "autoload" : {
 		"psr-4" : {
@@ -44,7 +44,7 @@
 	},
 	"extra": {
         "branch-alias": {
-            "dev-master": "2.x-dev"
+            "dev-master": "4.x-dev"
         }
     }
 }

@@ -48,7 +48,7 @@ final class Country extends EventProvider
     public function getCorePath()
     {
         if (empty($this->corePath)) {
-            $this->corePath = __DIR__ . '/../../../language/countries';
+            $this->corePath = __DIR__ . '/../../language/countries';
         }
 
         return $this->corePath;

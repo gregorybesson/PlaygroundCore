@@ -16,6 +16,12 @@
             "homepage": "http://www.playground.fr"
         }
     ],
+    "repositories" : [
+		{
+			"type" : "vcs",
+			"url" : "https://github.com/gregorybesson/doctrine-data-fixture-module"
+		}
+	],
     "require": {
         "php": ">=5.5",
 		"zendframework/zendframework" : ">=2.0.0",
@@ -36,12 +42,6 @@
         "squizlabs/php_codesniffer": ">=2.0.0",
         "php-coverall/php-coveralls": ">=0.0.0"
 	},
-	"repositories" : [
-		{
-			"type" : "git",
-			"url" : "https://github.com/gregorybesson/doctrine-data-fixture-module"
-		}
-	],
     "autoload" : {
 		"psr-4" : {
 			"PlaygroundCore\\" : "src/"

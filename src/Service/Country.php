@@ -2,11 +2,13 @@
 namespace PlaygroundCore\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use ZfcBase\EventManager\EventProvider;
+use Zend\EventManager\EventManagerAwareTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-final class Country extends EventProvider
+final class Country
 {
+    use EventManagerAwareTrait;
+
     private $translatedTo;
 
     private $path;

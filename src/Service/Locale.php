@@ -3,12 +3,13 @@
 namespace PlaygroundCore\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use ZfcBase\EventManager\EventProvider;
+use Zend\EventManager\EventManagerAwareTrait;
 use PlaygroundCore\Options\ModuleOptions;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Locale extends EventProvider
+class Locale
 {
+    use EventManagerAwareTrait;
 
     /**
      * @var localeMapper

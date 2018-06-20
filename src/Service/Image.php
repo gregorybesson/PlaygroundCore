@@ -1,16 +1,17 @@
 <?php
 namespace PlaygroundCore\Service;
 
-use ZfcBase\EventManager\EventProvider;
+use Zend\EventManager\EventManagerAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * require php_exif for some methods
  */
-class Image extends EventProvider
+class Image
 {
-    
+    use EventManagerAwareTrait;
+
     protected $file;
     
     /**

@@ -4,14 +4,15 @@ namespace PlaygroundCore\Service;
 
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManager;
-use ZfcBase\EventManager\EventProvider;
+use Zend\EventManager\EventManagerAwareTrait;
 use PlaygroundCore\Options\ModuleOptions;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Formgen extends EventProvider
+class Formgen
 {
+    use EventManagerAwareTrait;
 
     /**
      * @var formgenMapper

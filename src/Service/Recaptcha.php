@@ -2,14 +2,16 @@
 namespace PlaygroundCore\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use ZfcBase\EventManager\EventProvider;
+use Zend\EventManager\EventManagerAwareTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * main class
  */
-class Recaptcha extends EventProvider
+class Recaptcha
 {
+    use EventManagerAwareTrait;
+
     /**
      * @var ModuleOptions
      */

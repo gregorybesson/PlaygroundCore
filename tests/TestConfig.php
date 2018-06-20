@@ -6,7 +6,6 @@ return array(
         'DoctrineDataFixtureModule',
         'ZendDeveloperTools',
         'AsseticBundle',
-        'ZfcBase',
         'PlaygroundCore'
     ),
     'module_listener_options' => array(

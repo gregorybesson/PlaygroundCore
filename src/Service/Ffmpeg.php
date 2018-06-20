@@ -2,7 +2,7 @@
 namespace PlaygroundCore\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use ZfcBase\EventManager\EventProvider;
+use Zend\EventManager\EventManagerAwareTrait;
 use PHPVideoToolkit\FfmpegProcessOutputException;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -18,8 +18,9 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  *     Buffer Output: \PHPVideoToolkit\Trace::vars($ffmpeg->getBuffer(true));
  *
  */
-class Ffmpeg extends EventProvider
+class Ffmpeg
 {
+    use EventManagerAwareTrait;
 
     /**
      * @var ModuleOptions

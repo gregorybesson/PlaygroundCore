@@ -7,7 +7,7 @@ use PlaygroundCore\Mapper;
 use PlaygroundCore\Service\Registry;
 use Doctrine\ORM\EntityManager;
 use Zend\ServiceManager\ServiceManager;
-use ZfcBase\EventManager\EventProvider;
+use Zend\EventManager\EventManagerAwareTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
@@ -18,8 +18,10 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @author heartsentwined <heartsentwined@cogito-lab.com>
  * @license GPL http://opensource.org/licenses/gpl-license.php
  */
-class Cron extends EventProvider
+class Cron
 {
+    use EventManagerAwareTrait;
+
     /**
      * how long ahead to schedule cron jobs
      *

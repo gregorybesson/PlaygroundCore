@@ -26,7 +26,7 @@
 		"hounddog/doctrine-data-fixture-module": ">=0.0.0",
 		"zendframework/zend-developer-tools" : ">=1.0.0",
 		"zf-commons/zfc-base" : ">=0.0.0",
-		"bjyoungblood/bjy-authorize" : ">=1.0.0",
+		"kokspflanze/bjy-authorize": ">=1.6.3",
         "studio-42/elfinder": ">=2.0.0",
 		"twilio/sdk" : ">=3.0.0",
 		"buggedcom/phpvideotoolkit" : ">=2.0.0",

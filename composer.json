@@ -36,7 +36,6 @@
         "squizlabs/php_codesniffer": ">=2.0.0",
         "php-coverall/php-coveralls": ">=0.0.0"
 	},
-	,
 	"repositories" : [
 		{
 			"type" : "git",

@@ -59,7 +59,7 @@ final class Country
     public function getAllCountries($translatedTo = null)
     {
         if (null === $translatedTo) {
-            $translatedTo = $this->serviceLocator->get('translator')->getLocale();
+            $translatedTo = $this->serviceLocator->get('MvcTranslator')->getLocale();
         }
         
         $fileName = $this->getPath().'/'.$translatedTo.'.php';
@@ -77,7 +77,7 @@ final class Country
     public function getCountry($country, $translatedTo = null)
     {
         if (null === $translatedTo) {
-            $translatedTo = $this->serviceLocator->get('translator')->getLocale();
+            $translatedTo = $this->serviceLocator->get('MvcTranslator')->getLocale();
         }
         $fileName = $this->getPath().'/'.$translatedTo.'.php';
         if (! file_exists($fileName)) {

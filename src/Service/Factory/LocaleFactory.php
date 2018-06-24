@@ -2,18 +2,14 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Service\Locale;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 
 class LocaleFactory implements FactoryInterface
 {
-    /**
-    * @param ServiceLocatorInterface $locator
-    * @return \PlaygroundCore\Service\Locale
-    */
-    public function createService(ServiceLocatorInterface $locator)
+    public function __invoke(ContainerInterface $container, $requestedName, $options = null)
     {
-        $service = new Locale($locator);
+        $service = new Locale($container);
 
         return $service;
     }

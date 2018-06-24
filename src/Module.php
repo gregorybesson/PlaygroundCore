@@ -59,12 +59,12 @@ class Module implements
         $config = $e->getApplication()->getServiceManager()->get('config');
 
         // Locale management
-        $translator = $serviceManager->get('translator');
+        $translator = $serviceManager->get('MvcTranslator');
         $defaultLocale = 'fr';
 
         // Gestion de la locale
         if (PHP_SAPI !== 'cli') {
-            $config = $e->getApplication()->getServiceManager()->get('config');
+            $config = $serviceManager->get('config');
             if (isset($config['playgroundLocale'])) {
                 $pgLocale = $config['playgroundLocale'];
                 $defaultLocale = $pgLocale['default'];
@@ -87,7 +87,8 @@ class Module implements
 
                     // Is there a cookie for the locale ?
                     if (empty($locale) && in_array('cookie', $pgstrat)) {
-                        $serviceManager->get('router')->setTranslator($translator);
+                        // ZF3 TODO: fix
+                        //$serviceManager->get('router')->setTranslator($translator);
                         if ($serviceManager->get('router')->match($serviceManager->get('request')) &&
                             strpos($serviceManager->get('router')->match($serviceManager->get('request'))->getMatchedRouteName(), 'admin') !==false
                         ) {
@@ -131,11 +132,12 @@ class Module implements
             $translator->setLocale($locale);
 
             // Attach the translator to the router
-            $e->getRouter()->setTranslator($translator);
-            $e->getRouter()->setTranslatorTextDomain('routes');
+            // ZF3 TODO: fix
+            //$e->getRouter()->setTranslator($translator);
+            //$e->getRouter()->setTranslatorTextDomain('routes');
 
             // Attach the translator to the plugins
-            $translate = $serviceManager->get('viewhelpermanager')->get('translate');
+            $translate = $serviceManager->get('ViewHelperManager')->get('translate');
             $translate->getTranslator()->setLocale($locale);
 
             $options = $serviceManager->get('playgroundcore_module_options');
@@ -241,47 +243,47 @@ class Module implements
         return array(
             'factories' => array(
                 'QgCKEditor' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                    $config = $sm->getServiceLocator()->get('config');
+                    $config = $sm->get('config');
                     $QuCk = new View\Helper\AdCKEditor($config['playgroundcore']['ckeditor']);
 
                     return $QuCk;
                 },
 
                 'googleAnalytics' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                    $tracker = $sm->getServiceLocator()->get('google-analytics');
+                    $tracker = $sm->get('google-analytics');
     
-                    $helper  = new View\Helper\GoogleAnalytics($tracker, $sm->getServiceLocator()->get('Request'));
+                    $helper  = new View\Helper\GoogleAnalytics($tracker, $sm->get('Request'));
     
                     return $helper;
                 },
 
                 'facebookOpengraph' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                    $tracker = $sm->getServiceLocator()->get('facebook-opengraph');
+                    $tracker = $sm->get('facebook-opengraph');
 
-                    $helper  = new View\Helper\FacebookOpengraph($tracker, $sm->getServiceLocator()->get('Request'));
+                    $helper  = new View\Helper\FacebookOpengraph($tracker, $sm->get('Request'));
 
                     return $helper;
                 },
                 
                 'twitterCard' => function (\Zend\ServiceManager\ServiceManager $sm) {
                     $viewHelper = new View\Helper\TwitterCard();
-                    $viewHelper->setConfig($sm->getServiceLocator()->get('twitter-card'));
-                    $viewHelper->setRequest($sm->getServiceLocator()->get('Request'));
+                    $viewHelper->setConfig($sm->get('twitter-card'));
+                    $viewHelper->setRequest($sm->get('Request'));
 
                     return $viewHelper;
                 },
 
                 'switchLocaleWidget' => function (\Zend\ServiceManager\ServiceManager $sm) {
                     $viewHelper = new View\Helper\SwitchLocaleWidget();
-                    $viewHelper->setLocaleService($sm->getServiceLocator()->get('playgroundcore_locale_service'));
-                    $viewHelper->setWebsiteService($sm->getServiceLocator()->get('playgroundcore_website_service'));
-                    $viewHelper->setRouteMatch($sm->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch());
+                    $viewHelper->setLocaleService($sm->get('playgroundcore_locale_service'));
+                    $viewHelper->setWebsiteService($sm->get('playgroundcore_website_service'));
+                    $viewHelper->setRouteMatch($sm->get('Application')->getMvcEvent()->getRouteMatch());
                     
                     return $viewHelper;
                 },
 
                 'countryName' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                    $service = $sm->getServiceLocator()->get('playgroundcore_country_service');
+                    $service = $sm->get('playgroundcore_country_service');
                     $viewHelper = new View\Helper\CountryName($service);
 
                     return $viewHelper;

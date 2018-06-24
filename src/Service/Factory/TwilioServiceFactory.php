@@ -5,8 +5,8 @@ namespace PlaygroundCore\Service\Factory;
 use Services_Twilio;
 use PlaygroundCore\Options\ModuleOptions;
 use Zend\ServiceManager\Exception\InvalidArgumentException;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\ServiceManager;
 
 /**
@@ -22,19 +22,13 @@ class TwilioServiceFactory implements FactoryInterface
      */
     protected $options;
     
-    /**
-     * Generates the Item controller
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return Services_Twilio
-     */
-    public function createService(ServiceLocatorInterface $serviceManager)
+    public function __invoke(ContainerInterface $container, $requestedName, $options = null)
     {
         /**
-         * @var ServiceManager $serviceManager
+         * @var ServiceManager $container
          * @var ModuleOptions $options
          */
-        $options = $serviceManager->get('playgroundcore_module_options');
+        $options = $container->get('playgroundcore_module_options');
         $TwilioOptions = $options->getTwilio();
         
         if (!isset($TwilioOptions['sid']) || $TwilioOptions['sid'] === '') {

@@ -1,7 +1,7 @@
 <?php
 namespace PlaygroundCore\Stdlib\Hydrator\Strategy;
 
-use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+use Zend\Hydrator\Strategy\StrategyInterface;
 
 class BooleanStrategy implements StrategyInterface
 {

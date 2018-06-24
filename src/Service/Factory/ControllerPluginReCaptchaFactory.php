@@ -3,18 +3,13 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Controller\Plugin\Recaptcha;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Mvc\Service\AbstractPluginManagerFactory;
 
 class ControllerPluginRecaptchaFactory extends AbstractPluginManagerFactory
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, $options = null)
     {
-        $serviceLocator = $serviceLocator->getController()->getServiceLocator();
-
-        return new Recaptcha($serviceLocator);
+        return new Recaptcha($container);
     }
 }

@@ -2,18 +2,14 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Service\Recaptcha;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 
 class RecaptchaFactory implements FactoryInterface
 {
-    /**
-    * @param ServiceLocatorInterface $locator
-    * @return \PlaygroundCore\Service\Recaptcha
-    */
-    public function createService(ServiceLocatorInterface $locator)
+    public function __invoke(ContainerInterface $container, $requestedName, $options = null)
     {
-        $service = new Recaptcha($locator);
+        $service = new Recaptcha($container);
 
         return $service;
     }

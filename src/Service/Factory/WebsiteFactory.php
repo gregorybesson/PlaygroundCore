@@ -2,18 +2,14 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Service\Website;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 
 class WebsiteFactory implements FactoryInterface
 {
-    /**
-    * @param ServiceLocatorInterface $locator
-    * @return \PlaygroundCore\Service\Website
-    */
-    public function createService(ServiceLocatorInterface $locator)
+    public function __invoke(ContainerInterface $container, $requestedName, $options = null)
     {
-        $service = new Website($locator);
+        $service = new Website($container);
 
         return $service;
     }

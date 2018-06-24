@@ -16,7 +16,7 @@ class CountryName extends AbstractHelper
     public function __invoke($code, $locale = null)
     {
         if (empty($locale)) {
-            $locale = $this->service->getServiceManager()->get('translator')->getLocale();
+            $locale = $this->service->getServiceManager()->get('MvcTranslator')->getLocale();
         }
 
         return $this->service->getCountry($code, $locale);

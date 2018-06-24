@@ -116,7 +116,7 @@ return array(
     ),
 
     'router' => array(
-        'router_class' => '\Zend\Mvc\Router\Http\TranslatorAwareTreeRouteStack',
+        'router_class' => '\Zend\Router\Http\TranslatorAwareTreeRouteStack',
         'routes' => array(
             'frontend' => array(
                 'type'      => 'Segment',
@@ -141,7 +141,7 @@ return array(
                     ),
 		            // Give the possibility to call Cron from browser
 		            'cron' => array(
-		                'type' => 'Literal',
+		                'type' => 'Zend\Router\Http\Literal',
 		                'options' => array(
 		                    'route' => 'cron',
 		                    'defaults' => array(
@@ -153,14 +153,14 @@ return array(
         		),
         	),
             'admin' => array(
-                'type' => 'Literal',
+                'type' => 'Zend\Router\Http\Literal',
                 'priority' => -1000,
                 'options' => array(
                     'route'    => '/admin',
                 ),
                 'child_routes' => array(
                     'elfinder' => array(
-                        'type' => 'Literal',
+                        'type' => 'Zend\Router\Http\Literal',
                         'options' => array(
                             'route' => '/elfinder',
                             'defaults' => array(
@@ -171,7 +171,7 @@ return array(
                         'may_terminate' => true,
                         'child_routes' => array(
                             'connector' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/connector',
                                     'defaults' => array(
@@ -181,7 +181,7 @@ return array(
                                 ),
                             ),
                             'ckeditor' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/ckeditor',
                                     'defaults' => array(
@@ -193,7 +193,7 @@ return array(
                         ),
                     ),
                     'formgen' => array(
-                        'type'    => 'Literal',
+                        'type'    => 'Zend\Router\Http\Literal',
                         'options' => array(
                                 'route'    => '/formgen',
                                 'defaults' => array(
@@ -204,7 +204,7 @@ return array(
                         'may_terminate' => true,
                         'child_routes' => array(
                             'create' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/create',
                                     'defaults' => array(
@@ -214,7 +214,7 @@ return array(
                                 ),
                             ),
                             'generate' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/generate',
                                     'defaults' => array(
@@ -273,7 +273,7 @@ return array(
                                 ),
                             ),
                             'input' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/input',
                                     'defaults' => array(
@@ -283,7 +283,7 @@ return array(
                                 ),
                             ),
                             'paragraph' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/paragraph',
                                     'defaults' => array(
@@ -293,7 +293,7 @@ return array(
                                 ),
                             ),
                             'number' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/number',
                                     'defaults' => array(
@@ -303,7 +303,7 @@ return array(
                                 ),
                             ),
                             'phone' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/phone',
                                     'defaults' => array(
@@ -313,7 +313,7 @@ return array(
                                 ),
                             ),
                             'checkbox' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/checkbox',
                                     'defaults' => array(
@@ -323,7 +323,7 @@ return array(
                                 ),
                             ),
                             'radio' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/radio',
                                     'defaults' => array(
@@ -333,7 +333,7 @@ return array(
                                 ),
                             ),
                             'dropdown' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/dropdown',
                                     'defaults' => array(
@@ -343,7 +343,7 @@ return array(
                                 ),
                             ),
                             'password' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/password',
                                     'defaults' => array(
@@ -353,7 +353,7 @@ return array(
                                 ),
                             ),
                             'passwordverify' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/passwordverify',
                                     'defaults' => array(
@@ -363,7 +363,7 @@ return array(
                                 ),
                             ),
                             'email' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/email',
                                     'defaults' => array(
@@ -373,7 +373,7 @@ return array(
                                 ),
                             ),
                             'date' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/date',
                                     'defaults' => array(
@@ -383,7 +383,7 @@ return array(
                                 ),
                             ),
                             'upload' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/upload',
                                     'defaults' => array(
@@ -393,7 +393,7 @@ return array(
                                 ),
                             ),
                             'creditcard' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/creditcard',
                                     'defaults' => array(
@@ -403,7 +403,7 @@ return array(
                                 ),
                             ),
                             'url' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/url',
                                     'defaults' => array(
@@ -413,7 +413,7 @@ return array(
                                 ),
                             ),
                             'hidden' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/hidden',
                                     'defaults' => array(
@@ -423,7 +423,7 @@ return array(
                                 ),
                             ),
                             'test' => array(
-                                'type' => 'Literal',
+                                'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/test',
                                     'defaults' => array(
@@ -504,10 +504,10 @@ return array(
     ),
     'controller_plugins' => array(
         'factories' => array(
-            'recaptcha'    => 'PlaygroundCore\Service\Factory\ControllerPluginRecaptchaFactory',
-            'shortenUrl'    => 'PlaygroundCore\Service\Factory\ControllerPluginShortenUrlFactory',
-            'translate'       => 'PlaygroundCore\Service\Factory\TranslateFactory',
-            'translatePlural' => 'PlaygroundCore\Service\Factory\TranslatePluralFactory',
+            'recaptcha'    => \PlaygroundCore\Service\Factory\ControllerPluginRecaptchaFactory::class,
+            'shortenUrl'    => \PlaygroundCore\Service\Factory\ControllerPluginShortenUrlFactory::class,
+            'translate'       => \PlaygroundCore\Service\Factory\TranslateFactory::class,
+            'translatePlural' => \PlaygroundCore\Service\Factory\TranslatePluralFactory::class,
         ),
     ),
 

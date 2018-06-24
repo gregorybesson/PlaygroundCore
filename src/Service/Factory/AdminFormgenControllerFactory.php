@@ -2,18 +2,14 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Controller\Admin\FormgenController;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 
 class AdminFormgenControllerFactory implements FactoryInterface
 {
-    /**
-    * @param ServiceLocatorInterface $locator
-    * @return \PlaygroundCore\Controller\Admin\FormgenController
-    */
-    public function createService(ServiceLocatorInterface $locator)
+    public function __invoke(ContainerInterface $container, $requestedName, $options = null)
     {
-        $controller = new FormgenController($locator);
+        $controller = new FormgenController($container);
 
         return $controller;
     }

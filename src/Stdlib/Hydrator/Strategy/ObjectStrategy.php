@@ -1,7 +1,7 @@
 <?php
 namespace PlaygroundCore\Stdlib\Hydrator\Strategy;
 
-use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+use Zend\Hydrator\Strategy\StrategyInterface;
 use DoctrineModule\Stdlib\Hydrator\Strategy\AbstractCollectionStrategy;
 
 // This class fill a gap in Doctrine Hydrator : When the attribute is an object, we have to call getId()

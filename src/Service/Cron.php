@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\EventManager\EventManager;
 
 /**
  * main Cron class
@@ -84,6 +85,8 @@ class Cron
      */
     protected $serviceLocator;
 
+    protected $event;
+
     public function __construct(ServiceLocatorInterface $locator)
     {
         $this->serviceLocator = $locator;
@@ -117,7 +120,7 @@ class Cron
             $cronjobs = array();
 
             $results = $this->serviceLocator
-                ->get('application')
+                ->get('Application')
                 ->getEventManager()
                 ->trigger(__FUNCTION__, $this, array(
                         'cronjobs' => $cronjobs
@@ -687,5 +690,15 @@ class Cron
         }
 
         return $this->em;
+    }
+
+    public function getEventManager()
+    {
+        if ($this->event === NULL) {
+            $this->event = new EventManager(
+                $this->serviceLocator->get('SharedEventManager'), [get_class($this)]
+            );
+        }
+        return $this->event;
     }
 }

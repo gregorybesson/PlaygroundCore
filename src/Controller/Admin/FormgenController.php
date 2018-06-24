@@ -92,7 +92,7 @@ class FormgenController extends AbstractActionController
     public function viewAction()
     {
         $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
-        $headScript = $this->getServiceLocator()->get('viewhelpermanager')->get('HeadScript');
+        $headScript = $this->getServiceLocator()->get('ViewHelperManager')->get('HeadScript');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/parse.form.js');
 
         $formId = $this->params('form');
@@ -103,7 +103,7 @@ class FormgenController extends AbstractActionController
     public function createAction()
     {
         $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
-        $headScript = $this->getServiceLocator()->get('viewhelpermanager')->get('HeadScript');
+        $headScript = $this->getServiceLocator()->get('ViewHelperManager')->get('HeadScript');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/create.form.js');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/line.text.js');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/add.form.js');

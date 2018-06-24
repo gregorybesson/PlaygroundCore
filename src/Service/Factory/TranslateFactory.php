@@ -4,22 +4,18 @@ namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Controller\Plugin\Translate;
 use Zend\I18n\Translator\TranslatorServiceFactory;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Mvc\Service\AbstractPluginManagerFactory;
 
 class TranslateFactory extends AbstractPluginManagerFactory
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, $options = null)
     {
-        $serviceLocator = $serviceLocator->getController()->getServiceLocator();
-        if ($serviceLocator->has('MvcTranslator')) {
-            $translator = $serviceLocator->get('MvcTranslator');
+        if ($container->has('MvcTranslator')) {
+            $translator = $container->get('MvcTranslator');
         } else {
-            $serviceFactory = new TranslatorServiceFactory();
-            $translator     = $serviceFactory->createService($serviceLocator);
+            $serviceFactory = new TranslatorServiceFactory;
+            $translator     = $serviceFactory($container);
         }
         return new Translate($translator);
     }

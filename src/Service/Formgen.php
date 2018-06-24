@@ -143,7 +143,7 @@ class Formgen
             $element->setAttribute('maxlength', $attr['lengthMax']);
             $options['messages'] = array(
                 \Zend\Validator\StringLength::TOO_LONG => sprintf(
-                    $this->serviceLocator->get('translator')->translate(
+                    $this->serviceLocator->get('MvcTranslator')->translate(
                         'This field contains more than %s characters',
                         'playgroundcore'
                     ),

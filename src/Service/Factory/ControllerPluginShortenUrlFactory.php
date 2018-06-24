@@ -3,18 +3,14 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Controller\Plugin\ShortenUrl;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Mvc\Service\AbstractPluginManagerFactory;
 
 class ControllerPluginShortenUrlFactory extends AbstractPluginManagerFactory
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, $options = null)
     {
-        $serviceLocator = $serviceLocator->getController()->getServiceLocator();
-
-        return new ShortenUrl($serviceLocator);
+        return new ShortenUrl($container);
     }
 }

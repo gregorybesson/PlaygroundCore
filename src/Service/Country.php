@@ -26,6 +26,12 @@ final class Country
         $this->serviceLocator = $locator;
     }
 
+    
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
     public function getTranslatedTo()
     {
         return $this->translatedTo;

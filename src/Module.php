@@ -87,8 +87,7 @@ class Module implements
 
                     // Is there a cookie for the locale ?
                     if (empty($locale) && in_array('cookie', $pgstrat)) {
-                        // ZF3 TODO: fix
-                        //$serviceManager->get('router')->setTranslator($translator);
+                        $serviceManager->get('router')->setTranslator($translator);
                         if ($serviceManager->get('router')->match($serviceManager->get('request')) &&
                             strpos($serviceManager->get('router')->match($serviceManager->get('request'))->getMatchedRouteName(), 'admin') !==false
                         ) {
@@ -131,10 +130,8 @@ class Module implements
 
             $translator->setLocale($locale);
 
-            // Attach the translator to the router
-            // ZF3 TODO: fix
-            //$e->getRouter()->setTranslator($translator);
-            //$e->getRouter()->setTranslatorTextDomain('routes');
+            $e->getRouter()->setTranslator($translator);
+            $e->getRouter()->setTranslatorTextDomain('routes');
 
             // Attach the translator to the plugins
             $translate = $serviceManager->get('ViewHelperManager')->get('translate');

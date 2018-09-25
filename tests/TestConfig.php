@@ -5,7 +5,6 @@ return array(
         'DoctrineORMModule',
         'DoctrineDataFixtureModule',
         'ZendDeveloperTools',
-        'AsseticBundle',
         'PlaygroundCore'
     ),
     'module_listener_options' => array(

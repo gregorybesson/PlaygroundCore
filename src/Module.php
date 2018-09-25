@@ -26,9 +26,9 @@ class Module implements
         $eventManager = $manager->getEventManager();
     
         /*
-         * This event change the config before it's cached
-        * The change will apply to 'template_path_stack' and 'assetic_configuration'
-        * These 2 config take part in the Playground Theme Management
+        * This event change the config before it's cached
+        * The change will apply to 'template_path_stack'
+        * This config takes part in the Playground Theme Management
         */
         $eventManager->attach(\Zend\ModuleManager\ModuleEvent::EVENT_MERGE_CONFIG, array($this, 'onMergeConfig'), 100);
     }

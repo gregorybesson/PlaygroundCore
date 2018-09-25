@@ -85,7 +85,6 @@ return array(
                 array('controller' => 'playgroundcore_frontend_switchlocale', 'roles' => array('guest', 'user')),
 
                 // CRON / Console
-                array('controller' => 'AsseticBundle\Controller\Console', 'roles' => array('guest', 'user')),
                 array('controller' => 'DoctrineModule\Controller\Cli', 'roles' => array('guest', 'user')),
                 array('controller' => 'playgroundcore_console', 'roles' => array('guest', 'user')),
     
@@ -93,24 +92,6 @@ return array(
                 array('controller' => 'playgroundcore_admin_formgen', 'roles' => array('admin')),
                 array('controller' => 'playgroundcore_admin_elfinder', 'roles' => array('admin')),
                 array('controller' => 'DoctrineORMModule\Yuml\YumlController', 'roles' => array('admin')),
-            ),
-        ),
-    ),
-    
-    'assetic_configuration' => array(
-        'modules' => array(
-            'lib' => array(
-                'collections' => array(    
-                    'core_flags' => array(
-                        'assets' => array(
-                            __DIR__ . '/../view/images/flag/*.png',
-                        ),
-                        'options' => array(
-                            'move_raw' => true,
-                            'output' => 'lib/images/flag',
-                        )
-                    ),
-                ),
             ),
         ),
     ),

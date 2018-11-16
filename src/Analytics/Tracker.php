@@ -74,9 +74,19 @@ class Tracker
     protected $transactions;
     protected $customVars;
 
-    public function __construct($id)
+    protected $companyMapper;
+
+    public function __construct(\PlaygroundDesign\Mapper\Company $companyMapper)
     {
-        $this->setId($id);
+        $this->companyMapper = $companyMapper;
+        $company = $this->companyMapper->findOneBy([]);
+        $this->setId(null);
+        $this->setEnableTracking(false);
+
+        if ($company != null && $company->getGoogleAnalytics() != null) {
+            $this->setId($company->getGoogleAnalytics());
+            $this->setEnableTracking(true);
+        }
     }
 
     public function getId()

@@ -247,7 +247,7 @@ class Module implements
                 },
 
                 'googleAnalytics' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                    $tracker = $sm->get('google-analytics');
+                    $tracker = $sm->get('PlaygroundCore\Analytics\Tracker');
     
                     $helper  = new View\Helper\GoogleAnalytics($tracker, $sm->get('Request'));
     
@@ -331,40 +331,44 @@ class Module implements
                         );
                     },
                     'PlaygroundCore\Analytics\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
-                        $config = $sm->get('config');
-                        $config = isset($config['playgroundcore']) ? $config['playgroundcore']['googleAnalytics'] : array('id' => 'UA-XXXXXXXX-X');
-
-                        $tracker = new Analytics\Tracker($config['id']);
-
-                        if (isset($config['enable_tracking'])) {
-                            $tracker->setEnableTracking($config['enable_tracking']);
-                        }
-
-                        if (isset($config['custom_vars'])) {
-                            foreach ($config['custom_vars'] as $customVar) {
-                                $customVarId        = $customVar['id'];
-                                $customVarName        = $customVar['name'];
-                                $customVarValue    = $customVar['value'];
-                                $customVarOptScope  = $customVar['optScope'];
-                                $customVar = new Analytics\CustomVar($customVarId, $customVarName, $customVarValue, $customVarOptScope);
-                                $tracker->addCustomVar($customVar);
-                            }
-                        }
-
-                        if (isset($config['domain_name'])) {
-                            $tracker->setDomainName($config['domain_name']);
-                        }
-
-                        if (isset($config['allow_linker'])) {
-                            $tracker->setAllowLinker($config['allow_linker']);
-                        }
-
-                        if (isset($config['allow_hash'])) {
-                            $tracker->setAllowHash($config['allow_hash']);
-                        }
-
-                        return $tracker;
+                        return new Analytics\Tracker($sm->get('playgrounddesign_company_mapper'));
                     },
+                    // DEPRECATED
+                    // 'PlaygroundCore\Analytics\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    //     $config = $sm->get('config');
+                    //     $config = isset($config['playgroundcore']) ? $config['playgroundcore']['googleAnalytics'] : array('id' => 'UA-XXXXXXXX-X');
+
+                    //     $tracker = new Analytics\Tracker($config['id']);
+
+                    //     if (isset($config['enable_tracking'])) {
+                    //         $tracker->setEnableTracking($config['enable_tracking']);
+                    //     }
+
+                    //     if (isset($config['custom_vars'])) {
+                    //         foreach ($config['custom_vars'] as $customVar) {
+                    //             $customVarId        = $customVar['id'];
+                    //             $customVarName        = $customVar['name'];
+                    //             $customVarValue    = $customVar['value'];
+                    //             $customVarOptScope  = $customVar['optScope'];
+                    //             $customVar = new Analytics\CustomVar($customVarId, $customVarName, $customVarValue, $customVarOptScope);
+                    //             $tracker->addCustomVar($customVar);
+                    //         }
+                    //     }
+
+                    //     if (isset($config['domain_name'])) {
+                    //         $tracker->setDomainName($config['domain_name']);
+                    //     }
+
+                    //     if (isset($config['allow_linker'])) {
+                    //         $tracker->setAllowLinker($config['allow_linker']);
+                    //     }
+
+                    //     if (isset($config['allow_hash'])) {
+                    //         $tracker->setAllowHash($config['allow_hash']);
+                    //     }
+
+                    //     return $tracker;
+                    // },
                     'PlaygroundCore\Opengraph\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']['facebookOpengraph']) ? $config['playgroundcore']['facebookOpengraph'] : array('appId' => '');

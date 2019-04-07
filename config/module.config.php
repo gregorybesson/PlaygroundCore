@@ -120,19 +120,19 @@ return array(
                             ),
                         ),
                     ),
-		            // Give the possibility to call Cron from browser
-		            'cron' => array(
-		                'type' => 'Zend\Router\Http\Literal',
-		                'options' => array(
-		                    'route' => 'cron',
-		                    'defaults' => array(
-		                        'controller' => 'playgroundcore_console',
-		                        'action' => 'cron'
-		                    ),
-		                ),
-		            ),
-        		),
-        	),
+                    // Give the possibility to call Cron from browser
+                    'cron' => array(
+                        'type' => 'Zend\Router\Http\Literal',
+                        'options' => array(
+                            'route' => 'cron',
+                            'defaults' => array(
+                                'controller' => 'playgroundcore_console',
+                                'action' => 'cron'
+                            ),
+                        ),
+                    ),
+                ),
+            ),
             'admin' => array(
                 'type' => 'Zend\Router\Http\Literal',
                 'priority' => -1000,
@@ -511,15 +511,9 @@ return array(
         'translation_file_patterns' => array(
             array(
                 'type'         => 'phpArray',
-                'base_dir'     => __DIR__ . '/../../../../language',
-                'pattern'      => 'routes_%s.php',
-                'text_domain'  => 'routes'
-            ),
-            array(
-                'type'         => 'phpArray',
                 'base_dir'     => __DIR__ . '/../language',
-                'pattern'      => 'routes_%s.php',
-                'text_domain'  => 'routes'
+                'pattern'      => '%s.php',
+                'text_domain'  => 'playgroundcore'
             ),
             array(
                 'type'         => 'phpArray',
@@ -530,8 +524,14 @@ return array(
             array(
                 'type'         => 'phpArray',
                 'base_dir'     => __DIR__ . '/../language',
-                'pattern'      => '%s.php',
-                'text_domain'  => 'playgroundcore'
+                'pattern'      => 'routes_%s.php',
+                'text_domain'  => 'routes'
+            ),
+            array(
+                'type'         => 'phpArray',
+                'base_dir'     => __DIR__ . '/../../../../language',
+                'pattern'      => 'routes_%s.php',
+                'text_domain'  => 'routes'
             ),
         ),
     ),

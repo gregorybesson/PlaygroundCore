@@ -284,4 +284,6 @@ return array(
     // Zend\Validator\Uri
     "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
     "The input does not appear to be a valid Uri" => "L'entrée ne semble pas être une URI valide",
+
+    "This email already exists !" => "Cet email existe déjà",
 );

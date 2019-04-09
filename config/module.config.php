@@ -492,19 +492,20 @@ return array(
         ),
     ),
 
-    'playgroundLocale' => array(
-        'enable' => false,
-        'default' => 'fr',
-        'strategies' => array(
-            'uri',
-            'cookie',
-            'header'
-        ),
-        'supported' => array(
-            'fr',
-            'fr_FR'
-        )
-    ),
+    /* An example to configure the translation */
+    // 'playgroundLocale' => array(
+    //     'enable' => false,
+    //     'default' => 'fr',
+    //     'strategies' => array(
+    //         'uri',
+    //         'cookie',
+    //         'header'
+    //     ),
+    //     'supported' => array(
+    //         'fr',
+    //         'fr_FR'
+    //     )
+    // ),
 
     'translator' => array(
         'locale' => 'fr_FR',

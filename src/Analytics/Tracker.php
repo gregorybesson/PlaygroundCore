@@ -78,14 +78,18 @@ class Tracker
 
     public function __construct(\PlaygroundDesign\Mapper\Company $companyMapper)
     {
-        $this->companyMapper = $companyMapper;
-        $company = $this->companyMapper->findOneBy([]);
         $this->setId(null);
         $this->setEnableTracking(false);
 
-        if ($company != null && $company->getGoogleAnalytics() != null) {
-            $this->setId($company->getGoogleAnalytics());
-            $this->setEnableTracking(true);
+        try {
+            $this->companyMapper = $companyMapper;
+            $company = $this->companyMapper->findOneBy([]);
+            if ($company != null && $company->getGoogleAnalytics() != null) {
+                $this->setId($company->getGoogleAnalytics());
+                $this->setEnableTracking(true);
+            }
+        } catch(\Exception $e) {
+            // No record found
         }
     }
 

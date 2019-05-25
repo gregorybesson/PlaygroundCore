@@ -175,6 +175,13 @@ class Module implements
         );
         $filterChain->attach(new Filter\Slugify());
 
+        if (PHP_SAPI !== 'cli') {
+            $scheme = strtolower($e->getRequest()->getUri()->getScheme());
+            if ($scheme === 'https') {
+                $config['session']['cookie_secure'] = true;
+            }
+        }
+
         // Start the session container
         $sessionConfig = new SessionConfig();
         $sessionConfig->setOptions($config['session']);
@@ -227,6 +234,21 @@ class Module implements
                     $response->getHeaders()->addHeaderLine('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
                 }
             }
+
+            // SECURITY HEADERS
+            $headers = $e->getResponse()->getHeaders();
+
+            $headers->addHeaderLine('X-Content-Type-Options: nosniff');
+            // Not embeddable in an iframe TODO: make it configurable
+            $headers->addHeaderLine('X-Frame-Options: sameorigin');
+
+            $headers->addHeaderLine('X-XSS-Protection: 1; mode=block');
+            $csp = new \Zend\Http\Header\ContentSecurityPolicy();
+            //$csp->setDirective('default-src', array()) // No sources
+            $csp->setDirective('img-src', array('*'));
+            //     ->setDirective('object-src', array('media1.example.com', 'media2.example.com', '*.cdn.example.com'))
+            //     ->setDirective('script-src', array('trustedscripts.example.com'));
+            $headers->addHeader($csp);
         }
     }
 

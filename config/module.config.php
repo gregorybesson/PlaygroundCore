@@ -24,6 +24,8 @@ return array(
             'playgroundcore_twilio'              => 'PlaygroundCore\Service\Factory\TwilioServiceFactory',
             'playgroundcore_phpvideotoolkit'     => 'PlaygroundCore\Service\Factory\PhpvideotoolkitServiceFactory',
             'playgroundcore_transport'           => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
+            // We extend this service to handle the case when the requested role doesn't exist in the database
+            'BjyAuthorize\Guard\Controller'      => 'PlaygroundCore\Service\Factory\ControllerGuardServiceFactory',
         ),
     ),
 

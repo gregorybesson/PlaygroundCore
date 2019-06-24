@@ -27,7 +27,7 @@
 		"zendframework/zendframework" : ">=3.0.0",
         "doctrine/doctrine-orm-module": ">=0.0.0",
         "gedmo/doctrine-extensions": ">=2.3.0",
-        "beberlei/DoctrineExtensions": ">=1.0.0",
+        "beberlei/DoctrineExtensions": ">=1.1.5",
 		"playground/doctrine-data-fixture-module": ">=1.0.0",
 		"zendframework/zend-developer-tools" : ">=1.0.0",
 		"kokspflanze/bjy-authorize": ">=1.6.0",

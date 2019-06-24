@@ -245,7 +245,7 @@ class Module implements
             $headers->addHeaderLine('X-XSS-Protection: 1; mode=block');
             $csp = new \Zend\Http\Header\ContentSecurityPolicy();
             //$csp->setDirective('default-src', array()) // No sources
-            $csp->setDirective('img-src', array('*'));
+            //$csp->setDirective('img-src', array('*'));
             //     ->setDirective('object-src', array('media1.example.com', 'media2.example.com', '*.cdn.example.com'))
             //     ->setDirective('script-src', array('trustedscripts.example.com'));
             $headers->addHeader($csp);

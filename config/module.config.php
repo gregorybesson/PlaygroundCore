@@ -385,6 +385,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'captcha' => array(
+                                'type' => 'Zend\Router\Http\Literal',
+                                'options' => array(
+                                    'route' => '/captcha',
+                                    'defaults' => array(
+                                        'controller' => 'playgroundcore_admin_formgen',
+                                        'action'     => 'captcha',
+                                    ),
+                                ),
+                            ),
                             'url' => array(
                                 'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(

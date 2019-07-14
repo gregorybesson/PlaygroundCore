@@ -7,12 +7,6 @@ $settings = array(
     'bitlyUsername' => 'o_7t2s2bjmun',
     'bitlyApiKey'   => 'R_335290ffb3f5fc08b45d3e0e6678c3db',
     'bitlyUrl'      => 'http://api.bit.ly/v3/shorten',
-
-    /**
-    * Google ReCaptcha
-    */
-    'gReCaptchaUrl' => 'https://www.google.com/recaptcha/api/siteverify',
-    'gReCaptchaKey' => '',
     
     'twitterCard' => array(
         'enable'     => false, // can be enable for a specific page
@@ -133,6 +127,9 @@ $settings = array(
         ),
     ),
 
+    /**
+    * Google ReCaptcha
+    */
     'gReCaptchaUrl' => 'https://www.google.com/recaptcha/api/siteverify',
     'gReCaptchaKey' => '',
 );

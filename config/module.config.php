@@ -385,6 +385,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'captcha' => array(
+                                'type' => 'Zend\Router\Http\Literal',
+                                'options' => array(
+                                    'route' => '/captcha',
+                                    'defaults' => array(
+                                        'controller' => 'playgroundcore_admin_formgen',
+                                        'action'     => 'captcha',
+                                    ),
+                                ),
+                            ),
                             'url' => array(
                                 'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
@@ -494,20 +504,20 @@ return array(
         ),
     ),
 
-    /* An example to configure the translation */
-    // 'playgroundLocale' => array(
-    //     'enable' => false,
-    //     'default' => 'fr',
-    //     'strategies' => array(
-    //         'uri',
-    //         'cookie',
-    //         'header'
-    //     ),
-    //     'supported' => array(
-    //         'fr',
-    //         'fr_FR'
-    //     )
-    // ),
+    /* The root configuration key for translation */
+    'playgroundLocale' => array(
+        'enable' => false,
+        'default' => 'fr',
+        'strategies' => array(
+            'uri',
+            'cookie',
+            'header'
+        ),
+        'supported' => array(
+            'fr',
+            'fr_FR'
+        )
+    ),
 
     'translator' => array(
         'locale' => 'fr_FR',

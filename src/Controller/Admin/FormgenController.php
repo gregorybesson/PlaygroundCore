@@ -73,10 +73,12 @@ class FormgenController extends AbstractActionController
 
 
         $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
-        return new ViewModel(array(
-           'websites' => $websites,
-           'form' => $formgen,
-        ));
+        return new ViewModel(
+            array(
+            'websites' => $websites,
+            'form' => $formgen,
+            )
+        );
     }
 
     public function activateAction()
@@ -198,6 +200,13 @@ class FormgenController extends AbstractActionController
     }
 
     public function creditcardAction()
+    {
+        $result = $this->getAjax();
+
+        return $result;
+    }
+
+    public function captchaAction()
     {
         $result = $this->getAjax();
 

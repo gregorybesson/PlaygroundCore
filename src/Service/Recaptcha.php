@@ -35,13 +35,18 @@ class Recaptcha
      */
     public function recaptcha($response, $ipClient = null)
     {
-        if ($this->getOptions()->getGRecaptchaKey()) {
-            $client = new \Zend\Http\Client($this->getOptions()->getGRecaptchaUrl());
+        $platformSettings = $this->serviceLocator->get('playgrounddesign_settings_service')->getSettingsMapper()->findById(1);
+        if ($this->getOptions()->getGRecaptchaKey() || ($platformSettings && $platformSettings->getGReCaptchaKey() !== null) ) {
+            $rUrl = ($this->getOptions()->getGRecaptchaUrl() !== null) ? $this->getOptions()->getGRecaptchaUrl() : $platformSettings->getGReCaptchaUrl();
+            $rKey = ($this->getOptions()->getGRecaptchaKey() !== null) ? $this->getOptions()->getGRecaptchaKey() : $platformSettings->getGReCaptchaKey();
+
+            $client = new \Zend\Http\Client($rUrl);
             $client->setParameterPost(array(
-                'secret'  => $this->getOptions()->getGRecaptchaKey(),
+                'secret'  => $rKey,
                 'response' => $response,
                 'remoteip'   => $ipClient,
             ));
+
             $client->setMethod(\Zend\Http\Request::METHOD_POST);
     
             $result = $client->send();

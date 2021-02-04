@@ -72,7 +72,7 @@ return array(
                 'core'          => array(),
             ),
         ),
-    
+
         'rule_providers' => array(
             'BjyAuthorize\Provider\Rule\Config' => array(
                 'allow' => array(
@@ -80,7 +80,7 @@ return array(
                 ),
             ),
         ),
-    
+
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
                 // Frontend
@@ -89,7 +89,7 @@ return array(
                 // CRON / Console
                 array('controller' => 'DoctrineModule\Controller\Cli', 'roles' => array('guest', 'user')),
                 array('controller' => 'playgroundcore_console', 'roles' => array('guest', 'user')),
-    
+
                 // Admin area
                 array('controller' => 'playgroundcore_admin_formgen', 'roles' => array('admin')),
                 array('controller' => 'playgroundcore_admin_elfinder', 'roles' => array('admin')),
@@ -395,6 +395,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'key' => array(
+                                'type' => 'Zend\Router\Http\Literal',
+                                'options' => array(
+                                    'route' => '/key',
+                                    'defaults' => array(
+                                        'controller' => 'playgroundcore_admin_formgen',
+                                        'action'     => 'key',
+                                    ),
+                                ),
+                            ),
                             'url' => array(
                                 'type' => 'Zend\Router\Http\Literal',
                                 'options' => array(
@@ -492,7 +502,7 @@ return array(
             'playgroundcore_admin_elfinder'        => 'PlaygroundCore\Service\Factory\AdminElfinderControllerFactory',
             'playgroundcore_admin_website'         => 'PlaygroundCore\Service\Factory\AdminWebsiteAdminControllerFactory',
             'playgroundcore_frontend_switchlocale' => 'PlaygroundCore\Service\Factory\FrontendSwitchLocaleControllerFactory',
-            
+
         ),
     ),
     'controller_plugins' => array(

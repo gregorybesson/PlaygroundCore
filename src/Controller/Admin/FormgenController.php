@@ -24,7 +24,7 @@ class FormgenController extends AbstractActionController
 
     public function getServiceLocator()
     {
-        
+
         return $this->serviceLocator;
     }
 
@@ -73,12 +73,10 @@ class FormgenController extends AbstractActionController
 
 
         $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
-        return new ViewModel(
-            array(
-            'websites' => $websites,
-            'form' => $formgen,
-            )
-        );
+        return new ViewModel(array(
+           'websites' => $websites,
+           'form' => $formgen,
+        ));
     }
 
     public function activateAction()
@@ -214,6 +212,13 @@ class FormgenController extends AbstractActionController
     }
 
     public function urlAction()
+    {
+        $result = $this->getAjax();
+
+        return $result;
+    }
+
+    public function keyAction()
     {
         $result = $this->getAjax();
 

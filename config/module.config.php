@@ -11,7 +11,7 @@ return array(
             'translator'                 => 'MvcTranslator',
         ],
         'factories' => [
-            'MvcTranslator'                      => 'Laminas\I18n\Translator\TranslatorServiceFactory',
+            'MvcTranslator'                      => 'Laminas\Mvc\I18n\TranslatorFactory',
             'playgroundcore_message'             => 'PlaygroundCore\Mail\Service\Factory\MessageFactory',
             'playgroundcore_cron_service'        => 'PlaygroundCore\Service\Factory\CronFactory',
             'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\Factory\ShortenUrlFactory',

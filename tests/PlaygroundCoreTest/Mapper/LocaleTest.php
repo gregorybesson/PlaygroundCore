@@ -5,13 +5,13 @@ namespace PlaygroundCoreTest\Mapper;
 use PlaygroundCoreTest\Bootstrap;
 use \PlaygroundCore\Entity\Locale as localeEntity;
 
-class LocaleTest extends \PHPUnit_Framework_TestCase
+class LocaleTest extends \PHPUnit\Framework\TestCase
 {
     protected $traceError = true;
 
     protected $localeMapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->sm = Bootstrap::getServiceManager();
         $this->em = $this->sm->get('doctrine.entitymanager.orm_default');
@@ -127,7 +127,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locale = $locales[0];
 
         $locales = $this->getLocaleMapper()->findById($locale->getId());
-        $this->assertEquals(count($locales), 1);
+        $this->assertEquals(count([$locales]), 1);
     }
 
 
@@ -205,7 +205,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 
         $locales = $this->getLocaleMapper()->findAll();
         $this->assertEquals(count($locales), 2);
-        
+
         foreach ($locales as $locale) {
             $this->getLocaleMapper()->remove($locale);
         }
@@ -236,12 +236,12 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $locale = $locales[0];
         $flag = $locale->getFlag();
         $this->assertEquals($flag, '/lib/images/flag/fr');
-        
+
         $locale->setLocale('');
         $flag = $locale->getFlag();
         $this->assertEquals($flag, '');
     }
-       
+
     public function getLocaleMapper()
     {
 
@@ -252,7 +252,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         return $this->localeMapper;
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $dbh = $this->em->getConnection();
         unset($this->sm);

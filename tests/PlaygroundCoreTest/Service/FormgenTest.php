@@ -5,7 +5,7 @@ use PlaygroundCoreTest\Bootstrap;
 use \PlaygroundCore\Entity\Formgen as FormgenEntity;
 use stdClass;
 
-class FormgenTest extends \PHPUnit_Framework_TestCase
+class FormgenTest extends \PHPUnit\Framework\TestCase
 {
     protected $traceError = true;
 
@@ -15,7 +15,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
      */
     protected $formgenData;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->formgenData = array(
             'title' => 'Titre de test',

@@ -5,9 +5,9 @@ namespace PlaygroundCoreTest\Service;
 use PlaygroundCoreTest\Bootstrap;
 use PlaygroundCore\Service\Registry;
 
-class RegistryTest extends \PHPUnit_Framework_TestCase
+class RegistryTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->sm = Bootstrap::getServiceManager();

@@ -6,7 +6,7 @@ use PlaygroundCoreTest\Bootstrap;
 use \PlaygroundCore\Entity\Website as websiteEntity;
 use \PlaygroundCore\Entity\Locale as localeEntity;
 
-class WebsiteTest extends \PHPUnit_Framework_TestCase
+class WebsiteTest extends \PHPUnit\Framework\TestCase
 {
     protected $traceError = true;
 
@@ -14,7 +14,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
     protected $websiteMapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->sm = Bootstrap::getServiceManager();
         $this->em = $this->sm->get('doctrine.entitymanager.orm_default');
@@ -30,19 +30,19 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
         $self = $this;
         $websites = $this->getWebsiteMapper()->findAll();
-        
+
         foreach ($websites as $website) {
             $this->getWebsiteMapper()->remove($website);
         }
 
         $this->em->flush();
         $this->em->clear();
-        
+
         $this->em->transactional(function ($em) use ($self) {
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -57,7 +57,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website = new websiteEntity();
             $website->setName('Italy');
             $website->setCode('IT');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -70,19 +70,19 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $websites = $this->getWebsiteMapper()->findAll();
         $this->assertEquals(count($websites), 2);
 
- 
+
     }
 
     public function testFindBy()
     {
-        
+
         $self = $this;
 
         $this->em->transactional(function ($em) use ($self) {
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -97,7 +97,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website = new websiteEntity();
             $website->setName('Italy');
             $website->setCode('IT');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -112,20 +112,20 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
 
         $websites = $this->getWebsiteMapper()->findBy(array('name'=>'Italy'));
         $this->assertEquals(count($websites), 1);
-      
+
     }
 
     public function testFindById()
     {
 
         $self = $this;
-        
+
         $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -140,7 +140,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website = new websiteEntity();
             $website->setName('Italy');
             $website->setCode('IT');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -155,13 +155,13 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $website = $websites[0];
 
         $websites = $this->getWebsiteMapper()->findById($website->getId());
-        $this->assertEquals(count($websites), 1);
+        $this->assertEquals(count([$websites]), 1);
     }
 
 
     public function testUpdate()
     {
-       
+
         $self = $this;
 
         $this->em->transactional(function ($em) use ($self) {
@@ -169,7 +169,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -184,7 +184,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website = new websiteEntity();
             $website->setName('Italy');
             $website->setCode('IT');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -214,13 +214,13 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
     public function testRemove()
     {
         $self = $this;
-        
+
         $this->em->transactional(function ($em) use ($self) {
 
             $website = new websiteEntity();
             $website->setName('France');
             $website->setCode('FR');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -235,7 +235,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
             $website = new websiteEntity();
             $website->setName('Italy');
             $website->setCode('IT');
-            
+
             $website->setActive(true);
             $website->setDefault(0);
 
@@ -257,9 +257,9 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         $websites = $this->getWebsiteMapper()->findAll();
         $this->assertEquals(count($websites), 0);
     }
-  
 
-       
+
+
     public function getWebsiteMapper()
     {
 
@@ -280,7 +280,7 @@ class WebsiteTest extends \PHPUnit_Framework_TestCase
         return $this->localeMapper;
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $dbh = $this->em->getConnection();
         unset($this->sm);

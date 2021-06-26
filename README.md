@@ -24,3 +24,55 @@ This library contains the following features :
 - Core layout : The base for creating the structure layout of a website.
 
 Each feature is explained in the wiki : https://github.com/gregorybesson/PlaygroundCore/wiki
+
+
+
+# Migration Laminas
+1. Màj bootstrap de /tests avec
+```
+  $config = ArrayUtils::merge($baseConfig, $testConfig);
+
+  $smConfig = new ServiceManagerConfig($config);
+  $serviceManager = new ServiceManager();
+  $smConfig->configureServiceManager($serviceManager);
+
+  $serviceManager->setService('ApplicationConfig', $config);
+  $serviceManager->get('ModuleManager')->loadModules();
+```
+
+1. Remplacer
+```
+public function setUp()
+```
+par
+```
+protected function setUp(): void
+```
+
+3. Remplacer
+```
+public function tearDown()
+```
+par
+```
+protected function tearDown(): void
+```
+
+4. Remplacer
+```
+\PHPUnit_Framework_TestCase
+```
+par
+```
+\PHPUnit\Framework\TestCase
+```
+
+5. Les annotations PHPUNIT
+6. Remplacer
+```
+'MvcTranslator'                      => 'Zend\Mvc\I18n\TranslatorServiceFactory',
+```
+par
+```
+'MvcTranslator'                      => 'Zend\I18n\Translator\TranslatorServiceFactory',
+```

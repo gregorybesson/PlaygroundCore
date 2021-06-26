@@ -8,7 +8,7 @@ class FormgenControllerTest extends AbstractHttpControllerTestCase
 {
     protected $traceError = true;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->setApplicationConfig(
             include __DIR__ . '/../../TestConfig.php'

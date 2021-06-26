@@ -1,16 +1,17 @@
 <?php
 return array(
-    'service_manager' => array(
-        'aliases' => array(
+    'service_manager' => [
+        'aliases' => [
             'playgroundcore_doctrine_em' => 'doctrine.entitymanager.orm_default',
             'google-analytics'           => 'PlaygroundCore\Analytics\Tracker',
             'facebook-opengraph'         => 'PlaygroundCore\Opengraph\Tracker',
             'twitter-card'               => 'PlaygroundCore\TwitterCard\Config',
             'twilio'                     => 'playgroundcore_twilio',
-            'ffmpeg'                     => 'playgroundcore_phpvideotoolkit'
-        ),
-        'factories' => array(
-            'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'ffmpeg'                     => 'playgroundcore_phpvideotoolkit',
+            'translator'                 => 'MvcTranslator',
+        ],
+        'factories' => [
+            'MvcTranslator'                      => 'Zend\I18n\Translator\TranslatorServiceFactory',
             'playgroundcore_message'             => 'PlaygroundCore\Mail\Service\Factory\MessageFactory',
             'playgroundcore_cron_service'        => 'PlaygroundCore\Service\Factory\CronFactory',
             'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\Factory\ShortenUrlFactory',
@@ -26,8 +27,8 @@ return array(
             'playgroundcore_transport'           => 'PlaygroundCore\Mail\Transport\Service\TransportFactory',
             // We extend this service to handle the case when the requested role doesn't exist in the database
             'BjyAuthorize\Guard\Controller'      => 'PlaygroundCore\Service\Factory\ControllerGuardServiceFactory',
-        ),
-    ),
+        ],
+    ],
 
     'doctrine' => array(
         'driver' => array(

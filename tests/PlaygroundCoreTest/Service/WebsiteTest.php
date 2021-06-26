@@ -5,13 +5,13 @@ namespace PlaygroundCoreTest\Service;
 use PlaygroundCoreTest\Bootstrap;
 use PlaygroundCore\Service\Registry;
 
-class WebsiteTest extends \PHPUnit_Framework_TestCase
+class WebsiteTest extends \PHPUnit\Framework\TestCase
 {
     protected $traceError = true;
     
     protected $cronData;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->sm = Bootstrap::getServiceManager();

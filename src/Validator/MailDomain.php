@@ -2,8 +2,8 @@
 //filename : module/TutorialValidator/src/TutorialValidator/Validator/Special.php
 namespace PlaygroundCore\Validator;
 
-use Zend\Validator\AbstractValidator;
-use Zend\Validator\Exception;
+use Laminas\Validator\AbstractValidator;
+use Laminas\Validator\Exception;
 
 class MailDomain extends AbstractValidator
 {

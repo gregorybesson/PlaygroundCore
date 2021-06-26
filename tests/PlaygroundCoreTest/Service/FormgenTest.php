@@ -46,7 +46,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $service->setFormgenMapper($mapper);
 
         $formgenDataFromForm = $this->formgenData;
-        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","locale":"","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
+        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","locale":"","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Laminas\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Laminas\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Laminas\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
         $formgenDataFromForm['form_template'] = $this->formgenData['formtemplate'];
         $formgenDataFromForm['locale'] = null;
         $formgen = $service->insert($formgenDataFromForm);
@@ -74,7 +74,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $service->setFormgenMapper($mapper);
 
         $formgenDataFromForm = $this->formgenData;
-        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","locale":"1","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Zend\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
+        $formgenDataFromForm['form_jsonified'] = '[{"form_properties":[{"name":"form_properties","namespace":"","title":"Titre du formulaire","description":"Description","locale":"1","class":"","model_name":"","id":"","class_name":""}]},{"line_text":[{"name":"text","type":"Laminas\\Form\\Element\\Text","order":"1","data":{"placeholder":"Your civility...","label":"Civility","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Laminas\\Form\\Element\\Text","order":"2","data":{"placeholder":"Your firstname...","label":"Firstname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]},{"line_text":[{"name":"text","type":"Laminas\\Form\\Element\\Text","order":"3","data":{"placeholder":"Your lastname...","label":"Lastname","required":"0","class":"","id":"","length":{"min":"","max":""}}}]}]';
         $formgenDataFromForm['form_template'] = $this->formgenData['formtemplate'];
         $formgenDataFromForm['locale'] = null;
         $formgen = $service->update($formgenPostUpdate, $formgenDataFromForm);
@@ -91,7 +91,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $element = new stdClass();
         $element->line_text = array( (object) array(
             'name' => 'firstname',
-            'type' => 'Zend\\Form\\Element\\Text"',
+            'type' => 'Laminas\\Form\\Element\\Text"',
             'order' => '1',
             'data' => (object) array(
                 'placeholder' => 'Your firstname...',
@@ -110,7 +110,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $element = new stdClass();
         $element->line_email = array( (object) array(
             'name' => 'email',
-            'type' => 'Zend\\Form\\Element\\Mail"',
+            'type' => 'Laminas\\Form\\Element\\Mail"',
             'order' => '2',
             'data' => (object) array(
                 'placeholder' => 'Your mail...',
@@ -130,7 +130,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $element = new stdClass();
         $element->line_checkbox = array( (object) array(
             'name' => 'optin',
-            'type' => 'Zend\\Form\\Element\\Checkbox"',
+            'type' => 'Laminas\\Form\\Element\\Checkbox"',
             'order' => '3',
             'data' => (object) array(
                 'placeholder' => '',
@@ -154,7 +154,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $element = new stdClass();
         $element->line_paragraph = array( (object) array(
             'name' => 'comment',
-            'type' => 'Zend\\Form\\Element\\TextArea"',
+            'type' => 'Laminas\\Form\\Element\\TextArea"',
             'order' => '4',
             'data' => (object) array(
                 'placeholder' => 'Your comment',
@@ -173,7 +173,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $element = new stdClass();
         $element->line_upload = array( (object) array(
             'name' => 'file',
-            'type' => 'Zend\\Form\\Element\\File"',
+            'type' => 'Laminas\\Form\\Element\\File"',
             'order' => '4',
             'data' => (object) array(
                 'placeholder' => '',
@@ -192,7 +192,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $element = new stdClass();
         $element->line_radio = array( (object) array(
             'name' => 'civility',
-            'type' => 'Zend\\Form\\Element\\Radio"',
+            'type' => 'Laminas\\Form\\Element\\Radio"',
             'order' => '5',
             'data' => (object) array(
                 'placeholder' => '',
@@ -215,7 +215,7 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
         $element = new stdClass();
         $element->line_dropdown = array( (object) array(
             'name' => 'country',
-            'type' => 'Zend\\Form\\Element\\Select"',
+            'type' => 'Laminas\\Form\\Element\\Select"',
             'order' => '5',
             'data' => (object) array(
                 'placeholder' => '',
@@ -238,21 +238,21 @@ class FormgenTest extends \PHPUnit\Framework\TestCase
 
         $form = $service->render($formGem, "formtest");
 
-        $this->assertEquals(get_class($form), "Zend\Form\Form");
+        $this->assertEquals(get_class($form), "Laminas\Form\Form");
         $this->assertEquals($form->get('firstname')->getLabel(), "firstname");
-        $this->assertEquals(get_class($form->get('firstname')), "Zend\Form\Element\Text");
+        $this->assertEquals(get_class($form->get('firstname')), "Laminas\Form\Element\Text");
         $this->assertEquals($form->get('email')->getLabel(), "email");
-        $this->assertEquals(get_class($form->get('email')), "Zend\Form\Element\Email");
+        $this->assertEquals(get_class($form->get('email')), "Laminas\Form\Element\Email");
         $this->assertEquals($form->get('optin')->getLabel(), "optin");
-        $this->assertEquals(get_class($form->get('optin')), "Zend\Form\Element\MultiCheckbox");
+        $this->assertEquals(get_class($form->get('optin')), "Laminas\Form\Element\MultiCheckbox");
         $this->assertEquals($form->get('comment')->getLabel(), "comment");
-        $this->assertEquals(get_class($form->get('comment')), "Zend\Form\Element\Textarea");
+        $this->assertEquals(get_class($form->get('comment')), "Laminas\Form\Element\Textarea");
         $this->assertEquals($form->get('file')->getLabel(), "file");
-        $this->assertEquals(get_class($form->get('file')), "Zend\Form\Element\File");
+        $this->assertEquals(get_class($form->get('file')), "Laminas\Form\Element\File");
         $this->assertEquals($form->get('civility')->getLabel(), "civility");
-        $this->assertEquals(get_class($form->get('civility')), "Zend\Form\Element\Radio");
+        $this->assertEquals(get_class($form->get('civility')), "Laminas\Form\Element\Radio");
         $this->assertEquals($form->get('country')->getLabel(), "country");
-        $this->assertEquals(get_class($form->get('country')), "Zend\Form\Element\Select");
+        $this->assertEquals(get_class($form->get('country')), "Laminas\Form\Element\Select");
 
     }
 

@@ -2,10 +2,10 @@
 
 namespace PlaygroundCore\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Console\Response as ConsoleResponse;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Console\Response as ConsoleResponse;
 use PlaygroundCore\Service\Cron;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class ConsoleController extends AbstractActionController
 {

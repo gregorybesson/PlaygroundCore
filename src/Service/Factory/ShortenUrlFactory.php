@@ -2,7 +2,7 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Service\ShortenUrl;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 
 class ShortenUrlFactory implements FactoryInterface

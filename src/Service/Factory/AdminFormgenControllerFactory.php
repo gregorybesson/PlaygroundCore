@@ -2,7 +2,7 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Controller\Admin\FormgenController;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 
 class AdminFormgenControllerFactory implements FactoryInterface

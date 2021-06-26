@@ -4,7 +4,7 @@ namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Controller\Plugin\Recaptcha;
 use Interop\Container\ContainerInterface;
-use Zend\Mvc\Service\AbstractPluginManagerFactory;
+use Laminas\Mvc\Service\AbstractPluginManagerFactory;
 
 class ControllerPluginRecaptchaFactory extends AbstractPluginManagerFactory
 {

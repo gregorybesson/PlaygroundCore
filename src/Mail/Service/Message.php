@@ -1,12 +1,12 @@
 <?php
 namespace PlaygroundCore\Mail\Service;
 
-use Zend\ServiceManager\ServiceManager;
-use Zend\Mail\Message as MailMessage;
-use Zend\Mime\Message as MimeMessage;
-use Zend\Mime\Mime;
-use Zend\Mime\Part;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Mail\Message as MailMessage;
+use Laminas\Mime\Message as MimeMessage;
+use Laminas\Mime\Mime;
+use Laminas\Mime\Part;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Message
 {
@@ -23,13 +23,13 @@ class Message
 
     /**
      *
-     * @var \Zend\View\Renderer\RendererInterface
+     * @var \Laminas\View\Renderer\RendererInterface
      */
     protected $renderer;
 
     /**
      *
-     * @var \Zend\Mail\Transport\TransportInterface
+     * @var \Laminas\Mail\Transport\TransportInterface
      */
     protected $transport;
 
@@ -42,7 +42,7 @@ class Message
      *            An array containing the recipients of the mail
      * @param string $subject
      *            Subject of the mail
-     * @param string|\Zend\View\Model\ModelInterface $nameOrModel
+     * @param string|\Laminas\View\Model\ModelInterface $nameOrModel
      *            Either the template to use, or a ViewModel
      * @param null|array $values
      *            Values to use when the template is rendered
@@ -55,7 +55,7 @@ class Message
         }
         $renderer = $this->getRenderer();
         $content = $renderer->render($nameOrModel, $values);
-        $resolver = $this->serviceLocator->get('Zend\View\Resolver\TemplatePathStack');
+        $resolver = $this->serviceLocator->get('Laminas\View\Resolver\TemplatePathStack');
         // check if plain text email template exist
         if ($resolver->resolve($nameOrModel . '-plain')) {
             $contentText = $renderer->render($nameOrModel . '-plain', $values);
@@ -102,7 +102,7 @@ class Message
      *            An array containing the recipients of the mail
      * @param string $subject
      *            Subject of the mail
-     * @param string|\Zend\View\Model\ModelInterface $nameOrModel
+     * @param string|\Laminas\View\Model\ModelInterface $nameOrModel
      *            Either the template to use, or a ViewModel
      * @param null|array $values
      *            Values to use when the template is rendered
@@ -130,7 +130,7 @@ class Message
     /**
      * Get the renderer
      *
-     * @return \Zend\View\Renderer\RendererInterface
+     * @return \Laminas\View\Renderer\RendererInterface
      */
     protected function getRenderer()
     {
@@ -144,7 +144,7 @@ class Message
     /**
      * Get the transport
      *
-     * @return \Zend\Mail\Transport\TransportInterface
+     * @return \Laminas\Mail\Transport\TransportInterface
      */
     protected function getTransport()
     {

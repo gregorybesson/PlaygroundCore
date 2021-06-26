@@ -1,9 +1,9 @@
 <?php
 namespace PlaygroundCore\Service;
 
-use Zend\EventManager\EventManagerAwareTrait;
-use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\EventManager\EventManagerAwareTrait;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * require php_exif for some methods

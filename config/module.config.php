@@ -11,7 +11,7 @@ return array(
             'translator'                 => 'MvcTranslator',
         ],
         'factories' => [
-            'MvcTranslator'                      => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'MvcTranslator'                      => 'Laminas\I18n\Translator\TranslatorServiceFactory',
             'playgroundcore_message'             => 'PlaygroundCore\Mail\Service\Factory\MessageFactory',
             'playgroundcore_cron_service'        => 'PlaygroundCore\Service\Factory\CronFactory',
             'playgroundcore_shortenurl_service'  => 'PlaygroundCore\Service\Factory\ShortenUrlFactory',
@@ -100,7 +100,7 @@ return array(
     ),
 
     'router' => array(
-        'router_class' => '\Zend\Router\Http\TranslatorAwareTreeRouteStack',
+        'router_class' => '\Laminas\Router\Http\TranslatorAwareTreeRouteStack',
         'routes' => array(
             'frontend' => array(
                 'type'      => 'Segment',
@@ -125,7 +125,7 @@ return array(
                     ),
                     // Give the possibility to call Cron from browser
                     'cron' => array(
-                        'type' => 'Zend\Router\Http\Literal',
+                        'type' => 'Laminas\Router\Http\Literal',
                         'options' => array(
                             'route' => 'cron',
                             'defaults' => array(
@@ -137,14 +137,14 @@ return array(
                 ),
             ),
             'admin' => array(
-                'type' => 'Zend\Router\Http\Literal',
+                'type' => 'Laminas\Router\Http\Literal',
                 'priority' => -1000,
                 'options' => array(
                     'route'    => '/admin',
                 ),
                 'child_routes' => array(
                     'elfinder' => array(
-                        'type' => 'Zend\Router\Http\Literal',
+                        'type' => 'Laminas\Router\Http\Literal',
                         'options' => array(
                             'route' => '/elfinder',
                             'defaults' => array(
@@ -155,7 +155,7 @@ return array(
                         'may_terminate' => true,
                         'child_routes' => array(
                             'connector' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/connector',
                                     'defaults' => array(
@@ -165,7 +165,7 @@ return array(
                                 ),
                             ),
                             'ckeditor' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/ckeditor',
                                     'defaults' => array(
@@ -177,7 +177,7 @@ return array(
                         ),
                     ),
                     'formgen' => array(
-                        'type'    => 'Zend\Router\Http\Literal',
+                        'type'    => 'Laminas\Router\Http\Literal',
                         'options' => array(
                                 'route'    => '/formgen',
                                 'defaults' => array(
@@ -188,7 +188,7 @@ return array(
                         'may_terminate' => true,
                         'child_routes' => array(
                             'create' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/create',
                                     'defaults' => array(
@@ -198,7 +198,7 @@ return array(
                                 ),
                             ),
                             'generate' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/generate',
                                     'defaults' => array(
@@ -257,7 +257,7 @@ return array(
                                 ),
                             ),
                             'input' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/input',
                                     'defaults' => array(
@@ -267,7 +267,7 @@ return array(
                                 ),
                             ),
                             'paragraph' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/paragraph',
                                     'defaults' => array(
@@ -277,7 +277,7 @@ return array(
                                 ),
                             ),
                             'number' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/number',
                                     'defaults' => array(
@@ -287,7 +287,7 @@ return array(
                                 ),
                             ),
                             'phone' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/phone',
                                     'defaults' => array(
@@ -297,7 +297,7 @@ return array(
                                 ),
                             ),
                             'checkbox' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/checkbox',
                                     'defaults' => array(
@@ -307,7 +307,7 @@ return array(
                                 ),
                             ),
                             'radio' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/radio',
                                     'defaults' => array(
@@ -317,7 +317,7 @@ return array(
                                 ),
                             ),
                             'dropdown' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/dropdown',
                                     'defaults' => array(
@@ -327,7 +327,7 @@ return array(
                                 ),
                             ),
                             'password' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/password',
                                     'defaults' => array(
@@ -337,7 +337,7 @@ return array(
                                 ),
                             ),
                             'passwordverify' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/passwordverify',
                                     'defaults' => array(
@@ -347,7 +347,7 @@ return array(
                                 ),
                             ),
                             'email' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/email',
                                     'defaults' => array(
@@ -357,7 +357,7 @@ return array(
                                 ),
                             ),
                             'date' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/date',
                                     'defaults' => array(
@@ -367,7 +367,7 @@ return array(
                                 ),
                             ),
                             'upload' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/upload',
                                     'defaults' => array(
@@ -377,7 +377,7 @@ return array(
                                 ),
                             ),
                             'creditcard' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/creditcard',
                                     'defaults' => array(
@@ -387,7 +387,7 @@ return array(
                                 ),
                             ),
                             'captcha' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/captcha',
                                     'defaults' => array(
@@ -397,7 +397,7 @@ return array(
                                 ),
                             ),
                             'key' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/key',
                                     'defaults' => array(
@@ -407,7 +407,7 @@ return array(
                                 ),
                             ),
                             'url' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/url',
                                     'defaults' => array(
@@ -417,7 +417,7 @@ return array(
                                 ),
                             ),
                             'hidden' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/hidden',
                                     'defaults' => array(
@@ -427,7 +427,7 @@ return array(
                                 ),
                             ),
                             'test' => array(
-                                'type' => 'Zend\Router\Http\Literal',
+                                'type' => 'Laminas\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/test',
                                     'defaults' => array(

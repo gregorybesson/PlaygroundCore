@@ -1,9 +1,9 @@
 <?php
 namespace PlaygroundCore\Service;
 
-use Zend\ServiceManager\ServiceManager;
-use Zend\EventManager\EventManagerAwareTrait;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\EventManager\EventManagerAwareTrait;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * main class
@@ -36,7 +36,7 @@ class ShortenUrl
     public function shortenUrl($url)
     {
         if ($this->getOptions()->getBitlyApiKey() && $this->getOptions()->getBitlyUsername()) {
-            $client = new \Zend\Http\Client($this->getOptions()->getBitlyUrl());
+            $client = new \Laminas\Http\Client($this->getOptions()->getBitlyUrl());
             $client->setParameterGet(array(
                 'format'  => 'json',
                 'longUrl' => $url,
@@ -46,7 +46,7 @@ class ShortenUrl
     
             $result = $client->send();
             if ($result) {
-                $jsonResult = \Zend\Json\Json::decode($result->getBody());
+                $jsonResult = \Laminas\Json\Json::decode($result->getBody());
                 if ($jsonResult->status_code == 200) {
                     return $jsonResult->data->url;
                 }

@@ -21,11 +21,11 @@ namespace PlaygroundCore\Filter;
 /**
  * @see Zend_Filter_StringToLower
  */
-use Zend\Filter\StringToLower;
+use Laminas\Filter\StringToLower;
 /**
  * @see Zend_Filter_StringTrim
  */
-use Zend\Filter\StringTrim;
+use Laminas\Filter\StringTrim;
 use PlaygroundCore\Filter\Transliteration;
 
 /**
@@ -35,7 +35,7 @@ use PlaygroundCore\Filter\Transliteration;
  */
 
 
-class Sanitize implements \Zend\Filter\FilterInterface
+class Sanitize implements \Laminas\Filter\FilterInterface
 {
 
     /**
@@ -255,7 +255,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      */
     private function trimString($s)
     {
-        $trimFilter = new \Zend\Filter\StringTrim();
+        $trimFilter = new \Laminas\Filter\StringTrim();
         return $trimFilter->filter($s);
     }
 
@@ -300,7 +300,7 @@ class Sanitize implements \Zend\Filter\FilterInterface
      */
     private function toLowerChars($s)
     {
-        $lowerFilter = new \Zend\Filter\StringToLower;
+        $lowerFilter = new \Laminas\Filter\StringToLower;
         $lowerFilter->setEncoding('utf-8');
         return $lowerFilter->filter($s);
     }

@@ -4,10 +4,10 @@ namespace PlaygroundCore\Service\Factory;
 
 use Services_Twilio;
 use PlaygroundCore\Options\ModuleOptions;
-use Zend\ServiceManager\Exception\InvalidArgumentException;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Exception\InvalidArgumentException;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\ServiceManager;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Class TwilioServiceFactory

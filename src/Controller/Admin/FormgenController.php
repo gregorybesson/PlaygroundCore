@@ -1,9 +1,9 @@
 <?php
 namespace PlaygroundCore\Controller\Admin;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class FormgenController extends AbstractActionController
 {
@@ -91,7 +91,7 @@ class FormgenController extends AbstractActionController
 
     public function viewAction()
     {
-        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer = $this->serviceLocator->get('Laminas\View\Renderer\RendererInterface');
         $headScript = $this->getServiceLocator()->get('ViewHelperManager')->get('HeadScript');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/parse.form.js');
 
@@ -102,7 +102,7 @@ class FormgenController extends AbstractActionController
 
     public function createAction()
     {
-        $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
+        $renderer = $this->serviceLocator->get('Laminas\View\Renderer\RendererInterface');
         $headScript = $this->getServiceLocator()->get('ViewHelperManager')->get('HeadScript');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/create.form.js');
         $headScript->appendFile($renderer->adminAssetPath() . '/js/form/line.text.js');

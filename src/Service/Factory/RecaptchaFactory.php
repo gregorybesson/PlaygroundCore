@@ -2,7 +2,7 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Service\Recaptcha;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 
 class RecaptchaFactory implements FactoryInterface

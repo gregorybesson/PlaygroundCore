@@ -2,8 +2,8 @@
 
 namespace PlaygroundCore\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\Mvc\I18n\Translator;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Mvc\I18n\Translator;
 
 final class Translate extends AbstractPlugin
 {

@@ -1,9 +1,9 @@
 <?php
 namespace PlaygroundCore\Service;
 
-use Zend\ServiceManager\ServiceManager;
-use Zend\EventManager\EventManagerAwareTrait;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\EventManager\EventManagerAwareTrait;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * main class
@@ -40,18 +40,18 @@ class Recaptcha
             $rUrl = ($this->getOptions()->getGRecaptchaUrl() !== null) ? $this->getOptions()->getGRecaptchaUrl() : $platformSettings->getGReCaptchaUrl();
             $rKey = ($this->getOptions()->getGRecaptchaKey() !== null) ? $this->getOptions()->getGRecaptchaKey() : $platformSettings->getGReCaptchaKey();
 
-            $client = new \Zend\Http\Client($rUrl);
+            $client = new \Laminas\Http\Client($rUrl);
             $client->setParameterPost(array(
                 'secret'  => $rKey,
                 'response' => $response,
                 'remoteip'   => $ipClient,
             ));
 
-            $client->setMethod(\Zend\Http\Request::METHOD_POST);
+            $client->setMethod(\Laminas\Http\Request::METHOD_POST);
     
             $result = $client->send();
             if ($result) {
-                $jsonResult = \Zend\Json\Json::decode($result->getBody());
+                $jsonResult = \Laminas\Json\Json::decode($result->getBody());
                 if ($jsonResult->success) {
                     return true;
                 }

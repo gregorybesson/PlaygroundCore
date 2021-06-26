@@ -70,9 +70,9 @@ par
 5. Les annotations PHPUNIT
 6. Remplacer
 ```
-'MvcTranslator'                      => 'Zend\Mvc\I18n\TranslatorServiceFactory',
+'MvcTranslator'                      => 'Laminas\Mvc\I18n\TranslatorServiceFactory',
 ```
 par
 ```
-'MvcTranslator'                      => 'Zend\I18n\Translator\TranslatorServiceFactory',
+'MvcTranslator'                      => 'Laminas\I18n\Translator\TranslatorServiceFactory',
 ```

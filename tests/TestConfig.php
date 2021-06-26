@@ -4,7 +4,7 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'DoctrineDataFixtureModule',
-        'ZendDeveloperTools',
+        'Laminas\DeveloperTools',
         'PlaygroundCore'
     ),
     'module_listener_options' => array(

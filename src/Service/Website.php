@@ -2,10 +2,10 @@
 
 namespace PlaygroundCore\Service;
 
-use Zend\ServiceManager\ServiceManager;
-use Zend\EventManager\EventManagerAwareTrait;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\EventManager\EventManagerAwareTrait;
 use PlaygroundCore\Options\ModuleOptions;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Website
 {

@@ -93,7 +93,7 @@ class ModuleOptionsTest extends \PHPUnit\Framework\TestCase
     public function testSetAndGetTransportClass()
     {
         $optionsTest = $this->sm->get('playgroundcore_module_options');
-        $testTransportClass = 'Zend\Mail\Transport\File';
+        $testTransportClass = 'Laminas\Mail\Transport\File';
 
         $retour = $optionsTest->setTransportClass($testTransportClass);
         $this->assertInstanceOf('PlaygroundCore\Options\ModuleOptions', $retour);
@@ -106,7 +106,7 @@ class ModuleOptionsTest extends \PHPUnit\Framework\TestCase
     public function testSetAndGetOptionsClass()
     {
         $optionsTest = $this->sm->get('playgroundcore_module_options');
-        $testOptionsClass = 'Zend\Mail\Transport\FileOptions';
+        $testOptionsClass = 'Laminas\Mail\Transport\FileOptions';
 
         $retour = $optionsTest->setOptionsClass($testOptionsClass);
         $this->assertInstanceOf('PlaygroundCore\Options\ModuleOptions', $retour);

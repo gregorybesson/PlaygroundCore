@@ -40,10 +40,10 @@
  */
 namespace PlaygroundCore\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\Helper\HeadScript;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\HeadScript;
 use PlaygroundCore\Analytics\Tracker;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Stdlib\RequestInterface;
 use PlaygroundCore\Exception\RuntimeException;
 
 class GoogleAnalytics extends AbstractHelper
@@ -94,7 +94,7 @@ class GoogleAnalytics extends AbstractHelper
         }
 
         // We return if we are in a console request
-        if ((get_class($this->request) == 'Zend\Console\Request')) {
+        if ((get_class($this->request) == 'Laminas\Console\Request')) {
             return;
         }
 

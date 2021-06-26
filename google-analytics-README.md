@@ -6,8 +6,8 @@ Usage
 ---
 As tracking for Google Analytics is done with javascript, a view helper is
 available to generate the required code based on some configuration. The
-generated code is pushed into a `Zend\View\Helper\HeadScript` helper, by default
-the `Zend\View\Helper\InlineScript` is used, but this can be modified into
+generated code is pushed into a `Laminas\View\Helper\HeadScript` helper, by default
+the `Laminas\View\Helper\InlineScript` is used, but this can be modified into
 `HeadScript` or any other helper extending the `HeadScript` helper class.
 
 The `SlmGoogleAnalytics\Analytics\Tracker` is aliased to `google-analytics` in

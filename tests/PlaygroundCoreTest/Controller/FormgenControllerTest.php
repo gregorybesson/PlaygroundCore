@@ -2,7 +2,7 @@
 
 namespace PlaygroundCoreTest\Controller\Frontend;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class FormgenControllerTest extends AbstractHttpControllerTestCase
 {

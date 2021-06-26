@@ -3,9 +3,9 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Controller\Plugin\TranslatePlural;
-use Zend\I18n\Translator\TranslatorServiceFactory;
+use Laminas\I18n\Translator\TranslatorServiceFactory;
 use Interop\Container\ContainerInterface;
-use Zend\Mvc\Service\AbstractPluginManagerFactory;
+use Laminas\Mvc\Service\AbstractPluginManagerFactory;
 
 class TranslatePluralFactory extends AbstractPluginManagerFactory
 {

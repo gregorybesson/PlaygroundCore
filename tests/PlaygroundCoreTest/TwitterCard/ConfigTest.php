@@ -4,7 +4,7 @@ namespace PlaygroundCoreTest\TwitterCard;
 
 use PlaygroundCore\TwitterCard\Tag;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends \PHPUnit\Framework\TestCase
 {
     
     protected $config;

@@ -2,13 +2,13 @@
 
 namespace PlaygroundCoreTest\Controller\Frontend;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class FormgenControllerTest extends AbstractHttpControllerTestCase
 {
     protected $traceError = true;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->setApplicationConfig(
             include __DIR__ . '/../../TestConfig.php'

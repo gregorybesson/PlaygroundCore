@@ -2,7 +2,7 @@
 
 namespace PlaygroundCore\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions
 {
@@ -11,8 +11,8 @@ class ModuleOptions extends AbstractOptions
     protected $gReCaptchaKey = '';
     protected $gReCaptchaUrl = '';
     protected $bitlyUrl      = 'http://api.bit.ly/v3/shorten';
-    protected $transport_class = 'Zend\Mail\Transport\File';
-    protected $options_class   = 'Zend\Mail\Transport\FileOptions';
+    protected $transport_class = 'Laminas\Mail\Transport\File';
+    protected $options_class   = 'Laminas\Mail\Transport\FileOptions';
     protected $options   = array('path' => 'data/mail/');
     protected $twilio = array();
     protected $phpvideotoolkit = array();

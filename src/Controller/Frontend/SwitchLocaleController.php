@@ -1,8 +1,8 @@
 <?php
 namespace PlaygroundCore\Controller\Frontend;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class SwitchLocaleController extends AbstractActionController
 {
@@ -37,7 +37,7 @@ class SwitchLocaleController extends AbstractActionController
         $context = $this->getEvent()->getRouteMatch()->getParam('area');
         $redirect = (!empty($this->getEvent()->getRouteMatch()->getParam('redirect')))? urldecode($this->getEvent()->getRouteMatch()->getParam('redirect')) : '/'.$lang;
 
-        $cookie = new \Zend\Http\Header\SetCookie('pg_locale_'.$context, $lang, time() + 60*60*24*365, '/');
+        $cookie = new \Laminas\Http\Header\SetCookie('pg_locale_'.$context, $lang, time() + 60*60*24*365, '/');
         $this->getResponse()->getHeaders()->addHeader($cookie);
 
         return $this->redirect()->toUrl($redirect);

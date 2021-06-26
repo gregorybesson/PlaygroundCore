@@ -2,8 +2,8 @@
 
 namespace PlaygroundCore\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class ShortenUrl extends AbstractPlugin
 {

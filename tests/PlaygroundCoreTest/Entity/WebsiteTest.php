@@ -5,12 +5,12 @@ namespace PlaygroundCoreTest\Entity;
 use PlaygroundCoreTest\Bootstrap;
 use \PlaygroundCore\Entity\Website as WebsiteEntity;
 
-class WebsiteTest extends \PHPUnit_Framework_TestCase
+class WebsiteTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $website;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->time = time();
 

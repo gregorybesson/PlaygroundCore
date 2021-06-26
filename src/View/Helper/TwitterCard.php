@@ -2,14 +2,14 @@
 
 namespace PlaygroundCore\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\Helper\HeadMeta;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\HeadMeta;
 
 class TwitterCard extends AbstractHelper
 {
 
     /**
-     * @var \Zend\View\Helper\HeadMeta
+     * @var \Laminas\View\Helper\HeadMeta
      */
     protected $headMeta;
     
@@ -31,13 +31,13 @@ class TwitterCard extends AbstractHelper
     protected $config;
     
     /**
-     * @var \Zend\Stdlib\RequestInterface
+     * @var \Laminas\Stdlib\RequestInterface
      */
     protected $request;
     
     /**
-     * @param \Zend\View\Helper\HeadMeta $metaData
-     * @return \Zend\View\Helper\HeadMeta
+     * @param \Laminas\View\Helper\HeadMeta $metaData
+     * @return \Laminas\View\Helper\HeadMeta
      */
     public function __invoke()
     {
@@ -53,7 +53,7 @@ class TwitterCard extends AbstractHelper
         }
         
         // We return if we are in a console request
-        if (($this->request instanceof  \Zend\Console\Request)) {
+        if (($this->request instanceof  \Laminas\Console\Request)) {
             return;
         }
         
@@ -101,7 +101,7 @@ class TwitterCard extends AbstractHelper
     }
     
     /**
-     * @param \Zend\Stdlib\RequestInterface $request
+     * @param \Laminas\Stdlib\RequestInterface $request
      */
     public function setRequest($request)
     {

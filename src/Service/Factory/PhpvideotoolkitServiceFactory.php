@@ -3,10 +3,10 @@
 namespace PlaygroundCore\Service\Factory;
 
 use PlaygroundCore\Options\ModuleOptions;
-use Zend\ServiceManager\Exception\InvalidArgumentException;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Exception\InvalidArgumentException;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\ServiceManager;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Class PhpvideotoolkitServiceFactory
@@ -31,7 +31,7 @@ class PhpvideotoolkitServiceFactory implements FactoryInterface
         $phpvideotoolkitOptions = $options->getPhpvideotoolkit();
         
         if (!isset($phpvideotoolkitOptions['ffmpeg']) || $phpvideotoolkitOptions['ffmpeg'] === '') {
-            throw new \Zend\ServiceManager\Exception\InvalidArgumentException(
+            throw new \Laminas\ServiceManager\Exception\InvalidArgumentException(
                 'No phpvideotoolkit configuration found'
             );
         }
@@ -39,7 +39,7 @@ class PhpvideotoolkitServiceFactory implements FactoryInterface
         try {
             $config = new \PHPVideoToolkit\Config($phpvideotoolkitOptions);
         } catch (\PHPVideoToolkit\Exception $e) {
-            throw new \Zend\ServiceManager\Exception\InvalidArgumentException(
+            throw new \Laminas\ServiceManager\Exception\InvalidArgumentException(
                 'phpvideotoolkit error during configuration load'
             );
         }
@@ -49,7 +49,7 @@ class PhpvideotoolkitServiceFactory implements FactoryInterface
         } catch (\PHPVideoToolkit\Exception $e) {
             \PHPVideoToolkit\Trace::vars($e->getMessage());
             \PHPVideoToolkit\Trace::vars($e);
-            throw new \Zend\ServiceManager\Exception\InvalidArgumentException(
+            throw new \Laminas\ServiceManager\Exception\InvalidArgumentException(
                 'phpvideotoolkit process creation error'
             );
         }

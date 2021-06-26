@@ -7,7 +7,7 @@ use Traversable;
  * @category   Zend
  * @package    Zend_Filter
  */
-class Slugify extends \Zend\Filter\AbstractUnicode
+class Slugify extends \Laminas\Filter\AbstractUnicode
 {
     /**
      * @var array
@@ -33,7 +33,7 @@ class Slugify extends \Zend\Filter\AbstractUnicode
     }
 
     /**
-     * Defined by Zend\Filter\FilterInterface
+     * Defined by Laminas\Filter\FilterInterface
      *
      * Returns the string $value, converting characters to lowercase as necessary
      *

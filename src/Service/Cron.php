@@ -6,10 +6,10 @@ use PlaygroundCore\Exception;
 use PlaygroundCore\Mapper;
 use PlaygroundCore\Service\Registry;
 use Doctrine\ORM\EntityManager;
-use Zend\ServiceManager\ServiceManager;
-use Zend\EventManager\EventManagerAwareTrait;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\EventManager\EventManager;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\EventManager\EventManagerAwareTrait;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\EventManager\EventManager;
 
 /**
  * main Cron class

@@ -5,13 +5,13 @@ namespace PlaygroundCoreTest\Entity;
 use PlaygroundCoreTest\Bootstrap;
 use \PlaygroundCore\Entity\Locale as LocaleEntity;
 
-class LocaleTest extends \PHPUnit_Framework_TestCase
+class LocaleTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $locale;
     protected $time;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->time = time();
 

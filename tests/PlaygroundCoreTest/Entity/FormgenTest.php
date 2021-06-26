@@ -5,12 +5,12 @@ namespace PlaygroundCoreTest\Entity;
 use PlaygroundCoreTest\Bootstrap;
 use \PlaygroundCore\Entity\Formgen as FormgenEntity;
 
-class FormgenTest extends \PHPUnit_Framework_TestCase
+class FormgenTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $formgen;
 
-    public function setUp()
+    protected function setUp(): void
     {
 
         $this->formgen = array(
@@ -32,6 +32,6 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->formgen["formjsonified"], $formgenEntity->getFormjsonified());
         $this->assertEquals($this->formgen["formtemplate"], $formgenEntity->getFormtemplate());
 
-        
+
     }
 }

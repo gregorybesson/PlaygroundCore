@@ -12,7 +12,7 @@ namespace PlaygroundCore\Mvc\Router\Http;
 /**
  * Regex route.
  */
-class RegexSlash extends Zend\Router\Http\Regex implements \Zend\Router\Http\RouteInterface
+class RegexSlash extends Laminas\Router\Http\Regex implements \Laminas\Router\Http\RouteInterface
 {
 
 
@@ -33,7 +33,7 @@ class RegexSlash extends Zend\Router\Http\Regex implements \Zend\Router\Http\Rou
      * assemble(): Defined by RouteInterface interface.
      *
      * added a special feature for removing a '/' in some specific cases
-     * @see    \Zend\Router\RouteInterface::assemble()
+     * @see    \Laminas\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed

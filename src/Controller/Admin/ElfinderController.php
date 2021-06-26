@@ -1,9 +1,9 @@
 <?php
 namespace PlaygroundCore\Controller\Admin;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class ElfinderController extends AbstractActionController
 {
@@ -28,7 +28,7 @@ class ElfinderController extends AbstractActionController
     }
 
     /**
-     * @return array|\Zend\View\Model\ViewModel
+     * @return array|\Laminas\View\Model\ViewModel
      */
     public function indexAction()
     {
@@ -41,7 +41,7 @@ class ElfinderController extends AbstractActionController
     }
 
     /**
-     * @return \Zend\View\Model\ViewModel
+     * @return \Laminas\View\Model\ViewModel
      */
     public function ckeditorAction()
     {
@@ -55,7 +55,7 @@ class ElfinderController extends AbstractActionController
     }
 
     /**
-     * @return \Zend\View\Model\ViewModel
+     * @return \Laminas\View\Model\ViewModel
      */
     public function connectorAction()
     {

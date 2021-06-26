@@ -1,7 +1,7 @@
 <?php
 namespace PlaygroundCore\Mail\Transport\Service;
 
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 
 class TransportFactory implements FactoryInterface

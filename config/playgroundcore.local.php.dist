@@ -36,11 +36,11 @@ $settings = array(
      *
      * Name of Zend Transport Class to use
      */
-    'transport_class' => 'Zend\Mail\Transport\File',
-    'options_class' => 'Zend\Mail\Transport\FileOptions',
+    'transport_class' => 'Laminas\Mail\Transport\File',
+    'options_class' => 'Laminas\Mail\Transport\FileOptions',
     'options' => array(
         'path'              => 'data/mail/',
-        'callback'  => function (\Zend\Mail\Transport\File $transport) {
+        'callback'  => function (\Laminas\Mail\Transport\File $transport) {
             return 'Message_' . microtime(true) . '_' . mt_rand() . '.txt';
         },
     ),
@@ -134,7 +134,7 @@ $settings = array(
     ),
 );
  
-$zenddevelopertools = array(
+$laminas-developer-tools = array(
     'profiler' => array(
         'enabled' => true,
         'strict' => false,
@@ -183,7 +183,7 @@ $zfrcors = array(
 // 'Jhu\ZdtLoggerModule' config
 // $sm->get('jhu.zdt_logger')->info('my log');
 $zdt_logger = array(
-    'logger' => 'Zend\Log\Logger'
+    'logger' => 'Laminas\Log\Logger'
 );
 
 /**
@@ -191,7 +191,7 @@ $zdt_logger = array(
  */
 return array(
     'playgroundcore' => $settings,
-    'zenddevelopertools'=> $zenddevelopertools,
+    'laminas-developer-tools'=> $laminas-developer-tools,
     'zfr_cors' => $zfrcors,
     'jhu' => array('zdt_logger' => $zdt_logger)
 );

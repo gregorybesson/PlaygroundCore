@@ -23,7 +23,7 @@ namespace PlaygroundCore\Filter;
  * @package    Mhujer_Filter
  * @author     Martin Hujer mhujer@gmail.com
  */
-class Transliteration implements \Zend\Filter\FilterInterface
+class Transliteration implements \Laminas\Filter\FilterInterface
 {
 
     /**

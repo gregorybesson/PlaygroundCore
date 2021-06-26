@@ -2,13 +2,13 @@
 
 namespace PlaygroundCore\Service;
 
-use Zend\Form\Form;
-use Zend\ServiceManager\ServiceManager;
-use Zend\EventManager\EventManagerAwareTrait;
+use Laminas\Form\Form;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\EventManager\EventManagerAwareTrait;
 use PlaygroundCore\Options\ModuleOptions;
-use Zend\Form\Element;
-use Zend\InputFilter\Factory as InputFactory;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Form\Element;
+use Laminas\InputFilter\Factory as InputFactory;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Formgen
 {
@@ -117,7 +117,7 @@ class Formgen
     }
 
     /**
-     * @param \Zend\InputFilter\InputFilter $inputFilter
+     * @param \Laminas\InputFilter\InputFilter $inputFilter
      */
     public function decorate($element, $attr, $inputFilter)
     {
@@ -142,8 +142,8 @@ class Formgen
             $options['max'] = $attr['lengthMax'];
             $element->setAttribute('maxlength', $attr['lengthMax']);
             $options['messages'] = array(
-                \Zend\Validator\StringLength::TOO_LONG => sprintf(
-                    $this->serviceLocator->get('MvcTranslator')->translate(
+                \Laminas\Validator\StringLength::TOO_LONG => sprintf(
+                    $this->serviceLocator->get('translator')->translate(
                         'This field contains more than %s characters',
                         'playgroundcore'
                     ),
@@ -189,7 +189,7 @@ class Formgen
     {
         $form = new Form();
         $form->setAttribute('id', $id);
-        $inputFilter = new \Zend\InputFilter\InputFilter();
+        $inputFilter = new \Laminas\InputFilter\InputFilter();
         $factory = new InputFactory();
 
         foreach ($formPV as $element) {
@@ -236,15 +236,15 @@ class Formgen
                     $values[] = $value->label;
                 }
                 $element->setValueOptions($values);
-        
+
                 $options = array();
                 $options['encoding'] = 'UTF-8';
                 $options['disable_inarray_validator'] = true;
-        
+
                 $element->setOptions($options);
-        
+
                 $form->add($element);
-        
+
                 $inputFilter->add($factory->createInput(array(
                     'name'     => $attr['name'],
                     'required' => $attr['required'],
@@ -254,7 +254,7 @@ class Formgen
             if (isset($element->line_checkbox)) {
                 $attr = $this->getAttributes($element->line_checkbox[0]);
                 $element = new Element\MultiCheckbox($attr['name']);
-        
+
                 $element->setLabel($attr['label']);
                 $element->setAttributes(
                     array(
@@ -272,13 +272,13 @@ class Formgen
                 }
                 $element->setValueOptions($values);
                 $form->add($element);
-        
+
                 $options = array();
                 $options['encoding'] = 'UTF-8';
                 $options['disable_inarray_validator'] = true;
-        
+
                 $element->setOptions($options);
-        
+
                 $inputFilter->add($factory->createInput(array(
                     'name'      => $attr['name'],
                     'required'  => $attr['required'],
@@ -305,13 +305,13 @@ class Formgen
                 }
                 $element->setValueOptions($values);
                 $form->add($element);
-        
+
                 $options = array();
                 $options['encoding'] = 'UTF-8';
                 $options['disable_inarray_validator'] = true;
-        
+
                 $element->setOptions($options);
-        
+
                 $inputFilter->add($factory->createInput(array(
                     'name'     => $attr['name'],
                     'required' => $attr['required'],
@@ -338,21 +338,21 @@ class Formgen
                     )
                 );
                 $form->add($element);
-        
+
                 $inputFilter->add($factory->createInput(array(
                     'name'     => $attr['name'],
                     'required' => $attr['required'],
                     'validators' => array(
                         array(
-                            'name' => '\Zend\Validator\File\Size',
+                            'name' => '\Laminas\Validator\File\Size',
                             'options' => array('min' => $attr['filesizeMin'], 'max' => $attr['filesizeMax'])
                         ),
                         array(
-                            'name' => '\Zend\Validator\File\Extension',
+                            'name' => '\Laminas\Validator\File\Extension',
                             'options'  => array(
                                 'png,PNG,jpg,JPG,jpeg,JPEG,gif,GIF',
                                 'messages' => array(
-                                    \Zend\Validator\File\Extension::FALSE_EXTENSION =>'Veuillez télécharger une image'
+                                    \Laminas\Validator\File\Extension::FALSE_EXTENSION =>'Veuillez télécharger une image'
                                 )
                             )
                         ),

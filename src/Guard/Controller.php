@@ -9,14 +9,14 @@
 namespace PlaygroundCore\Guard;
 
 use BjyAuthorize\Exception\UnAuthorizedException;
-use Zend\Console\Request as ConsoleRequest;
-use Zend\EventManager\EventManagerInterface;
-use Zend\Http\Request as HttpRequest;
-use Zend\Mvc\MvcEvent;
+use Laminas\Console\Request as ConsoleRequest;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\Http\Request as HttpRequest;
+use Laminas\Mvc\MvcEvent;
 
 /**
  * Controller Guard listener, allows checking of permissions
- * during {@see \Zend\Mvc\MvcEvent::EVENT_DISPATCH}
+ * during {@see \Laminas\Mvc\MvcEvent::EVENT_DISPATCH}
  *
  * @author Ben Youngblood <bx.youngblood@gmail.com>
  */
@@ -46,11 +46,11 @@ class Controller extends \BjyAuthorize\Guard\Controller
             || $service->isAllowed($this->getResourceName($controller))
             || $service->isAllowed($this->getResourceName($controller, $action))
             || ($method && $service->isAllowed($this->getResourceName($controller, $method)));
-        } catch (\Zend\Permissions\Acl\Exception\InvalidArgumentException $e) {
+        } catch (\Laminas\Permissions\Acl\Exception\InvalidArgumentException $e) {
             $authorized = false;
             $errorMessage = $e->getMessage();
             $event->setParam('exception', new \Exception($errorMessage));
-            $event->setError(\Zend\Mvc\Application::ERROR_EXCEPTION);
+            $event->setError(\Laminas\Mvc\Application::ERROR_EXCEPTION);
         }
         if ($authorized) {
             return;
@@ -66,7 +66,7 @@ class Controller extends \BjyAuthorize\Guard\Controller
             $event->setParam('exception', new UnAuthorizedException($errorMessage));
         }
 
-        /* @var $app \Zend\Mvc\ApplicationInterface */
+        /* @var $app \Laminas\Mvc\ApplicationInterface */
         $app = $event->getTarget();
         $eventManager = $app->getEventManager();
         $eventManager->setEventPrototype($event);

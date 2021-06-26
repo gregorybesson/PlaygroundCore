@@ -2,18 +2,18 @@
 
 namespace PlaygroundCore;
 
-use Zend\Session\SessionManager;
-use Zend\Session\Config\SessionConfig;
-use Zend\Session\Container;
-use Zend\Validator\AbstractValidator;
-use Zend\EventManager\EventInterface;
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
-use Zend\ModuleManager\ModuleManager;
-use Zend\Uri\UriFactory;
+use Laminas\Session\SessionManager;
+use Laminas\Session\Config\SessionConfig;
+use Laminas\Session\Container;
+use Laminas\Validator\AbstractValidator;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\AutoloaderProviderInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ServiceProviderInterface;
+use Laminas\ModuleManager\Feature\ViewHelperProviderInterface;
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Uri\UriFactory;
 
 class Module implements
     BootstrapListenerInterface,
@@ -30,14 +30,14 @@ class Module implements
         * The change will apply to 'template_path_stack'
         * This config takes part in the Playground Theme Management
         */
-        $eventManager->attach(\Zend\ModuleManager\ModuleEvent::EVENT_MERGE_CONFIG, array($this, 'onMergeConfig'), 100);
+        $eventManager->attach(\Laminas\ModuleManager\ModuleEvent::EVENT_MERGE_CONFIG, array($this, 'onMergeConfig'), 100);
     }
 
     /**
      * This method is called only when the config is not cached.
-     * @param \Zend\ModuleManager\ModuleEvent $e
+     * @param \Laminas\ModuleManager\ModuleEvent $e
      */
-    public function onMergeConfig(\Zend\ModuleManager\ModuleEvent $e)
+    public function onMergeConfig(\Laminas\ModuleManager\ModuleEvent $e)
     {
         $config = $e->getConfigListener()->getMergedConfig(false);
 
@@ -53,7 +53,7 @@ class Module implements
     public function onBootstrap(EventInterface $e)
     {
         // this is useful for zfr-cors to accept chrome extension like Postman
-        UriFactory::registerScheme('chrome-extension', 'Zend\Uri\Uri');
+        UriFactory::registerScheme('chrome-extension', 'Laminas\Uri\Uri');
 
         $serviceManager = $e->getApplication()->getServiceManager();
         $config = $e->getApplication()->getServiceManager()->get('config');
@@ -168,7 +168,7 @@ class Module implements
         /**
          * Adding a Filter to slugify a string (make it URL compliiant)
          */
-        $filterChain = new \Zend\Filter\FilterChain();
+        $filterChain = new \Laminas\Filter\FilterChain();
         $filterChain->getPluginManager()->setInvokableClass(
             'slugify',
             'PlaygroundCore\Filter\Slugify'
@@ -192,11 +192,11 @@ class Module implements
          * Optional: If you later want to use namespaces, you can already store the
          * Manager in the shared (static) Container (=namespace) field
          */
-        \Zend\Session\Container::setDefaultManager($sessionManager);
+        \Laminas\Session\Container::setDefaultManager($sessionManager);
 
         // Google Analytics : When the render event is triggered, we invoke the view helper to
         // render the javascript code.
-        $e->getApplication()->getEventManager()->attach(\Zend\Mvc\MvcEvent::EVENT_RENDER, function (\Zend\Mvc\MvcEvent $e) use ($serviceManager) {
+        $e->getApplication()->getEventManager()->attach(\Laminas\Mvc\MvcEvent::EVENT_RENDER, function (\Laminas\Mvc\MvcEvent $e) use ($serviceManager) {
             $view   = $serviceManager->get('ViewHelperManager');
             $plugin = $view->get('googleAnalytics');
             $plugin();
@@ -230,7 +230,7 @@ class Module implements
 
                 // This fix exists only for IE6+, when this app is embedded into an iFrame : The P3P policy has to be set.
                 $response = $e->getResponse();
-                if ($response instanceof \Zend\Http\Response && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') || strpos($_SERVER['HTTP_USER_AGENT'], 'rv:11.'))) {
+                if ($response instanceof \Laminas\Http\Response && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') || strpos($_SERVER['HTTP_USER_AGENT'], 'rv:11.'))) {
                     $response->getHeaders()->addHeaderLine('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
                 }
             }
@@ -243,7 +243,7 @@ class Module implements
             $headers->addHeaderLine('X-Frame-Options: sameorigin');
 
             $headers->addHeaderLine('X-XSS-Protection: 1; mode=block');
-            $csp = new \Zend\Http\Header\ContentSecurityPolicy();
+            $csp = new \Laminas\Http\Header\ContentSecurityPolicy();
             //$csp->setDirective('default-src', array()) // No sources
             //$csp->setDirective('img-src', array('*'));
             //     ->setDirective('object-src', array('media1.example.com', 'media2.example.com', '*.cdn.example.com'))
@@ -261,14 +261,14 @@ class Module implements
     {
         return array(
             'factories' => array(
-                'QgCKEditor' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                'QgCKEditor' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                     $config = $sm->get('config');
                     $QuCk = new View\Helper\AdCKEditor($config['playgroundcore']['ckeditor']);
 
                     return $QuCk;
                 },
 
-                'googleAnalytics' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                'googleAnalytics' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                     $tracker = $sm->get('PlaygroundCore\Analytics\Tracker');
     
                     $helper  = new View\Helper\GoogleAnalytics($tracker, $sm->get('Request'));
@@ -276,7 +276,7 @@ class Module implements
                     return $helper;
                 },
 
-                'facebookOpengraph' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                'facebookOpengraph' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                     $tracker = $sm->get('facebook-opengraph');
 
                     $helper  = new View\Helper\FacebookOpengraph($tracker, $sm->get('Request'));
@@ -284,7 +284,7 @@ class Module implements
                     return $helper;
                 },
                 
-                'twitterCard' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                'twitterCard' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                     $viewHelper = new View\Helper\TwitterCard();
                     $viewHelper->setConfig($sm->get('twitter-card'));
                     $viewHelper->setRequest($sm->get('Request'));
@@ -292,7 +292,7 @@ class Module implements
                     return $viewHelper;
                 },
 
-                'switchLocaleWidget' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                'switchLocaleWidget' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                     $viewHelper = new View\Helper\SwitchLocaleWidget();
                     $viewHelper->setLocaleService($sm->get('playgroundcore_locale_service'));
                     $viewHelper->setWebsiteService($sm->get('playgroundcore_website_service'));
@@ -301,7 +301,7 @@ class Module implements
                     return $viewHelper;
                 },
 
-                'countryName' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                'countryName' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                     $service = $sm->get('playgroundcore_country_service');
                     $viewHelper = new View\Helper\CountryName($service);
 
@@ -322,13 +322,13 @@ class Module implements
                 ),
 
                 'factories' => array(
-                    'playgroundcore_module_options' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    'playgroundcore_module_options' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('Configuration');
 
                         return new Options\ModuleOptions(isset($config['playgroundcore']) ? $config['playgroundcore'] : array());
                     },
 
-                    'playgroundcore_formgen_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    'playgroundcore_formgen_mapper' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                         return new Mapper\Formgen(
                             $sm->get('playgroundcore_doctrine_em'),
                             $sm->get('playgroundcore_module_options'),
@@ -336,7 +336,7 @@ class Module implements
                         );
                     },
 
-                    'playgroundcore_website_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    'playgroundcore_website_mapper' => function (\Laminas\ServiceManager\ServiceManager $sm) {
 
                         return new Mapper\Website(
                             $sm->get('playgroundcore_doctrine_em'),
@@ -345,18 +345,18 @@ class Module implements
                         );
                     },
 
-                    'playgroundcore_locale_mapper' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    'playgroundcore_locale_mapper' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                         return new Mapper\Locale(
                             $sm->get('playgroundcore_doctrine_em'),
                             $sm->get('playgroundcore_module_options'),
                             $sm
                         );
                     },
-                    'PlaygroundCore\Analytics\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    'PlaygroundCore\Analytics\Tracker' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                         return new Analytics\Tracker($sm->get('playgrounddesign_company_mapper'));
                     },
                     // DEPRECATED
-                    // 'PlaygroundCore\Analytics\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    // 'PlaygroundCore\Analytics\Tracker' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                     //     $config = $sm->get('config');
                     //     $config = isset($config['playgroundcore']) ? $config['playgroundcore']['googleAnalytics'] : array('id' => 'UA-XXXXXXXX-X');
 
@@ -391,7 +391,7 @@ class Module implements
 
                     //     return $tracker;
                     // },
-                    'PlaygroundCore\Opengraph\Tracker' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    'PlaygroundCore\Opengraph\Tracker' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']['facebookOpengraph']) ? $config['playgroundcore']['facebookOpengraph'] : array('appId' => '');
 
@@ -410,7 +410,7 @@ class Module implements
 
                         return $tracker;
                     },
-                    'PlaygroundCore\TwitterCard\Config' => function (\Zend\ServiceManager\ServiceManager $sm) {
+                    'PlaygroundCore\TwitterCard\Config' => function (\Laminas\ServiceManager\ServiceManager $sm) {
                         $config = $sm->get('config');
                         $config = isset($config['playgroundcore']['twitterCard']) ? $config['playgroundcore']['twitterCard'] : array();
                         return new TwitterCard\Config($config);
@@ -419,7 +419,7 @@ class Module implements
         );
     }
 
-    public function getConsoleUsage(\Zend\Console\Adapter\Posix $console)
+    public function getConsoleUsage(\Laminas\Console\Adapter\Posix $console)
     {
         return array(
             'cron'  => 'call this command to enable cron tasks'

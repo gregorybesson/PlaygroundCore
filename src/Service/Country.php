@@ -1,9 +1,9 @@
 <?php
 namespace PlaygroundCore\Service;
 
-use Zend\ServiceManager\ServiceManager;
-use Zend\EventManager\EventManagerAwareTrait;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\EventManager\EventManagerAwareTrait;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 final class Country
 {

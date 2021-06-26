@@ -2,11 +2,11 @@
 
 namespace PlaygroundCoreTest\Filter;
 
-class CronTest extends \PHPUnit_Framework_TestCase
+class CronTest extends \PHPUnit\Framework\TestCase
 {
     protected $traceError = true;
     
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->slugify  = new \PlaygroundCore\Filter\Slugify;

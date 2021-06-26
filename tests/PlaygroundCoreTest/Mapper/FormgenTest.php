@@ -5,13 +5,13 @@ namespace PlaygroundCoreTest\Mapper;
 use PlaygroundCoreTest\Bootstrap;
 use \PlaygroundCore\Entity\Formgen as FormgenEntity;
 
-class FormgenTest extends \PHPUnit_Framework_TestCase
+class FormgenTest extends \PHPUnit\Framework\TestCase
 {
     protected $traceError = true;
 
     protected $formgenMapper;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->sm = Bootstrap::getServiceManager();
         $this->em = $this->sm->get('doctrine.entitymanager.orm_default');
@@ -127,7 +127,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $formgen = $formgens[0];
 
         $formgens = $this->getFormgenMapper()->findById($formgen->getId());
-        $this->assertEquals(count($formgens), 1);
+        $this->assertEquals(count([$formgens]), 1);
     }
 
 
@@ -206,7 +206,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
 
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 2);
-        
+
         foreach ($formgens as $formgen) {
             $this->getFormgenMapper()->remove($formgen);
         }
@@ -214,9 +214,9 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         $formgens = $this->getFormgenMapper()->findAll();
         $this->assertEquals(count($formgens), 0);
     }
-  
 
-       
+
+
     public function getFormgenMapper()
     {
 
@@ -227,7 +227,7 @@ class FormgenTest extends \PHPUnit_Framework_TestCase
         return $this->formgenMapper;
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $dbh = $this->em->getConnection();
         unset($this->sm);

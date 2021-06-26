@@ -1,10 +1,10 @@
 <?php
 namespace PlaygroundCore\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\Helper\HeadMeta;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\HeadMeta;
 use PlaygroundCore\Opengraph\Tracker;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Stdlib\RequestInterface;
 use PlaygroundCore\Exception\RuntimeException;
 
 class FacebookOpengraph extends AbstractHelper
@@ -42,7 +42,7 @@ class FacebookOpengraph extends AbstractHelper
             return;
         }
 
-        if ((get_class($this->request) == 'Zend\Console\Request')) {
+        if ((get_class($this->request) == 'Laminas\Console\Request')) {
             return;
         }
 

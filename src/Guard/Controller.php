@@ -34,7 +34,7 @@ class Controller extends \BjyAuthorize\Guard\Controller
     public function onDispatch(MvcEvent $event)
     {
         /* @var $service \BjyAuthorize\Service\Authorize */
-        $service = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
+        $service = $this->container->get('BjyAuthorize\Service\Authorize');
         $match = $event->getRouteMatch();
         $controller = $match->getParam('controller');
         $action = $match->getParam('action');

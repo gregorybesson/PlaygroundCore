@@ -517,7 +517,7 @@ return array(
 
     /* The root configuration key for translation */
     'playgroundLocale' => array(
-        'enable' => false,
+        'enable' => true,
         'default' => 'fr',
         'strategies' => array(
             'uri',
@@ -526,7 +526,8 @@ return array(
         ),
         'supported' => array(
             'fr',
-            'fr_FR'
+            'fr_FR',
+            'en'
         )
     ),
 

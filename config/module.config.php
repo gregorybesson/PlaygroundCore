@@ -571,6 +571,7 @@ return array(
         'invokables' => array(
             'NotInBlacklist' => 'PlaygroundCore\Validator\Blacklist',
             'InMailDomainList' => 'PlaygroundCore\Validator\MailDomain',
+            'InEmailList' => 'PlaygroundCore\Validator\EmailList',
          ),
     ),
 );

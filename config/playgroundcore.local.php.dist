@@ -169,7 +169,7 @@ $laminas-developer-tools = array(
 //      }
 //    });
 
-$zfrcors = array(
+$lmccors = array(
     // cors from a localhost:3000 and Postman (chrome extension)
     'allowed_origins' => array('http://localhost:3000','chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'),
     'allowed_methods' => array('GET', 'POST', 'OPTIONS'),
@@ -192,6 +192,6 @@ $zdt_logger = array(
 return array(
     'playgroundcore' => $settings,
     'laminas-developer-tools'=> $laminas-developer-tools,
-    'zfr_cors' => $zfrcors,
+    'lmc_cors' => $lmccors,
     'jhu' => array('zdt_logger' => $zdt_logger)
 );

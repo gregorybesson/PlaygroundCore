@@ -3,7 +3,7 @@
 namespace PlaygroundCore\Stdlib\Hydrator;
 
 use DateTime;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  *
@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *  having to fix a DoctrineModule bug :( https://github.com/doctrine/DoctrineModule/issues/180
  *  so i've extended DoctrineHydrator ...
  */
-class DoctrineObject extends \DoctrineModule\Stdlib\Hydrator\DoctrineObject
+class DoctrineObject extends \Doctrine\Laminas\Hydrator\DoctrineObject
 {
 
     /**
@@ -22,9 +22,9 @@ class DoctrineObject extends \DoctrineModule\Stdlib\Hydrator\DoctrineObject
      * @param string        $targetClass   The FQCN of the hydrated/extracted object
      * @param bool          $byValue       If set to true, hydrator will always use entity's public API
      */
-    public function __construct(ObjectManager $objectManager, $targetClass, $byValue = true)
+    public function __construct(ObjectManager $objectManager, bool $byValue = true, ?Inflector $inflector = null)
     {
-        parent::__construct($objectManager, $targetClass, $byValue);
+        parent::__construct($objectManager, $byValue, $inflector);
     }
 
     /**

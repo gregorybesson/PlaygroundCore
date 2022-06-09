@@ -33,9 +33,9 @@ return array(
     'doctrine' => array(
         'driver' => array(
             'playgroundcore_entity' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'class' => \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
                 'cache' => 'array',
-                'paths' => __DIR__ . '/../src/Entity'
+                'paths' => [__DIR__ . '/../src/Entity']
             ),
 
             'orm_default' => array(
@@ -47,7 +47,7 @@ return array(
         'connection' => array(
             // default connection name
             'orm_default' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'driverClass' => \Doctrine\DBAL\Driver\PDO\MySQL\Driver::class,
                 'params' => array(
                     'host'          => '127.0.0.1',
                     'port'          => '3306',

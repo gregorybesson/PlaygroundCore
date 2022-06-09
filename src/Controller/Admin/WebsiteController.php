@@ -45,7 +45,7 @@ class WebsiteController extends AbstractActionController
     public function listAction()
     {
         $locales = $this->getLocaleService()->getLocaleMapper()->findBy(array('active_front' => 1));
-        $user = $this->zfcUserAuthentication()->getIdentity();
+        $user = $this->lmcUserAuthentication()->getIdentity();
 
         $websites = $this->getWebsiteService()->getWebsiteMapper()->findAll();
 

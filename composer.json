@@ -90,11 +90,11 @@
         "laminas/laminas-view": ">=2.8",
         "laminas/laminas-xml2json": ">=3.0",
         "laminas/laminas-xmlrpc": ">=2.6",
-        "zendframework/zendxml": ">=1.0.2",
         "hhxsv5/php-sse": "~2.0",
         "lm-commons/lmc-cors": "^1.2",
         "laminas/laminas-cli": "^1.4",
-        "playground/doctrine-data-fixture-module": "^1.1"
+        "playground/doctrine-data-fixture-module": "^1.1",
+        "laminas/laminas-xml": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.0.0",

@@ -189,13 +189,15 @@ class Module implements
       $sessionConfig->setOptions($config['session']);
       $sessionManager = new SessionManager($sessionConfig);
       $sessionManager->start();
+
+      /**
+       * Optional: If you later want to use namespaces, you can already store the
+       * Manager in the shared (static) Container (=namespace) field
+       */
+      \Laminas\Session\Container::setDefaultManager($sessionManager);
     }
 
-    /**
-     * Optional: If you later want to use namespaces, you can already store the
-     * Manager in the shared (static) Container (=namespace) field
-     */
-    \Laminas\Session\Container::setDefaultManager($sessionManager);
+
 
     // Google Analytics : When the render event is triggered, we invoke the view helper to
     // render the javascript code.
